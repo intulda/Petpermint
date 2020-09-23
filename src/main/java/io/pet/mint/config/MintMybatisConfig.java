@@ -13,7 +13,7 @@ import javax.sql.DataSource;
 
 /**
  * Mybatis 설정
- * @create 2020.08.05
+ * @create 2020.09.23
  * @author kimbogeun
  */
 @Configuration

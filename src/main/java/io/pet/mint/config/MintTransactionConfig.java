@@ -22,7 +22,7 @@ import java.util.Properties;
 
 /**
  * Transaction aop 설정
- * @create 2020.08.07
+ * @create 2020.09.23
  */
 @Aspect
 @Configuration
