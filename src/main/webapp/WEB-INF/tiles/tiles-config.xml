@@ -11,9 +11,9 @@
     </definition>
 
     <definition name="view:*" extends="default-layout">
-        <put-attribute name="body" value="/WEB-INF/{1}.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/index.jsp"/>
     </definition>
     <definition name="view:*/*" extends="default-layout">
-        <put-attribute name="body" value="/WEB-INF/{1}/{2}.jsp"/>
+        <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
     </definition>
 </tiles-definitions>
