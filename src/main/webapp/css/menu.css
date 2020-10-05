@@ -1,0 +1,105 @@
+.menu__container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 0 0 #60a1e1;
+}
+.menu__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    transition: 0.5s;
+    white-space: nowrap;
+}
+.menu__list-sub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    transition: 0.5s;
+    position: absolute;
+    top: 52px;
+    padding: 20px 0;
+    box-shadow: 0 1px 0 0 #ddd;
+    background-color: white;
+}
+
+.menu {
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.menu ul>li>a {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-size: 0.8em;
+}
+
+.menu ul>li>a:hover {
+    color: #60a1e1;
+    display: block;
+}
+
+.menu__sub-menu {
+    padding: 10px;
+}
+
+.menu__list li:hover {
+    background-color: #60a1e1;
+    color: white;
+}
+.menu__list-hover {
+    background-color: #60a1e1;
+    color: white;
+}
+.menu__n-none {
+    display: none;
+}
+
+.menu__appear {
+    animation: fade-in 0.3s;
+    animation-fill-mode: forwards;
+    display: flex;
+}
+
+.menu__disappear {
+    animation: fade-out 0.3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+
+    }
+    to {
+        opacity: 0;
+    }
+}
