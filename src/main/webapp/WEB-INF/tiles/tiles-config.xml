@@ -6,6 +6,7 @@
     <definition name="default-layout" template="/WEB-INF/views/common/layout.jsp">
         <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
         <put-attribute name="headResource" value="/WEB-INF/views/common/resource.jsp"/>
+        <put-attribute name="menu" value="/WEB-INF/views/common/menu.jsp"/>
         <put-attribute name="body" value=""/>
         <put-attribute name="css" value=""/>
         <put-attribute name="js" value=""/>
@@ -14,7 +15,7 @@
 
     <definition name="view:index" extends="default-layout">
         <put-attribute name="body" value="/WEB-INF/index.jsp"/>
-        <put-attribute name="css" value="/css/header.css"/>
+        <put-attribute name="css" value="class/css/header.css"/>
         <put-attribute name="js" value="/js/index.js"/>
     </definition>
 
