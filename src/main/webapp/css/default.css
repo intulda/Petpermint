@@ -72,6 +72,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
+a {
+    text-decoration: none;
+    color: black;
+}
 body {
     width: 100%;
     line-height: 1;
