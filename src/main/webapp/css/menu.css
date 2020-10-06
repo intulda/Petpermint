@@ -81,7 +81,16 @@
     background-color: #60a1e1;
     color: white;
 }
+.menu__list li:hover a {
+    background-color: #60a1e1;
+    color: white;
+}
+
 .menu__list-hover {
+    background-color: #60a1e1;
+    color: white;
+}
+.menu__list-hover a {
     background-color: #60a1e1;
     color: white;
 }
