@@ -74,7 +74,7 @@
     list-style: none;
     cursor: pointer;
 }
-.header__right ul li:first-child {
+.header__right ul li.first-child {
     width: 40px;
     height: 40px;
     margin-right: 30px;
@@ -82,7 +82,10 @@
     background-repeat: no-repeat;
     background-image: url("/images/alert.png");
 }
-.header__right ul li:last-child {
+.header__right ul li.login {
+    margin-right: 30px;
+}
+.header__right ul li.last-child {
     background-color: orange;
     width: 40px;
     height: 40px;
