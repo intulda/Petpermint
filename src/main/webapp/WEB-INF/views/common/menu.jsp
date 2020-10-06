@@ -9,7 +9,9 @@
 
 <div class="menu__container">
     <ul class="menu__list"></ul>
-    <ul class="menu__list-sub menu__n-none disappear">
-    </ul>
+    <div class="menu__sub-menu-container menu__n-none disappear">
+        <ul class="menu__list-sub"></ul>
+    </div>
 </div>
+
 <script src="${pageContext.request.contextPath}/js/menu.js"></script>
