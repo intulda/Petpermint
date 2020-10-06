@@ -41,16 +41,22 @@
 .header__center input:focus {
     outline: none;
 }
+
 .header__center label {
     position: absolute;
     right: 0;
     width: 50px;
+    height: 40px;
     text-align: center;
     color: white;
     line-height: 40px;
-    background: #60a1e1;
+    background-color: #60a1e1;
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    background-image: url('/images/search.png');
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 }
 .header__right {
     width: 20%;
@@ -83,7 +89,6 @@
     border-radius: 50%;
     color: white;
 }
-
 /*스마터폰*/
 @media(max-width: 768px) {
     .header__wrap {
