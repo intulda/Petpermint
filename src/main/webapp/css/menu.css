@@ -7,6 +7,7 @@
     position: relative;
     z-index: 3;
     box-shadow: 0 2px 0 0 #60a1e1;
+    margin-bottom: 50px;
 }
 .menu__sub-menu-container {
     display: flex;
@@ -14,7 +15,7 @@
     justify-content: center;
     width: 100%;
     position: absolute;
-    height: 136px;
+    height: 140px;
     top: 50px;
     left: 0;
     z-index: 2;
@@ -81,7 +82,16 @@
     background-color: #60a1e1;
     color: white;
 }
+.menu__list li:hover a {
+    background-color: #60a1e1;
+    color: white;
+}
+
 .menu__list-hover {
+    background-color: #60a1e1;
+    color: white;
+}
+.menu__list-hover a {
     background-color: #60a1e1;
     color: white;
 }
@@ -116,5 +126,11 @@
     }
     to {
         opacity: 0;
+    }
+}
+
+@media(max-width: 768px) {
+    .menu__container {
+        display: none;
     }
 }
