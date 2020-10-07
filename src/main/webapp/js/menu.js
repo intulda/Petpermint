@@ -9,12 +9,12 @@
 
         const data = {
             list : [
-                {name: '강아지 이야기', subMenu: [
+                {name: '강아지 이야기', link:'', subMenu: [
                         { name: '강아지 백과', link: '', order: 1},
                         { name: '강아지 음식', link: '', order: 2},
                         { name: '강아지 훈련', link: '', order: 3},
                     ], order:1},
-                {name: '고양이 이야기', subMenu: [
+                {name: '고양이 이야기', link:'', subMenu: [
                         { name: '고양이 백과', link: '', order: 1},
                         { name: '고양이 음식', link: '', order: 2},
                         { name: '고양이 훈련', link: '', order: 3},
@@ -24,17 +24,17 @@
                         { name: '애견 카페', link: '/placeBoard/placeBoardWriteView', order: 2},
                         { name: '애견 펜션', link: '/placeBoard/placeBoardDetail', order: 3},
                     ], order:3},
-                {name: '구조했어요', subMenu: [
+                {name: '구조했어요', link:'', subMenu: [
                         { name: '구조했어요', link: '', order: 1},
                         { name: '찾아주세요', link: '', order: 2},
                         { name: '입양공고', link: '', order: 3},
                     ], order:4},
-                {name: '중고장터', subMenu: [
+                {name: '중고장터', link:'', subMenu: [
                         { name: '강아지 용품', link: '', order: 1},
                         { name: '고양이 용품', link: '', order: 2},
                         { name: '무료나눔', link: '', order: 3},
                     ], order:5},
-                {name: '커뮤니티', subMenu: [
+                {name: '커뮤니티', link:'', subMenu: [
                         { name: '자유게시판', link: '', order: 1},
                     ], order:6},
             ]
@@ -85,8 +85,11 @@
         const render = () => {
             for(let obj of data.list) {
                 const liElem = document.createElement('li');
+                const aElem = document.createElement('a');
                 liElem.classList.add('menu');
-                liElem.innerHTML = obj.name;
+                aElem.innerHTML = obj.name;
+                aElem.setAttribute('href', obj.link);
+                liElem.appendChild(aElem);
                 liElem.style.width = 100/Number(size) + '%';
                 menuList.appendChild(liElem);
                 if(obj.subMenu != null) {
@@ -97,24 +100,32 @@
         }
 
         const addEvent = () => {
-            container.addEventListener('mouseover', (e) => {
-                e.stopPropagation();
-                if(e.target.parentElement === menuList) {
-                    $(e.target).addClass('menu__list-hover');
-                    $(e.target).siblings().removeClass('menu__list-hover');
+            menuList.addEventListener('click', (e) => {
+                location.href = $(e.target).children()[0];
+            });
 
-                    subContainer.classList.remove('menu__disappear');
-                    subContainer.classList.add('menu__appear');
-                }
-            });
-            container.addEventListener('mouseleave', (e) => {
-                e.stopPropagation();
-                if (subContainer.classList.contains('menu__appear')) {
-                    subContainer.classList.add('menu__disappear');
-                    subContainer.classList.remove('menu__appear')
-                }
-                $(menuList).children().removeClass('menu__list-hover');
-            });
+            container.addEventListener('mouseover', overEvent);
+            container.addEventListener('mouseleave', leaveEvent);
+        }
+
+        function overEvent(e) {
+            e.stopPropagation();
+            if(e.target.parentElement === menuList) {
+                $(e.target).addClass('menu__list-hover');
+                $(e.target).siblings().removeClass('menu__list-hover');
+
+                subContainer.classList.remove('menu__disappear');
+                subContainer.classList.add('menu__appear');
+            }
+        }
+
+        function leaveEvent(e) {
+            e.stopPropagation();
+            if (subContainer.classList.contains('menu__appear')) {
+                subContainer.classList.add('menu__disappear');
+                subContainer.classList.remove('menu__appear')
+            }
+            $(menuList).children().removeClass('menu__list-hover');
         }
 
         $.extend(this, {
