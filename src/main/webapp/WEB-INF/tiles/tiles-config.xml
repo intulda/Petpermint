@@ -16,7 +16,7 @@
     <definition name="view:index" extends="default-layout">
         <put-attribute name="body" value="/WEB-INF/index.jsp"/>
         <put-attribute name="css" value="class/css/header.css"/>
-        <put-attribute name="js" value="/js/index.js"/>
+        <put-attribute name="js" value="/js/main.js"/>
     </definition>
 
     <definition name="view:*/*" extends="default-layout">
