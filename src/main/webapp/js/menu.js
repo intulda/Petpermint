@@ -104,24 +104,28 @@
                 location.href = $(e.target).children()[0];
             });
 
-            container.addEventListener('mouseover', (e) => {
-                e.stopPropagation();
-                if(e.target.parentElement === menuList) {
-                    $(e.target).addClass('menu__list-hover');
-                    $(e.target).siblings().removeClass('menu__list-hover');
+            container.addEventListener('mouseover', overEvent);
+            container.addEventListener('mouseleave', leaveEvent);
+        }
 
-                    subContainer.classList.remove('menu__disappear');
-                    subContainer.classList.add('menu__appear');
-                }
-            });
-            container.addEventListener('mouseleave', (e) => {
-                e.stopPropagation();
-                if (subContainer.classList.contains('menu__appear')) {
-                    subContainer.classList.add('menu__disappear');
-                    subContainer.classList.remove('menu__appear')
-                }
-                $(menuList).children().removeClass('menu__list-hover');
-            });
+        function overEvent(e) {
+            e.stopPropagation();
+            if(e.target.parentElement === menuList) {
+                $(e.target).addClass('menu__list-hover');
+                $(e.target).siblings().removeClass('menu__list-hover');
+
+                subContainer.classList.remove('menu__disappear');
+                subContainer.classList.add('menu__appear');
+            }
+        }
+
+        function leaveEvent(e) {
+            e.stopPropagation();
+            if (subContainer.classList.contains('menu__appear')) {
+                subContainer.classList.add('menu__disappear');
+                subContainer.classList.remove('menu__appear')
+            }
+            $(menuList).children().removeClass('menu__list-hover');
         }
 
         $.extend(this, {
