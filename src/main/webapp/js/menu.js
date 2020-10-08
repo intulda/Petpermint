@@ -25,12 +25,12 @@
                         { name: '애견 펜션', link: '', order: 3},
                     ], order:3},
                 {name: '구조했어요', subMenu: [
-                        { name: '구조했어요', link: '', order: 1},
+                        { name: '구조했어요', link: '/lostPet/lostPet', order: 1},
                         { name: '찾아주세요', link: '', order: 2},
                         { name: '입양공고', link: '', order: 3},
                     ], order:4},
                 {name: '중고장터', subMenu: [
-                        { name: '강아지 용품', link: '', order: 1},
+                        { name: '강아지 용품', link: '/market/market', order: 1},
                         { name: '고양이 용품', link: '', order: 2},
                         { name: '무료나눔', link: '', order: 3},
                     ], order:5},
