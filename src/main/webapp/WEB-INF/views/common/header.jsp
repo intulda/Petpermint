@@ -18,8 +18,12 @@
         </div>
         <div class="header-flex header__right">
             <ul class="header-flex">
-                <li class="header-flex"></li>
-                <li class="header-flex">코</li>
+                <%-- 로그인 후 --%>
+<%--                <li class="header-flex first-child"></li>--%>
+<%--                <li class="header-flex last-child">코</li>--%>
+                <%-- 로그인 전 --%>
+                <li class="header-flex login">로그인</li>
+                <li class="header-flex register">회원가입</li>
             </ul>
         </div>
     </div>

@@ -19,10 +19,10 @@
                         { name: '고양이 음식', link: '', order: 2},
                         { name: '고양이 훈련', link: '', order: 3},
                     ], order:2},
-                {name: '펫플레이스', link:'', subMenu: [
-                        { name: '주변 동물병원', link: '', order: 1},
-                        { name: '애견 카페', link: '', order: 2},
-                        { name: '애견 펜션', link: '', order: 3},
+                {name: '펫플레이스', subMenu: [
+                        { name: '주변 동물병원', link: '/placeBoard/placeBoardList', order: 1},
+                        { name: '애견 카페', link: '/placeBoard/placeBoardWriteView', order: 2},
+                        { name: '애견 펜션', link: '/placeBoard/placeBoardDetail', order: 3},
                     ], order:3},
                 {name: '구조했어요', link:'', subMenu: [
                         { name: '구조했어요', link: '', order: 1},
@@ -104,24 +104,28 @@
                 location.href = $(e.target).children()[0];
             });
 
-            container.addEventListener('mouseover', (e) => {
-                e.stopPropagation();
-                if(e.target.parentElement === menuList) {
-                    $(e.target).addClass('menu__list-hover');
-                    $(e.target).siblings().removeClass('menu__list-hover');
+            container.addEventListener('mouseover', overEvent);
+            container.addEventListener('mouseleave', leaveEvent);
+        }
 
-                    subContainer.classList.remove('menu__disappear');
-                    subContainer.classList.add('menu__appear');
-                }
-            });
-            container.addEventListener('mouseleave', (e) => {
-                e.stopPropagation();
-                if (subContainer.classList.contains('menu__appear')) {
-                    subContainer.classList.add('menu__disappear');
-                    subContainer.classList.remove('menu__appear')
-                }
-                $(menuList).children().removeClass('menu__list-hover');
-            });
+        function overEvent(e) {
+            e.stopPropagation();
+            if(e.target.parentElement === menuList) {
+                $(e.target).addClass('menu__list-hover');
+                $(e.target).siblings().removeClass('menu__list-hover');
+
+                subContainer.classList.remove('menu__disappear');
+                subContainer.classList.add('menu__appear');
+            }
+        }
+
+        function leaveEvent(e) {
+            e.stopPropagation();
+            if (subContainer.classList.contains('menu__appear')) {
+                subContainer.classList.add('menu__disappear');
+                subContainer.classList.remove('menu__appear')
+            }
+            $(menuList).children().removeClass('menu__list-hover');
         }
 
         $.extend(this, {
