@@ -19,10 +19,10 @@
                         { name: '고양이 음식', link: '', order: 2},
                         { name: '고양이 훈련', link: '', order: 3},
                     ], order:2},
-                {name: '펫플레이스', link:'', subMenu: [
-                        { name: '주변 동물병원', link: '', order: 1},
-                        { name: '애견 카페', link: '', order: 2},
-                        { name: '애견 펜션', link: '', order: 3},
+                {name: '펫플레이스', subMenu: [
+                        { name: '주변 동물병원', link: '/placeBoard/placeBoardList', order: 1},
+                        { name: '애견 카페', link: '/placeBoard/placeBoardWriteView', order: 2},
+                        { name: '애견 펜션', link: '/placeBoard/placeBoardDetail', order: 3},
                     ], order:3},
                 {name: '구조했어요', link:'', subMenu: [
                         { name: '구조했어요', link: '', order: 1},
