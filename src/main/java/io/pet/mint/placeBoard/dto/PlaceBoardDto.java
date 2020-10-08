@@ -18,6 +18,7 @@ public class PlaceBoardDto implements Serializable {
 	private String boardCategory;
 	private String boardTitle;
 	private String boardContents;
+	private String imagePath;
 	
 	private String id;
 	private String boardLocation;

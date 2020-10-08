@@ -36,24 +36,31 @@
 <!-- form 안에 에디터를 사용하는 경우 (보통 이경우를 많이 사용하는듯)-->
 
 <div id="inputArea">
-	<form method="post">
-	  <input type="text" id="id" name="writter" class="sendData" readonly="readonly">
-	  <input type="text" id="boardTitle" name="title" class="sendData" placeholder="제목을 입력해주세요">
-	  <textarea id="summernote" name="editordata"></textarea>
-	</form>
+	<form method="post" id="sendForm" action="/placeBoard/placeBoardWrite"
+		enctype="multipart/form-data">		
+		<input type="text" name="id" class="sendData" readonly="readonly">
+		<input type="text" name="boardTitle" class="sendData" placeholder="제목을 입력해주세요">
+		썸네일이미지
+		<input type="file" name="thumbnail" class="sendData">	
+		<textarea id="summernote" name="boardContents"></textarea>	  
+	</form>	
 </div>
 
-<div id="testdiv">
 
-
-</div>
+ 
 
 
 
 
-<div align="center">
-<textarea cols="50" rows="30" id="testarea"></textarea>
-</div>
+<select id="choice">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+</select>
+
+<button type="button" id="btn">클릭</button>
+
+
 <button type="button" id="writeButton" >글등록</button>
 
 <!-- div에 에디터를 사용하는 경우 -->
@@ -74,16 +81,12 @@ $(document).ready(function() {
         	  ['fontsize', ['fontsize']],
         	  ['insert', ['link', 'picture', 'video']]
           ]
-		/*
-    	,
-    	
-    	callbacks: {	//이미지 첨부하는 부분
-            onImageUpload : function(files) {
-                 uploadSummernoteImageFile(files[0],this);
-             }
-         }
-		*/
-    
+	});
+
+	$('#writeButton').click(function(){
+		
+		$('#sendForm').submit();
+		
 	});
 
 	/*
@@ -103,48 +106,82 @@ $(document).ready(function() {
         });
     }
 	*/
-
-$('#writeButton').click(function(){
-	//alert($('textarea[name="editordata"]').val());
-	//console.log(($('#summernote').summernote('code')));
+/*
+	$('#writeButton').click(function(){
 		
-	//let summervalue = $('#summernote').summernote('code');
+			
+		//let summervalue = $('#summernote').summernote('code');
+		//$('#summernote').summernote('pasteHTML',summervalue);
 		
+		let sendData = { id:$('#id').val(), boardTitle: $('#boardTitle').val(), boardContents:$('#summernote').summernote('code')};
+		//console.log(sendData);
+		//let fileData = $('#sendForm')[2];
+		
+		//let form = document.createElement('form');
+		
+		
+		
+		let formData = new FormData();
+		
+		//formData.append("id", $('#id').val());
+		//formData.append("boardTitle", $('#boardTitle').val());
+		//formData.append("boardContents", $('#summernote').summernote('code'));
+		formData.append("fileUpload", $('#fileUpload')[0].files[0]);
+		
+		
+		
+		 $.ajax({
+			url:"/placeBoard/placeBoardWrite",
+			type:"post",
+			data:{sendData:sendData, formData:formData},
+			contenttype:false,
+			processData:false,
+			//async:false,	// 동기식으로 실행
+			success:function(data){
+				//alert(data);
+			},
+			error:function(){
+				alert("connection error");
+			} 
 	
-	//$('#testdiv').html(summervalue);	
-	//$('#summernote').summernote('pasteHTML',summervalue);
+			//$('#sendForm').children()[2].files[0]
+	
+		});				
+	});
 
-	let sendData = { id:$('#id').val(), boardTitle: $('#boardTitle').val(), 
-			boardContents:$('#summernote').summernote('code')};
+*/	
 
-	//console.log(sendData);
 
-	$.ajax({
-		url:"/placeBoard/placeBoardWrite",
-		type:"post",
-		data:sendData,
-		//async:false,	// 동기식으로 실행
-		success:function(data){
-			ale       rt(data);
-		},
-		error:function(){
-			alert("connection error");
+/*
+let sel = document.querySelector('#choice');
+$('#btn').click(function(){
+	let sel = document.querySelector('#choice');
+	//alert(sel.options[0].value);
+	//alert(sel.length);
+
+	for(i=0; i < sel.length; i++){
+		if(sel.options[i].value == 2){
+
+			sel.options[i].selected =true;
 		}
 		
-		
-
-
-
-	});
-		
+	}
+});	
+*/
 
 
 	
+
+
+
+
+
 });
 
-	
-	
-	
-});
+
+
+
+
+
 
 </script>

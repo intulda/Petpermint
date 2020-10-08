@@ -24,23 +24,17 @@
                         { name: '애견 카페', link: '/placeBoard/placeBoardWriteView', order: 2},
                         { name: '애견 펜션', link: '/placeBoard/placeBoardDetail', order: 3},
                     ], order:3},
-<<<<<<< HEAD
-                {name: '구조했어요', subMenu: [
-                        { name: '구조했어요', link: '/lostPet/lostPet', order: 1},
-=======
+
                 {name: '구조했어요', link:'', subMenu: [
                         { name: '구조했어요', link: '', order: 1},
->>>>>>> branch 'develop' of https://github.com/intulda/Petpermint
+
                         { name: '찾아주세요', link: '', order: 2},
                         { name: '입양공고', link: '', order: 3},
                     ], order:4},
-<<<<<<< HEAD
-                {name: '중고장터', subMenu: [
-                        { name: '강아지 용품', link: '/market/market', order: 1},
-=======
+
                 {name: '중고장터', link:'', subMenu: [
                         { name: '강아지 용품', link: '', order: 1},
->>>>>>> branch 'develop' of https://github.com/intulda/Petpermint
+
                         { name: '고양이 용품', link: '', order: 2},
                         { name: '무료나눔', link: '', order: 3},
                     ], order:5},

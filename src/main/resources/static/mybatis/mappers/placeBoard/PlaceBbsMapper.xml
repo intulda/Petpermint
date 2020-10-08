@@ -17,15 +17,19 @@
 	
 </insert>
 
-
-
 <select id="getPlaceBoardContent" 
 	parameterType="java.lang.Integer" resultType="io.pet.mint.placeBoard.dto.PlaceBoardDto">
 	
-	SELECT * 
+	SELECT *
 	FROM BOARD
 	WHERE BOARD_SEQ = #{boardSeq}
 	
 	
-	</select>
+</select>
+
+
+
+
+
+
 </mapper>

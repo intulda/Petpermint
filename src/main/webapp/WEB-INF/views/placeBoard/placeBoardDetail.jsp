@@ -5,8 +5,11 @@
 <h1>detail</h1>
 
 
-
+<img src="${placeDto.imagePath}">
 <div>${placeDto.boardContents }</div>
+
+
+
 
 
 
