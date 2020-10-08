@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.pet.mint.placeBoard.dao.PlaceBoardDao">
+  
+  
+
+
+<insert id="placeBoardWrite" 
+	parameterType="io.pet.mint.placeBoard.dto.PlaceBoardDto">
+	
+	INSERT INTO BOARD(BOARD_SEQ, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE, BOARD_CONTENTS, ID, BOARD_LOCATION,
+						BOARD_VIEW_COUNT, BOARD_REG_ID, BOARD_REG_DATE, BOARD_REF)
+	VALUES(SEQ_BOARD.NEXTVAL, '펫플레이스', '동물병원', #{boardTitle}, #{boardContents:CLOB}, 'aaa', '서울시',
+			0, 'aaa', SYSDATE, (SELECT NVL(MAX(BOARD_REF), 0) + 1  FROM BOARD) )
+	
+</insert>
+
+
+
+<select id="getPlaceBoardContent" 
+	parameterType="java.lang.Integer" resultType="io.pet.mint.placeBoard.dto.PlaceBoardDto">
+	
+	SELECT * 
+	FROM BOARD
+	WHERE BOARD_SEQ = #{boardSeq}
+	
+	
+	</select>
+</mapper>
