@@ -125,7 +125,7 @@ $('#writeButton').click(function(){
 		data:sendData,
 		//async:false,	// 동기식으로 실행
 		success:function(data){
-			ale       rt(data);
+			alert(data);
 		},
 		error:function(){
 			alert("connection error");
