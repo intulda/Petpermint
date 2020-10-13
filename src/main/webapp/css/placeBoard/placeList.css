@@ -1,0 +1,148 @@
+ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+ul.board_list li{ float: left;}
+ul.board_list button{
+	display: block;
+	background-color: #60a1e1;
+	color: #fff;
+	border: none;
+	padding: 8px;
+	margin:2px;
+	text-decoration: none;
+	text-align: center;
+	border-radius: 10px;
+	
+}
+
+div.header{
+	
+	width:1000px;
+	height:50px;	
+	margin-top: 40px;
+	margin-bottom: 0px;
+	vertical-align: middle;	
+	margin: 0 auto;
+	margin-left: 490px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	border-bottom: none;
+	border-radius: 3px;
+	
+
+}.header a{
+	margin:4px;
+}.header ul li{
+	margin:4px;
+}
+
+
+
+div.place_container{
+	
+	display: flex;
+	flex-direction: column;
+	width:1000px;	
+	margin: 0 auto;
+	margin-left: 460px;
+	margin-bottom: 30px;
+	border: 2px #e6e6e6 solid;
+	
+}
+
+div.place_title{
+		
+	width:1000px;
+	height:180px;	
+	margin-top: 40px;
+	margin-bottom: 0px;
+	vertical-align: middle;	
+	margin: 0 auto;
+	margin-left: 460px;
+	border: 2px #e6e6e6 solid;
+	border-bottom: none;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	
+}
+
+
+
+div.place_content{
+
+	display: flex;
+	
+	flex-direction: row;
+	width:900px;
+	height:250px;
+	margin-left: 30px;
+	margin-top: 30px;
+	margin-bottom: 10px;
+	
+	
+}
+
+
+div.place_item{
+	
+	width:420px;
+	height:100%;
+	border-radius: 10px;	
+}
+
+.place_item img{
+
+	height:100%;
+	width:100%;
+	
+	
+}
+
+
+div.place_item2{
+	
+	width:350px;
+	height:100%;
+	padding:4px;
+	padding-left: 80px;
+}
+
+.place_item2 div{
+	
+	margin: 20px;
+	margin-top: 0px;
+
+}
+
+div.place_title h2 
+{
+
+	font-size: 2.3em;
+	margin-left: 30px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-weight: 500;
+}
+div.place_title p{
+
+	margin: 10px;
+	margin-bottom: 0px;
+	font-size: 15px;
+	margin-left: 30px;
+}
+
+
+a.detailButton{
+    display:block;
+    width:120px;
+    line-height:30px;
+    text-align:center;
+    /* 이미지 크기를 30*30 정사각형으로 지정하는 경우 */
+   	color:white;
+    background-repeat:no-repeat;
+    background-position:left center;
+    background-color: #60a1e1;
+}

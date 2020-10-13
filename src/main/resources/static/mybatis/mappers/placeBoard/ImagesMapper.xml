@@ -9,7 +9,8 @@
 <insert id="saveImages" parameterType="io.pet.mint.placeBoard.dto.ImagesDto">
 
 	INSERT INTO BOARD_IMAGES(IMAGES_SEQ, BOARD_SEQ, IMAGES_PATH, REG_ID, REG_DATE)
-	VALUES(SEQ_IMAGES.NEXTVAL, (SELECT MAX(BOARD_SEQ) FROM BOARD), #{imagesPath}, 'aaa', SYSDATE )
+	VALUES(SEQ_IMAGES.NEXTVAL, (SELECT MAX(BOARD_SEQ) FROM BOARD WHERE BOARD_TYPE='펫플레이스'),
+	 #{imagesPath}, 'aaa', SYSDATE )
 	
 </insert> 
   
@@ -20,9 +21,6 @@
 	SELECT *
 	FROM BOARD_IMAGES
 	WHERE BOARD_SEQ = #{BoardSeq} 
-	
-	
-	
 
 </select>
 

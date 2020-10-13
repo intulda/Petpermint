@@ -7,7 +7,7 @@
 #inputArea{
 
 	
-	width:50%;
+	width:60%;
 	
 	
 	margin: 0 auto;
@@ -23,11 +23,9 @@
 }
 
 
-
 </style>
 
 
-    
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/summernote-ko-KR.js"></script>  
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
@@ -37,28 +35,26 @@
 
 <div id="inputArea">
 	<form method="post" id="sendForm" action="/placeBoard/placeBoardWrite"
-		enctype="multipart/form-data">		
-		<input type="text" name="id" class="sendData" readonly="readonly">
-		<input type="text" name="boardTitle" class="sendData" placeholder="제목을 입력해주세요">
-		썸네일이미지
-		<input type="file" name="thumbnail" class="sendData">	
+		enctype="multipart/form-data">	
+			
+		작성자<input type="text" name="id" class="sendData" readonly="readonly" value="aaa">
+		<input type="text" name="boardTitle" id="boardTitle" class="sendData" placeholder="장소명을 입력해주세요">
+		<input type="text" name="boardLocation" id="boardLocation" class="sendData"placeholder="주소를 입력해주세요">
+		<select name="boardCategory">
+			<option value="동물병원">동물병원</option>
+			<option value="애견카페">애견카페</option>
+			<option value="카페">카페</option>
+			<option value="음식점">음식점</option>
+		</select>
+		<br>썸네일이미지
+		<input type="file" name="thumbnail" class="sendData" accept=".gif, .jpg, .png">	
 		<textarea id="summernote" name="boardContents"></textarea>	  
+		
 	</form>	
 </div>
 
 
- 
 
-
-
-
-<select id="choice">
-	<option value="1">1</option>
-	<option value="2">2</option>
-	<option value="3">3</option>
-</select>
-
-<button type="button" id="btn">클릭</button>
 
 
 <button type="button" id="writeButton" >글등록</button>
@@ -79,15 +75,28 @@ $(document).ready(function() {
           toolbar:[
         	  ['style', ['bold', 'italic', 'underline', 'clear']],
         	  ['fontsize', ['fontsize']],
+        	  ['color', ['color']],
         	  ['insert', ['link', 'picture', 'video']]
           ]
 	});
 
 	$('#writeButton').click(function(){
 		
-		$('#sendForm').submit();
-		
+		if($('#boardTitle').val().trim() == ""){			
+			alert("장소명을 입력해주세요");
+			$('#boardTitle').focus();
+		}
+		else if($('#boardLocation').val().trim() == ""){			
+			alert("장소주소를 입력해주세요");
+			$('#boardLocation').focus();
+		}		
+		else{		
+			$('#sendForm').submit();
+		}
 	});
+
+	
+	
 
 	/*
 	function uploadSummernoteImageFile(file, editor) {

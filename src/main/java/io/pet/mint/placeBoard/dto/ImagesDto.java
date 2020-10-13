@@ -11,9 +11,8 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
-@NoArgsConstructor
+
 public class ImagesDto implements Serializable {
 /*	
 DROP TABLE BOARD_IMAGES
@@ -39,4 +38,20 @@ INCREMENT BY 1
 	private String contents;
 	private String regId;
 	private String regDate;
+	
+	
+	public ImagesDto() {}
+
+
+	public ImagesDto(int imagesSeq, int boardSeq, byte[] imagesPath, String contents, String regId, String regDate) {
+		super();
+		this.imagesSeq = imagesSeq;
+		BoardSeq = boardSeq;
+		this.imagesPath = imagesPath;
+		this.contents = contents;
+		this.regId = regId;
+		this.regDate = regDate;
+	}
+	
+	
 }
