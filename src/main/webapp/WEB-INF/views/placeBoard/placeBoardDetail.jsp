@@ -6,12 +6,11 @@
 
 <div class="place_title">
 	<p class="board_info">
-	게시날짜 : ${placeDto.boardRegDate }  (ID:${placeDto.boardRegId })
+	게시날짜 : ${placeDto.boardRegDate }  (ID : ${placeDto.boardRegId })
 	</p>
 	<c:if test="${placeDto.boardUpdDate  != null }">
 		<P class="board_info">
-		수정날짜 : ${placeDto.boardUpdDate }
-		수정한사람 : ${placeDto.boardUpdId }
+		수정날짜 : ${placeDto.boardUpdDate } (ID : ${placeDto.boardUpdId })
 		</p>
 	</c:if>
 </div>
@@ -30,13 +29,37 @@
 
 <script>
 
-$("#updButton").click(function(){
+$('#updButton').click(function(){
 	let boardSeq = "${placeDto.boardSeq}";
-
 	location.href = "/placeBoard/placeBoardUpdate?boardSeq=" + boardSeq;
 });
 
 
+$('#delButton').click(function(){
+	let boardSeq = ${placeDto.boardSeq};
+	$.ajax({
+	
+		
+		url:"/placeBoard/placeBoardDelete",
+		type:"post",
+		data:{boardSeq},
+		success:function(data){
+			if(data === 'ok'){
+	
+				alert("글을 삭제했습니다.");
+				location.href = "/placdBoard/getPlaceBoardList";
+			}
+			else{
+				alert("글을 삭제하지 못했습니다.");
+				
+			}
+		},
+		error:function(){
+				alert("실패");
+		}
+	});
+	
+});
 
 
 </script>

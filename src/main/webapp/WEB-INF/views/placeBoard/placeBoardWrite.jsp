@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
 
 <style>
 
@@ -94,94 +94,6 @@ $(document).ready(function() {
 			$('#sendForm').submit();
 		}
 	});
-
-	
-	
-
-	/*
-	function uploadSummernoteImageFile(file, editor) {
-        data = new FormData();
-        data.append("file", file);
-        $.ajax({
-            data : data,
-            type : "POST",
-            url : "/uploadSummernoteImageFile",
-            contentType : false,
-            processData : false,
-            success : function(data) {
-                //항상 업로드된 파일의 url이 있어야 한다.
-                $(editor).summernote('insertImage', data.url);
-            }
-        });
-    }
-	*/
-/*
-	$('#writeButton').click(function(){
-		
-			
-		//let summervalue = $('#summernote').summernote('code');
-		//$('#summernote').summernote('pasteHTML',summervalue);
-		
-		let sendData = { id:$('#id').val(), boardTitle: $('#boardTitle').val(), boardContents:$('#summernote').summernote('code')};
-		//console.log(sendData);
-		//let fileData = $('#sendForm')[2];
-		
-		//let form = document.createElement('form');
-		
-		
-		
-		let formData = new FormData();
-		
-		//formData.append("id", $('#id').val());
-		//formData.append("boardTitle", $('#boardTitle').val());
-		//formData.append("boardContents", $('#summernote').summernote('code'));
-		formData.append("fileUpload", $('#fileUpload')[0].files[0]);
-		
-		
-		
-		 $.ajax({
-			url:"/placeBoard/placeBoardWrite",
-			type:"post",
-			data:{sendData:sendData, formData:formData},
-			contenttype:false,
-			processData:false,
-			//async:false,	// 동기식으로 실행
-			success:function(data){
-				//alert(data);
-			},
-			error:function(){
-				alert("connection error");
-			} 
-	
-			//$('#sendForm').children()[2].files[0]
-	
-		});				
-	});
-
-*/	
-
-
-/*
-let sel = document.querySelector('#choice');
-$('#btn').click(function(){
-	let sel = document.querySelector('#choice');
-	//alert(sel.options[0].value);
-	//alert(sel.length);
-
-	for(i=0; i < sel.length; i++){
-		if(sel.options[i].value == 2){
-
-			sel.options[i].selected =true;
-		}
-		
-	}
-});	
-*/
-
-
-	
-
-
 
 
 

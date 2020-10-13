@@ -20,19 +20,19 @@ public class PlaceBoardDto implements Serializable {
 	private String boardLocation;	// 장소 주소
 	
 	
-	private int boardSeq; // 게시판 시퀀스
-	private String boardType;	// 게시판 유형
+	private int boardSeq; 			// 게시판 시퀀스
+	private String boardType;		// 게시판 유형
 	
-	private String imagePath;		// 썸네일 이미지 경로명
+	private String imagePath;		// 썸네일 이미지 경로명, db저장 x
 	
-	private String id;	 // 작성자id
+	private String id;	 			// 작성자id
 	private String boardRegId;		// 작성자id
-	private String boardRegDate;		// 작성날짜
-	private String boardUpdId;		// 	수정자id
-	private String boardUpdDate;		// 수정날짜
+	private String boardRegDate;	// 작성날짜
+	private String boardUpdId;		// 수정자id
+	private String boardUpdDate;	// 수정날짜
 	
 	private int BoardviewCount;		// 조회수
-	private int boardRef;		// 게시물 그룹번호
+	private int boardRef;			// 게시물 그룹번호
 	
 	
 	public PlaceBoardDto() {}

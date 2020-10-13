@@ -14,18 +14,23 @@ public class ImagesService {
 	
 	
 	@Autowired
-	ImagesDao dao;
+	ImagesDao imageDao;
 	
 	
 	public  int saveImages(ImagesDto imageDto) {
 		
-		return dao.saveImages(imageDto);
+		return imageDao.saveImages(imageDto);
 		
 	}
 	
 	public ImagesDto getImages(int boardSeq) {
 		
-		return dao.getImages(boardSeq);
+		return imageDao.getImages(boardSeq);
+	}
+	
+	public int updateImages(ImagesDto imageDto) {
+		
+		return imageDao.updateImages(imageDto);
 	}
 	
 }

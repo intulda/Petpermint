@@ -59,14 +59,12 @@ public class PlaceBoardController {
 		// paging 처리
 		int sn = param.getPageNumber();
 		int start = sn * param.getRecordCountPerPage() + 1;
-		int end = (sn + 1) * param.getRecordCountPerPage();
-		
+		int end = (sn + 1) * param.getRecordCountPerPage();	
 		param.setStart(start);
 		param.setEnd(end);
-		System.out.println(param.getKeyword());
+
 		List<PlaceBoardDto> placeList = boardService.getPlaceBoardList(param);
-		
-			
+					
 		for(PlaceBoardDto placeDto : placeList) {
 					
 			ImagesDto imageDto = imageService.getImages(placeDto.getBoardSeq());
@@ -91,51 +89,40 @@ public class PlaceBoardController {
 
 	
 	
-	
+	// 글작성페이지 이동
 	@GetMapping(value = "placeBoardWriteView")
 	public String placeBoardWriteView() {
 		
 		return "view:placeBoard/placeBoardWrite";
 	}
 	 
-	// 글쓰기
+	// 글작성
 	@PostMapping(value = "placeBoardWrite")
 	public String placeBoardWrite(
 			 PlaceBoardDto placeDto
 			,@RequestParam(value = "thumbnail", required = false)MultipartFile thumbnail
-			,HttpServletRequest req) {
-		
-			
+				) {
 		
 			try {
-				//byte[] image = dto.getImagesPath(); 			
-				//System.out.println(placeDto.toString());
 				
 				// 게시판 내용 저장
-				int dbCheck = boardService.placeBoardWrite(placeDto);
-					
-				System.out.println("게시판 확인용 " + dbCheck);
-							
+				boardService.placeBoardWrite(placeDto);
+													
 				ImagesDto imageDto = new ImagesDto();
-				// 작성한 이미지 파일을 db에 파일형식으로 저장하기 위해서 바이트로 변환후 dto에 저장
+				// 썸네일 이미지 이름	, 파일 저장		
 				imageDto.setImagesPath(thumbnail.getBytes());
-				// 이미지 파일저장
-				dbCheck = imageService.saveImages(imageDto);
-				
-				System.out.println("이미지 등록 확인용 " + dbCheck);
-				
-				
-				
+				imageService.saveImages(imageDto);
+								
 				return "view:placeBoard/placeBoardList";
 				
 			} catch (IOException e1) {
 				
 				e1.printStackTrace();
 				return "view:placeBoard/placeBoardList";
-			}
-			
+			}		
 	}
 	
+	// 상세페이지 이동
 	@GetMapping(value = "placeBoardDetail")
 	public String placeBoardDetail(String seq, Model model) {
 		
@@ -155,6 +142,7 @@ public class PlaceBoardController {
 		return "view:placeBoard/placeBoardDetail";
 	}
 	
+	// 수정페이지 이동
 	@GetMapping(value = "placeBoardUpdate")
 	public String placeBoardUpdate(@RequestParam(value="boardSeq")int boardSeq
 								,Model model) {
@@ -163,13 +151,60 @@ public class PlaceBoardController {
 		
 		ImagesDto imageDto = imageService.getImages(boardSeq); 
 		
-		if(imageDto!= null) {
+		if(imageDto != null) {
 			byte[] byteImage = imageDto.getImagesPath();
 			placeDto.setImagePath(CommonUtil.imageToBase64(byteImage));
 		}
+				
 		model.addAttribute("placeDto", placeDto);
 		
 		return "view:placeBoard/placeBoardUpdate";
 	}
 	
+	
+	// 글수정
+	@PostMapping(value = "placeBoardUpdateAf")
+	public String placeBoardUpdateAf( PlaceBoardDto placeDto
+			,@RequestParam(value = "thumbnail", required = false)MultipartFile thumbnail) {
+						
+		try {
+			
+			// 게시판 내용 수정
+			boardService.placeBoardUpdate(placeDto);
+			
+			// 수정한 썸네일이미지가 있을 경우
+			if(!thumbnail.isEmpty()) {									
+				ImagesDto imageDto = new ImagesDto();
+				// 썸네일 파일 수정		
+				imageDto.setImagesPath(thumbnail.getBytes());
+				imageDto.setBoardSeq(placeDto.getBoardSeq());
+				imageService.updateImages(imageDto);
+			}				
+			return "view:placeBoard/placeBoardList";
+			
+		} catch (IOException e1) {
+			
+			e1.printStackTrace();
+			return "view:placeBoard/placeBoardList";
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "placeBoardDelete")
+	public String placeBoardDelete(
+			@RequestParam(value = "boardSeq")int boardSeq) {
+		
+		int check = boardService.placeBoardDelete(boardSeq);
+		
+		return check>0?"ok":"no";
+	}
+	
 }
+
+
+
+
+
+
+
+

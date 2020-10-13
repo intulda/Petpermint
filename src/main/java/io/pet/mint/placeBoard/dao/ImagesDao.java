@@ -11,5 +11,5 @@ public interface ImagesDao {
 
 	public int saveImages(ImagesDto imageDto);
 	public ImagesDto getImages(int boardSeq);
-	 
+	public int updateImages(ImagesDto imageDto); 
 }

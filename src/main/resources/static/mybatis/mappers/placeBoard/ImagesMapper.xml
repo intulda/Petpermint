@@ -10,7 +10,7 @@
 
 	INSERT INTO BOARD_IMAGES(IMAGES_SEQ, BOARD_SEQ, IMAGES_PATH, REG_ID, REG_DATE)
 	VALUES(SEQ_IMAGES.NEXTVAL, (SELECT MAX(BOARD_SEQ) FROM BOARD WHERE BOARD_TYPE='펫플레이스'),
-	 #{imagesPath}, 'aaa', SYSDATE )
+	 #{imagesPath}, 'aaa', SYSDATE)
 	
 </insert> 
   
@@ -23,6 +23,14 @@
 	WHERE BOARD_SEQ = #{BoardSeq} 
 
 </select>
+
+<update id="updateImages" parameterType="io.pet.mint.placeBoard.dto.ImagesDto">
+	
+	UPDATE BOARD_IMAGES
+	SET IMAGES_PATH=#{imagesPath}
+	WHERE BOARD_SEQ=#{boardSeq} 
+
+</update>
 
 
 

@@ -2,17 +2,18 @@ div.place_container{
 	
 	display: flex;
 	flex-direction: column;
-	width:1000px;	
+	width:1100px;	
 	margin: 0 auto;
 	margin-left: 400px;
 	margin-bottom: 30px;
 	border: 2px #d9d9d9 solid;
+	border-top: none;
 	
 }
 
 div.footer{
 	
-	width:1000px;
+	width:1100px;
 	height:50px;	
 	margin-top: 40px;
 	margin-bottom: 0px;
@@ -30,7 +31,7 @@ div.footer{
 
 div.place_title{
 		
-	width:1000px;
+	width:1100px;
 	height:30px;	
 	margin-top: 40px;
 	margin-bottom: 0px;
@@ -41,6 +42,7 @@ div.place_title{
 	border-bottom: none;
 	padding-top: 20px;
 	padding-bottom: 20px;
+	text-align: right;
 	
 }
 
@@ -66,8 +68,10 @@ h1.boardTitle{
 
 p.board_info{
 	
-	margin-left:20px;
-	font-size: 15px;
+	margin-right:20px;
+	font-size: 13px;
+	color:   #bfbfbf;
+	
 	
 }
 
@@ -76,7 +80,7 @@ hr.bottom_line{
 	
 	
 	border: 1px solid black;
-	width: 900px;
+	width: 920px;
 	margin-top: 50px;
 	margin-bottom: 40px;
 }

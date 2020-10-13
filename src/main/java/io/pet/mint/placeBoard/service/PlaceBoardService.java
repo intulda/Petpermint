@@ -39,4 +39,14 @@ public class PlaceBoardService {
 		return placeBoardDao.getCount(param);
 	}
 	
+	public int placeBoardUpdate(PlaceBoardDto placeDto) {
+		
+		return placeBoardDao.placeBoardUpdate(placeDto);
+	}
+	
+	public int placeBoardDelete(int boardSeq) {
+		
+		return placeBoardDao.placeBoardDelete(boardSeq);
+	}
+	
 }

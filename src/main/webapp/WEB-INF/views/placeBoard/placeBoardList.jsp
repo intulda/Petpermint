@@ -23,9 +23,7 @@
 			<input type="text" id="_keyword" name="keyword">		
 		</td>
 		<td style="padding-left: 5px">
-		
-			<button type="button" id="findButton">검색</button>
-			
+			<button type="button" id="findButton">검색</button>		
 		</td>
 	</tr>
 </table>
@@ -49,43 +47,7 @@
 </div>
 
 
-<div class="place_container">
-	<!-- <div class="place_content">		
-		<div class="place_item">
-			<img alt="" src="/images/PANDA.jpg">
-		</div>	
-		<div class="place_item2">
-			<div><p>작성날짜</p></div>
-			<div><h1>장소명</h1></div>
-			<div><p>종류</p></div>
-			<div><p>장소주소</p></div>
-			<div><a href=# class="detailButton">더알아보기</a></div>
-		</div>	
-	</div>
-	<div class="place_content">		
-		<div class="place_item">
-			<img alt="" src="/images/PANDA.jpg">
-		</div>	
-		<div class="place_item2">
-			<div><p>작성날짜</p></div>
-			<div><h1>장소명</h1></div>
-			<div><p>종류</p></div>
-			<div><p>장소주소</p></div>
-			<div><a href=# class="detailButton">더알아보기</a></div>
-		</div>	
-	</div>
-	<div class="place_content">		
-		<div class="place_item">
-			<img alt="" src="/images/PANDA.jpg">
-		</div>	
-		<div class="place_item2">
-			<div><p>작성날짜</p></div>
-			<div><h1>장소명</h1></div>
-			<div><p>종류</p></div>
-			<div><p>장소주소</p></div>
-			<div><a href=# class="detailButton">더알아보기</a></div>
-		</div>	
-	</div> -->
+<div class="place_container">	
 </div>
 
 
@@ -119,6 +81,7 @@ $('#writeButton').click(function(){
 	location.href = "/placeBoard/placeBoardWriteView";	
 });
 
+// 카테고리 선택
 function selCategory(BoardCategory){
 	boardCategory = BoardCategory;
 	getBbsListData(0,boardCategory);
@@ -127,7 +90,12 @@ function selCategory(BoardCategory){
 
 
 
-//bbslist를 갖고 온다
+
+
+
+
+// 페이징 함수
+
 function getBbsListData( pNumber, boardCategory ){
 	
 	$.ajax({
@@ -138,8 +106,6 @@ function getBbsListData( pNumber, boardCategory ){
 			"boardCategory":boardCategory
 			 },
 		success:function( list ){
-		
-			//$(".list_col").remove();
 		
 			$(".place_content").remove();
 			if(list == null || list ==''){
@@ -178,31 +144,13 @@ function getBbsListData( pNumber, boardCategory ){
 					$('.place_container').append(tagData);
 				});
 			}
-			/*
-			$.each(list, function(i, val){
-				let app = "<tr class='list_col'>"
-							+ "<td>" + (i + 1) + "</td>"
-							+ "<td style='text-align:left'>"
-							+ 	getArrow( val.depth )
-							+  	"<a href='bbsdetail.do?seq=" + val.seq + "'>" + val.title + "</a>"
-							+ "</td>"
-							+ "<td>" + val.id + "</td>"
-						  "</tr>";
-
-				$("#_list_table").append(app);  	
-					
-			});
-			*/				
+						
 		},
 		error:function(){
 			alert("error");
 		}	
-	});
-
-	
+	});	
 }
-
-
 
 //글의 총수를 취득
 function getBbsListCount(boardCategory){
@@ -254,10 +202,6 @@ function loadPage( totalCount ){
 		}	
 	});
 }
-
-
-
-
 
 </script>
 

@@ -39,11 +39,11 @@ INCREMENT BY 1
 	private String regId;
 	private String regDate;
 	
-	
 	public ImagesDto() {}
 
 
-	public ImagesDto(int imagesSeq, int boardSeq, byte[] imagesPath, String contents, String regId, String regDate) {
+	public ImagesDto(int imagesSeq, int boardSeq, byte[] imagesPath, String contents, String regId, String regDate,
+			String imageName) {
 		super();
 		this.imagesSeq = imagesSeq;
 		BoardSeq = boardSeq;
@@ -52,6 +52,8 @@ INCREMENT BY 1
 		this.regId = regId;
 		this.regDate = regDate;
 	}
+
+
 	
 	
 }

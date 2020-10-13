@@ -11,9 +11,9 @@
 	parameterType="io.pet.mint.placeBoard.dto.PlaceBoardDto">
 	
 	INSERT INTO BOARD(BOARD_SEQ, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE, BOARD_CONTENTS, ID, BOARD_LOCATION,
-						BOARD_VIEW_COUNT, BOARD_REG_ID, BOARD_REG_DATE, BOARD_REF)
+						BOARD_VIEW_COUNT, BOARD_REG_ID, BOARD_REG_DATE, BOARD_REF, BOARD_DEL)
 	VALUES(SEQ_BOARD.NEXTVAL, '펫플레이스', #{boardCategory}, #{boardTitle}, #{boardContents:CLOB}, 'aaa', #{boardLocation},
-			0, 'aaa', SYSDATE, (SELECT NVL(MAX(BOARD_SEQ), 0) + 1  FROM BOARD WHERE BOARD_TYPE='펫플레이스')  )
+			0, 'aaa', SYSDATE, (SELECT NVL(MAX(BOARD_SEQ), 0) + 1  FROM BOARD WHERE BOARD_TYPE='펫플레이스'), 0  )
 	
 </insert>
 
@@ -75,6 +75,7 @@
 				</if>
 			</if>
 			AND BOARD_TYPE='펫플레이스'	
+			AND BOARD_DEL=0
 		) A
 	WHERE RNUM BETWEEN ${start} AND ${end} 	
 </select> 
@@ -115,6 +116,26 @@
 	AND BOARD_TYPE='펫플레이스'	
 </select>
 
+<update id="placeBoardUpdate" parameterType="io.pet.mint.placeBoard.dto.PlaceBoardDto">
 
+UPDATE BOARD
+SET BOARD_TITLE=#{boardTitle},
+	BOARD_CONTENTS=#{boardContents:CLOB},
+	BOARD_LOCATION=#{boardLocation},
+	BOARD_UPD_ID=#{id},
+	BOARD_UPD_DATE=SYSDATE,   
+    BOARD_CATEGORY = #{boardCategory}
+WHERE BOARD_SEQ=#{boardSeq}
+     
+</update>
+
+
+<update id="placeBoardDelete" parameterType="java.lang.Integer">
+
+UPDATE BOARD
+SET BOARD_DEL = 1
+WHERE BOARD_SEQ = #{boardSeq}
+
+</update>
 
 </mapper>

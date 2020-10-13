@@ -17,4 +17,6 @@ public interface PlaceBoardDao {
 	public PlaceBoardDto getPlaceBoardContent(int boardSeq);	// seq번호 매개변수로 수정해야함
 	public List<PlaceBoardDto> getPlaceBoardList(PlaceBoardParam param);
 	public int getCount(PlaceBoardParam param);
+	public int placeBoardUpdate(PlaceBoardDto placeDto);
+	public int placeBoardDelete(int boardSeq);
 }
