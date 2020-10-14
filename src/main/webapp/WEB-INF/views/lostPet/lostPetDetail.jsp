@@ -22,7 +22,7 @@
        </tr>
        <tr>
            <td>${lostPetDto.lostSeq}</td>
-           <td>${lostPetDto.lostDate}</td>
+           <td>${lostPetDto.lostKind}</td>
            <td>${lostPetDto.lostViewcount}</td>
            <td>${lostPetDto.lostStatus}</td>
            <td>${lostPetDto.lostLocation}</td>

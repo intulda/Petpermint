@@ -26,39 +26,10 @@
 		</td>
 	</tr>
 </table>
-
-<h1>멍냥 구조대</h1>
-<br>
-<a href=lostPetWrite>글쓰기</a>
-<br>
-<table border="1" id="lostBoard">
-       <tr>
-           <th>NO</th>
-           <th>DATE</th>
-           <th>STATUS</th>
-           <th>LOCATION</th>
-           <th>VIEWCOUNT</th>
-           <th></th>
-       </tr>
-       
-       
-       
-       
-       
-        <%--  <c:forEach var="l" items="${list}">
-             <tr>
-                 <td><a href="lostPetDetail?seq=${l.lostSeq}">${l.lostSeq}</a></td>
-                 <td>${l.lostDate}</td>
-                 <td>${l.lostStatus}</td>
-                 <td>${l.lostLocation}</td>
-                 <td>${l.lostViewcount}</td>
-             </tr>
-         </c:forEach> --%>
-</table>
+<button type="button" id="writeButton">글쓰기</button>
 
 <div class="place_container">	
 </div>
-
 
 <div class="container">
 	<nav aria-label="Page navigation">
@@ -78,6 +49,10 @@ getBbsListCount();
 $('#findButton').click(function(){
 	getBbsListData(0);
 	getBbsListCount();
+});
+
+$('#writeButton').click(function(){
+	location.href = "/lostPet/lostPetWrite";	
 });
 
 

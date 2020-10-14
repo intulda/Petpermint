@@ -10,8 +10,6 @@
 
 연락처 : <input type="text" id="_phone" placeholder="-을 포함한 연락처 기재"><br>
 
-날짜 : <input type="text" id="_date" placeholder="목격/실종 날짜"/><br>
-
 장소 :  <input type="text" id="_location" placeholder="목격/실종 장소"/></br>
 
 동물 :
@@ -22,6 +20,8 @@
 		<option value="3">기타</option>
 </select>
 <br>
+
+품종 : <input type="text" id="_kind" placeholder="품종"/><br>
 
 상태 :
 <select name="status" id="_status">
@@ -55,7 +55,7 @@
 $("#_lostPetWrite").click(function() {
 	
 	let sendData = {lostId:$('#_id').val(), lostPhone:$('#_phone').val(),
-						lostDate:$('#_date').val(), lostType:$('#_type').val(),
+						lostKind:$('#_kind').val(), lostType:$('#_type').val(),
 						lostStatus:$('#_status').val(), lostGender:$('#_gender').val(),
 						lostDetail:$('#_detail').val(),
 						lostLocation:$('#_location').val()

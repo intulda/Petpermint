@@ -1,11 +1,19 @@
 package io.pet.mint.lostPet.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+@Setter
+@Getter
+@ToString
 public class LostPetDto {
 
 	private int lostSeq;
 	private String lostId;
 	private String lostDate;
 	private String lostWdate;
+	private String lostKind;
 	private int lostViewcount;
 	private int lostStatus;
 	private String lostLocation;
@@ -15,16 +23,19 @@ public class LostPetDto {
 	private String lostDetail;
 	private int lostDel;
 	
+	private String imagePath;		// 썸네일 이미지 경로명, db저장 x
+	
 	public LostPetDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public LostPetDto(int lostSeq, String lostId, String lostDate, int lostViewcount, int lostStatus,
-			String lostLocation, String lostPhone, int lostType, int lostGender, String lostDetail, int lostDel) {
+	public LostPetDto(int lostSeq, String lostId, String lostKind, int lostViewcount, int lostStatus,
+			String lostLocation, String lostPhone, int lostType, int lostGender, String lostDetail, int lostDel,
+			String imagePath) {
 		super();
 		this.lostSeq = lostSeq;
 		this.lostId = lostId;
-		this.lostDate = lostDate;
+		this.lostKind = lostKind;
 		this.lostViewcount = lostViewcount;
 		this.lostStatus = lostStatus;
 		this.lostLocation = lostLocation;
@@ -33,58 +44,7 @@ public class LostPetDto {
 		this.lostGender = lostGender;
 		this.lostDetail = lostDetail;
 		this.lostDel = lostDel;
-	}
-	
-	public LostPetDto(String lostDate, int lostStatus, String lostLocation, String lostPhone, int lostType,
-			int lostGender, String lostDetail) {
-		super();
-		this.lostDate = lostDate;
-		this.lostStatus = lostStatus;
-		this.lostLocation = lostLocation;
-		this.lostPhone = lostPhone;
-		this.lostType = lostType;
-		this.lostGender = lostGender;
-		this.lostDetail = lostDetail;
-	}
-
-	public int getLostSeq() {
-		return lostSeq;
-	}
-
-	public void setLostSeq(int lostSeq) {
-		this.lostSeq = lostSeq;
-	}
-
-	public String getLostId() {
-		return lostId;
-	}
-
-	public void setLostId(String lostId) {
-		this.lostId = lostId;
-	}
-
-	public String getLostDate() {
-		return lostDate;
-	}
-
-	public void setLostDate(String lostDate) {
-		this.lostDate = lostDate;
-	}
-
-	public int getLostViewcount() {
-		return lostViewcount;
-	}
-
-	public void setLostViewcount(int lostViewcount) {
-		this.lostViewcount = lostViewcount;
-	}
-
-	public int getLostStatus() {
-		return lostStatus;
-	}
-
-	public void setLostStatus(int lostStatus) {
-		this.lostStatus = lostStatus;
+		this.imagePath = imagePath;
 	}
 
 	public String getLostLocation() {
@@ -150,7 +110,4 @@ public class LostPetDto {
 				+ lostPhone + ", lostType=" + lostType + ", lostGender=" + lostGender + ", lostDetail=" + lostDetail
 				+ ", lostDel=" + lostDel + "]";
 	}
-	
-	
-	
 }

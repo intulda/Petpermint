@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.pet.mint.lostPet.dto.LCommDto;
+import io.pet.mint.lostPet.dto.LostImagesDto;
 import io.pet.mint.lostPet.dto.LostPetDto;
 import io.pet.mint.lostPet.dto.LostPetParam;
+import io.pet.mint.lostPet.service.LostImagesService;
 import io.pet.mint.lostPet.service.LostPetService;
-import io.pet.mint.placeBoard.dto.PlaceBoardParam;
+import io.pet.mint.placeBoard.dto.ImagesDto;
+import io.pet.mint.placeBoard.dto.PlaceBoardDto;
+import io.pet.mint.util.CommonUtil;
 
 @Controller
 @RequestMapping(value="/lostPet/*")
@@ -23,6 +27,9 @@ public class LostPetController {
 
 	@Autowired
 	LostPetService service;
+	
+	@Autowired
+	LostImagesService imageService;
 	
 	@GetMapping(value = "lostPet")
 	public String lostPet() {
@@ -40,14 +47,24 @@ public class LostPetController {
 		int end = (sn + 1) * param.getRecordCountPerPage();	
 		param.setStart(start);
 		param.setEnd(end);
-		System.out.println(param.toString());
+				
 		List<LostPetDto> list = service.getLostPetList(param);
+		
+		for(LostPetDto dto : list) {
+			
+			LostImagesDto imagesDto = imageService.getImages(dto.getLostSeq());
+			
+			if(imagesDto != null) {
+				byte[] byteImage = imagesDto.getImagesPath();
+				dto.setImagePath(CommonUtil.imageToBase64(byteImage));
+			}	
+		}
+			
 		System.out.println(list);
 		//model.addAttribute("list", list);
 	
 		return list;
 	}
-	
 	
 	@ResponseBody
 	@PostMapping(value = "getCount")
@@ -159,5 +176,5 @@ public class LostPetController {
 		return "redirect:/lostPet/lostPetDetail";
 	}
 	
-	
+
 }
