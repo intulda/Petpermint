@@ -12,7 +12,7 @@
         <div class="main__title">
             <span>강아지 이야기</span>
         </div>
-        <div class="story__more">
+        <div class="story__more" data-link="">
             <p>더보기</p>
         </div>
         <div class="main__contents">
@@ -45,7 +45,7 @@
         <div class="main__title">
             <span>고양이 이야기</span>
         </div>
-        <div class="story__more">
+        <div class="story__more" data-link="">
             <p>더보기</p>
         </div>
         <div class="main__contents">
@@ -78,7 +78,7 @@
         <div class="main__title">
             <span>유기동물 공고</span>
         </div>
-        <div class="story__more">
+        <div class="story__more" data-link="/lostPet/lostPet">
             <p>더보기</p>
         </div>
         <div class="main__contents">
@@ -86,7 +86,7 @@
                 <c:when test="${lostPetList.size() ne 0}">
                     <ul class="main__contents-lost-wrap">
                         <c:forEach items="${lostPetList}" var="lost">
-                            <li class="lostPet__card-wrap" data-link="http://www.naver.com">
+                            <li class="lostPet__card-wrap" data-link="/lostPet/lostPetDetail?seq=${lost.lostSeq}">
                                 <div class="lostPet__card-image">
                                     <c:if test="${lost.thumbnail ne null}">
                                         <div style="background-image: url('${dog.thumbnail}')"></div>
