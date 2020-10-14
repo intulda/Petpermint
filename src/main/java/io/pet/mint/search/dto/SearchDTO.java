@@ -16,7 +16,7 @@ public class SearchDTO {
     private String id;
     private String boardLocation;
     private String boardContents;
-    private byte[] imagePath;
+    private byte[] imagesPath;
     private String thumbnail;
 
 }
