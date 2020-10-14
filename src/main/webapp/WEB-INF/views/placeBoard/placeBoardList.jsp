@@ -90,10 +90,6 @@ function selCategory(BoardCategory){
 
 
 
-
-
-
-
 // 페이징 함수
 
 function getBbsListData( pNumber, boardCategory ){

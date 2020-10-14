@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.pet.mint.lostPet.dto.LCommDto;
 import io.pet.mint.lostPet.dto.LostPetDto;
+import io.pet.mint.lostPet.dto.LostPetParam;
 import io.pet.mint.lostPet.service.LostPetService;
+import io.pet.mint.placeBoard.dto.PlaceBoardParam;
 
 @Controller
 @RequestMapping(value="/lostPet/*")
@@ -21,16 +24,37 @@ public class LostPetController {
 	@Autowired
 	LostPetService service;
 	
-	@GetMapping(value="lostPet") 
-	public String getLostPetList(Model model) {
+	@GetMapping(value = "lostPet")
+	public String lostPet() {
 		
-		System.out.println("LostPetController getLostPetList");
-	
-		List<LostPetDto> list = service.getLostPetList();
-		System.out.println(list);
-		model.addAttribute("list", list);
-	
 		return "view:lostPet/lostPet";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="getLostPet") 
+	public List<LostPetDto> getLostPetList(Model model, LostPetParam param) {
+
+		// paging 처리
+		int sn = param.getPageNumber();
+		int start = sn * param.getRecordCountPerPage() + 1;
+		int end = (sn + 1) * param.getRecordCountPerPage();	
+		param.setStart(start);
+		param.setEnd(end);
+		System.out.println(param.toString());
+		List<LostPetDto> list = service.getLostPetList(param);
+		System.out.println(list);
+		//model.addAttribute("list", list);
+	
+		return list;
+	}
+	
+	
+	@ResponseBody
+	@PostMapping(value = "getCount")
+	public int getCount(LostPetParam param) {
+		int count = service.getCount(param);
+		System.out.println("게시물 갯수: " + count);
+		return count;
 	}
 	
 	@GetMapping(value="lostPetDetail")
@@ -48,11 +72,6 @@ public class LostPetController {
 		model.addAttribute("LCommList", LCommList);
 		//댓글 적기 Ajax
 		//댓글
-		/*
-		 * LCommDto lcommDto = service.getLCommDto(seq);
-		 * System.out.println(lcommDto.toString()); model.addAttribute("lcommDto",
-		 * lcommDto);
-		 */
 		
 		return "view:lostPet/lostPetDetail";
 	}
@@ -81,16 +100,6 @@ public class LostPetController {
 		return n>0?"ok":"no";
 	}
 	
-	/*
-	@ResponseBody
-	@PostMapping(value = "LCommUpdateAf")
-	public String LCommUpdateAf(LCommDto lcommDto, Model model) throws Exception {
-		System.out.println("lcommUpdateAf 도착" + lcommDto.getLcommSeq());
-		int n = service.getLCommUpdate(lcommDto);
-		
-		return n>0?"ok":"no";
-	}
-	*/
 		
 	@GetMapping(value="lostPetUpdate")
 	public String getLostPetUpdate(int seq, Model model) {
@@ -141,13 +150,13 @@ public class LostPetController {
 		
 	}
 
-	@ResponseBody
 	@PostMapping(value = "lcommUpdateAf")
-	public String lcommUpdateAf(LCommDto dto, Model model) throws Exception {
+	public String lcommUpdateAf(LCommDto dto, Model model, RedirectAttributes redirect) throws Exception {
 		
+		System.out.println(dto.toString());
 		int n = service.getLCommUpdate(dto);
-		
-		return n>0?"ok":"no";
+		redirect.addAttribute("seq", dto.getLostpetSeq());
+		return "redirect:/lostPet/lostPetDetail";
 	}
 	
 	

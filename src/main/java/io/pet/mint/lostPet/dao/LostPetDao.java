@@ -8,13 +8,15 @@ import org.springframework.stereotype.Repository;
 
 import io.pet.mint.lostPet.dto.LCommDto;
 import io.pet.mint.lostPet.dto.LostPetDto;
-import io.pet.mint.lostPet.dto.LostPetParamPage;
+import io.pet.mint.lostPet.dto.LostPetParam;
+import io.pet.mint.placeBoard.dto.PlaceBoardParam;
 
 @Mapper
 @Repository
 public interface LostPetDao {
 
-	public List<LostPetDto> getLostPetList();
+	public List<LostPetDto> getLostPetList(LostPetParam param);
+	public int getCount(LostPetParam param);
 	
 	LostPetDto getLostPetDetail(int seq);
 	public int getLostViewcount(int seq);

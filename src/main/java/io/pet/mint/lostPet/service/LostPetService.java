@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import io.pet.mint.lostPet.dao.LostPetDao;
 import io.pet.mint.lostPet.dto.LCommDto;
 import io.pet.mint.lostPet.dto.LostPetDto;
-import io.pet.mint.lostPet.dto.LostPetParamPage;
+import io.pet.mint.lostPet.dto.LostPetParam;
+import io.pet.mint.placeBoard.dto.PlaceBoardParam;
 
 @Service
 @Transactional
@@ -18,8 +19,13 @@ public class LostPetService {
 	@Autowired
 	LostPetDao dao;
 	
-	public List<LostPetDto> getLostPetList() {
-		return dao.getLostPetList();
+	public List<LostPetDto> getLostPetList(LostPetParam param) {
+		return dao.getLostPetList(param);
+	}
+	
+	public int getCount(LostPetParam param) {
+		
+		return dao.getCount(param);
 	}
 	
 	public LostPetDto getLostPetDetail(int seq) {
