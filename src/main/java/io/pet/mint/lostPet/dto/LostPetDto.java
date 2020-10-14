@@ -5,6 +5,7 @@ public class LostPetDto {
 	private int lostSeq;
 	private String lostId;
 	private String lostDate;
+	private String lostWdate;
 	private int lostViewcount;
 	private int lostStatus;
 	private String lostLocation;
@@ -132,6 +133,14 @@ public class LostPetDto {
 
 	public void setLostDel(int lostDel) {
 		this.lostDel = lostDel;
+	}
+
+	public String getLostWdate() {
+		return lostWdate;
+	}
+
+	public void setLostWdate(String lostWdate) {
+		this.lostWdate = lostWdate;
 	}
 
 	@Override
