@@ -1,5 +1,6 @@
 package io.pet.mint.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.pet.mint.lostPet.dto.LCommDto;
@@ -18,7 +21,6 @@ import io.pet.mint.lostPet.dto.LostPetParam;
 import io.pet.mint.lostPet.service.LostImagesService;
 import io.pet.mint.lostPet.service.LostPetService;
 import io.pet.mint.placeBoard.dto.ImagesDto;
-import io.pet.mint.placeBoard.dto.PlaceBoardDto;
 import io.pet.mint.util.CommonUtil;
 
 @Controller
@@ -94,18 +96,41 @@ public class LostPetController {
 	}
 	
 	@GetMapping(value="lostPetWrite")
-	public String lostPetWrite(Model model) {
+	public String lostPetWrite() {
 		
+		System.out.println("lostPetWritedddddddddddddddddddddddddddddddddddddddddddddddddffa");
 		return "view:lostPet/lostPetWrite";
 	}
 	
-	@ResponseBody
 	@PostMapping(value = "lostPetWriteAf")
-	public String lostPetWriteAf(LostPetDto lostPetDto, Model model) throws Exception {
+	public String lostPetWriteAf(
+			LostPetDto lostPetDto
+	,@RequestParam(value = "thumbnail", required = false)MultipartFile thumbnail
+	) {
 		
-		int n = service.getLostPetWrite(lostPetDto);
+		System.out.println("lostPetDto1" + lostPetDto.toString());
 		
-		return n>0?"ok":"no";
+		try {
+			
+			// 게시판 내용 저장
+			service.getLostPetWriteAf(lostPetDto);
+												
+			LostImagesDto imageDto = new LostImagesDto();
+			// 썸네일 이미지 이름	, 파일 저장	
+			
+			System.out.println("ㅗ"+imageDto.toString());
+			imageDto.setImagesPath(thumbnail.getBytes());
+			imageService.saveImages(imageDto);
+							
+			
+			
+			return "view:lostPet/lostPet";
+			
+		} catch (IOException e1) {
+			
+			e1.printStackTrace();
+			return "view:lostPet/lostPet";
+		}	
 	}
 	
 	@ResponseBody

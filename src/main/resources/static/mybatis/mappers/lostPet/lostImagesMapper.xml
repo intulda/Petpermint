@@ -7,8 +7,8 @@
 
 <insert id="saveImages" parameterType="io.pet.mint.lostPet.dto.LostImagesDto">
 	INSERT INTO LOSTPET_IMAGES(LOSTPET_SEQ, IMAGES_SEQ, IMAGES_PATH, REG_ID, REG_DATE)
-	VALUES((SELECT MAX(LOSTPET_SEQ) FROM LOSTPET), SEQ_LOSTIMAGES.NEXTVAL,
-	 #{imagesPath}, 'aaa', SYSDATE)	
+		VALUES					((SELECT MAX(LOSTPET_SEQ) FROM LOSTPET), SEQ_LOSTIMAGES.NEXTVAL,
+								 #{imagesPath}, #{regId}, SYSDATE)	
 </insert> 
 	
 <select id="getImages" parameterType="java.lang.Integer"

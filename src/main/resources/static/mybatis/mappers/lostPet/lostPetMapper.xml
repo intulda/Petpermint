@@ -73,6 +73,8 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 	VALUES(SEQ_LOSTPET.NEXTVAL, #{lostId}, #{lostKind}, 0, #{lostStatus}, #{lostLocation}, #{lostPhone}, #{lostType}, #{lostGender}, #{lostDetail}, 0, SYSDATE)
 </insert>
 
+
+
 <update id="getLostPetUpdate" parameterType="io.pet.mint.lostPet.dto.LostPetDto">
 	UPDATE LOSTPET SET
 	LOST_STATUS=#{lostStatus}, LOST_LOCATION=#{lostLocation}, LOST_PHONE=#{lostPhone}, LOST_TYPE=#{lostType}, LOST_GENDER=#{lostGender}, LOST_DETAIL=#{lostDetail} 

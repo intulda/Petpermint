@@ -9,6 +9,7 @@
 
 <title>멍냥 구조대</title>
 
+
 <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
 	<tr>
 		<td style="padding-left: 5px">

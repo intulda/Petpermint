@@ -49,7 +49,7 @@
 		<br>썸네일이미지
 		<input type="file" name="thumbnail" class="sendData" accept=".gif, .jpg, .png">	
 		<textarea id="summernote" name="boardContents"></textarea>	  
-		
+
 	</form>	
 </div>
 

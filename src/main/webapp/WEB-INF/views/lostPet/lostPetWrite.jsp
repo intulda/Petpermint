@@ -6,12 +6,14 @@
 <h3>글쓰기</h3>
 <br>
 
+<div id="inputArea">
+	<form method="post" id="sendForm" action="/lostPet/lostPetWriteAf"
+		enctype="multipart/form-data">
+		
 아이디 : <input type="text" id="_id" placeholder="아이디"/><br>
-
+파 일 : <input type="file" name="thumbnail" class="sendData" accept=".gif, .jpg, .png"><br>
 연락처 : <input type="text" id="_phone" placeholder="-을 포함한 연락처 기재"><br>
-
 장소 :  <input type="text" id="_location" placeholder="목격/실종 장소"/></br>
-
 동물 :
 <select name="type" id="_type">
 		<option value="0">동물 선택</option>
@@ -20,9 +22,7 @@
 		<option value="3">기타</option>
 </select>
 <br>
-
 품종 : <input type="text" id="_kind" placeholder="품종"/><br>
-
 상태 :
 <select name="status" id="_status">
 		<option value="0">상태 선택</option>
@@ -31,7 +31,6 @@
 		<option value="3">기타</option>
 </select>
 <br>
-
 성별 :
 <select name="gender" id="_gender">
 		<option value="0">성별 선택</option>
@@ -40,19 +39,58 @@
 		<option value="3">모름</option>
 </select>
 <br>
-
 상세 :
 <textarea id="_detail" name="detail" placeholder="동물의 안전한 귀가를 위한 보다 상세한 정보를 기재해주세요." rows="4" cols="50">
 </textarea>
 <br>
 
-<a id="_lostPetWrite" title="글쓰기">		
-	<img src="/images/bwrite.png" alt="글쓰기" />
-</a>
+	</form>
+</div>
+
+<button type="button" id="writeButton" >글등록</button>
 
 
 <script type="text/javascript">
-$("#_lostPetWrite").click(function() {
+
+$(document).ready(function() {
+
+	$('#writeButton').click(function(){
+		
+		if($('#_id').val().trim() == ""){			
+			alert("아이디를 입력해주세요");
+			$('#_id').focus();
+		}
+		else if($('#_phone').val().trim() == ""){			
+			alert("연락처를 입력해주세요");
+			$('#_phone').focus();
+		}
+		else if($('#_location').val().trim() == ""){			
+			alert("실종/발견 장소를 입력해주세요");
+			$('#_location').focus();
+		}
+		else if($('#_type').val() == 0){			
+			alert("강아지/고양이를 선택해주세요");
+			$('#_type').focus();
+		}
+		else if($('#_status').val().trim() == 0){			
+			alert("실종/목격 중 선택해주세요");
+			$('#_status').focus();
+		}
+		else if($('#_gender').val().trim() == 0){			
+			alert("성별을 선택해주세요");
+			$('#_gender').focus();
+		}
+		else{		
+			$('#sendForm').submit();
+		}
+	});
+
+});
+
+
+	
+
+/* $("#_lostPetWrite").click(function() {
 	
 	let sendData = {lostId:$('#_id').val(), lostPhone:$('#_phone').val(),
 						lostKind:$('#_kind').val(), lostType:$('#_type').val(),
@@ -85,7 +123,7 @@ $("#_lostPetWrite").click(function() {
 
 	});
 	//$("#_lostPetInfo").attr("action":"lostPetWriteAf").submit();	
-});
+}); */
 </script>
 
 
