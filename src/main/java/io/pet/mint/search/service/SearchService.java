@@ -36,8 +36,8 @@ public class SearchService {
         if("LOST_PET".equals(type)) {
             return ((List<SearchLostPetDTO>)selectList).stream()
                     .map(e -> {
-                        if(e.getImagePath() != null) {
-                            e.setThumbnail(CommonUtil.imageToBase64(e.getImagePath()));
+                        if(e.getImagesPath() != null) {
+                            e.setThumbnail(CommonUtil.imageToBase64(e.getImagesPath()));
                         }
                         return e;
                     })
@@ -45,10 +45,10 @@ public class SearchService {
                     .collect(Collectors.toList());
         } else {
             return ((List<SearchDTO>)selectList).stream()
-                    .filter(e -> e.getBoardType().equals(type))
+                    .filter(e -> e.getBoardType().contains(type))
                     .map(e -> {
-                        if(e.getImagePath() != null) {
-                            e.setThumbnail(CommonUtil.imageToBase64(e.getImagePath()));
+                        if(e.getImagesPath() != null) {
+                            e.setThumbnail(CommonUtil.imageToBase64(e.getImagesPath()));
                         }
                         return e;
                     })
