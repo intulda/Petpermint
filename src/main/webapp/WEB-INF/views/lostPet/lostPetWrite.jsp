@@ -7,24 +7,24 @@
 <br>
 
 <div id="inputArea">
-	<form method="post" id="sendForm" action="/lostPet/lostPetWriteAf"
+	<form method="post" id="sendForm" action="/lostPet/lostPetWrite"
 		enctype="multipart/form-data">
-		
-아이디 : <input type="text" id="_id" placeholder="아이디"/><br>
-파 일 : <input type="file" name="thumbnail" class="sendData" accept=".gif, .jpg, .png"><br>
-연락처 : <input type="text" id="_phone" placeholder="-을 포함한 연락처 기재"><br>
-장소 :  <input type="text" id="_location" placeholder="목격/실종 장소"/></br>
+
+아이디 : <input type="text" name="lostId" id="_id" value='aaa', readonly placeholder="아이디"/><br>
+파 일 : <input type="file" name="thumbnail" accept=".gif, .jpg, .png"><br>
+연락처 : <input type="text" name="lostPhone" id="_phone" placeholder="-을 포함한 연락처 기재"><br>
+장소 :  <input type="text" name="lostLocation" id="_location" placeholder="목격/실종 장소"/></br>
 동물 :
-<select name="type" id="_type">
+<select name="lostType" id="_type">
 		<option value="0">동물 선택</option>
 		<option value="1">강아지</option>
 		<option value="2">고양이</option>
 		<option value="3">기타</option>
 </select>
 <br>
-품종 : <input type="text" id="_kind" placeholder="품종"/><br>
+품종 : <input type="text" name="lostKind" id="_kind" placeholder="품종"/><br>
 상태 :
-<select name="status" id="_status">
+<select name="lostStatus" id="_status">
 		<option value="0">상태 선택</option>
 		<option value="1">실종</option>
 		<option value="2">목격</option>
@@ -32,7 +32,7 @@
 </select>
 <br>
 성별 :
-<select name="gender" id="_gender">
+<select name="lostGender" id="_gender">
 		<option value="0">성별 선택</option>
 		<option value="1">암컷</option>
 		<option value="2">수컷</option>
@@ -40,7 +40,7 @@
 </select>
 <br>
 상세 :
-<textarea id="_detail" name="detail" placeholder="동물의 안전한 귀가를 위한 보다 상세한 정보를 기재해주세요." rows="4" cols="50">
+<textarea id="_detail" name="lostDetail" placeholder="동물의 안전한 귀가를 위한 보다 상세한 정보를 기재해주세요." rows="4" cols="50">
 </textarea>
 <br>
 
@@ -56,11 +56,7 @@ $(document).ready(function() {
 
 	$('#writeButton').click(function(){
 		
-		if($('#_id').val().trim() == ""){			
-			alert("아이디를 입력해주세요");
-			$('#_id').focus();
-		}
-		else if($('#_phone').val().trim() == ""){			
+		if($('#_phone').val().trim() == ""){			
 			alert("연락처를 입력해주세요");
 			$('#_phone').focus();
 		}
@@ -72,11 +68,15 @@ $(document).ready(function() {
 			alert("강아지/고양이를 선택해주세요");
 			$('#_type').focus();
 		}
-		else if($('#_status').val().trim() == 0){			
+		else if($('#_kind').val().trim() == ""){			
+			alert("품종을 입력해주세요");
+			$('#_kind').focus();
+		}
+		else if($('#_status').val() == 0){			
 			alert("실종/목격 중 선택해주세요");
 			$('#_status').focus();
 		}
-		else if($('#_gender').val().trim() == 0){			
+		else if($('#_gender').val() == 0){			
 			alert("성별을 선택해주세요");
 			$('#_gender').focus();
 		}

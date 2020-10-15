@@ -21,6 +21,7 @@ import io.pet.mint.lostPet.dto.LostPetParam;
 import io.pet.mint.lostPet.service.LostImagesService;
 import io.pet.mint.lostPet.service.LostPetService;
 import io.pet.mint.placeBoard.dto.ImagesDto;
+import io.pet.mint.placeBoard.dto.PlaceBoardDto;
 import io.pet.mint.util.CommonUtil;
 
 @Controller
@@ -95,20 +96,20 @@ public class LostPetController {
 		return "view:lostPet/lostPetDetail";
 	}
 	
-	@GetMapping(value="lostPetWrite")
-	public String lostPetWrite() {
+	@GetMapping(value="lostPetWriteView")
+	public String lostPetWriteView() {
 		
-		System.out.println("lostPetWritedddddddddddddddddddddddddddddddddddddddddddddddddffa");
+		System.out.println("lostPetWriteViewController");
 		return "view:lostPet/lostPetWrite";
 	}
 	
-	@PostMapping(value = "lostPetWriteAf")
-	public String lostPetWriteAf(
+	@PostMapping(value = "lostPetWrite")
+	public String lostPetWrite(
 			LostPetDto lostPetDto
 	,@RequestParam(value = "thumbnail", required = false)MultipartFile thumbnail
 	) {
 		
-		System.out.println("lostPetDto1" + lostPetDto.toString());
+		//System.out.println("입력 왜 안 됨 ㅡㅡ" + lostPetDto.toString());
 		
 		try {
 			
@@ -118,8 +119,9 @@ public class LostPetController {
 			LostImagesDto imageDto = new LostImagesDto();
 			// 썸네일 이미지 이름	, 파일 저장	
 			
-			System.out.println("ㅗ"+imageDto.toString());
 			imageDto.setImagesPath(thumbnail.getBytes());
+			System.out.println("ㅗ"+imageDto.toString());
+			
 			imageService.saveImages(imageDto);
 							
 			
@@ -144,30 +146,58 @@ public class LostPetController {
 	
 		
 	@GetMapping(value="lostPetUpdate")
-	public String getLostPetUpdate(int seq, Model model) {
+	public String getLostPetUpdate(@RequestParam(value="lostSeq")int lostSeq
+			,Model model) {
 		
-		LostPetDto lostPetDto = service.getLostPetDetail(seq);
-		System.out.println(lostPetDto);
-		model.addAttribute("lostPetDto", lostPetDto);
+		LostPetDto lostDto = service.getLostPetDetail(lostSeq);
+		System.out.println("lostPetUpdate 도착" + lostDto.toString());
+		LostImagesDto imageDto = imageService.getImages(lostSeq);
+		
+		if(imageDto != null) {
+			byte[] byteImage = imageDto.getImagesPath();
+			lostDto.setImagePath(CommonUtil.imageToBase64(byteImage));
+		}
+		
+		model.addAttribute("lostPetDto", lostDto);
+		
+		System.out.println(lostDto);
 		
 		return "view:lostPet/lostPetUpdate";
 	}
+		
 	
-	
-	@ResponseBody
+	// 글수정
 	@PostMapping(value = "lostPetUpdateAf")
-	public String lostPetUpdateAf(LostPetDto dto, Model model) throws Exception {
+	public String lostPetUpdateAf( LostPetDto dto
+			,@RequestParam(value = "thumbnail", required = false)MultipartFile thumbnail) {
+						
+		try {
 		
-		int n = service.getLostPetUpdate(dto);
-		
-		return n>0?"ok":"no";
+			// 게시판 내용 수정
+			service.getLostPetUpdate(dto);
+
+			// 수정한 썸네일이미지가 있을 경우
+			if(!thumbnail.isEmpty()) {									
+				LostImagesDto imageDto = new LostImagesDto();
+				// 썸네일 파일 수정		
+				imageDto.setImagesPath(thumbnail.getBytes());
+				imageDto.setLostpetSeq(dto.getLostSeq());
+				imageService.updateImages(imageDto);
+			}				
+			return "view:lostPet/lostPet";
+			
+		} catch (IOException e1) {
+			
+			e1.printStackTrace();
+			return "view:lostPet/lostPet";
+		}
 	}
 	
 	
 	@GetMapping(value="lostPetDelete")
-	public String getLostPetDelete(int lcommSeq, Model model) {
+	public String getLostPetDelete(int lostSeq, Model model) {
 			
-		service.getLostPetDelete(lcommSeq);
+		service.getLostPetDelete(lostSeq);
 		return "redirect:lostPet";	
 	}
 	
