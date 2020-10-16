@@ -32,12 +32,11 @@ CREATE SEQUENCE SEQ_IMAGES
 START WITH 1
 INCREMENT BY 1	
 */
-	private int imagesSeq;
-	private int BoardSeq;
-	private byte[] imagesPath;
-	private String contents;
-	private String regId;
-	private String regDate;
+	private int imagesSeq;			// 이미지 시퀀스 번호
+	private int BoardSeq;			// 게시물 시퀀스 번호
+	private byte[] imagesPath;		// 저장된 이미지 파일
+	private String regId;			// 이미지 등록한 사람
+	private String regDate;			// 이미지 등록일
 	
 	public ImagesDto() {}
 
@@ -48,12 +47,8 @@ INCREMENT BY 1
 		this.imagesSeq = imagesSeq;
 		BoardSeq = boardSeq;
 		this.imagesPath = imagesPath;
-		this.contents = contents;
 		this.regId = regId;
 		this.regDate = regDate;
 	}
-
-
-	
 	
 }
