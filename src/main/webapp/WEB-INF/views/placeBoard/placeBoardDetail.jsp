@@ -109,35 +109,7 @@ function getBbsListData(pNumber){
 								+ commDto.commSeq + "'>"
 								+ commDto.commContent
 								+ "</div>";
-
-
-
-
-					/*
-					let tagData = "<div class='commHeader'>"
-								+ "<input type='text' value='aaa' class='commData'>"
-								+ "<span class='infoData'>등록날짜  -  </span>"
-								+ "<input type='text' value='"
-								+ commDto.commRegDate
-								+ "' id='commRegDate"
-								+ commDto.commSeq
-								+ "' class='comRegDate'>"
-								+ "<button type='button' id='commUpdButton"
-								+ commDto.commSeq
-								+ "' onclick=\"commUpdate('"
-								+ commDto.commSeq + "','" + commDto.commContent
-								+ "')\">수정</button>"
-								+ "<button type='button' id='commDelButton"
-								+ commDto.commSeq
-								+ "' onclick=\"commDelete('"
-								+ commDto.commSeq
-								+ "')\">삭제</button>"
-								+ "</div>"
-								+ "<div class='commBody' id='commBody"
-								+ commDto.commSeq + "'>"
-								+ commDto.commContent
-								+ "</div>";
-						*/				
+				
 					$('.comm_listItem').append(tagData);
 				});
 			}		
