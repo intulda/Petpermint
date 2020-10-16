@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="io.pet.mint.info.dao.InfoDao">
+
+<!-- getInfoList -->
+<!-- <select id="getInfoList" resultType="io.pet.mint.info.dto.InfoDto">
+	SELECT * FROM BOARD
+	WHERE BOARD_TYPE = 'DOG' 
+</select> -->
+
+
+
+<select id="dogListPage" parameterType="io.pet.mint.info.dto.InfoParam" resultType="io.pet.mint.info.dto.InfoDto">
+
+   SELECT BOARD_SEQ,BOARD_REG_ID, BOARD_TITLE, BOARD_CONTENTS,BOARD_REG_DATE, BOARD_VIEW_COUNT
+   FROM  (SELECT 
+   		 ROW_NUMBER()OVER(ORDER BY BOARD_SEQ DESC)AS RNUM,BOARD_SEQ,BOARD_REG_ID, BOARD_TITLE, BOARD_CONTENTS,BOARD_REG_DATE, BOARD_VIEW_COUNT
+   		FROM BOARD
+        WHERE BOARD_CATEGORY=#{boardType}
+       <if test="choice != null and choice != ''
+             and searchWord != null and searchWord != ''">          
+          <if test="choice == 'title'">
+             AND BOARD_TITLE LIKE '%'||#{searchWord}||'%'
+          </if>
+          <if test="choice == 'content'">
+             AND BOARD_CONTENTS LIKE '%'||#{searchWord}||'%'
+          </if>             
+       </if>
+       )     
+   	WHERE RNUM BETWEEN ${start} AND ${end}    
+</select>   
+
+<!-- infoList count -->
+<select id="getInfoListCount" parameterType="io.pet.mint.info.dto.InfoParam" resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0) AS CNT
+	FROM BOARD
+	WHERE 1=1
+	<if test="choice != null and choice != '' and searchWord != null and searchWord != '' ">		 	
+	 	<if test="choice == 'title'">
+	 		AND BOARD_TITLE LIKE '%'||#{searchWord}||'%'
+	 	</if>
+	 	<if test="choice == 'content'">
+	 		AND BOARD_CONTENTS LIKE '%'||#{searchWord}||'%'
+	 	</if>		 		
+	 </if>
+</select>
+
+<!--강아지글의 총수 -->
+<select id="getParamCount" parameterType="io.pet.mint.info.dto.InfoParam"
+   							resultType="java.lang.Integer">
+   SELECT NVL(COUNT(*), 0) AS CNT
+   FROM BOARD
+   WHERE 1=1
+   <if test="category != null and category != ''">
+      <if test="category == 'title'">
+         AND BOARD_TITLE LIKE '%'||#{boardType}||'%'
+      </if>
+      <if test="category == 'content'">
+         AND BOARD_CONTENTS LIKE '%'||#{boardType}||'%'
+      </if>
+      <if test="category == 'address'">
+         AND BOARD_LOCATION LIKE '%'||#{boardType}||'%'
+      </if>   
+   </if>
+   AND BOARD_TYPE= #{boardType}    
+</select>
+
+<!-- 글 쓰기  -->
+<insert id="infoWrite" parameterType="io.pet.mint.info.dto.InfoDto">
+	INSERT INTO BOARD(BOARD_SEQ,BOARD_TYPE,BOARD_CATEGORY, ID,BOARD_REG_ID,BOARD_REF,BOARD_STEP, 
+				BOARD_DEPTH, BOARD_TITLE, BOARD_CONTENTS, BOARD_REG_DATE, BOARD_VIEW_COUNT,BOARD_DEL)
+		VALUES(SEQ_BOARD.NEXTVAL,#{boardType},#{boardCategory}, 'aaa','aaa', 0, 0, 0, 
+				#{boardTitle}, #{boardContents}, SYSDATE, 0, 1)	
+</insert> 
+<!-- 글 쓰기 : 이미지 저장 -->
+<insert id = "imgSave" parameterType = "io.pet.mint.info.dto.InfoImagesDto"> 
+	INSERT INTO BOARD_IMAGES (IMAGES_SEQ, BOARD_SEQ, IMAGES_PATH, REG_ID, REG_DATE) 
+	VALUES (SEQ_IMAGES.NEXTVAL, (SELECT MAX(BOARD_SEQ) FROM BOARD), 
+			 #{imagesPath}, 'aaa', SYSDATE) 
+</insert>
+
+
+<!-- 글 디테일 -->
+<select id="infoDetail" resultType="io.pet.mint.info.dto.InfoDto">
+ SELECT BOARD_SEQ, BOARD_REG_ID,BOARD_TITLE,BOARD_CONTENTS,BOARD_REG_DATE, BOARD_VIEW_COUNT
+ FROM BOARD
+ WHERE BOARD_SEQ=#{boardSeq}
+</select>
+
+<!-- 글 디테일 : 이미지 디테일 -->
+<select id="imgDetail" parameterType ="java.lang.Integer" resultType="io.pet.mint.info.dto.InfoImagesDto">
+	SELECT IMAGES_PATH
+	FROM BOARD_IMAGES 
+	WHERE BOARD_SEQ = #{boardSeq}
+</select>
+
+<!-- 글 수정 -->
+<update id="infoUpDateAf" parameterType ="io.pet.mint.info.dto.InfoDto">
+	UPDATE BOARD 
+	SET    BOARD_TITLE=#{boardTitle},BOARD_CONTENTS=#{boardContents},BOARD_UPD_ID=#{boardUpdId},
+		   BOARD_UPD_DATE=SYSDATE, BOARD_DEL=0
+	WHERE BOARD_SEQ=#{boardSeq}
+</update>
+<update id="imgUpDate" parameterType ="io.pet.mint.info.dto.InfoImagesDto">
+	UPDATE BOARD_IMAGES 
+	SET IMAGES_PATH=#{imagesPath}
+	WHERE BOARD_SEQ=#{boardSeq}
+</update>
+
+<!-- 글 삭제 -->
+<update id="infoDelete" parameterType ="io.pet.mint.info.dto.InfoDto">
+	UPDATE BOARD 
+	SET BOARD_DEL=1
+	WHERE BOARD_SEQ=#{boardSeq}
+</update>
+
+
+</mapper>
