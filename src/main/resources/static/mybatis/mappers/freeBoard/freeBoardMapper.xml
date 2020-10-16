@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="io.pet.mint.freeBoard.dao.FreeBoardDAO">
+
+<insert id="addFreeBoardPage" parameterType="io.pet.mint.freeBoard.dto.FreeBoardDTO">
+
+	INSERT INTO BOARD (BOARD_SEQ,BOARD_TYPE, BOARD_REG_ID, BOARD_TITLE, BOARD_CONTENTS,
+				BOARD_VIEW_COUNT, BOARD_REG_DATE,BOARD_CATEGORY,ID, BOARD_REF)
+	VALUES (SEQ_BOARD.NEXTVAL,'자유게시판' ,'aaa', #{boardTitle}, #{boardContents},0,
+				SYSDATE,'자유게시판','aaa', (SELECT NVL(MAX(BOARD_REF), 0 ) + 1 FROM BOARD) )
+</insert>
+
+<select id="getFreeBoardList" resultType="io.pet.mint.freeBoard.dto.FreeBoardDTO">
+		SELECT BOARD_SEQ, BOARD_TITLE, BOARD_REG_ID, TO_CHAR(BOARD_REG_DATE, 'YYYY/MM/DD')AS "BOARD_REG_DATE", BOARD_VIEW_COUNT
+		FROM BOARD
+		WHERE BOARD_TYPE IN '자유게시판'
+		ORDER BY BOARD_REG_DATE DESC
+</select>
+
+<select id="freeBoardSearch" parameterType="io.pet.mint.freeBoard.dto.FreeBoardParam" resultType="io.pet.mint.freeBoard.dto.FreeBoardDTO">
+
+	SELECT BOARD_SEQ, BOARD_TITLE, BOARD_REG_ID, TO_CHAR(BOARD_REG_DATE, 'YYYY/MM/DD')AS
+			"BOARD_REG_DATE", BOARD_VIEW_COUNT
+	FROM (SELECT ROW_NUMBER()OVER(ORDER BY BOARD_SEQ, BOARD_REG_DATE)AS RNUM,
+			BOARD_SEQ, BOARD_TITLE, BOARD_REG_ID, BOARD_REG_DATE, BOARD_VIEW_COUNT
+			FROM BOARD
+			WHERE BOARD_TYPE = '자유게시판'
+			<if test="searchWord != null and searchWord !=''">
+				<if test="choice == 'title'">
+					AND BOARD_TITLE LIKE '%'||#{searchWord}||'%'
+				</if>
+				<if test="choice =='writer'">
+					AND BOARD_REG_ID LIKE '%'||#{searchWord}||'%'
+				</if>
+			</if>
+			ORDER BY BOARD_REG_DATE DESC) A
+			WHERE RNUM BETWEEN ${start} AND ${end}
+</select>
+
+<select id="freeBoardPaging" parameterType="io.pet.mint.freeBoard.dto.FreeBoardParam">
+	
+	SELECT NVL(COUNT(*), 0) AS CNT
+	FROM BOARD
+	WHERE BOARD_TYPE = '자유게시판'
+	<if test="choice != null and choice != ''
+	 		and searchWord != null and searchWord != ''">		 	
+	 	<if test="choice == 'title'">
+	 		AND TITLE LIKE '%'||#{searchWord}||'%'
+	 	</if>
+	 	<if test="choice == 'writer'">
+	 		AND ID LIKE '%'||#{searchWord}||'%'
+	 	</if>		 		
+	 </if>
+</select>
+
+</mapper>
