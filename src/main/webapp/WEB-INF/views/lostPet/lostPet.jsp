@@ -70,7 +70,8 @@ function getBbsListData( pNumber){
 			 },
 		success:function( list ){
 			
-			$(".lost_content").remove();
+			$(".center").remove();
+			
 			if(list == null || list ==''){
 				let tagData = "<div class='lost_content'>"
 							+ "<div class='lost_item2'>"
@@ -83,7 +84,10 @@ function getBbsListData( pNumber){
 					//alert(lostDto.lostSeq);
 					
 					//alert(lostDto.imagePath);
-					let tagData = "<div class='child'>"
+					
+				
+					
+					let tagData = "<div class='center'>"
 								+ "<div class='place_item'>"
 								 +"</div>"
 								+ "<div class='lost_item2'>"											
