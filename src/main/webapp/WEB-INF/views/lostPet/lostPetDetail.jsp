@@ -17,19 +17,21 @@
            <th>DATE</th>
            <th>VIEWCOUNT</th>
            <th>STATUS</th>
-           <th>LOCATION</th>
+
+           
            <th></th>
        </tr>
        <tr>
            <td>${lostPetDto.lostSeq}</td>
-           <td>${lostPetDto.lostDate}</td>
+           <td>${lostPetDto.lostKind}</td>
            <td>${lostPetDto.lostViewcount}</td>
            <td>${lostPetDto.lostStatus}</td>
            <td>${lostPetDto.lostLocation}</td>
+           
        </tr>
 </table>
 
-<a href="lostPetUpdate?seq=${lostPetDto.lostSeq}">수정</a>
+<a href="lostPetUpdate?lostSeq=${lostPetDto.lostSeq}">수정</a>
 <input type="button" value="삭제" onclick="del(${lostPetDto.lostSeq})">
 
 
@@ -71,7 +73,7 @@
 function del(seq) {
 	var chk = confirm("정말 삭제하시겠습니까?");
 	if (chk) {
-		location.href='/lostPet/lostPetDelete?seq='+ seq;
+		location.href='/lostPet/lostPetDelete?lostSeq='+ seq;
 	}
 }
 
