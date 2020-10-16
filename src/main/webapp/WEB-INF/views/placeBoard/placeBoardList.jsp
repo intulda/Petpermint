@@ -86,14 +86,9 @@ function selCategory(BoardCategory){
 	getBbsListCount(boardCategory);
 }
 
-<<<<<<< HEAD
 
-
-// 페이징 함수
-
-=======
 // 누른 페이지를 적용해서 게시물 출력
->>>>>>> refs/remotes/origin/feature/placeReply
+
 function getBbsListData( pNumber, boardCategory ){
 	
 	$.ajax({
