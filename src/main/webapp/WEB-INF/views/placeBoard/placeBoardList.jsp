@@ -4,9 +4,7 @@
 
 <script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeList.css" />
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
 
 
 <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
@@ -88,10 +86,14 @@ function selCategory(BoardCategory){
 	getBbsListCount(boardCategory);
 }
 
+<<<<<<< HEAD
 
 
 // 페이징 함수
 
+=======
+// 누른 페이지를 적용해서 게시물 출력
+>>>>>>> refs/remotes/origin/feature/placeReply
 function getBbsListData( pNumber, boardCategory ){
 	
 	$.ajax({
@@ -132,6 +134,7 @@ function getBbsListData( pNumber, boardCategory ){
 								+ "<div><p>"
 								+ placeDto.boardLocation
 								+ "</p></div>"
+								// 연락처 추가
 								+ "<div><a href='/placeBoard/placeBoardDetail?seq="
 								+ placeDto.boardSeq
 								+ "' class='detailButton'>더알아보기</a></div>"
@@ -148,18 +151,16 @@ function getBbsListData( pNumber, boardCategory ){
 	});	
 }
 
-//글의 총수를 취득
+// 글의 갯수 카운트
 function getBbsListCount(boardCategory){
 	$.ajax({
 		url:"/placeBoard/getCount",
 		type:"post",
-		data:{ "pageNumber":0, "recordCountPerPage":10, 
-			"category":$("#_category").val(), "keyword":$("#_keyword").val(),
+		data:{	"category":$("#_category").val(), "keyword":$("#_keyword").val(),
 			"boardCategory":boardCategory
 			 },
 		success:function( count ){
-		//	alert("success");
-		//	alert(count);	
+	
 			loadPage(count);		
 		},
 		error:function(){
@@ -169,23 +170,33 @@ function getBbsListCount(boardCategory){
 }
 
 
-// paging 처리
+// 지정한 번호에 맞게 게시물 출력 및 페이징 출력
 function loadPage( totalCount ){
 
 	let pageSize = 10;
 	let nowPage = 1;
 
-	let totalPages = totalCount / pageSize;
-	if(totalCount % pageSize > 0){
-		totalPages++;
-	}
+	let totalPages = 0;
 
+	// 게시물의 갯수가 0일 경우 페이지수를 1로 지정
+	if(totalCount == 0){
+		totalPages = 1;
+	}
+	else{	
+		// 자바스크립트는 정수결과를 얻기 위해서 정수변환
+		totalPages =  parseInt(totalCount / pageSize);
+		if(totalCount % pageSize > 0){
+		
+			totalPages++;
+		}
+	}
+		
 	$("#pagination").twbsPagination('destroy');	// 페이지 갱신
 	
 	$("#pagination").twbsPagination({
-	//	startPage: 1,
+		//startPage: 1,
 		totalPages: totalPages,		// 전체 페이지 수
-		visiblePages: 10,
+		visiblePages: 5,
 		first:'<span aria-hidden="true">«</span>',
 		prev:"이전",
 		next:"다음",

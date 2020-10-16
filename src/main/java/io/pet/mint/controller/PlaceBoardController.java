@@ -18,40 +18,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import io.pet.mint.placeBoard.dto.ImagesDto;
 import io.pet.mint.placeBoard.dto.PlaceBoardDto;
 import io.pet.mint.placeBoard.dto.PlaceBoardParam;
+import io.pet.mint.placeBoard.dto.PlaceCommDto;
+import io.pet.mint.placeBoard.dto.PlaceCommParam;
 import io.pet.mint.placeBoard.service.ImagesService;
 import io.pet.mint.placeBoard.service.PlaceBoardService;
+import io.pet.mint.placeBoard.service.PlaceCommService;
 import io.pet.mint.util.CommonUtil;
 
 @Controller
 @RequestMapping(value = "/placeBoard/*")
 public class PlaceBoardController {
 	
-	
+	// 게시판 서비스
 	@Autowired
 	PlaceBoardService boardService;
-	
+	// 이미지 서비스
 	@Autowired
 	ImagesService imageService;
+	// 댓글 서비스
+	@Autowired
+	PlaceCommService commService;
 	
 	
+	
+	/*---------------- 게시물 컨트롤러 ----------------*/
+	
+	
+	// 게시판페이지 이동
 	@GetMapping(value = "placeBoardList")
 	public String placeBbsList() {
 		
 		return "view:placeBoard/placeBoardList";
 	}
-	/*
-	@ResponseBody
-	@PostMapping(value = "getPlaceBoardList")
-	public String getPlaceBoardList(PlaceBoardParam param, Model model) {
-		
-		
-	}
-	*/
+	
+	// 게시물페이지에서 게시물리스트 출력
 	@ResponseBody
 	@PostMapping(value = "getPlaceBoardList")
 	public List<PlaceBoardDto> getPlaceBoardList(PlaceBoardParam param) {
@@ -79,6 +84,7 @@ public class PlaceBoardController {
 		return placeList;
 	}
 	
+	// 게시물 카운팅
 	@ResponseBody
 	@PostMapping(value = "getCount")
 	public int getCount(PlaceBoardParam param) {
@@ -87,8 +93,6 @@ public class PlaceBoardController {
 		return count;
 	}
 
-	
-	
 	// 글작성페이지 이동
 	@GetMapping(value = "placeBoardWriteView")
 	public String placeBoardWriteView() {
@@ -96,7 +100,7 @@ public class PlaceBoardController {
 		return "view:placeBoard/placeBoardWrite";
 	}
 	 
-	// 글작성
+	// 글 작성
 	@PostMapping(value = "placeBoardWrite")
 	public String placeBoardWrite(
 			 PlaceBoardDto placeDto
@@ -124,11 +128,9 @@ public class PlaceBoardController {
 	
 	// 상세페이지 이동
 	@GetMapping(value = "placeBoardDetail")
-	public String placeBoardDetail(String seq, Model model) {
+	public String placeBoardDetail(@RequestParam(value = "seq")int boardSeq, 
+									Model model) {
 		
-		
-		System.out.print(seq);
-		int boardSeq = Integer.parseInt(seq);
 		PlaceBoardDto placeDto = boardService.getPlaceBoardContent(boardSeq);
 				
 		ImagesDto imageDto = imageService.getImages(boardSeq); 
@@ -161,7 +163,6 @@ public class PlaceBoardController {
 		return "view:placeBoard/placeBoardUpdate";
 	}
 	
-	
 	// 글수정
 	@PostMapping(value = "placeBoardUpdateAf")
 	public String placeBoardUpdateAf( PlaceBoardDto placeDto
@@ -189,6 +190,7 @@ public class PlaceBoardController {
 		}
 	}
 	
+	// 글삭제
 	@ResponseBody
 	@PostMapping(value = "placeBoardDelete")
 	public String placeBoardDelete(
@@ -199,12 +201,81 @@ public class PlaceBoardController {
 		return check>0?"ok":"no";
 	}
 	
+	
+	
+	
+	/*---------------- 댓글 컨트롤러 ----------------*/
+	
+	
+	// 댓글 등록
+	@ResponseBody
+	@PostMapping(value = "placeCommWrite")
+	public String placeCommWrite(PlaceCommDto commDto) {
+		
+		System.out.println(commDto.toString());
+		int n = commService.placeCommWrite(commDto);
+		
+		return n>0?"ok":"no";
+	}
+	
+	// 댓글 출력
+	@ResponseBody
+	@PostMapping(value = "getCommList")
+	public List<PlaceCommDto> getCommList(PlaceCommParam param){
+		
+		
+		// paging 처리
+		int sn = param.getPageNumber();
+		int start = sn * param.getRecordCountPerPage() + 1;
+		int end = (sn + 1) * param.getRecordCountPerPage();	
+		param.setStart(start);
+		param.setEnd(end);
+		
+		List<PlaceCommDto> list = commService.getCommList(param);
+		
+		System.out.println(list);
+		return list;
+	}
+	
+	//댓글 갯수 카운팅
+	@ResponseBody
+	@PostMapping(value = "getCommCount")
+	public int getCommCount(PlaceCommParam param){
+		int count = commService.getCommCount(param.getCommRef());
+		System.out.println("댓글 갯수: " + count);
+		return count;
+	}
+	
+	// 댓글 수정
+	@ResponseBody
+	@PostMapping(value = "PlaceCommUpdate")
+	public String PlaceCommUpdate(PlaceCommDto commDto) {
+		
+		int check = commService.placeCommUpdate(commDto);
+		System.out.println("수정 결과: " + check);
+		
+		return check>0?"ok":"no";
+	}
+	
+	// 댓글 삭제
+	@ResponseBody
+	@PostMapping( value = "PlaceCommDelete")
+	public String PlaceCommDelete(int commSeq) {
+		
+		int check = commService.placeCommDelete(commSeq);
+		System.out.println("수정 결과: " + check);
+		
+		return check>0?"ok":"no";
+	}
+	
+	
+	
+	/*---------------- 맵 컨트롤러 ----------------*/
+	
+	
+	@GetMapping( value = "placeBoardMap")
+	public String placeBoardMap() {
+		
+		return "view:placeBoard/placeBoardMap";
+	}
 }
-
-
-
-
-
-
-
-

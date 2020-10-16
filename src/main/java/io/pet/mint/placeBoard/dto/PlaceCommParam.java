@@ -9,14 +9,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class PlaceBoardParam implements Serializable {
-	
-	//검색시 저장할 변수
-	private String keyword;					// 검색 키워드
-	private String category;				// 검색 항목
-	
-	// 셀렉트태그에서 항목을 변경할 때 저장할 변수
-	private String boardCategory;
+public class PlaceCommParam implements Serializable {
 	
 	// 페이지 변경시 저장할 변수
 	private int pageNumber = 0;				// 현재 페이지
@@ -24,14 +17,20 @@ public class PlaceBoardParam implements Serializable {
 	private int start = 1;					// 시작 rnum
 	private int end = 10;					// 끝 rum
 	
-	public PlaceBoardParam() {}
+	private int commRef;
+	
+	public PlaceCommParam() {
+	}
 
-	public PlaceBoardParam(int pageNumber, int recordCountPerPage, int start, int end) {
+	public PlaceCommParam(int pageNumber, int recordCountPerPage, int start, int end, int commRef) {
 		super();
 		this.pageNumber = pageNumber;
 		this.recordCountPerPage = recordCountPerPage;
 		this.start = start;
 		this.end = end;
+		this.commRef = commRef;
 	}
+
+	
 	
 }
