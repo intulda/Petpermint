@@ -6,4 +6,9 @@
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
+    <typeAliases>
+        <typeAlias type="io.pet.mint.search.dto.SearchParamDTO" alias="SearchParamDTO"/>
+        <typeAlias type="io.pet.mint.search.dto.SearchDTO" alias="SearchDTO"/>
+        <typeAlias type="io.pet.mint.search.dto.SearchLostPetDTO" alias="SearchLostPetDTO"/>
+    </typeAliases>
 </configuration>
