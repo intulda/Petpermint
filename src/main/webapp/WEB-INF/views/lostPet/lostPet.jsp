@@ -30,9 +30,14 @@
 	</tr>
 </table>
 
-<div class="place_container">	
+<br><br>
+
+<div class="lost_container1">	
 </div>
-<img src="" id="img1">
+
+<br><br>
+
+
 <div class="container">
 	<nav aria-label="Page navigation">
 		<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
@@ -70,25 +75,21 @@ function getBbsListData( pNumber){
 			 },
 		success:function( list ){
 			
-			$(".center").remove();
-			
+			$(".lost_content").remove();
 			if(list == null || list ==''){
 				let tagData = "<div class='lost_content'>"
 							+ "<div class='lost_item2'>"
 							+ "<p>해당결과가 없습니다.</p></div>"
 							+ "</div>";
-				$('.place_container').append(tagData);
+				$('.lost_container1').append(tagData);
 			}
 			else{	
 				$.each(list, function(index, lostDto){
 					//alert(lostDto.lostSeq);
 					
 					//alert(lostDto.imagePath);
-					
-				
-					
-					let tagData = "<div class='center'>"
-								+ "<div class='place_item'>"
+					let tagData = "<div class='lost_content'>"
+								+ "<div class='lost_container2'>"
 								 +"</div>"
 								+ "<div class='lost_item2'>"											
 								+ "<div><p>"
@@ -115,7 +116,7 @@ function getBbsListData( pNumber){
 								
 								+ "</div>";
 	
-					$('.place_container').append(tagData);
+					$('.lost_container1').append(tagData);
 					
 				});
 					
