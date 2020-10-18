@@ -20,8 +20,6 @@ import io.pet.mint.lostPet.dto.LostPetDto;
 import io.pet.mint.lostPet.dto.LostPetParam;
 import io.pet.mint.lostPet.service.LostImagesService;
 import io.pet.mint.lostPet.service.LostPetService;
-import io.pet.mint.placeBoard.dto.ImagesDto;
-import io.pet.mint.placeBoard.dto.PlaceBoardDto;
 import io.pet.mint.util.CommonUtil;
 
 @Controller
@@ -50,8 +48,8 @@ public class LostPetController {
 		int end = (sn + 1) * param.getRecordCountPerPage();	
 		param.setStart(start);
 		param.setEnd(end);
-				
-		List<LostPetDto> list = service.getLostPetList(param);
+		
+		List<LostPetDto> list = service.getLostPetList(param);	
 		
 		for(LostPetDto dto : list) {
 			
@@ -64,7 +62,7 @@ public class LostPetController {
 		}
 			
 		System.out.println(list);
-		//model.addAttribute("list", list);
+		System.out.println("리스트 개수 :" +list.size());
 	
 		return list;
 	}
@@ -82,6 +80,14 @@ public class LostPetController {
 		//글 상세
 		LostPetDto lostPetDto = service.getLostPetDetail(seq);
 		System.out.println(lostPetDto);
+		
+		LostImagesDto imagesDto = imageService.getImages(lostPetDto.getLostSeq());
+		
+		if(imagesDto != null) {
+			byte[] byteImage = imagesDto.getImagesPath();
+			lostPetDto.setImagePath(CommonUtil.imageToBase64(byteImage));
+		}	
+		
 		model.addAttribute("lostPetDto", lostPetDto);
 		//뷰카운트
 		int getLostViewcount = service.getLostViewcount(seq);

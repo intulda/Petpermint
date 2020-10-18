@@ -6,9 +6,7 @@
 
 #inputArea{
 
-	width:60%;	
-	margin: 0 auto;
-	margin-top: 30px;
+
 
 }
 #inputArea input.sendData{

@@ -17,7 +17,7 @@
 			<select id="_category" name="category">
 				<option value="" selected="selected">선택</option>
 				<option value="lostId">작성자</option>
-				<option value="lostLocation">장소</option>		
+				<option value="lostLocation">지역</option>		
 			</select>
 		</td>
 		<td style="padding-left: 5px">
@@ -29,8 +29,7 @@
 		</td>
 	</tr>
 </table>
-
-<br><br>
+<br>
 
 <div class="lost_container1">	
 </div>
@@ -61,7 +60,6 @@ $('#writeButton').click(function(){
 });
 
 
-
 //페이징 함수
 
 function getBbsListData( pNumber){
@@ -69,51 +67,47 @@ function getBbsListData( pNumber){
 	$.ajax({
 		url:"/lostPet/getLostPet",
 		type:"post",
-		data:{ "pageNumber":pNumber, "recordCountPerPage":10, 
+		data:{ "pageNumber":pNumber, "recordCountPerPage":9, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val(),
 			
 			 },
 		success:function( list ){
 			
-			$(".lost_content").remove();
+			$(".lost_container2").remove();
 			if(list == null || list ==''){
-				let tagData = "<div class='lost_content'>"
-							+ "<div class='lost_item2'>"
-							+ "<p>해당결과가 없습니다.</p></div>"
+				let tagData = "<div class='lost_container2'>"
+							+ "<div class='lost_content'>"
+							+ "<p>작성 된 글이 없습니다.</p></div>"
 							+ "</div>";
 				$('.lost_container1').append(tagData);
 			}
 			else{	
 				$.each(list, function(index, lostDto){
 					//alert(lostDto.lostSeq);
-					
 					//alert(lostDto.imagePath);
-					let tagData = "<div class='lost_content'>"
-								+ "<div class='lost_container2'>"
-								 +"</div>"
-								+ "<div class='lost_item2'>"											
+					let tagData = "<div class='lost_container2'>"
+								+ "<div class='lost_content'>"									
 								+ "<div><p>"
-								+ "NO ."+ lostDto.lostSeq
+								+ "NO .&nbsp;"+ lostDto.lostSeq
 								+ "</p></div>"
 								+ "<img src='" 
 								+ lostDto.imagePath
-								+ "' width='250px' height='350px'>"
-								+ "<div><h5>"
-								+ "품종"+lostDto.lostType+"["+lostDto.lostKind+"]"
+								+ "' width='250px' height='300px'>"
+								+ "<br><br><div><h5>"
+								+ "품종&nbsp;&nbsp;"+lostDto.lostType+"&nbsp;["+lostDto.lostKind+"]"
 								+ "</h5></div>"
 								+ "<div><p>"
-								+ "성별"+lostDto.lostGender
+								+ "성별&nbsp;&nbsp;"+lostDto.lostGender
 								+ "</p></div>"
 								+ "<div><p>"
-								+ "구조장소"+lostDto.lostLocation
+								+ "공고일자&nbsp;&nbsp;"+lostDto.lostLocation
 								+ "</p></div>"
 								+ "<div><p>"
-								+ "구조일"+lostDto.lostWdate
+								+ "구조일&nbsp;&nbsp;"+lostDto.lostWdate
 								+ "</p></div>"
 								+ "<div><a href='/lostPet/lostPetDetail?seq="
 								+ lostDto.lostSeq
-								+ "' class='detailButton'>더알아보기</a></div>"
-								
+								+ "' class='detailButton'>상세보기</a></div>"
 								+ "</div>";
 	
 					$('.lost_container1').append(tagData);
@@ -124,7 +118,7 @@ function getBbsListData( pNumber){
 						
 		},
 		error:function(){
-			alert("error");
+			alert("error1");
 		}	
 	});	
 }
@@ -134,7 +128,7 @@ function getBbsListCount(){
 	$.ajax({
 		url:"/lostPet/getCount",
 		type:"post",
-		data:{ "pageNumber":0, "recordCountPerPage":10, 
+		data:{ "pageNumber":0, "recordCountPerPage":9, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val()
 			 },
 		success:function( count ){
@@ -143,7 +137,7 @@ function getBbsListCount(){
 			loadPage(count);		
 		},
 		error:function(){
-			alert("error");
+			alert("error2");
 		}		
 	});	
 }
@@ -165,7 +159,7 @@ function loadPage( totalCount ){
 	$("#pagination").twbsPagination({
 	//	startPage: 1,
 		totalPages: totalPages,		// 전체 페이지 수
-		visiblePages: 10,
+		visiblePages: 9,
 		first:'<span aria-hidden="true">«</span>',
 		prev:"이전",
 		next:"다음",
@@ -178,8 +172,6 @@ function loadPage( totalCount ){
 		}	
 	});
 }
-
-
 
 
 

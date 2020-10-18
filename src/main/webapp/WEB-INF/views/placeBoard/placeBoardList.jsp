@@ -94,7 +94,7 @@ function getBbsListData( pNumber, boardCategory ){
 	$.ajax({
 		url:"/placeBoard/getPlaceBoardList",
 		type:"post",
-		data:{ "pageNumber":pNumber, "recordCountPerPage":10, 
+		data:{ "pageNumber":pNumber, "recordCountPerPage":9, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val(),
 			"boardCategory":boardCategory
 			 },
