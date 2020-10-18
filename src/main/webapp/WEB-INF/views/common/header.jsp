@@ -9,11 +9,11 @@
 <header class="header__container">
     <div class="header__wrap">
         <div class="header-flex header__left">
-            <img src="${pageContext.request.contextPath}/images/logo.png">
+            <a href="/"><img src="${pageContext.request.contextPath}/images/logo.png"></a>
         </div>
         <div class="header-flex header__center">
             <input type="text" id="headerSearch" placeholder="궁금하신점을 물어보세요"/>
-            <label for="headerSearch">
+            <label for="headerSearch" id="headerSearchBtn">
             </label>
         </div>
         <div class="header-flex header__right">

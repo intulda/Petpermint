@@ -18,7 +18,10 @@
     /*height: 100%;*/
     text-align: center;
 }
-.header__left img {
+.header__left a {
+    width: 100%;
+}
+.header__left a>img {
     width: 80%;
     max-width: 300px;
 }
@@ -57,6 +60,7 @@
     background-size: 20px;
     background-repeat: no-repeat;
     background-position: 50% 50%;
+    margin-bottom: 0 !important;
 }
 .header__right {
     width: 20%;
