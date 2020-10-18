@@ -85,11 +85,11 @@ function getBbsListData(pNumber){
 
 					
 					let tagData = "<div class='commHeader'>"
-								+ "<span class='infoId'>aaa</span>"
+								+ "<span class='infoId'>aaa  |</span>"
 								+ updDate							
 								+ "<span class='infoData'>등록날짜</span>"
 								+ "<span"
-								+ " id='commRegDate"
+								+ " class='infoData' id='commRegDate"
 								+ commDto.commSeq
 								+ "'>"
 								+ commDto.commRegDate
