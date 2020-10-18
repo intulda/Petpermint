@@ -12,6 +12,13 @@
             $('.lostPet__card-wrap').click(goToLink);
             $('.story__more').click(goToLink);
             $('#headerSearchBtn').click(search);
+            $('#headerSearch').keypress(enterEvent);
+        }
+
+        function enterEvent(e) {
+            if(e.key === 'Enter') {
+                search();
+            }
         }
 
         function search(e) {
@@ -24,6 +31,7 @@
                 contentType: 'application/json',
                 success: function (response) {
                     $('#mainContainer').html(response);
+                    $('#headerSearch').val('');
                 }
 
             })
