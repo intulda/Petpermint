@@ -16,12 +16,12 @@
         <c:choose>
             <c:when test="${totalCount > 0}">
                 <div class="search__top-result">
-                    '<span class="search__point">${keyword}</span>'에 대한 통합 검색결과 입니다.
+                    '<span class="search__point">${keyword ne '' ? keyword : '전체'}</span>'에 대한 통합 검색결과 입니다.
                 </div>
             </c:when>
             <c:when test="${totalCount <= 0}">
                 <div class="search__empty">
-                    '<span class="search__point">${keyword}</span>'에 대한 통합 검색결과가 없습니다.
+                    '<span class="search__point">${keyword ne '' ? keyword : '전체'}</span>'에 대한 통합 검색결과가 없습니다.
                 </div>
             </c:when>
         </c:choose>
@@ -61,7 +61,7 @@
                     </c:when>
                     <c:when test="${dogList.size() <= 0}">
                         <div class="search__empty">
-                            '<span class="search__point">${keyword}</span>'에 대한 통합 검색결과가 없습니다.
+                            '<span class="search__point">${keyword ne '' ? keyword : '전체'}</span>'에 대한 통합 검색결과가 없습니다.
                         </div>
                     </c:when>
                 </c:choose>
@@ -99,7 +99,7 @@
                     </c:when>
                     <c:when test="${catList.size() <= 0}">
                         <div class="search__empty">
-                            '<span class="search__point">${keyword}</span>'에 대한 통합 검색결과가 없습니다.
+                            '<span class="search__point">${keyword ne '' ? keyword : '전체'}</span>'에 대한 통합 검색결과가 없습니다.
                         </div>
                     </c:when>
                 </c:choose>
@@ -137,7 +137,7 @@
                     </c:when>
                     <c:when test="${freeBoard.size() <= 0}">
                         <div class="search__empty">
-                            '<span class="search__point">${keyword}</span>'에 대한 통합 검색결과가 없습니다.
+                            '<span class="search__point">${keyword ne '' ? keyword : '전체'}</span>'에 대한 통합 검색결과가 없습니다.
                         </div>
                     </c:when>
                 </c:choose>
