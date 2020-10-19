@@ -87,14 +87,8 @@ function selCategory(BoardCategory){
 	getBbsListData(0,boardCategory);
 	getBbsListCount(boardCategory);
 }
-<<<<<<< HEAD
 
-
-=======
-
->>>>>>> branch 'develop' of https://github.com/intulda/Petpermint
 // 누른 페이지를 적용해서 게시물 출력
-
 function getBbsListData( pNumber, boardCategory ){
 	
 	$.ajax({
