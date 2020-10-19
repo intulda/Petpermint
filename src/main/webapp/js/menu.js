@@ -9,10 +9,10 @@
 
         const data = {
             list : [
-                {name: '강아지 이야기', link:'', subMenu: [
-                        { name: '강아지 백과', link: '', order: 1},
-                        { name: '강아지 음식', link: '', order: 2},
-                        { name: '강아지 훈련', link: '', order: 3},
+                {name: '강아지 이야기', link:'/info/dogPage', subMenu: [
+  						{ name: '강아지 백과', link: '/info/dogInfo', order: 1},
+                        { name: '강아지 음식', link: '/info/dogFood', order: 2},
+                        { name: '강아지 훈련', link: '/info/dogTraining', order: 3},
                     ], order:1},
                 {name: '고양이 이야기', link:'', subMenu: [
                         { name: '고양이 백과', link: '', order: 1},
@@ -127,4 +127,3 @@
     menu.init();
 
 })(jQuery, window);
-

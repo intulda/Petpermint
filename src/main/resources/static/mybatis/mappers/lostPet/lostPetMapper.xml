@@ -26,7 +26,7 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 					AND LOST_ID = #{keyword}
 				</if>
 				<if test="category == 'lostLocation'">
-					AND LOST_LOCATION LIKE '%'||#{keyword}||'%'
+					AND LOSTPET_CONTENT LIKE '%'||#{keyword}||'%'
 				</if>
 			</if>
 			AND LOST_DEL != 1
@@ -47,7 +47,7 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 			AND LOST_ID = #{keyword}
 		</if>
 		<if test="category == 'lostLocation'">
-			AND LOST_LOCATION LIKE '%'||#{keyword}||'%'
+			AND LOSTPET_CONTENT LIKE '%'||#{keyword}||'%'
 		</if>	
 	</if>
 	AND LOST_DEL!=1
@@ -114,8 +114,4 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 	LCOMM_DEL=1
 	WHERE LCOMM_SEQ=#{lcommSeq}
 </update>
-
-
-
-
 </mapper>

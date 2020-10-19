@@ -1,3 +1,4 @@
+
 package io.pet.mint.util;
 
 import java.util.Base64;
@@ -10,3 +11,4 @@ public class CommonUtil {
 		return "data:png;base64,"+base64data;
 	}
 }
+

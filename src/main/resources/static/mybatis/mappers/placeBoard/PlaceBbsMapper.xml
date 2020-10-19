@@ -138,10 +138,4 @@ SET BOARD_DEL = 1
 WHERE BOARD_SEQ = #{boardSeq}
 
 </update>
-
-
-
-
-
-
 </mapper>

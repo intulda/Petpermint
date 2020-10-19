@@ -46,7 +46,4 @@ public class LostPetDto {
 		this.lostWdate = lostWdate;
 		this.imagePath = imagePath;
 	}
-	
-	
-
 }
