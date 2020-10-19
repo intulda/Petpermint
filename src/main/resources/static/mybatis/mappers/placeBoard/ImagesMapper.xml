@@ -30,8 +30,4 @@
 	WHERE BOARD_SEQ=#{boardSeq} 
 
 </update>
-
-
-
-  
 </mapper>

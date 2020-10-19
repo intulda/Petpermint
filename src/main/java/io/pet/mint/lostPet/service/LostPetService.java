@@ -67,8 +67,5 @@ public class LostPetService {
 	
 	public LCommDto getLCommDto(int seq) {
 		return dao.getLCommDto(seq);
-	}
-	
-	
-	
+	}	
 }

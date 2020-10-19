@@ -1,14 +1,20 @@
-<%@ page contentType="text/html; charset=utf-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/lostPet/lostPet.css" />
 <fmt:requestEncoding value="utf-8"/>
 
-<h3>수정</h3>
-<br>
-<h5>시퀀스 : '${lostPetDto.lostSeq}' </h5>
 
+<div id="inputArea">
+	<div id="inputArea">
 	<form method="post" id="sendForm" action="/lostPet/lostPetUpdateAf"
-			enctype="multipart/form-data">	
+			enctype="multipart/form-data">
+<h3>등록 정보 변경</h3>
+<br>
+<h5>등록 번호 : '${lostPetDto.lostSeq}' </h5>
+<br>	
 <input type="hidden" name="lostSeq" value="${lostPetDto.lostSeq}">
 아이디 : <input type="text" name="lostId"  id="_id" value='${lostPetDto.lostId}' placeholder="아이디" /><br>
 파 일 : <input type="file" name="thumbnail" accept=".gif, .jpg, .png"><br>
@@ -47,6 +53,10 @@ ${lostPetDto.lostDetail}</textarea>
 	</form>	
 
 <button type="button" id="updateButton" >글수정하기</button>
+</div>
+</div>
+
+
 
 <script type="text/javascript">
 
@@ -159,4 +169,3 @@ $("#_lostPetUpdate").click(function() {
 
  */
 </script>
-

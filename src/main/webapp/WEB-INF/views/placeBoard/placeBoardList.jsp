@@ -87,8 +87,12 @@ function selCategory(BoardCategory){
 	getBbsListData(0,boardCategory);
 	getBbsListCount(boardCategory);
 }
+<<<<<<< HEAD
 
 
+=======
+
+>>>>>>> branch 'develop' of https://github.com/intulda/Petpermint
 // 누른 페이지를 적용해서 게시물 출력
 
 function getBbsListData( pNumber, boardCategory ){
@@ -96,7 +100,7 @@ function getBbsListData( pNumber, boardCategory ){
 	$.ajax({
 		url:"/placeBoard/getPlaceBoardList",
 		type:"post",
-		data:{ "pageNumber":pNumber, "recordCountPerPage":10, 
+		data:{ "pageNumber":pNumber, "recordCountPerPage":9, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val(),
 			"boardCategory":boardCategory
 			 },
