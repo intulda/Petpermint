@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Member">
+
+<select id="selectUserById" resultType="io.pet.mint.member.dto.MemberDTO">
+	SELECT *
+	FROM MEMBER
+	WHERE ID=#{ id }
+</select>
+
+<select id="allMember" resultType="io.pet.mint.member.dto.MemberDTO">
+	SELECT * FROM MEMBER
+</select>
+
+<select id="login" parameterType="io.pet.mint.member.dto.MemberDTO"
+	resultType="io.pet.mint.member.dto.MemberDTO">
+	SELECT ID, PWD, NICKNAME, AUTH, REG_DATE, DEL, SIGNUP_TYPE, INFO_AGREE, PHONE
+	FROM MEMBER
+	WHERE ID=#{id} AND PWD=#{pwd}
+</select>
+
+<insert id="addmember" parameterType="io.pet.mint.member.dto.MemberDTO">
+	INSERT INTO MEMBER(ID, PWD, NICKNAME, AUTH, REG_DATE, DEL, SIGNUP_TYPE, INFO_AGREE, PHONE)
+	VALUES(#{id}, #{pwd}, #{nickname}, 3, SYSDATE, 0, '', '', #{phone})
+</insert>
+
+
+</mapper>
