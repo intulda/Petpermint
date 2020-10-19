@@ -86,7 +86,6 @@ function selCategory(BoardCategory){
 	getBbsListCount(boardCategory);
 }
 
-
 // 누른 페이지를 적용해서 게시물 출력
 
 function getBbsListData( pNumber, boardCategory ){

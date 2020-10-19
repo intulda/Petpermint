@@ -114,8 +114,4 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 	LCOMM_DEL=1
 	WHERE LCOMM_SEQ=#{lcommSeq}
 </update>
-
-
-
-
 </mapper>

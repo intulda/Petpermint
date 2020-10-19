@@ -32,9 +32,5 @@ public class LostPetParam implements Serializable {
 		this.recordCountPerPage = recordCountPerPage;
 		this.start = start;
 		this.end = end;
-	}
-	
-	
-	
-	
+	}	
 }

@@ -177,13 +177,4 @@ function loadPage( totalCount ){
 		}	
 	});
 }
-
-
-
-
-
-
-
-
-
 </script>

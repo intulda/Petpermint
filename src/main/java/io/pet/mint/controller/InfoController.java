@@ -38,16 +38,16 @@ public class InfoController {
 		return "view:info/dogPage";
 	}
 	
-	/*
-	 * @GetMapping(value = "dogListPageView") public String
-	 * dogListPageView(InfoParam param,Model model) {
-	 * 
-	 * System.out.println("dogListPageView = "+ param.toString());
-	 * 
-	 * model.addAttribute("boardType", param.getBoardType());
-	 * 
-	 * return "view:info/dogListPage"; }
-	 */
+	
+	  @GetMapping(value = "dogListPageView") 
+	  public String dogListPageView(String Type,Model model) {
+	  
+	  System.out.println("dogListPageView = "+ Type);
+	  
+	  model.addAttribute("boardType", Type);
+	 
+	  return "view:info/dogListPage"; }
+	 
 	
 	
 	// 강아지/고양이 게시글 불러오기 !
@@ -88,8 +88,6 @@ public class InfoController {
 		
 		model.addAttribute("choice", par.getChoice());
 		model.addAttribute("serarchword", par.getKeyword());
-		
-		System.out.println("controller = "+ getInfoList.size());
 		
 		return getInfoList;
 		

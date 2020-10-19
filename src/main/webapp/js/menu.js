@@ -127,4 +127,3 @@
     menu.init();
 
 })(jQuery, window);
-
