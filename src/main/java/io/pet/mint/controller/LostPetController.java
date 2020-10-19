@@ -61,8 +61,8 @@ public class LostPetController {
 			}	
 		}
 			
-		System.out.println(list);
-		System.out.println("리스트 개수 :" +list.size());
+		//System.out.println(list);
+		//System.out.println("리스트 개수 :" +list.size());
 	
 		return list;
 	}
