@@ -85,6 +85,19 @@ function getBbsListData( pNumber){
 				$.each(list, function(index, lostDto){
 					//alert(lostDto.lostSeq);
 					//alert(lostDto.imagePath);
+				
+					let gender = "";
+					
+					if(lostDto.lostGender == '1'){
+
+						gender = "암컷";
+					}
+					else if(lostDto.lostGender == '2'){
+						gender = "수컷";
+					}
+					else{
+						gender = "모름";
+					}
 					let tagData = "<div class='lost_container2'>"
 								+ "<div class='lost_content'>"									
 								+ "<div><p>"
@@ -97,7 +110,7 @@ function getBbsListData( pNumber){
 								+ "품종&nbsp;&nbsp;"+lostDto.lostType+"&nbsp;["+lostDto.lostKind+"]"
 								+ "</h5></div>"
 								+ "<div><p>"
-								+ "성별&nbsp;&nbsp;"+lostDto.lostGender
+								+ "성별&nbsp;&nbsp;"+gender
 								+ "</p></div>"
 								+ "<div><p>"
 								+ "공고일자&nbsp;&nbsp;"+lostDto.lostLocation
