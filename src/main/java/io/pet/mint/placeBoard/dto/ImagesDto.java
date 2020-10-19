@@ -4,14 +4,15 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
+
 public class ImagesDto implements Serializable {
 /*	
 DROP TABLE BOARD_IMAGES
@@ -31,9 +32,23 @@ CREATE SEQUENCE SEQ_IMAGES
 START WITH 1
 INCREMENT BY 1	
 */
-	private int imagesSeq;
-	private int BoardSeq;
-	private String imagesPath;
-	private String regId;
-	private String regDate;
+	private int imagesSeq;			// 이미지 시퀀스 번호
+	private int BoardSeq;			// 게시물 시퀀스 번호
+	private byte[] imagesPath;		// 저장된 이미지 파일
+	private String regId;			// 이미지 등록한 사람
+	private String regDate;			// 이미지 등록일
+	
+	public ImagesDto() {}
+
+
+	public ImagesDto(int imagesSeq, int boardSeq, byte[] imagesPath, String contents, String regId, String regDate,
+			String imageName) {
+		super();
+		this.imagesSeq = imagesSeq;
+		BoardSeq = boardSeq;
+		this.imagesPath = imagesPath;
+		this.regId = regId;
+		this.regDate = regDate;
+	}
+	
 }

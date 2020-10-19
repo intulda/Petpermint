@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.pet.mint.search.dao.SearchDAO">
+
+	<resultMap id="searchList" type="SearchDTO"/>
+	<resultMap id="searchLostList" type="SearchLostPetDTO"/>
+
+	<select id="getBoardList" statementType="CALLABLE" parameterType="SearchParamDTO" resultMap="searchList">
+		{
+		    CALL GET_THUMBNAIL_BOARD_LIST(
+		    	'BOARD',
+                #{keyword, mode=IN, jdbcType=VARCHAR},
+                #{boardResult, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=searchList}
+            )
+        }
+	</select>
+
+	<select id="getLostPetList" statementType="CALLABLE" parameterType="SearchParamDTO" resultMap="searchLostList">
+		{
+		    CALL GET_THUMBNAIL_BOARD_LIST(
+		    	'LOST_PET',
+                #{keyword, mode=IN, jdbcType=VARCHAR},
+                #{lostPetResult, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=searchLostList}
+            )
+        }
+	</select>
+
+</mapper>

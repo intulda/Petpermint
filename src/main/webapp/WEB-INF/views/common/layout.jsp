@@ -14,9 +14,11 @@
     <tiles:insertAttribute name="headResource"/>
 </head>
 <body>
-    <tiles:insertAttribute name="header"/>
-    <tiles:insertAttribute name="menu"/>
-    <tiles:insertAttribute name="body"/>
-    <tiles:insertAttribute name="footer"/>
+        <tiles:insertAttribute name="header"/>
+        <tiles:insertAttribute name="menu"/>
+        <section class="main__container" id="mainContainer">
+            <tiles:insertAttribute name="body"/>
+        </section>
+        <tiles:insertAttribute name="footer"/>
 </body>
 </html>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="io.pet.mint.lostPet.dao.LostPetDao">
+
+<select id="getLostPetList" parameterType="io.pet.mint.lostPet.dto.LostPetParam" 
+resultType="io.pet.mint.lostPet.dto.LostPetDto">	
+	
+	SELECT 	LOST_SEQ, LOST_ID, LOST_KIND,
+			LOST_VIEWCOUNT, LOST_STATUS, LOST_LOCATION, LOST_PHONE, LOST_TYPE, 
+			LOST_GENDER, LOST_DETAIL, LOST_DEL,
+			TO_CHAR(LOST_WDATE,'YYYY/MM/DD HH24:MI:SS') AS LOST_WDATE
+	FROM
+	(SELECT ROW_NUMBER()OVER(ORDER BY LOST_SEQ DESC)AS RNUM,
+			LOST_SEQ, LOST_ID, LOST_KIND,
+			LOST_VIEWCOUNT, LOST_STATUS, LOST_LOCATION, LOST_PHONE, LOST_TYPE, 
+			LOST_GENDER, LOST_DETAIL, LOST_DEL,
+			LOST_WDATE
+	 FROM LOSTPET
+		  WHERE 1=1
+			<if test="category != null and category != ''
+				and keyword != null and keyword != ''">
+				<if test="category == 'lostId'">
+					AND LOST_ID = #{keyword}
+				</if>
+				<if test="category == 'lostLocation'">
+					AND LOSTPET_CONTENT LIKE '%'||#{keyword}||'%'
+				</if>
+			</if>
+			AND LOST_DEL != 1
+		) A
+	WHERE RNUM BETWEEN ${start} AND ${end} 		
+</select>
+
+
+<!-- 글의 총수 -->
+<select id="getCount" parameterType="io.pet.mint.lostPet.dto.LostPetParam"
+	resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0) AS CNT
+	FROM LOSTPET
+	WHERE 1=1
+	<if test="category != null and category != ''
+		and keyword != null and keyword != ''">
+		<if test="category == 'lostId'">
+			AND LOST_ID = #{keyword}
+		</if>
+		<if test="category == 'lostLocation'">
+			AND LOSTPET_CONTENT LIKE '%'||#{keyword}||'%'
+		</if>	
+	</if>
+	AND LOST_DEL!=1
+</select>
+
+
+
+<update id="getLostViewcount" parameterType="java.lang.Integer">
+	UPDATE LOSTPET
+	SET LOST_VIEWCOUNT=LOST_VIEWCOUNT+1
+	WHERE LOST_SEQ=#{lostSeq}
+</update>
+
+<select id="getLostPetDetail" resultType="io.pet.mint.lostPet.dto.LostPetDto">	
+	SELECT *
+	FROM LOSTPET
+	WHERE LOST_SEQ=#{lostSeq}
+</select>
+
+<insert id="getLostPetWrite" parameterType="io.pet.mint.lostPet.dto.LostPetDto">
+	INSERT INTO LOSTPET
+	(LOST_SEQ, LOST_ID, LOST_KIND, LOST_VIEWCOUNT, LOST_STATUS, LOST_LOCATION, LOST_PHONE, LOST_TYPE, LOST_GENDER, LOST_DETAIL, LOST_DEL, LOST_WDATE)
+	VALUES(SEQ_LOSTPET.NEXTVAL, 'aaa', #{lostKind}, 0, #{lostStatus}, #{lostLocation}, #{lostPhone}, #{lostType}, #{lostGender}, #{lostDetail}, 0, SYSDATE)
+</insert>
+
+
+<update id="getLostPetUpdate" parameterType="io.pet.mint.lostPet.dto.LostPetDto">
+	UPDATE LOSTPET SET
+	LOST_STATUS=#{lostStatus}, LOST_KIND=#{lostKind}, LOST_LOCATION=#{lostLocation}, LOST_PHONE=#{lostPhone}, LOST_TYPE=#{lostType}, LOST_GENDER=#{lostGender}, LOST_DETAIL=#{lostDetail} 
+	WHERE LOST_SEQ=#{lostSeq}
+</update>
+
+<update id="getLostPetDelete" parameterType="io.pet.mint.lostPet.dto.LostPetDto">
+	UPDATE LOSTPET SET
+	LOST_DEL=1
+	WHERE LOST_SEQ=#{lostSeq}
+</update>
+
+<select id="getLCommList" resultType="io.pet.mint.lostPet.dto.LCommDto">	
+	SELECT * FROM LOSTPET_COMM
+	WHERE LOSTPET_SEQ=#{lostSeq} AND LCOMM_DEL!=1
+</select>
+
+<insert id="getLostPetLCommWrite" parameterType="io.pet.mint.lostPet.dto.LCommDto">
+	INSERT INTO LOSTPET_COMM
+	(LOSTPET_SEQ, LCOMM_SEQ, LCOMM_DATE, LCOMM_ID, LCOMM_CONTENT, LCOMM_REF, LCOMM_STEP, LCOMM_DEPTH, LCOMM_DEL)
+	VALUES(#{lostpetSeq}, SEQ_LOSTPET_COMM.NEXTVAL, SYSDATE, 'aaa', #{lcommContent}, 0, 0, 0, 0)
+</insert>
+
+<update id="getLCommUpdate" parameterType="io.pet.mint.lostPet.dto.LCommDto">
+	UPDATE LOSTPET_COMM SET
+	LCOMM_CONTENT=#{lcommContent}
+	WHERE LCOMM_SEQ=#{lcommSeq}
+</update>
+
+<select id="getLCommDto" resultType="io.pet.mint.lostPet.dto.LCommDto">	
+	SELECT *
+	FROM LOSTPET_COMM
+		WHERE LCOMM_SEQ=#{lcommSeq}
+</select>
+
+<update id="getLCommDel" parameterType="io.pet.mint.lostPet.dto.LCommDto">
+	UPDATE LOSTPET_COMM SET
+	LCOMM_DEL=1
+	WHERE LCOMM_SEQ=#{lcommSeq}
+</update>
+
+
+
+
+</mapper>
