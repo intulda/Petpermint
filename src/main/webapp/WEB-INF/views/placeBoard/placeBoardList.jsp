@@ -7,7 +7,18 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeList.css" />
 
 
-<table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
+
+
+
+<div class="header">	
+	<ul class="board_list">
+		<li><button type="button" onclick="selCategory(this.value)" value="동물병원">동물병원</button></li>
+		<li><button type="button" onclick="selCategory(this.value)" value="애견카페">애견카페</button></li>
+		<li><button type="button" onclick="selCategory(this.value)" value="카페">카페</button></li>
+		<li><button type="button" onclick="selCategory(this.value)" value="음식점">음식점</button></li>
+	</ul>
+	
+	<table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
 	<tr>
 		<td style="padding-left: 5px">
 			<select id="_category" name="category">
@@ -25,21 +36,12 @@
 		</td>
 	</tr>
 </table>
-
-
-<div class="header">	
-	<ul class="board_list">
-		<li><button type="button" onclick="selCategory(this.value)" value="동물병원">동물병원</button></li>
-		<li><button type="button" onclick="selCategory(this.value)" value="애견카페">애견카페</button></li>
-		<li><button type="button" onclick="selCategory(this.value)" value="카페">카페</button></li>
-		<li><button type="button" onclick="selCategory(this.value)" value="음식점">음식점</button></li>
-	</ul>
 </div>
 
 
 
 <div class="place_title">
-	<p>&nbsp;&nbsp;<a href="#" style="color:grey">홈/</a></p>
+	<p>&nbsp;&nbsp;<a href="/" style="color:grey">홈/</a></p>
 	<h2>펫플레이스</h2>
 	<p class="intro">반려동물의 동반장소를 소개해드립니다</p>
 </div>

@@ -20,11 +20,8 @@ ul.board_list button{
 
 div.header{
 	
-	width:1000px;
-	height:50px;	
-	margin-top: 40px;
-	margin-bottom: 0px;
-	vertical-align: middle;	
+	width:950px;
+	height:100px;	
 	margin: 0 auto;
 	margin-bottom: 10px;
 	margin-top: 20px;
@@ -48,6 +45,9 @@ div.place_container{
 	margin: 0 auto;
 	margin-bottom: 30px;
 	border: 2px #d9d9d9 solid;
+	padding-top: 40px;
+ 	
+	
 	
 }
 
@@ -75,8 +75,8 @@ div.place_content{
 	flex-direction: row;
 	width:1100px;
 	height:250px;
-	margin-top: 30px;
-	margin-bottom: 10px;
+
+	margin-bottom: 30px;
 	
 	
 }
@@ -87,6 +87,8 @@ div.place_item{
 	width:550px;
 	height:100%;
 	border-radius: 10px;	
+	margin-left: 30px;
+	
 }
 
 .place_item img{
