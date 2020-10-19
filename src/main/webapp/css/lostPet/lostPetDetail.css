@@ -12,4 +12,24 @@
     background: white;
     width:500px;
     margin:auto;
+    text-align:left;
+}
+
+.lcommArea{
+	background: white;
+    width:960px;	
+	margin: auto;
+}
+
+.lcommArea2{
+    background: white;
+    width:500px;
+    margin:auto;
+    text-align:left;
+}
+
+
+
+.lcommArea{
+	text-align:center;
 }

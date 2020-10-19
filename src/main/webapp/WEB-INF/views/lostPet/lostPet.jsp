@@ -9,6 +9,8 @@
 
 <title>멍냥 구조대</title>
 
+
+
 <br>
 <br>
 <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
@@ -67,7 +69,7 @@ function getBbsListData( pNumber){
 	$.ajax({
 		url:"/lostPet/getLostPet",
 		type:"post",
-		data:{ "pageNumber":pNumber, "recordCountPerPage":9, 
+		data:{ "pageNumber":pNumber, "recordCountPerPage":6, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val(),
 			
 			 },
@@ -90,14 +92,42 @@ function getBbsListData( pNumber){
 					
 					if(lostDto.lostGender == '1'){
 
-						gender = "암컷";
+						gender = "<img src=/css/lostPet/lostPetIcon/women.png class='icon'>";
 					}
 					else if(lostDto.lostGender == '2'){
-						gender = "수컷";
+						gender = "<img src=/css/lostPet/lostPetIcon/man.png class='icon'>";
 					}
 					else{
-						gender = "모름";
+						gender = "<img src=/css/lostPet/lostPetIcon/question.png class='icon'>";
 					}
+
+					let type = "";
+					
+					if(lostDto.lostType == '1'){
+
+						type = "<img src=/css/lostPet/lostPetIcon/dog.png class='icon'>";
+					}
+					else if(lostDto.lostType == '2'){
+						type = "<img src=/css/lostPet/lostPetIcon/cat.png class='icon'>";
+					}
+					else{
+						type = "기타 동물"
+					}
+
+					let status = "";
+					
+					if(lostDto.lostStatus == '1'){
+
+						status = "실종";
+					}
+					else if(lostDto.lostStatus == '2'){
+						status = "목격";
+					}
+					else{
+						status = "기타";
+					}
+
+					
 					let tagData = "<div class='lost_container2'>"
 								+ "<div class='lost_content'>"									
 								+ "<div><p>"
@@ -105,18 +135,21 @@ function getBbsListData( pNumber){
 								+ "</p></div>"
 								+ "<img src='" 
 								+ lostDto.imagePath
-								+ "' width='250px' height='300px'>"
+								+ "' width='250px' height='300px' onclick='moveDetail("
+								+ lostDto.lostSeq
+								+ ")'>"
 								+ "<br><br><div><h5>"
-								+ "품종&nbsp;&nbsp;"+lostDto.lostType+"&nbsp;["+lostDto.lostKind+"]"
+								+ type+"&nbsp;"+gender+"&nbsp;["+lostDto.lostKind+"]"
 								+ "</h5></div>"
-								+ "<div><p>"
-								+ "성별&nbsp;&nbsp;"+gender
+								+ "<div><div><p>"
+								+ "상태&nbsp;&nbsp;"+status
+								+ "</p></div>"
 								+ "</p></div>"
 								+ "<div><p>"
-								+ "공고일자&nbsp;&nbsp;"+lostDto.lostLocation
+								+ "<img src=/css/lostPet/lostPetIcon/location.png class='icon'>&nbsp;&nbsp;"+lostDto.lostLocation
 								+ "</p></div>"
 								+ "<div><p>"
-								+ "구조일&nbsp;&nbsp;"+lostDto.lostWdate
+								+ "<img src=/css/lostPet/lostPetIcon/calendar.png class='icon'>&nbsp;&nbsp;"+lostDto.lostWdate
 								+ "</p></div>"
 								+ "<div><a href='/lostPet/lostPetDetail?seq="
 								+ lostDto.lostSeq
@@ -135,12 +168,19 @@ function getBbsListData( pNumber){
 		}	
 	});	
 }
+
+function moveDetail(lostSeq){
+	
+	location.href = "/lostPet/lostPetDetail?seq="+lostSeq;
+	
+}
+
 //글의 총수를 취득
 function getBbsListCount(){
 	$.ajax({
 		url:"/lostPet/getCount",
 		type:"post",
-		data:{ "pageNumber":0, "recordCountPerPage":9, 
+		data:{ "pageNumber":0, "recordCountPerPage":6, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val()
 			 },
 		success:function( count ){
@@ -158,7 +198,7 @@ function getBbsListCount(){
 // paging 처리
 function loadPage( totalCount ){
 
-	let pageSize = 10;
+	let pageSize = 6;
 	let nowPage = 1;
 
 	let totalPages = totalCount / pageSize;

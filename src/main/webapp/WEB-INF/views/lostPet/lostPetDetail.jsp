@@ -15,14 +15,28 @@
 <br><br>
 <div class="inputArea2">
 <div><img src="${lostPetDto.imagePath}" width="500px" height="auto"></div>
-<br><br>
+<br>
 <div>
 <span>No.</span>
 <span>${lostPetDto.lostSeq}</span>
 </div>
 <div>
+<br>
 <span>품종</span>
-<span>${lostPetDto.lostType}[${lostPetDto.lostKind}]</span>
+
+<span>
+<c:if test="${lostPetDto.lostType == 1}">
+강아지
+</c:if>
+
+<c:if test="${lostPetDto.lostType == 2}">
+고양이
+</c:if>
+
+<c:if test="${lostPetDto.lostType == 3}">
+기타
+</c:if>
+[${lostPetDto.lostKind}]</span>
 </div>
 <div>
 <span>성별</span>
@@ -51,37 +65,44 @@
 </div>
 <br><br>
 
-<a href=lostPetWrite>글쓰기</a>
 <br>
 <br>
+<div class=lcommArea>
+	<h3>댓글</h3>
+	<div class=lcommArea2>
 <textarea id="_lcommContent"></textarea>
-<a id="_lostPetLCommWrite" title="글쓰기">		
-	<img src="/images/bwrite.png" alt="글쓰기" />
-</a>
+<button type="button" id="_lostPetLCommWrite">글쓰기</button>
 
-<table border="1">
-       <tr>
-           <th>BNO</th>
-           <th>CNO</th>
-           <th>ID</th>
-           <th>CONTENT</th>
-           <th>DATE</th>
-           <th>수정</th>
-           <th>삭제</th>
-           <th></th>
-       </tr>
-         <c:forEach var="c" items="${LCommList}">
-             <tr>
-                 <td><a href="lostPetDetail?seq=${c.lostpetSeq}">${c.lostpetSeq}</a></td>
-                 <td>${c.lcommSeq}</td>
-                 <td>${c.lcommId}</td>
-                 <td>${c.lcommContent}</td>
-                 <td>${c.lcommDate}</td>
-                 <td><input type="button" value="수정" onclick="upBtn(${c.lcommSeq}, ${c.lostpetSeq})"/></td>
-				 <td><input type="button" value="삭제" onclick="delBtn(${c.lcommSeq},${c.lostpetSeq})"></td>
-             </tr>
+ <div>
+<c:forEach var="c" items="${LCommList}">
+  
+    
+                 <div><span>${c.lcommId}</span></div>
+                 <div><span>${c.lcommContent}</span></div>
+                <div><span>${c.lcommDate}</span></div>
+                 <span><input type="button" value="수정" onclick="upBtn(${c.lcommSeq}, ${c.lostpetSeq})"/>
+				 <input type="button" value="삭제" onclick="delBtn(${c.lcommSeq},${c.lostpetSeq})"></span>
+				 <br>
+				 <br>
          </c:forEach>
-</table>
+         </div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 function del(seq) {
@@ -113,7 +134,7 @@ $("#_lostPetLCommWrite").click(function(){
 			}
 		},
 		error:function(){
-			alert("error");
+			alert("댓글 내용을 입력해주세요.");
 			}
 	});	
 });
@@ -149,5 +170,20 @@ function delBtn(seq, bseq){
 			}
 	});	
 }
+
+
+let gender = "";
+
+if(lostDto.lostGender == '1'){
+
+	gender = "암컷";
+}
+else if(lostDto.lostGender == '2'){
+	gender = "수컷";
+}
+else{
+	gender = "모름";
+}
+
 
 </script>
