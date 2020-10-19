@@ -163,7 +163,8 @@
 	</table>
 	<table class="city_content" id="제주도">
 		<tr>
-			<td colspan='3'>제주시</td>
+			<td>제주시</td>
+			<td>서귀포시</td>
 		</tr>
 	</table>
 	<div id="map" class="mymap"></div>
