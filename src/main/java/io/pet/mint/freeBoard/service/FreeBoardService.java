@@ -33,4 +33,16 @@ public class FreeBoardService {
 		return dao.freeBoardPaging(par);
 	}
 	
+	public FreeBoardDTO freeDetail(int boardSeq) {
+		return dao.freeDetail(boardSeq);
+	}
+	
+	public int freeBoardDelete(int boardSeq) {
+		return dao.freeBoardDelete(boardSeq);
+	}
+	
+	public int freeBoardUpdate(FreeBoardDTO dto) {
+		return dao.freeBoardUpdate(dto);
+	}
+	
 }

@@ -17,10 +17,15 @@
 	width : 1300px;
 }
 
-hr{
+.freeHr{
 	width:150px;
-	border-color:#FFB7;
+	border-color:#ffa500;
 	margin-top : 20px;
+}
+
+.freeDetailHr{
+	width : 1800px;
+	border-color : #d8d3d3;
 }
 
 .freeTable tbody > tr:hover{
@@ -46,6 +51,7 @@ hr{
 }
 
 .freeTable th{
+	text-align: center;
 	padding : 10px;
 	border-bottom : 1px solid #dcdcdc;
 }
@@ -54,14 +60,6 @@ hr{
 	padding : 10px;
 	border-bottom : 1px solid #dcdcdc;
 	text-align : center;
-}
-
-.freewrite{
-	width: 1200px;
-	height : 650px;
-	margin-top : 100px;
-	margin-left : 350px;
-	font-size : 25px;
 }
 
 .freeWriteH1{
@@ -95,8 +93,23 @@ hr{
 	margin : inherit;
 }
 
+.freewrite{
+	width:60%;
+	margin: 0 auto;
+	margin-top: 80px;
+
+}
+
+.freewrite input.sendData{
+	margin: 5px;
+	height: 30px;
+	width: 940px;
+	border: none;
+	border-bottom: 1px solid black;
+}
+
 .num{
-	width : 40px;
+	width : 50px;
 }
 
 .title{
@@ -104,7 +117,7 @@ hr{
 }
 
 .name{
-	width : 50px;
+	width : 70px;
 }
 
 .date{
@@ -112,14 +125,10 @@ hr{
 }
 
 .view{
-	width : 50px;
+	width : 70px;
 }
 .like{
-	width : 50px;
-}
-
-.searchWord{
-	margin-left : 1250px;
+	width : 70px;
 }
 
 .searchButton{
@@ -128,4 +137,27 @@ hr{
 	border-radius : 5px;
 	font-size : 20px;
 	border : 1px;
+}
+
+.freeContainer{
+	text-align: right;
+    margin-right: 300px;
+}
+
+.detailP{
+	margin-left : 100px;
+	color : #a9a9a9;
+}
+
+.detailH1{
+	
+	padding-top:90px;
+	font-size: 60px;
+	text-align: center;
+	font-weight : normal;
+}
+
+.detailDiv{
+	text-align: center;
+    margin-bottom: 200px;
 }

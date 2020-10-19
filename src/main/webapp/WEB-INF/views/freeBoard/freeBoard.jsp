@@ -7,13 +7,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href ="/css/freeBoard/freeBoard.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
 
 <h1 class="freeH1">커뮤니티</h1>
-<hr>
+<hr class="freeHr">
 <br><br>
 
 <div class="freeDiv">
@@ -35,7 +37,7 @@
 		</thead>
 		<tbody>
 		<c:forEach var="l" items="${getFreeBoardList}" varStatus="vs">
-				<tr>
+				<tr onclick = "location.href='/freeDetail/${l.boardSeq}'">
 					<th><input type="checkbox" name="freeCheck"></th>
 					<td>${vs.count}</td>
 					<td>${l.boardTitle}</td>
@@ -47,32 +49,36 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<br>
 	
-	<div class="container">
-			<nav aria-label="Page navigation">
-				<ul class="pagination"></ul>
-			</nav>
+	<div class="freeContainer">
+		<nav aria-label="Page navigation" >
+			<ul class="pagination" ></ul>
+		</nav>
+		<input type="text" name="searchWord" class="searchWord">
+		<button type="button" class="searchButton">검색</button>
+		<select class="choice">
+			<option value="select">전체</option>
+			<option value="title">제목</option>
+			<option value="contents">내용</option>
+			<option value="name">작성자</option>
+		</select>
 	</div>
-	
-	<input type="text" name="searchWord" class="searchWord">
-	
-	<button type="button" class="searchButton">검색</button>
-	
-	<select class="choice">
-		<option value="select">전체</option>
-		<option value="title">제목</option>
-		<option value="name">작성자</option>
-	</select>
 </div>
+<br><br>
 
 <script>
+
+getListData(1);
+getListCount();
+
     $('.write').click(function (){
         location.href = "http://localhost:8090/freeBoard/freeWrite";
     });
 
-    $('.freeTable td').click(function(){
+   /*  $('.freeTable td').click(function(){
 		location.href = "http://localhost:8090/freeBoard/freeDetail";
-        });
+        }); */
     
     function toggle(source) {
     	  checkboxes = document.getElementsByName('freeCheck');
@@ -94,13 +100,13 @@ function getListData(pNumber){
 		data:{"nowPage":pNumber, "countPerPage":10, "choice":$(".choice").val(),
 				"searchWord":$(".searchWord").val()},
 		success : function(data){
-			 alert("호옹이");
+			 //alert("호옹이");
 
 			 $("tbody").html("");
 			
 			$.each(data,function(idx,data){ 
-			//	console.log(data);
-				let app = "<tr>"
+				console.log(data);
+				let app = "<tr onclick='location.href=\"freeDetail?boardSeq=" + data.boardSeq + "\"'>"
 						+"	<th><input type='checkbox' name='freeCheck'></th>"
 						+"	<td>" + (idx + 1) + "</td>"
 						+"	<td>" + data.boardTitle + "</td>"
@@ -112,9 +118,9 @@ function getListData(pNumber){
 						
 				$("tbody").append(app);
 
-				 $('.freeTable td').click(function(){
-						location.href = "http://localhost:8090/freeBoard/freeDetail";
-				  });	
+			/* 	 $('.freeTable td').click(function(){
+						location.href = "http://localhost:8090/freeBoard/freeDetail?boardSeq=" + data.boardSeq;
+				  });	 */
 			});
 
 			},
@@ -127,14 +133,14 @@ function getListData(pNumber){
 	function getListCount(){
 		
 		$.ajax({
-			url:"freeBoard/freeBoardPaging",
+			url:"/freeBoard/freeBoardPaging",
 			type:"get",
 			data:{"nowPage":0, "recordCountPerPage":10,"choice":$("#choice").val(),"searchWord":$("#searchWord").val()},
 			success:function(count){
-				alert(count);
-				loadpage(count);
+				//alert(count);
+				loadPage(count);
 				}
-			})
+			});
 		}
 
 	function loadPage(totalCount) {
@@ -142,9 +148,9 @@ function getListData(pNumber){
 		let PageSize = 10;		// 보여주고싶은 글의 갯수
 		let nowPage = 1;
 		
-		let totalPages = totalCount / pageSize;
+		let totalPages = totalCount / PageSize;
 		//		2			23			10
-		if(totalCount % pageSize > 0){
+		if(totalCount % PageSize > 0){
 			totalPages++;
 		}
 		
@@ -152,7 +158,7 @@ function getListData(pNumber){
 		
 		$(".pagination").twbsPagination({
 			//startPage: 1,
-			totalPages: _totalPages,
+			totalPages: totalPages,
 			visiblePages: 10,
 			first:'<span aria-hidden="true">«</span>',		// 첫페이지로 돌아가기
 			prev:"이전",

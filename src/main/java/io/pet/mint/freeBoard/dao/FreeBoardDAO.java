@@ -24,4 +24,12 @@ public interface FreeBoardDAO {
 	//검색 후 카운트
 	public int freeBoardPaging(FreeBoardParam par);
 	
+	//게시판 디테일
+	public FreeBoardDTO freeDetail(int boardSeq);
+	
+	//게시판 삭제
+	public int freeBoardDelete(int boardSeq);
+	
+	//게시판 수정
+	public int freeBoardUpdate(FreeBoardDTO dto);
 }

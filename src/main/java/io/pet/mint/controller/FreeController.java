@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.pet.mint.freeBoard.dto.FreeBoardDTO;
@@ -26,7 +27,7 @@ public class FreeController {
 		
 		List<FreeBoardDTO> list = service.getFreeBoardList();
 		model.addAttribute("getFreeBoardList", list);
-		
+	//	System.out.println(list);
 		return "view:freeBoard/freeBoard";
 	}
 	
@@ -36,7 +37,12 @@ public class FreeController {
 	}
 	
 	@GetMapping(value="freeDetail")
-	public String freeDetail() {
+	public String freeDetail(Model model, String boardSeq) {
+	
+		FreeBoardDTO dto = service.freeDetail(Integer.parseInt(boardSeq));
+		
+		model.addAttribute("dto", dto);
+		//System.out.println(dto);
 		return "view:freeBoard/freeDetail";
 	}
 	
@@ -45,7 +51,7 @@ public class FreeController {
 	public String addFreeBoardPage(FreeBoardDTO dto) {
 		//System.out.println(dto.toString());
 		int n = service.addFreeBoardPage(dto);
-		System.out.println("등록게시물갯수"+n);
+	//	System.out.println("등록게시물갯수"+n);
 		
 		return n>0?"ok":"no";
 	}
@@ -79,10 +85,35 @@ public class FreeController {
 	@ResponseBody
 	@GetMapping(value="freeBoardPaging")
 	public int freeBoardPaging(FreeBoardParam par) {
-		System.out.println("FreeController freeBoardPaging");
-		int n = service.freeBoardPaging(par);
 		
+		int n = service.freeBoardPaging(par);
 		return n;
+	}
+	
+	@ResponseBody
+	@PostMapping(value="freeBoardDelete")
+	public String freeBoardDelete(
+			@RequestParam(value="boardSeq") int boardSeq) {
+		
+		int check = service.freeBoardDelete(boardSeq);
+		
+		return check>0?"ok" : "no";
+	}
+	
+	@GetMapping(value="freeBoardUpdateView")
+	public String freeBoardUpdateView(Model model, String boardSeq) {
+		
+		FreeBoardDTO dto = service.freeDetail(Integer.parseInt(boardSeq));
+		
+		model.addAttribute("dto", dto);
+		
+		return "view:freeBoard/freeBoardUpdate";
+	}
+	
+	@ResponseBody
+	@PostMapping(value="freeBoardUpdate")
+	public String freeBoardUpdate(FreeBoardDTO dto) {
+		return null;
 	}
 
 }
