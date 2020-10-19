@@ -6,10 +6,7 @@
 
 #inputArea{
 
-	
 	width:60%;
-	
-	
 	margin: 0 auto;
 	margin-top: 30px;
 
@@ -52,25 +49,23 @@
 	</form>	
 </div>
 
-
-
-
-
 <button type="button" id="updateButton" >글수정하기</button>
 
-<!-- div에 에디터를 사용하는 경우 -->
-<!-- <div id="summernote">Hello Summernote</div> -->
+
+
+
+
 <script>
 $(document).ready(function() {
 	
-
+	// 섬머노트api 출력
 	$('#summernote').summernote({
-		  height: 500,                 // 에디터 높이
-		  width: 950,
+		  height: 500,                // 에디터 높이
+		  width: 950,				  // 에디터 너비
 		  minHeight: 500,             // 최소 높이
 		  maxHeight: 500,             // 최대 높이
-		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-		  lang: "ko-KR",					// 한글 설정
+		  focus: true,                // 에디터 로딩후 포커스를 맞출지 여부
+		  lang: "ko-KR",			  // 한글 설정
 		  placeholder: '최대 2048자까지 쓸 수 있습니다'	,//placeholder 설정
 	         toolbar:[
 	       	  ['style', ['bold', 'italic', 'underline', 'clear']],
@@ -79,14 +74,12 @@ $(document).ready(function() {
 	       	  ['insert', ['link', 'picture', 'video']]
 	         ]
 	});
-	
+
+	// 등록한 내용을 섬머노트 api 입력란에 대입
 	$('#summernote').summernote('pasteHTML','${placeDto.boardContents}');
 	categorySelect();
 
-
-
-
-	
+	// 게시물 수정
 	$('#updateButton').click(function(){
 		
 		if($('#boardTitle').val().trim() == ""){			
@@ -102,8 +95,7 @@ $(document).ready(function() {
 		}
 	});
 
-
-	// 카테고리 자동선택
+	// 입력된 카테고리 자동선택
 	function categorySelect(){
 	
 		let sel = document.querySelector('#boardCategory');
@@ -112,23 +104,7 @@ $(document).ready(function() {
 			if(sel.options[i].value == '${placeDto.boardCategory}'){
 				sel.options[i].selected =true;
 			}	
-		}
-	
+		}	
 	}
-
-
-	
-
-
-
-
-
 });
-
-
-
-
-
-
-
 </script>

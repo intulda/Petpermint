@@ -13,8 +13,10 @@ import lombok.Setter;
 public class SearchLostPetDTO extends LostPetDto {
 
     private byte[] imagesPath;
+    private String lostKind;
     private String thumbnail;
     private String lostTypeName;
     private String lostGenderName;
+    private int count;
 
 }

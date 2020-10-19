@@ -8,14 +8,13 @@
 <select id="getLostPetList" parameterType="io.pet.mint.lostPet.dto.LostPetParam" 
 resultType="io.pet.mint.lostPet.dto.LostPetDto">	
 	
-	SELECT 	LOST_SEQ, LOST_ID, 
-			TO_CHAR(LOST_DATE,'YYYY/MM/DD HH24:MI:SS') AS LOST_DATE,
+	SELECT 	LOST_SEQ, LOST_ID, LOST_KIND,
 			LOST_VIEWCOUNT, LOST_STATUS, LOST_LOCATION, LOST_PHONE, LOST_TYPE, 
 			LOST_GENDER, LOST_DETAIL, LOST_DEL,
 			TO_CHAR(LOST_WDATE,'YYYY/MM/DD HH24:MI:SS') AS LOST_WDATE
 	FROM
 	(SELECT ROW_NUMBER()OVER(ORDER BY LOST_SEQ DESC)AS RNUM,
-			LOST_SEQ, LOST_ID, LOST_DATE,
+			LOST_SEQ, LOST_ID, LOST_KIND,
 			LOST_VIEWCOUNT, LOST_STATUS, LOST_LOCATION, LOST_PHONE, LOST_TYPE, 
 			LOST_GENDER, LOST_DETAIL, LOST_DEL,
 			LOST_WDATE
@@ -70,13 +69,14 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 
 <insert id="getLostPetWrite" parameterType="io.pet.mint.lostPet.dto.LostPetDto">
 	INSERT INTO LOSTPET
-	(LOST_SEQ, LOST_ID, LOST_DATE, LOST_VIEWCOUNT, LOST_STATUS, LOST_LOCATION, LOST_PHONE, LOST_TYPE, LOST_GENDER, LOST_DETAIL, LOST_DEL, LOST_WDATE)
-	VALUES(SEQ_LOSTPET.NEXTVAL, #{lostId}, SYSDATE, 0, #{lostStatus}, #{lostLocation}, #{lostPhone}, #{lostType}, #{lostGender}, #{lostDetail}, 0, SYSDATE)
+	(LOST_SEQ, LOST_ID, LOST_KIND, LOST_VIEWCOUNT, LOST_STATUS, LOST_LOCATION, LOST_PHONE, LOST_TYPE, LOST_GENDER, LOST_DETAIL, LOST_DEL, LOST_WDATE)
+	VALUES(SEQ_LOSTPET.NEXTVAL, 'aaa', #{lostKind}, 0, #{lostStatus}, #{lostLocation}, #{lostPhone}, #{lostType}, #{lostGender}, #{lostDetail}, 0, SYSDATE)
 </insert>
+
 
 <update id="getLostPetUpdate" parameterType="io.pet.mint.lostPet.dto.LostPetDto">
 	UPDATE LOSTPET SET
-	LOST_STATUS=#{lostStatus}, LOST_LOCATION=#{lostLocation}, LOST_PHONE=#{lostPhone}, LOST_TYPE=#{lostType}, LOST_GENDER=#{lostGender}, LOST_DETAIL=#{lostDetail} 
+	LOST_STATUS=#{lostStatus}, LOST_KIND=#{lostKind}, LOST_LOCATION=#{lostLocation}, LOST_PHONE=#{lostPhone}, LOST_TYPE=#{lostType}, LOST_GENDER=#{lostGender}, LOST_DETAIL=#{lostDetail} 
 	WHERE LOST_SEQ=#{lostSeq}
 </update>
 
@@ -93,7 +93,8 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 
 <insert id="getLostPetLCommWrite" parameterType="io.pet.mint.lostPet.dto.LCommDto">
 	INSERT INTO LOSTPET_COMM
-	VALUES(#{lostpetSeq}, SEQ_LOSTPET_COMM.NEXTVAL, 'aaa', SYSDATE, #{lcommContent}, 0, 0, 0, 0)
+	(LOSTPET_SEQ, LCOMM_SEQ, LCOMM_DATE, LCOMM_ID, LCOMM_CONTENT, LCOMM_REF, LCOMM_STEP, LCOMM_DEPTH, LCOMM_DEL)
+	VALUES(#{lostpetSeq}, SEQ_LOSTPET_COMM.NEXTVAL, SYSDATE, 'aaa', #{lcommContent}, 0, 0, 0, 0)
 </insert>
 
 <update id="getLCommUpdate" parameterType="io.pet.mint.lostPet.dto.LCommDto">
@@ -113,8 +114,4 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 	LCOMM_DEL=1
 	WHERE LCOMM_SEQ=#{lcommSeq}
 </update>
-
-
-
-
 </mapper>

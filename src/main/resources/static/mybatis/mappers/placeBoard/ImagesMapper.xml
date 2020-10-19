@@ -5,7 +5,6 @@
 <mapper namespace="io.pet.mint.placeBoard.dao.ImagesDao">
   
   
-  
 <insert id="saveImages" parameterType="io.pet.mint.placeBoard.dto.ImagesDto">
 
 	INSERT INTO BOARD_IMAGES(IMAGES_SEQ, BOARD_SEQ, IMAGES_PATH, REG_ID, REG_DATE)
@@ -31,8 +30,4 @@
 	WHERE BOARD_SEQ=#{boardSeq} 
 
 </update>
-
-
-
-  
 </mapper>

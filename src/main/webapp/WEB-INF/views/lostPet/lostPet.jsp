@@ -4,18 +4,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeList.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/lostPet/lostPet.css" />
 <fmt:requestEncoding value="utf-8"/>
 
 <title>멍냥 구조대</title>
 
+<br>
+<br>
 <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
 	<tr>
 		<td style="padding-left: 5px">
 			<select id="_category" name="category">
 				<option value="" selected="selected">선택</option>
 				<option value="lostId">작성자</option>
-				<option value="lostLocation">장소</option>		
+				<option value="lostLocation">지역</option>		
 			</select>
 		</td>
 		<td style="padding-left: 5px">
@@ -23,41 +25,16 @@
 		</td>
 		<td style="padding-left: 5px">
 			<button type="button" id="findButton">검색</button>		
+			<button type="button" id="writeButton">글쓰기</button>
 		</td>
 	</tr>
 </table>
-
-<h1>멍냥 구조대</h1>
 <br>
-<a href=lostPetWrite>글쓰기</a>
-<br>
-<table border="1" id="lostBoard">
-       <tr>
-           <th>NO</th>
-           <th>DATE</th>
-           <th>STATUS</th>
-           <th>LOCATION</th>
-           <th>VIEWCOUNT</th>
-           <th></th>
-       </tr>
-       
-       
-       
-       
-       
-        <%--  <c:forEach var="l" items="${list}">
-             <tr>
-                 <td><a href="lostPetDetail?seq=${l.lostSeq}">${l.lostSeq}</a></td>
-                 <td>${l.lostDate}</td>
-                 <td>${l.lostStatus}</td>
-                 <td>${l.lostLocation}</td>
-                 <td>${l.lostViewcount}</td>
-             </tr>
-         </c:forEach> --%>
-</table>
 
-<div class="place_container">	
+<div class="lost_container1">	
 </div>
+
+<br><br>
 
 
 <div class="container">
@@ -65,8 +42,6 @@
 		<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
 	</nav>
 </div>
-
-
 
 <script>
 
@@ -80,6 +55,9 @@ $('#findButton').click(function(){
 	getBbsListCount();
 });
 
+$('#writeButton').click(function(){
+	location.href = "/lostPet/lostPetWriteView";	
+});
 
 
 //페이징 함수
@@ -89,45 +67,50 @@ function getBbsListData( pNumber){
 	$.ajax({
 		url:"/lostPet/getLostPet",
 		type:"post",
-		data:{ "pageNumber":pNumber, "recordCountPerPage":10, 
+		data:{ "pageNumber":pNumber, "recordCountPerPage":9, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val(),
 			
 			 },
 		success:function( list ){
 			
-			$(".lost_content").remove();
+			$(".lost_container2").remove();
 			if(list == null || list ==''){
-				let tagData = "<div class='lost_content'>"
-							+ "<div class='lost_item2'>"
-							+ "<p>해당결과가 없습니다.</p></div>"
+				let tagData = "<div class='lost_container2'>"
+							+ "<div class='lost_content'>"
+							+ "<p>작성 된 글이 없습니다.</p></div>"
 							+ "</div>";
-				$('.place_container').append(tagData);
+				$('.lost_container1').append(tagData);
 			}
 			else{	
 				$.each(list, function(index, lostDto){
 					//alert(lostDto.lostSeq);
-					
-					
-					let tagData = "<div class='lost_content'>"
-								+ "<div class='lost_item2'>"
+					//alert(lostDto.imagePath);
+					let tagData = "<div class='lost_container2'>"
+								+ "<div class='lost_content'>"									
 								+ "<div><p>"
-								+ lostDto.lostLocation
+								+ "NO .&nbsp;"+ lostDto.lostSeq
 								+ "</p></div>"
-								+ "<div><h1>"
-								+ lostDto.lostLocation
-								+ "</h1></div>"
+								+ "<img src='" 
+								+ lostDto.imagePath
+								+ "' width='250px' height='300px'>"
+								+ "<br><br><div><h5>"
+								+ "품종&nbsp;&nbsp;"+lostDto.lostType+"&nbsp;["+lostDto.lostKind+"]"
+								+ "</h5></div>"
 								+ "<div><p>"
-								+ lostDto.lostLocation
+								+ "성별&nbsp;&nbsp;"+lostDto.lostGender
 								+ "</p></div>"
 								+ "<div><p>"
-								+ lostDto.lostLocation
+								+ "공고일자&nbsp;&nbsp;"+lostDto.lostLocation
+								+ "</p></div>"
+								+ "<div><p>"
+								+ "구조일&nbsp;&nbsp;"+lostDto.lostWdate
 								+ "</p></div>"
 								+ "<div><a href='/lostPet/lostPetDetail?seq="
 								+ lostDto.lostSeq
-								+ "' class='detailButton'>더알아보기</a></div>"
+								+ "' class='detailButton'>상세보기</a></div>"
 								+ "</div>";
 	
-					$('.place_container').append(tagData);
+					$('.lost_container1').append(tagData);
 					
 				});
 					
@@ -135,17 +118,16 @@ function getBbsListData( pNumber){
 						
 		},
 		error:function(){
-			alert("error");
+			alert("error1");
 		}	
 	});	
 }
-
 //글의 총수를 취득
 function getBbsListCount(){
 	$.ajax({
 		url:"/lostPet/getCount",
 		type:"post",
-		data:{ "pageNumber":0, "recordCountPerPage":10, 
+		data:{ "pageNumber":0, "recordCountPerPage":9, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val()
 			 },
 		success:function( count ){
@@ -154,7 +136,7 @@ function getBbsListCount(){
 			loadPage(count);		
 		},
 		error:function(){
-			alert("error");
+			alert("error2");
 		}		
 	});	
 }
@@ -176,7 +158,7 @@ function loadPage( totalCount ){
 	$("#pagination").twbsPagination({
 	//	startPage: 1,
 		totalPages: totalPages,		// 전체 페이지 수
-		visiblePages: 10,
+		visiblePages: 9,
 		first:'<span aria-hidden="true">«</span>',
 		prev:"이전",
 		next:"다음",
@@ -189,13 +171,4 @@ function loadPage( totalCount ){
 		}	
 	});
 }
-
-
-
-
-
-
-
-
-
 </script>

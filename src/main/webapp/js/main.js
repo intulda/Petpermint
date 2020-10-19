@@ -11,6 +11,30 @@
             $('.story__card-wrap').click(goToLink);
             $('.lostPet__card-wrap').click(goToLink);
             $('.story__more').click(goToLink);
+            $('#headerSearchBtn').click(search);
+            $('#headerSearch').keypress(enterEvent);
+        }
+
+        function enterEvent(e) {
+            if(e.key === 'Enter') {
+                search();
+            }
+        }
+
+        function search(e) {
+            $.ajax({
+                url: '/search',
+                type: 'POST',
+                data: JSON.stringify({
+                    keyword: $('#headerSearch').val()
+                }),
+                contentType: 'application/json',
+                success: function (response) {
+                    $('#mainContainer').html(response);
+                    $('#headerSearch').val('');
+                }
+
+            })
         }
 
         function goToLink(e) {
@@ -25,7 +49,8 @@
         })
     }
 
-    const main = new Main();
-    main.init();
-
+    $(document).ready(function () {
+        const main = new Main();
+        main.init();
+    });
 })(jQuery, window);

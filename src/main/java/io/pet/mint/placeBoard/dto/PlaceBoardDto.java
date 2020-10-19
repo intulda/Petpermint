@@ -18,7 +18,7 @@ public class PlaceBoardDto implements Serializable {
 	private String boardTitle;		// 제목이 아닌 장소의 명칭
 	private String boardContents;	// 내용 : 썸머노트 api를 이용했기 때문에 html태그로 내용을 저장
 	private String boardLocation;	// 장소 주소
-	
+	private String boardTel; 		// 연락처
 	
 	private int boardSeq; 			// 게시판 시퀀스
 	private String boardType;		// 게시판 유형
@@ -37,15 +37,15 @@ public class PlaceBoardDto implements Serializable {
 	
 	public PlaceBoardDto() {}
 
-
 	public PlaceBoardDto(String boardCategory, String boardTitle, String boardContents, String boardLocation,
-			int boardSeq, String boardType, String imagePath, String id, String boardRegId, String boardRegDate,
-			String boardUpdId, String boardUpdDate, int boardviewCount, int boardRef) {
+			String boardTel, int boardSeq, String boardType, String imagePath, String id, String boardRegId,
+			String boardRegDate, String boardUpdId, String boardUpdDate, int boardviewCount, int boardRef) {
 		super();
 		this.boardCategory = boardCategory;
 		this.boardTitle = boardTitle;
 		this.boardContents = boardContents;
 		this.boardLocation = boardLocation;
+		this.boardTel = boardTel;
 		this.boardSeq = boardSeq;
 		this.boardType = boardType;
 		this.imagePath = imagePath;
@@ -57,10 +57,5 @@ public class PlaceBoardDto implements Serializable {
 		BoardviewCount = boardviewCount;
 		this.boardRef = boardRef;
 	}
-
-
-	
-	
-	
 	
 }

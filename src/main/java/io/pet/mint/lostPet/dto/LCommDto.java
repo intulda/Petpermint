@@ -108,7 +108,4 @@ public class LCommDto {
 				+ lcommDate + ", lcommContent=" + lcommContent + ", lcommRef=" + lcommRef + ", lcommStep=" + lcommStep
 				+ ", lcommDepth=" + lcommDepth + ", lcommDel=" + lcommDel + "]";
 	}
-
-	
-	
 }

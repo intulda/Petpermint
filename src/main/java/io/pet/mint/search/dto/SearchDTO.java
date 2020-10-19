@@ -18,5 +18,7 @@ public class SearchDTO {
     private String boardContents;
     private byte[] imagesPath;
     private String thumbnail;
+    private String boardRegDate;
+    private int count;
 
 }

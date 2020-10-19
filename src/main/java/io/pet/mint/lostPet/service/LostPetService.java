@@ -36,7 +36,7 @@ public class LostPetService {
 		return dao.getLostViewcount(seq);		
 	}
 
-	public int getLostPetWrite(LostPetDto dto) {
+	public int getLostPetWriteAf(LostPetDto dto) {
 		return dao.getLostPetWrite(dto);
 	}
 	
@@ -67,8 +67,5 @@ public class LostPetService {
 	
 	public LCommDto getLCommDto(int seq) {
 		return dao.getLCommDto(seq);
-	}
-	
-	
-	
+	}	
 }

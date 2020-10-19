@@ -7,7 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<section class="main__container">
     <div class="main__wrap">
         <div class="main__title">
             <span>강아지 이야기</span>
@@ -89,7 +88,7 @@
                             <li class="lostPet__card-wrap" data-link="/lostPet/lostPetDetail?seq=${lost.lostSeq}">
                                 <div class="lostPet__card-image">
                                     <c:if test="${lost.thumbnail ne null}">
-                                        <div style="background-image: url('${dog.thumbnail}')"></div>
+                                        <div style="background-image: url('${lost.thumbnail}')"></div>
                                     </c:if>
                                     <span>${lost.lostLocation}</span>
                                 </div>
@@ -97,7 +96,7 @@
                                     <ul>
                                         <li class="lostPet__card-index-wrap">
                                             <span>품종</span>
-                                            <span class="lostPet__point">[${lost.lostTypeName}]</span>
+                                            <span class="lostPet__point">[${lost.lostTypeName}] ${lost.lostKind}</span>
                                         </li>
                                         <li class="lostPet__card-index-wrap">
                                             <span>성별</span>
@@ -126,6 +125,3 @@
             <div id="enters"></div>
         </div>
     </div>
-</section>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
-
