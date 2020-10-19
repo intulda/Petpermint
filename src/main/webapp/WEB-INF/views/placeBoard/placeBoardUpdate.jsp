@@ -30,24 +30,23 @@
 <script src="/js/summernote/summernote-ko-KR.js"></script>  
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 
-
-<!-- form 안에 에디터를 사용하는 경우 (보통 이경우를 많이 사용하는듯)-->
-
 <div id="inputArea">
-	<form method="post" id="sendForm" action="/placeBoard/placeBoardWrite"
+	<form method="post" id="sendForm" action="/placeBoard/placeBoardUpdateAf"
 		enctype="multipart/form-data">	
-			
+		<input type="hidden" name="boardSeq" value="${placeDto.boardSeq}"}>	
 		작성자<input type="text" name="id" class="sendData" readonly="readonly" value="aaa">
-		<input type="text" name="boardTitle" id="boardTitle" class="sendData" placeholder="장소명을 입력해주세요">
-		<input type="text" name="boardLocation" id="boardLocation" class="sendData"placeholder="주소를 입력해주세요">
-		<select name="boardCategory">
+		<input type="text" name="boardTitle" id="boardTitle" class="sendData" placeholder="장소명을 입력해주세요"
+		 value="${placeDto.boardTitle }">
+		<input type="text" name="boardLocation" id="boardLocation" class="sendData"placeholder="주소를 입력해주세요"
+		 value="${placeDto.boardLocation }">
+		<select name="boardCategory" id="boardCategory">
 			<option value="동물병원">동물병원</option>
 			<option value="애견카페">애견카페</option>
 			<option value="카페">카페</option>
 			<option value="음식점">음식점</option>
 		</select>
 		<br>썸네일이미지
-		<input type="file" name="thumbnail" class="sendData" accept=".gif, .jpg, .png">	
+		<input type="file" name="thumbnail" id="thumbnail" class="sendData" accept=".gif, .jpg, .png">	
 		<textarea id="summernote" name="boardContents"></textarea>	  
 		
 	</form>	
@@ -57,13 +56,14 @@
 
 
 
-<button type="button" id="writeButton" >글등록</button>
+<button type="button" id="updateButton" >글수정하기</button>
 
 <!-- div에 에디터를 사용하는 경우 -->
 <!-- <div id="summernote">Hello Summernote</div> -->
 <script>
 $(document).ready(function() {
-	//여기 아래 부분
+	
+
 	$('#summernote').summernote({
 		  height: 500,                 // 에디터 높이
 		  width: 950,
@@ -72,15 +72,22 @@ $(document).ready(function() {
 		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
 		  lang: "ko-KR",					// 한글 설정
 		  placeholder: '최대 2048자까지 쓸 수 있습니다'	,//placeholder 설정
-          toolbar:[
-        	  ['style', ['bold', 'italic', 'underline', 'clear']],
-        	  ['fontsize', ['fontsize']],
-        	  ['color', ['color']],
-        	  ['insert', ['link', 'picture', 'video']]
-          ]
+	         toolbar:[
+	       	  ['style', ['bold', 'italic', 'underline', 'clear']],
+	       	  ['fontsize', ['fontsize']],
+	       	  ['color', ['color']],
+	       	  ['insert', ['link', 'picture', 'video']]
+	         ]
 	});
+	
+	$('#summernote').summernote('pasteHTML','${placeDto.boardContents}');
+	categorySelect();
 
-	$('#writeButton').click(function(){
+
+
+
+	
+	$('#updateButton').click(function(){
 		
 		if($('#boardTitle').val().trim() == ""){			
 			alert("장소명을 입력해주세요");
@@ -94,6 +101,25 @@ $(document).ready(function() {
 			$('#sendForm').submit();
 		}
 	});
+
+
+	// 카테고리 자동선택
+	function categorySelect(){
+	
+		let sel = document.querySelector('#boardCategory');
+		
+		for(i=0; i < sel.length; i++){
+			if(sel.options[i].value == '${placeDto.boardCategory}'){
+				sel.options[i].selected =true;
+			}	
+		}
+	
+	}
+
+
+	
+
+
 
 
 

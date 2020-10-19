@@ -4,14 +4,15 @@ import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 
 @Getter
 @Setter
-@AllArgsConstructor
 @ToString
+
 public class ImagesDto implements Serializable {
 /*	
 DROP TABLE BOARD_IMAGES
@@ -33,7 +34,26 @@ INCREMENT BY 1
 */
 	private int imagesSeq;
 	private int BoardSeq;
-	private String imagesPath;
+	private byte[] imagesPath;
+	private String contents;
 	private String regId;
 	private String regDate;
+	
+	public ImagesDto() {}
+
+
+	public ImagesDto(int imagesSeq, int boardSeq, byte[] imagesPath, String contents, String regId, String regDate,
+			String imageName) {
+		super();
+		this.imagesSeq = imagesSeq;
+		BoardSeq = boardSeq;
+		this.imagesPath = imagesPath;
+		this.contents = contents;
+		this.regId = regId;
+		this.regDate = regDate;
+	}
+
+
+	
+	
 }

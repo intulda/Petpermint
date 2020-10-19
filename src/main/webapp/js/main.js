@@ -8,12 +8,16 @@
     function Main() {
 
         function init() {
-            $('.story__card-wrap').click(function (e) {
-                const link = $(this).data('link');
-                if(link !== undefined) {
-                    location.href = link;
-                }
-            })
+            $('.story__card-wrap').click(goToLink);
+            $('.lostPet__card-wrap').click(goToLink);
+            $('.story__more').click(goToLink);
+        }
+
+        function goToLink(e) {
+            const link = $(this).data('link');
+            if(link !== undefined) {
+                location.href = link;
+            }
         }
 
         $.extend(this, {

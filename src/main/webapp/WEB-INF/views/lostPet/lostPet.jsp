@@ -1,22 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
-
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeList.css" />
-<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+<fmt:requestEncoding value="utf-8"/>
 
+<title>멍냥 구조대</title>
 
 <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
 	<tr>
 		<td style="padding-left: 5px">
 			<select id="_category" name="category">
 				<option value="" selected="selected">선택</option>
-				<option value="title">장소명</option>
-				<option value="content">내용</option>
-				<option value="address">주소</option>		
+				<option value="lostId">작성자</option>
+				<option value="lostLocation">장소</option>		
 			</select>
 		</td>
 		<td style="padding-left: 5px">
@@ -28,33 +27,36 @@
 	</tr>
 </table>
 
-
-<div class="header">	
-	<ul class="board_list">
-		<li><button type="button" onclick="selCategory(this.value)" value="동물병원">동물병원</button></li>
-		<li><button type="button" onclick="selCategory(this.value)" value="애견카페">애견카페</button></li>
-		<li><button type="button" onclick="selCategory(this.value)" value="카페">카페</button></li>
-		<li><button type="button" onclick="selCategory(this.value)" value="음식점">음식점</button></li>
-	</ul>
-</div>
-
-
-
-<div class="place_title">
-	<p>&nbsp;&nbsp;<a href="#" style="color:grey">홈/</a></p>
-	<h2>펫플레이스</h2>
-	<p class="intro">반려동물의 동반장소를 소개해드립니다</p>
-</div>
-
+<h1>멍냥 구조대</h1>
+<br>
+<a href=lostPetWrite>글쓰기</a>
+<br>
+<table border="1" id="lostBoard">
+       <tr>
+           <th>NO</th>
+           <th>DATE</th>
+           <th>STATUS</th>
+           <th>LOCATION</th>
+           <th>VIEWCOUNT</th>
+           <th></th>
+       </tr>
+       
+       
+       
+       
+       
+        <%--  <c:forEach var="l" items="${list}">
+             <tr>
+                 <td><a href="lostPetDetail?seq=${l.lostSeq}">${l.lostSeq}</a></td>
+                 <td>${l.lostDate}</td>
+                 <td>${l.lostStatus}</td>
+                 <td>${l.lostLocation}</td>
+                 <td>${l.lostViewcount}</td>
+             </tr>
+         </c:forEach> --%>
+</table>
 
 <div class="place_container">	
-</div>
-
-
-<div class="header">	
-	<ul class="board_list">
-		<li><button type="button" id="writeButton">글쓰기</button></li>
-	</ul>
 </div>
 
 
@@ -65,80 +67,70 @@
 </div>
 
 
+
 <script>
 
 getBbsListData(0);
 getBbsListCount();
 
-let boardCategory ="";
+
 
 $('#findButton').click(function(){
 	getBbsListData(0);
 	getBbsListCount();
 });
 
-$('#writeButton').click(function(){
-	location.href = "/placeBoard/placeBoardWriteView";	
-});
-
-// 카테고리 선택
-function selCategory(BoardCategory){
-	boardCategory = BoardCategory;
-	getBbsListData(0,boardCategory);
-	getBbsListCount(boardCategory);
-}
 
 
+//페이징 함수
 
-// 페이징 함수
-
-function getBbsListData( pNumber, boardCategory ){
+function getBbsListData( pNumber){
 	
 	$.ajax({
-		url:"/placeBoard/getPlaceBoardList",
+		url:"/lostPet/getLostPet",
 		type:"post",
 		data:{ "pageNumber":pNumber, "recordCountPerPage":10, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val(),
-			"boardCategory":boardCategory
+			
 			 },
 		success:function( list ){
-		
-			$(".place_content").remove();
+			
+			$(".lost_content").remove();
 			if(list == null || list ==''){
-				let tagData = "<div class='place_content'>"
-							+ "<div class='place_item2'>"
+				let tagData = "<div class='lost_content'>"
+							+ "<div class='lost_item2'>"
 							+ "<p>해당결과가 없습니다.</p></div>"
 							+ "</div>";
 				$('.place_container').append(tagData);
 			}
 			else{	
-				$.each(list, function(index, placeDto){
+				$.each(list, function(index, lostDto){
+					//alert(lostDto.lostSeq);
 					
-					let tagData = "<div class='place_content'>"
-								+ "<div class='place_item'>"
-								+ "<img src='" 
-								+ placeDto.imagePath
-								+ "'></div>"
-								+ "<div class='place_item2'>"
+					
+					let tagData = "<div class='lost_content'>"
+								+ "<div class='lost_item2'>"
 								+ "<div><p>"
-								+ placeDto.boardRegDate
+								+ lostDto.lostLocation
 								+ "</p></div>"
 								+ "<div><h1>"
-								+ placeDto.boardTitle
+								+ lostDto.lostLocation
 								+ "</h1></div>"
 								+ "<div><p>"
-								+ placeDto.boardCategory
+								+ lostDto.lostLocation
 								+ "</p></div>"
 								+ "<div><p>"
-								+ placeDto.boardLocation
+								+ lostDto.lostLocation
 								+ "</p></div>"
-								+ "<div><a href='/placeBoard/placeBoardDetail?seq="
-								+ placeDto.boardSeq
+								+ "<div><a href='/lostPet/lostPetDetail?seq="
+								+ lostDto.lostSeq
 								+ "' class='detailButton'>더알아보기</a></div>"
 								+ "</div>";
 	
 					$('.place_container').append(tagData);
+					
 				});
+					
 			}
 						
 		},
@@ -149,13 +141,12 @@ function getBbsListData( pNumber, boardCategory ){
 }
 
 //글의 총수를 취득
-function getBbsListCount(boardCategory){
+function getBbsListCount(){
 	$.ajax({
-		url:"/placeBoard/getCount",
+		url:"/lostPet/getCount",
 		type:"post",
 		data:{ "pageNumber":0, "recordCountPerPage":10, 
-			"category":$("#_category").val(), "keyword":$("#_keyword").val(),
-			"boardCategory":boardCategory
+			"category":$("#_category").val(), "keyword":$("#_keyword").val()
 			 },
 		success:function( count ){
 		//	alert("success");
@@ -199,6 +190,12 @@ function loadPage( totalCount ){
 	});
 }
 
+
+
+
+
+
+
+
+
 </script>
-
-
