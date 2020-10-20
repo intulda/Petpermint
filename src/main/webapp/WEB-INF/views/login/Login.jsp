@@ -11,7 +11,8 @@
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
-
+<!-- cookie -->
+<script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript" ></script>
 
 <body>
 
@@ -24,7 +25,7 @@
 								
 			<div class="login_title_warp">
 				<div style="margin-top: 15px">
-					<img src="/images/로그인1.png" width="950px">
+					<img src="./images/로그인1.png" width="950px">
 				</div>			
 			</div>
 			
@@ -32,12 +33,12 @@
 			
 			<div id="login_wrap">
 				
-				<form action="loginAf" name="frmFrom" id="_frmForm" method="post">
+				<form action="/loginCheck.do" name="frmFrom" id="_frmForm" method="post">
 					
 					<table class="content_table" >
 					<tr colspan="2">
 						<td>
-							<img src="/images/login_pic1.jpg" width="450px" height="400px">						
+							<img src="./images/login_pic1.jpg" width="450px" height="450px">						
 						</td>	
 						
 						
@@ -45,9 +46,7 @@
 							<a href="#none" id="_loginNaver" title="Naver로그인">
 								<img alt="" src="./images/naverbtn.png" width="500px">
 							</a>
-							
 							&nbsp;
-							
 							<a href="#none" id="_loginNaver" title="Kakao로그인">
 								<img alt="" src="./images/kakaobtn.png" width="500px">
 							</a>
@@ -67,13 +66,10 @@
 							<hr>
 							<a href="#none" id="_btnjoin" title="회원가입">
 								<img alt="" src="./images/joinbtn1.png">
-							</a>
-							
-							
+							</a>							
 						</td>					
-					</tr>
-											
-					</table>				
+					</tr>											
+					</table>
 				</form>			
 			</div>
 			</div>		
@@ -83,10 +79,26 @@
 
 <script type="text/javascript">
 
-$("#_btnjoin").click(function(){
-	location.href = "Joinus";
+/*
+ * 
+ * 페이지 이동
+ */
+
+$(document).ready(function(){
+	$('#_btnjoin').click(function() {
+		location.href="joinus.do";
+	});
+	$('#_btnlogin').click(function() {
+		location.href="login.do";
+	});
 });
 
+
+/*
+ * 
+ * ID 혹은 PWD 칸이 비었을 경우
+ */
+ 
 $("#_btnlogin").click(function(){
 	//alert("login click");
 	if($("#_userid").val().trim() == ""){
@@ -98,11 +110,38 @@ $("#_btnlogin").click(function(){
 		$("#_pwd").focus();
 	}
 	else{
-		$("#_frmForm").attr({"action":"loginAf", "target":"_self"}).submit();
+		$("#_frmForm").attr({"action":"loginCheck.do", "target":"_self"}).submit();
 	}
 });
 
 
+/*
+ * 
+ * 쿠키 설정
+ */
+
+let user_id = $.cookie("user_id");
+if(user_id != null){
+	$("#_userid").val( user_id );
+	$("#chk_save_id").attr("checked", "checked");	
+}
+
+$("#chk_save_id").click(function(){
+
+	if( $("#chk_save_id").is(":checked") ){
+		if( $("#_userid").val().trim() == ""){
+			alert("id를 입력해 주세요");
+			$("#chk_save_id").prop("checked", false);
+		}
+		else{
+			$.cookie("user_id", $("#_userid").val(), { expires:356, path:'/' });
+		}
+	}
+	else{
+		alert("쿠키 삭제");
+		$.removeCookie("user_id", {path:'/'});
+	}	
+});
 
 </script>
 </body>

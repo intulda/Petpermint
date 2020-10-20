@@ -1,6 +1,6 @@
-package io.pet.mint.member.dto;
+package io.pet.mint.member.vo;
 
-public class MemberDTO {
+public class MemberVO {
 
 	private String id;
 	private String pwd;
@@ -12,10 +12,19 @@ public class MemberDTO {
 	private int info_agree;
 	private String phone;
 	
-	public MemberDTO() {
+	public MemberVO() {
 	}
+	
 
-	public MemberDTO(String id, String pwd, String nickname, int auth, String reg_date, int del, String signup_type,
+	public MemberVO(String id, String pwd, int auth) {
+		super();
+		this.id = id;
+		this.pwd = pwd;
+		this.auth = auth;
+	}
+	
+
+	public MemberVO(String id, String pwd, String nickname, int auth, String reg_date, int del, String signup_type,
 			int info_agree, String phone) {
 		super();
 		this.id = id;

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Member">
+
+<select id="allMember" resultType="io.pet.mint.member.vo.MemberVO">
+	SELECT * FROM MEMBER
+</select>
+
+<select id="login" parameterType="io.pet.mint.member.vo.MemberVO"
+	resultType="io.pet.mint.member.vo.MemberVO">
+	SELECT *
+	FROM MEMBER
+	WHERE ID=#{id} AND PWD=#{pwd}
+</select>
+
+
+<insert id="addmember" parameterType="io.pet.mint.member.vo.MemberVO">
+	INSERT INTO MEMBER(ID, PWD, NICKNAME, AUTH, REG_DATE, DEL, SIGNUP_TYPE, INFO_AGREE, PHONE)
+	VALUES(#{id}, #{pwd}, #{nickname}, 3, SYSDATE, 0, '', '', #{phone})
+</insert>
+
+<select id="loginCheck" resultType="String">
+	SELECT count(*) FROM member
+	WHERE id = #{id} AND pwd = #{pwd}
+</select>
+
+
+</mapper>
