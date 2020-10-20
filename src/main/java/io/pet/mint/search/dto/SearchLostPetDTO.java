@@ -17,6 +17,7 @@ public class SearchLostPetDTO extends LostPetDto {
     private String thumbnail;
     private String lostTypeName;
     private String lostGenderName;
+    private String lostStatusName;
     private int count;
 
 }
