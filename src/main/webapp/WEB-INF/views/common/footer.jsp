@@ -18,6 +18,7 @@
         <div class="footer-flex footer__right">
             <ul class="footer-flex">
                 <li>김보근</li>
+                <li>장혜승</li>
                 <li>한병규</li>
                 <li>정연화</li>
                 <li>장세영</li>

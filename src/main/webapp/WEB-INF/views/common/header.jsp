@@ -8,6 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header class="header__container">
     <div class="header__wrap">
+        <div class="header__hamburger-menu">
+            <input type="checkbox" id="hamburger" />
+            <label for="hamburger" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <div class="sidebar">
+                <ul class="header__hamburger-menu-list">
+
+                </ul>
+            </div>
+        </div>
         <div class="header-flex header__left">
             <a href="/"><img src="${pageContext.request.contextPath}/images/logo.png"></a>
         </div>

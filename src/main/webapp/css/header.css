@@ -101,6 +101,7 @@
     .header__wrap {
         flex-wrap: wrap;
         padding: 5%;
+        justify-content: flex-start;
     }
     .header__right {
         display: none;
