@@ -143,5 +143,11 @@
                 </c:choose>
             </div>
         </c:when>
+        <c:when test="${totalCount <= 0}">
+            <div class="search__empty-cat-image">
+                <div></div>
+                <p>다른 검색어로 해달라옹...</p>
+            </div>
+        </c:when>
     </c:choose>
 </div>

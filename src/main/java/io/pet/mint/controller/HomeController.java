@@ -45,7 +45,7 @@ public class HomeController {
                 .addAttribute("dogList", searchService.getBoardTypeFilter("강아지", boardList))
                 .addAttribute("freeBoard", searchService.getBoardTypeFilter("자유게시판", boardList))
                 .addAttribute("keyword", searchParamDTO.getKeyword())
-                .addAttribute("totalCount", boardList.size());
+                .addAttribute("totalCount", 0);
         return "search/search";
     }
 }
