@@ -108,7 +108,7 @@
                                         </li>
                                         <li class="lostPet__card-index-wrap">
                                             <span>상태</span>
-                                            <span>${lost.lostStatus}</span>
+                                            <span>${lost.lostStatusName}</span>
                                         </li>
                                     </ul>
                                 </div>
