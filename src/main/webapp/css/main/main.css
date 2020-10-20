@@ -182,14 +182,13 @@
     font-size: 14px;
 }
 .search__top-img div {
-    background-image: url(/images/search.png);
+    background-image: url(/images/search-black.png);
     background-repeat: no-repeat;
     background-size: cover;
-    width: 20px;
-    height: 20px;
-    background-color: black;
+    width: 14px;
+    height: 14px;
     background-position: 50% 50%;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 .search__point {
     color: #60a1e1;
@@ -301,6 +300,24 @@
 }
 .search__empty {
     font-size: 0.8rem;
+}
+
+.search__empty-cat-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.search__empty-cat-image div {
+    background-image: url(/images/searchEmpty.png);
+    background-repeat: no-repeat;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    background-size: cover;
+    height: 300px;
+    /* height: 100vw; */
+    margin-bottom: 20px;
 }
 @media(max-width: 992px) {
     .main__contents ul {
