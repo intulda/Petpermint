@@ -4,12 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/lostPet/lostPet.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/lostPet/lostPet.css"/>
 <fmt:requestEncoding value="utf-8"/>
 
 <title>멍냥 구조대</title>
-
-
 
 <br>
 <br>
@@ -126,7 +124,6 @@ function getBbsListData( pNumber){
 					else{
 						status = "기타";
 					}
-
 					
 					let tagData = "<div class='lost_container2'>"
 								+ "<div class='lost_content'>"									
@@ -193,7 +190,6 @@ function getBbsListCount(){
 		}		
 	});	
 }
-
 
 // paging 처리
 function loadPage( totalCount ){

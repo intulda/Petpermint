@@ -1,35 +1,129 @@
 .inputArea{
     background: white;
-    width:960px;	
-	margin: auto;
+    width:1050px;
+    height:600px;
+    margin-left:10px;
+    text-align:center;
 }
 
-.inputArea{
-	text-align:center;
-}
 
 .inputArea2{
-    background: white;
-    width:500px;
-    margin:auto;
-    text-align:left;
+    width:1050px;
+    height:500px;
+    text-align:right;
+    padding:10px;
+    
 }
 
 .lcommArea{
-	background: white;
-    width:960px;	
-	margin: auto;
+    background: white;
+    width: 900px;
+    margin-left: -10px;
+    margin-top:100;
+    text-align: left;
 }
 
 .lcommArea2{
+	background:white;
+	width:1050px;
+	margin:auto;
+	border-top:3px solid black;
+}
+
+.lcommArea3{
     background: white;
-    width:500px;
-    margin:auto;
-    text-align:left;
+    width: 1050;
+    margin-left: auto;
+    text-align: left;
 }
 
-
-
-.lcommArea{
-	text-align:center;
+.lcommArea3 textArea{
+    width: 900px;
+    height: 100px;
+    margin-left: 1%;
 }
+
+.lcommArea3 Button{
+	color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    padding: 2px;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    border-radius: .25em;
+  -webkit-appearance: none; /* ����Ƽ�� ���� ���߱� */
+  -moz-appearance: none;
+  appearance: none;
+  vertical-align:186%;
+  height:100px;
+  width:130px;
+}
+
+.lcommArea4{
+	margin-left:1%;
+	width:1030px;
+	padding:2%;
+	border-bottom:1px solid black;
+}
+
+.lcommId{
+	margin-left:1%;
+	margin-top:1%;
+}
+
+.box1{
+	width: 500px;
+	height: 600px;
+	padding: 40px;
+	float: left;
+}
+.box2{
+	width: 500px;
+	height: 400px;
+	float: right;
+	margin-top :100px;
+	text-align:left;
+
+}
+
+.title{
+	padding:30px;
+	
+}
+
+.box2 input{
+	color: #fff;
+    background-color:#337ab7;
+    border-color: #2e6da4;
+    padding: 2px;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    border-radius: .25em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  vertical-align:186%;
+  height:40px;
+  width:80px;
+}
+
+.buttonList{
+	display:flex;
+	flex-direction: row;
+	margin-left: 250px;
+	margin-right: 95px;
+	margin-top: 250px;
+	
+}
+
+.item{
+	margin: 0 10px;
+	vertical-align:-100%;
+}
+
+.icon{
+	vertical-align:-30%;
+}
+
