@@ -31,7 +31,7 @@ public class PlaceBoardDto implements Serializable {
 	private String boardUpdId;		// 수정자id
 	private String boardUpdDate;	// 수정날짜
 	
-	private int BoardviewCount;		// 조회수
+	private int boardViewCount;		// 조회수
 	private int boardRef;			// 게시물 그룹번호
 	
 	
@@ -54,7 +54,7 @@ public class PlaceBoardDto implements Serializable {
 		this.boardRegDate = boardRegDate;
 		this.boardUpdId = boardUpdId;
 		this.boardUpdDate = boardUpdDate;
-		BoardviewCount = boardviewCount;
+		boardViewCount = boardviewCount;
 		this.boardRef = boardRef;
 	}
 	

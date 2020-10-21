@@ -109,6 +109,7 @@ public class PlaceBoardController {
 		
 			try {
 				
+				System.out.println("글쓰기 : " + placeDto.toString());
 				// 게시판 내용 저장
 				boardService.placeBoardWrite(placeDto);
 													
@@ -130,6 +131,10 @@ public class PlaceBoardController {
 	@GetMapping(value = "placeBoardDetail")
 	public String placeBoardDetail(@RequestParam(value = "seq")int boardSeq, 
 									Model model) {
+		
+		
+		//!! 세션에서 로그인한 id와 작성자 id를 비교 후 조회수 카운트
+		boardService.viewCounting(boardSeq);
 		
 		PlaceBoardDto placeDto = boardService.getPlaceBoardContent(boardSeq);
 				
