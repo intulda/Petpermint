@@ -10,7 +10,9 @@
 		<input type='hidden' name='lostpetSeq' value="${dto.lostpetSeq}">
 		<input type='hidden' name='lcommSeq' value="${dto.lcommSeq}">
 	<div class=lcommArea>
-		<h3 class="comm"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>&nbsp;&nbsp;${dto.lcommId}</h3>
+	<div>
+		<h3 class="comm"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>${dto.lcommId}&nbsp;&nbsp;${dto.lcommDate}</h3>
+		</div>
 			<div class="lcommArea3">
 				<span><textarea id="_lcommContent" class="lcommId" name="lcommContent">${dto.lcommContent}</textarea></span>
 				<span><button type="button" onclick="upBtn('${dto.lostpetSeq}', '${dto.lcommSeq}', '${dto.lcommContent}')">수정</button></span>
