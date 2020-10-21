@@ -21,9 +21,14 @@
                 <%-- 로그인 후 --%>
 <%--                <li class="header-flex first-child"></li>--%>
 <%--                <li class="header-flex last-child">코</li>--%>
+
                 <%-- 로그인 전 --%>
-                <li class="header-flex login">로그인</li>
-                <li class="header-flex register">회원가입</li>
+                <li class="header-flex login">
+                	<a href="login.do"> 로그인 </a>
+                </li>
+                <li class="header-flex register">
+                	<a href="joinus.do"> 회원가입 </a> 
+                </li>
             </ul>
         </div>
     </div>

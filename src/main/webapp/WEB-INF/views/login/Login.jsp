@@ -5,6 +5,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/>
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css" />  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
@@ -20,28 +26,29 @@
 	<div id="middle_wrap">
 		<div id="content_wrap">
 			
-			<div style="width: 900px; margin-left: 300px;
+			<div style="width: 900px; margin-left: 200px;
 						position: relative; top: 50px;">
 								
 			<div class="login_title_warp">
 				<div style="margin-top: 15px">
 					<img src="./images/로그인1.png" width="950px">
-				</div>			
+				</div>
 			</div>
 			
 			<br><br>
 			
 			<div id="login_wrap">
 				
-				<form action="/loginCheck.do" name="frmFrom" id="_frmForm" method="post">
+				<form action="/loginAf.do" name="frmFrom" id="_frmForm" method="post">
 					
 					<table class="content_table" >
-					<tr colspan="2">
+					<tr>
+<!-- 					
 						<td>
 							<img src="./images/login_pic1.jpg" width="450px" height="450px">						
 						</td>	
 						
-						
+						 -->
 						<td style="margin: 10px">
 							<a href="#none" id="_loginNaver" title="Naver로그인">
 								<img alt="" src="./images/naverbtn.png" width="500px">
@@ -56,7 +63,7 @@
 									size="400px" title="이메일" style="border: 1px solid #dddddd" placeholder="이메일"> <br>
 							<input type="text" id="_pwd" name="pwd" class="form-control"
 									size="100px" title="비밀번호" style="border: 1px solid #dddddd" placeholder="비밀번호">	<br>
-							<input type="checkbox"> 로그인 상태 유지
+							<input type="checkbox" id="chk_save_id"> ID 저장
 							<br>
 							<a href="#none" id="_btnlogin" title="로그인">
 								<img alt="" src="./images/loginbtn1.png">
@@ -77,6 +84,8 @@
 	</div>
 </div>
 
+<br><br><br>
+
 <script type="text/javascript">
 
 /*
@@ -88,9 +97,9 @@ $(document).ready(function(){
 	$('#_btnjoin').click(function() {
 		location.href="joinus.do";
 	});
-	$('#_btnlogin').click(function() {
+/* 	$('#_btnlogin').click(function() {
 		location.href="login.do";
-	});
+	}); */
 });
 
 
@@ -100,7 +109,7 @@ $(document).ready(function(){
  */
  
 $("#_btnlogin").click(function(){
-	//alert("login click");
+	// alert("login click");
 	if($("#_userid").val().trim() == ""){
 		alert($("#_userid").attr("data-msg") + "ID를 입력해주세요");
 		$("#_userid").focus();
@@ -110,7 +119,7 @@ $("#_btnlogin").click(function(){
 		$("#_pwd").focus();
 	}
 	else{
-		$("#_frmForm").attr({"action":"loginCheck.do", "target":"_self"}).submit();
+		$("#_frmForm").attr({"action":"loginAf.do", "target":"_self"}).submit();
 	}
 });
 

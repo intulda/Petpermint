@@ -10,22 +10,22 @@
 	SELECT * FROM MEMBER
 </select>
 
+<select id="getId" parameterType="java.lang.String" resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0)
+	FROM MEMBER
+	WHERE ID=#{id}
+</select>
+
+<insert id="addmember" parameterType="io.pet.mint.member.vo.MemberVO">
+	INSERT INTO MEMBER(ID, PWD, NICKNAME, AUTH, REG_DATE, DEL, SIGNUP_TYPE, INFO_AGREE, PHONE)
+	VALUES(#{id}, #{pwd}, #{nickname}, 0, SYSDATE, 0, 'default', 'YES', #{phone})
+</insert>
+
 <select id="login" parameterType="io.pet.mint.member.vo.MemberVO"
 	resultType="io.pet.mint.member.vo.MemberVO">
 	SELECT *
 	FROM MEMBER
 	WHERE ID=#{id} AND PWD=#{pwd}
-</select>
-
-
-<insert id="addmember" parameterType="io.pet.mint.member.vo.MemberVO">
-	INSERT INTO MEMBER(ID, PWD, NICKNAME, AUTH, REG_DATE, DEL, SIGNUP_TYPE, INFO_AGREE, PHONE)
-	VALUES(#{id}, #{pwd}, #{nickname}, 3, SYSDATE, 0, '', '', #{phone})
-</insert>
-
-<select id="loginCheck" resultType="String">
-	SELECT count(*) FROM member
-	WHERE id = #{id} AND pwd = #{pwd}
 </select>
 
 

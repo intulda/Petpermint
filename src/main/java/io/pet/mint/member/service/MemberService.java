@@ -1,15 +1,14 @@
 package io.pet.mint.member.service;
 
-import javax.servlet.http.HttpSession;
-
 import io.pet.mint.member.vo.MemberVO;
 
 public interface MemberService {
 
-	//로그인 체크
-	public boolean loginCheck(MemberVO vo,HttpSession session);
+	//List<MemberDto> allMember();
 	
-	//로그 아웃
-	public void logout(HttpSession session);
+	int getId(MemberVO vo);
+	boolean addmember(MemberVO vo);
+	
+	MemberVO login(MemberVO vo);
 	
 }
