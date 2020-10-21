@@ -48,5 +48,10 @@ public class PlaceBoardService {
 		
 		return placeBoardDao.placeBoardDelete(boardSeq);
 	}
+	// 조회수 카운트
+	public int viewCounting(int boardSeq) {
+		
+		return placeBoardDao.viewCounting(boardSeq);
+	}
 	
 }

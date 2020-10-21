@@ -21,7 +21,6 @@
                     ], order:2},
                 {name: '펫플레이스',link:'/placeBoard/placeBoardList', subMenu: [
                         { name: '펫플레이스', link: '/placeBoard/placeBoardList', order: 1},
-                        { name: '펫맵', link: '/placeBoard/placeBoardMap', order: 2},
                     ], order:3},
 
                 {name: '구조했어요', link:'', subMenu: [
