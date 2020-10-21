@@ -7,6 +7,45 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/lostPet/lostPet.css"/>
 <fmt:requestEncoding value="utf-8"/>
 
+<style>
+	.lostPet__search-wrap {
+	    width: 50%;
+	    /*height: 100%;*/
+	    position: relative;
+	}
+	.lostPet__search-wrap input {
+	    width: 100%;
+	    height: 40px;
+	    border: 2px solid #60a1e1;
+	    border-radius: 5px;
+	    padding: 10px;
+	}
+	.lostPet__search-wrap input::placeholder {
+	    font-size: 0.8rem;
+	}
+	.lostPet__search-wrap input:focus {
+	    outline: none;
+	}
+	
+	.lostPet__search-wrap label {
+	    position: absolute;
+	    right: 0;
+	    width: 50px;
+	    height: 40px;
+	    text-align: center;
+	    color: white;
+	    line-height: 40px;
+	    background-color: #60a1e1;
+	    border-radius: 0 5px 5px 0;
+	    cursor: pointer;
+	    background-image: url('/images/search.png');
+	    background-size: 20px;
+	    background-repeat: no-repeat;
+	    background-position: 50% 50%;
+	    margin-bottom: 0 !important;
+	}
+</style>
+
 <title>멍냥 구조대</title>
 
 <br>
@@ -20,11 +59,11 @@
 				<option value="lostLocation">지역</option>		
 			</select>
 		</td>
-		<td style="padding-left: 5px">
-			<input type="text" id="_keyword" name="keyword">		
+		<td style="padding-left: 5px" class="lostPet__search-wrap">
+			<input type="text" id="_keyword" name="keyword">
+			<label for="_keyword" id="findButton"></label>		
 		</td>
 		<td style="padding-left: 5px">
-			<button type="button" id="findButton">검색</button>		
 			<button type="button" id="writeButton">글쓰기</button>
 		</td>
 	</tr>

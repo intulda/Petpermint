@@ -15,8 +15,13 @@
 
 <div class="inputArea">
 	<h3 class="title">구조 동물 상세 보기</h3>
-<div class="inputArea2">
-		<img src=/css/lostPet/lostPetIcon/eye2.png class='icon'>&nbsp;&nbsp;${lostPetDto.lostViewcount}
+	<div class="titlebox">
+		<div class="idbox"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>&nbsp;&nbsp;${lostPetDto.lostId}
+		&nbsp;&nbsp; ${lostPetDto.lostWdate}
+		</div>
+		<div class="eye"><img src=/css/lostPet/lostPetIcon/eye2.png class='icon'>&nbsp;&nbsp;${lostPetDto.lostViewcount}</div>
+	</div>
+<div class="inputArea2">	
 	<div class="box1">
 			<img src="${lostPetDto.imagePath}" width="420px" height="auto">
 </div>
@@ -49,9 +54,9 @@
 
 			<div class="buttonList">
 				<span class="item">
-				<input type="button" value="수정" onclick="update(${lostPetDto.lostSeq})"></span> 
+				<button type="button" onclick="update(${lostPetDto.lostSeq})">수정</button></span> 
 				<span class="item">
-					<input type="button" value="삭제" onclick="del(${lostPetDto.lostSeq})">
+					<button type="button" onclick="del(${lostPetDto.lostSeq})">삭제</button>
 				</span>
 			</div>
 		</div>
@@ -59,13 +64,12 @@
 	</div>
 	<br> <br>
 	<div class=lcommArea>
-		<h3>댓글()</h3>
+		<h3 class="comm">댓글()</h3>
 		<div class=lcommArea2>
 			<div class="lcommArea3">
 				<h4 class="lcommId">아이디</h4>
-				<span><textarea id="_lcommContent"
-						placeholder="동물들이 따뜻한 가정의 품으로 돌아 갈 수 있도록 도와주세요"></textarea></span> <span><button
-						type="button" id="_lostPetLCommWrite">글쓰기</button></span>
+				<span><textarea id="_lcommContent" placeholder="동물들이 따뜻한 가정의 품으로 돌아 갈 수 있도록 도와주세요"></textarea></span> 
+				<span><button type="button" id="_lostPetLCommWrite">글쓰기</button></span>
 			</div>
 
 
@@ -80,10 +84,10 @@
 					<div>
 						<span>${c.lcommContent}</span>
 					</div>
-					<span><input type="button" value="수정"
-						onclick="upBtn(${c.lcommSeq}, ${c.lostpetSeq})" /> <input
-						type="button" value="삭제"
-						onclick="delBtn(${c.lcommSeq},${c.lostpetSeq})"></span>
+					<div class=button2>
+					<span><button type="button" onclick="upBtn(${c.lcommSeq}, ${c.lostpetSeq})">수정</button></span>
+					<span><button type="button" type="button" value="삭제" onclick="delBtn(${c.lcommSeq},${c.lostpetSeq})">삭제</button></span>
+</div>
 				</div>
 
 			</c:forEach>
@@ -138,7 +142,7 @@ $("#_lostPetLCommWrite").click(function(){
 function upBtn(seq, bseq){
 	 
     window.open('/lostPet/lcommUpdate?seq='+seq,'popName',
-                'width=1000,height=200,top=500,left=300,toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+                'width=850,height=200,top=500,left=300,toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 }
 
 
@@ -154,7 +158,6 @@ function delBtn(seq, bseq){
 			
 			if(data==='ok'){
 				confirm('댓글을 삭제하시겠습니까?');
-				alert("댓글을 삭제했습니다.");
 				location.href='/lostPet/lostPetDetail?seq=' + bseq;
 			}
 			else{
