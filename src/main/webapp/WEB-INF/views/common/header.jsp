@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <header class="header__container">
     <div class="header__wrap">
         <div class="header__hamburger-menu">
@@ -34,9 +37,26 @@
                 <%-- 로그인 후 --%>
 <%--                <li class="header-flex first-child"></li>--%>
 <%--                <li class="header-flex last-child">코</li>--%>
+
+				<%-- 로그인 후 --%>
+				<c:if test="${not empty login}">
+					<li>
+						<a href="#">
+							<span>${login.id }</span>
+						</a>
+					</li>
+				</c:if>
+				
+
                 <%-- 로그인 전 --%>
-                <li class="header-flex login">로그인</li>
-                <li class="header-flex register">회원가입</li>
+                <li class="header-flex login">
+                	<a href="login.do"> 로그인 </a>
+                </li>
+                <li class="header-flex register">
+                	<a href="joinus.do"> 회원가입 </a> 
+                </li>
+
+                
             </ul>
         </div>
     </div>
