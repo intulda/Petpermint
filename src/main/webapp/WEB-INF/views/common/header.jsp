@@ -34,10 +34,6 @@
         </div>
         <div class="header-flex header__right">
             <ul class="header-flex">
-                <%-- 로그인 후 --%>
-<%--                <li class="header-flex first-child"></li>--%>
-<%--                <li class="header-flex last-child">코</li>--%>
-				<%-- 로그인 후 --%>
 				<c:if test="${not empty login}">
 					<li>
                         <div class="dropdown">

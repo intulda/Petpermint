@@ -27,11 +27,16 @@ public class MemberController {
 		return "view:login/Login";
 	}
 	
-	@RequestMapping(value="/joinus.do")
+	@RequestMapping(value="/regi.do", method=RequestMethod.GET)
 	public String joinus() {
 		return "view:login/Joinus";
 	}
 	
+	
+	/*
+	 * 
+	 * 회원가입시 아이디 중복 확인
+	 */
 	@ResponseBody
 	@RequestMapping(value = "getId.do", method = RequestMethod.POST)
 	public String getId(MemberVO vo) {
@@ -48,21 +53,30 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value = "joinus.do", method=RequestMethod.POST)
+	/*
+	 * 
+	 * 회원가입
+	 */
+	@RequestMapping(value = "regiAf.do", method=RequestMethod.POST)
 	public String regiAf(MemberVO vo) {
-		System.out.println("MemberController joinus " + new Date());
+		System.out.println("MemberController regiAf " + new Date());
 		
 		boolean b = memberservice.addmember(vo);
 		if(b) {
 			System.out.println("회원 가입되었습니다 " + new Date());
 			return "view:login/Login";
-		} else {
-			System.out.println("가입되지 않았습니다 " + new Date());
 		}
+		System.out.println("가입되지 않았습니다 " + new Date());
 		
-		return "view:login/Joinus";
+		return "view:login/Login";
 	}
 	
+	
+	
+	/*
+	 * 
+	 * 로그인 이후 처리
+	 */
 	@RequestMapping(value = "loginAf.do", method=RequestMethod.POST)
 	public String loginAf(MemberVO vo, HttpServletRequest req) {
 		System.out.println("MemberController loginAf()");
@@ -83,6 +97,11 @@ public class MemberController {
 		}		
 	}
 	
+	
+	/*
+	 * 
+	 * 로그인 세션 설정
+	 */
 	@RequestMapping(value = "sessionOut.do", method=RequestMethod.GET)
 	public String sessionOut() {
 		return "view:login/sessionOut";
