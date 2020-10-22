@@ -65,7 +65,7 @@
 <div class="place_comm">
 	<div class="place_commInput">
 	 	<label for="comm_content">comment</label>
-	 	<input type="hidden" value="aaa" id="commRegId">	
+	 	<input type="hidden" value="${login.id }" id="commRegId">	
 	 	<textarea rows="40" cols="20" id="comm_content" class="input_comm"
 	 	 placeholder="댓글을 입력해주세요"></textarea>
 		<button type="button" id="commButton" class="comm_button">입력</button>
@@ -114,9 +114,7 @@ function getBbsListData(pNumber){
 			$('.comm_listItem').html("");
 			if(list != null || list !=''){
 				$.each(list, function(index, commDto){
-
-				
-					
+		
 					let updDate ="";
 					if(commDto.commUpdDate != null){
 						updDate = "<span class='infoData'>수정날짜</span>"
@@ -126,7 +124,7 @@ function getBbsListData(pNumber){
 					}
 
                     let buttons = "";
-                    if("${login}"!= null && ("${login.id}" == commDto.id || "${login.auth}" == 3)  ){
+                    if("${login}"!= null && ("${login.id}" == commDto.commRegId || "${login.auth}" == 3)  ){
 
                     	buttons = "<a id='commUpdButton"
 								+ commDto.commSeq
@@ -142,7 +140,9 @@ function getBbsListData(pNumber){
 
 					
 					let tagData = "<div class='commHeader'>"
-								+ "<span class='infoId'>aaa  |</span>"
+								+ "<span class='infoId'>"
+								+ commDto.commRegId
+								+ " |</span>"
 								+ updDate							
 								+ "<span class='infoData'>등록날짜</span>"
 								+ "<span"
@@ -168,34 +168,7 @@ function getBbsListData(pNumber){
 	});	
 }
 
-/*
-let tagData = "<div class='commHeader'>"
-	+ "<span class='infoId'>aaa  |</span>"
-	+ updDate							
-	+ "<span class='infoData'>등록날짜</span>"
-	+ "<span"
-	+ " class='infoData' id='commRegDate"
-	+ commDto.commSeq
-	+ "'>"
-	+ commDto.commRegDate
-	+ "</span>"
-	+ "<a id='commUpdButton"
-	+ commDto.commSeq
-	+ "' onclick=\"commUpdate('"
-	+ commDto.commSeq + "','" + commDto.commContent
-	+ "')\" class='commButton'>수정</a>"
-	+ "<a id='commDelButton"
-	+ commDto.commSeq
-	+ "' onclick=\"commDelete('"
-	+ commDto.commSeq
-	+ "')\" class='commButton'>삭제</a>"
-	+ "</div>"
-	+ "<div class='commBody' id='commBody"
-	+ commDto.commSeq + "'>"
-	+ commDto.commContent
-	+ "</div>";
 
-	*/
 
 // 댓글의 총 갯수 카운팅
 function getBbsListCount(boardCategory){
@@ -290,7 +263,7 @@ $('#delButton').click(function(){
 // 댓글 등록
 $('#commButton').click(function(){
 		
-	let sendData = {commRef:boardSeq, commRegId:'aaa', 
+	let sendData = {commRef:boardSeq, commRegId:"${login.id}", 
 			commContent:$('#comm_content').val()};
 	
 	if($('#comm_content').val().trim() == ""){			

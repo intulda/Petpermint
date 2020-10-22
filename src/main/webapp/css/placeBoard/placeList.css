@@ -60,6 +60,7 @@ ul.bottom_list button:hover{
 }
 
 div.header{
+	
 	display: flex;
     flex-direction: row;
     width: 950px;
@@ -71,8 +72,6 @@ div.header{
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-	
-
 }.header a{
 	margin:4px;
 }.header ul{
@@ -159,10 +158,9 @@ div.place_item2{
 }
 
 .place_item2 p{
-	
-	
-	font-weight: 600;
+
 	font-family: 'Nanum Gothic', sans-serif;
+	font-weight: 800;
 	margin-left: 4px;
 
 }
@@ -170,9 +168,8 @@ div.place_item2{
 .place_item2 h1{
 	
 	
-	color: #ffa31a;
+	color: #e68a00;
 	font-size: 30px;
-	font-family: 'Nanum Gothic', sans-serif;
 	font-weight: 500;
 	line-height: 1.7em;
 }
