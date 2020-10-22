@@ -39,17 +39,17 @@
 				</div>
 		
 				<div id="join_memberinfo_wrap" style="top:10px;">​​
-					<input type="text" class="form-control" name="id" id="_id" placeholder="이메일" width="25">
-					<button type="button" class="form-control" id="_btnGetId" size="10"> 이메일 확인 </button>
-					<div id="_rgetid"></div>
-					<input type="text" class="form-control" name="pwd" id="_pwd" placeholder="비밀번호" width="25">
-					<input type="text" class="form-control" id="_pwdcfm" placeholder="비밀번호 확인" width="25"><br>
+					<input type="text" class="form-control" name="id" id="id" placeholder="이메일" width="25">
+					<button type="button" class="form-control" id="btnGetId" size="10"> 이메일 확인 </button>
+					<div id="rgetid"></div>
+					<input type="text" class="form-control" name="pwd" id="pwd" placeholder="비밀번호" width="25">
+					<input type="text" class="form-control" id="pwdcfm" placeholder="비밀번호 확인" width="25"><br>
 				</div>
 	
 				<span> 닉네임 </span><img src="./images/red-dot.png">
-				<input type="text" class="form-control" name="nicname" id="_nicname" size="25" placeholder="닉네임"><br>
+				<input type="text" class="form-control" name="nickname" id="nickname" size="25" placeholder="닉네임"><br>
 				<span> 연락처 </span><img src="./images/red-dot.png">
-				<input type="text" class="form-control" name="phone" id="_phone" size="25" placeholder="연락처"><br>				
+				<input type="text" class="form-control" name="phone" id="phone" size="25" placeholder="연락처"><br>				
 				
 				
 				<div class="form-check">
@@ -76,21 +76,20 @@
 
 <script type="text/javascript">
 $("#_btnjoin").click(function(){
-	if( $("#_id").val().trim() == "" ){
+	if( $("#id").val().trim() == "" ){
 		alert("id를 입력해 주십시오");
-		$("#_id").focus();		
+		$("#id").focus();		
 	}
 	else{
-		$("#_frmForm").attr("action", "joinus.do").submit();
-		alert("회원가입이 완료되었습니다");
+		$("#_frmForm").attr("action", "regiAf.do").submit();
 	}
 });
 
 /* 
 $("#_btnjoin").click(function(){
-	if( $("#_id").val().trim() == "" ){
+	if( $("#id").val().trim() == "" ){
 		alert("id를 입력해 주십시오");
-		$("#_id").focus();		
+		$("#id").focus();		
 	}
 	else{
 		$("#_frmForm").attr("action", "joinus.do").submit();
@@ -99,33 +98,33 @@ $("#_btnjoin").click(function(){
 });
  */
 
-$("#_btnGetId").click(function(){
+$("#btnGetId").click(function(){
 
-	if($("#_id").val().trim() == ""){
+	if($("#id").val().trim() == ""){
 		 alert("id를 입력해 주십시오");
-		$("#_id").val("");
-		$("#_id").focus();
-		$("#_userid").val("");
-		$("#_rgetid").html("아이디를 입력해 주십시오");		
+		$("#id").val("");
+		$("#id").focus();
+		$("#id").val("");
+		$("#rgetid").html("아이디를 입력해 주십시오");		
 	}
 	else{
 
 		$.ajax({
 			url:"getId.do",
 			type:"post",
-			data:{ id:$("#_id").val() },
+			data:{ id:$("#id").val() },
 			success:function( msg ){
 				if(msg == 'YES'){
 					// alert("이 ID를 사용할 수 없습니다");
-					$("#_rgetid").html("사용할 수 없는 ID입니다");
-					$("#_rgetid").css("color", "#ff0000");
-					$("#_id").val();
-					$("#_userid").val();
+					$("#rgetid").html("사용할 수 없는 ID입니다");
+					$("#rgetid").css("color", "#ff0000");
+					$("#id").val();
+					$("#id").val();
 				}
 				else{
-					$("#_rgetid").html("사용 가능한 ID입니다");
-					$("#_rgetid").css("color", "#0000ff");
-					$("#_userid").val(  $("#_id").val().trim()  );
+					$("#rgetid").html("사용 가능한 ID입니다");
+					$("#rgetid").css("color", "#0000ff");
+					$("#id").val(  $("#id").val().trim()  );
 				}
 			},
 			error:function(){

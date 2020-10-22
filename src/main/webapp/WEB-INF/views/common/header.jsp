@@ -40,7 +40,7 @@
                 	<a href="login.do"> 로그인 </a>
                 </li>
                 <li class="header-flex register">
-                	<a href="joinus.do"> 회원가입 </a> 
+                	<a href="regi.do"> 회원가입 </a> 
                 </li>
 
                 

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="Member">
+<mapper namespace="io.pet.mint.member.dao.MemberDao">
 
 <select id="allMember" resultType="io.pet.mint.member.vo.MemberVO">
 	SELECT * FROM MEMBER
@@ -18,7 +18,16 @@
 
 <insert id="addmember" parameterType="io.pet.mint.member.vo.MemberVO">
 	INSERT INTO MEMBER(ID, PWD, NICKNAME, AUTH, REG_DATE, DEL, SIGNUP_TYPE, INFO_AGREE, PHONE)
-	VALUES(#{id}, #{pwd}, #{nickname}, 0, SYSDATE, 0, 'default', 'YES', #{phone})
+	VALUES(#{id},
+			#{pwd},
+			#{nickname, jdbcType=VARCHAR}, 
+			0, 
+			SYSDATE, 
+			#{del,  jdbcType=INTEGER}, 
+			#{signup_type,  jdbcType=VARCHAR}, 
+			#{info_agree,  jdbcType=VARCHAR}, 
+			#{phone,  jdbcType=VARCHAR}
+			)
 </insert>
 
 <select id="login" parameterType="io.pet.mint.member.vo.MemberVO"
