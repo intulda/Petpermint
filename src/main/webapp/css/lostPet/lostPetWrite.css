@@ -11,8 +11,9 @@
     background: white;
     width:350px;
 	height:1200px;
-	margin: auto;
+	margin: right;
 	padding: 20px;
+	margin-left: 350px;
 }
 
 .inputArea2 button{
@@ -25,8 +26,8 @@
     line-height: normal;
     vertical-align: middle;
     border-radius: .25em;
-  -webkit-appearance: none; /* ����Ƽ�� ���� ���߱� */
-  -moz-appearance: none;
+
+  -webkit-appearance: none; 
   appearance: none;
 }
 
@@ -49,6 +50,8 @@
   -webkit-appearance: none; /* ����Ƽ�� ���� ���߱� */
   -moz-appearance: none;
   appearance: none;
+  resize:none;
+  width:300px;
 }
 
 body {margin: 10px;}
