@@ -26,7 +26,7 @@
                                     </c:if>
                                 </div>
                                 <div class="story__card-content">
-                                    <span>${dog.boardContents}</span>
+                                    <span><c:out value='${dog.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
                                 </div>
                             </li>
                         </c:forEach>
@@ -51,15 +51,15 @@
             <c:choose>
                 <c:when test="${catList.size() ne 0}">
                     <ul>
-                        <c:forEach items="${catList}" var="dog">
+                        <c:forEach items="${catList}" var="cat">
                             <li class="story__card-wrap" data-link="">
                                 <div class="story__card-image">
-                                    <c:if test="${dog.thumbnail ne null}">
-                                        <div style="background-image: url("${dog.thumbnail}")"></div>
+                                    <c:if test="${cat.thumbnail ne null}">
+                                        <div style="background-image: url("${cat.thumbnail}")"></div>
                                     /</c:if>
                                 </div>
                                 <div class="story__card-content">
-                                    <span>${dog.boardContents}</span>
+                                    <span><c:out value='${cat.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
                                 </div>
                             </li>
                         </c:forEach>
