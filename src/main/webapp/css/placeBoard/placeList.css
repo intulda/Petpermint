@@ -310,7 +310,6 @@ div.box{
   border-radius: 5px;
   font-size: 17px;
   font-weight: 400;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
   -webkit-appearance: button;
   appearance: button;
   outline: none;

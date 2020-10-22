@@ -46,7 +46,7 @@
 			</div>
 		</div>
 		<div class="bottom_infoContent">
-			<div class="infoContent_sub1">
+			<div class="infoContent_sub2">
 				<p class="sub2_content">주소</p>
 				<p style="margin-left:9px;">${placeDto.boardLocation }</p>
 				<p class="sub2_content">연락처</p>
@@ -79,14 +79,18 @@
 			</nav>
 		</div>	
 	</div>
-</div>	
-<c:if test="${login != null &&  (placeDto.boardRegId == login.id || login.auth == 3) }">
-	<div class="footer">
-		<button type="button" id="updButton" class="changeButton">수정</button>
-		<button type="button" id="delButton" class="changeButton">삭제</button>
+</div>
+<div class="footer">	
+	<c:if test="${login != null &&  (placeDto.boardRegId == login.id || login.auth == 3) }">	
+		<div class="footer_item1">
+			<button type="button" id="updButton" class="changeButton">수정</button>
+			<button type="button" id="delButton" class="changeButton">삭제</button>
+		</div>
+	</c:if>
+	<div class="footer_item2">
+	<button type="button" id="listButton" class="changeButton">목록</button>
 	</div>
-</c:if>
-
+</div>
 
 
 
@@ -221,12 +225,10 @@ function loadPage( totalCount ){
 		initiateStartPageClick:false,		// onPageClick 자동 실행하지 않는다
 		onPageClick: function(event, page){
 			nowPage = page;
-		//	alert('nowPage:' + nowPage);
 			getBbsListData( nowPage - 1 );	
 		}	
 	});
 }
-
 
 // 업데이트 페이지로 이동
 $('#updButton').click(function(){
@@ -293,6 +295,12 @@ $('#commButton').click(function(){
 	
 });
 
+$('#listButton').click(function(){
+
+	location.href = "/placeBoard/placeBoardList";
+});
+
+
 // 댓글 수정페이지로 전환
 function commUpdate(commSeq, commContent){
 
@@ -312,7 +320,7 @@ function commUpdate(commSeq, commContent){
 	let commUpdAfButton = "<button type='button' onclick=\"commUpdateAf('"+commSeq+"')\""
 		 + "id='commUpdAfButton"
 		 + commSeq
-		 + "' class='upAfButton'>수정완료</button>";
+		 + "' class='upAfButton'>수정하기</button>";
 	$("#comm_content" + commSeq).after(commUpdAfButton);
 	$("#commUpdButton"+ commSeq).remove();
 	
