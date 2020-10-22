@@ -55,13 +55,13 @@
 <div class="place_container">	
 </div>
 
-
-<div class="header">	
-	<ul class="bottom_list">
-		<li><button type="button" id="writeButton">글쓰기</button></li>
-	</ul>
-</div>
-
+<c:if test="${login != null }">
+	<div class="header">	
+		<ul class="bottom_list">
+			<li><button type="button" id="writeButton">글쓰기</button></li>
+		</ul>
+	</div>
+</c:if>
 
 <div class="container">
 	<nav aria-label="Page navigation">

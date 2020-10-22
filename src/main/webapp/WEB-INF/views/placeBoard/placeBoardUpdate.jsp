@@ -18,7 +18,7 @@
 		<div class="subArea">
 			<div class="item1">작성자</div>
 			<div class="item2">
-				<input type="text" name="id" class="idData" readonly="readonly" value="aaa">
+				<input type="text" name="id" class="idData" readonly="readonly" value="${login.id }">
 			</div>
 		</div>
 		<div class="subArea">

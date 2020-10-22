@@ -12,8 +12,8 @@
 	
 	INSERT INTO BOARD(BOARD_SEQ, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE, BOARD_CONTENTS, ID, BOARD_LOCATION,
 						BOARD_VIEW_COUNT, BOARD_REG_ID, BOARD_REG_DATE, BOARD_REF, BOARD_DEL,BOARD_TEL)
-	VALUES(SEQ_BOARD.NEXTVAL, '펫플레이스', #{boardCategory}, #{boardTitle}, #{boardContents:CLOB}, 'aaa', #{boardLocation},
-			0, 'aaa', SYSDATE, (SELECT NVL(MAX(BOARD_SEQ), 0) + 1  FROM BOARD WHERE BOARD_TYPE='펫플레이스'), 0, #{boardTel} )
+	VALUES(SEQ_BOARD.NEXTVAL, '펫플레이스', #{boardCategory}, #{boardTitle}, #{boardContents:CLOB}, #{id}, #{boardLocation},
+			0,#{id}, SYSDATE, (SELECT NVL(MAX(BOARD_SEQ), 0) + 1  FROM BOARD WHERE BOARD_TYPE='펫플레이스'), 0, #{boardTel} )
 	
 </insert>
 

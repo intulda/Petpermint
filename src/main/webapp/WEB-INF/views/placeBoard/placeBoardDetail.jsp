@@ -17,14 +17,12 @@
 		<p class="board_info">
 		<img src="../images/placeImg/detail_writer.png" class="idImg">작성자 : ${placeDto.boardRegId }
 		</p>
-	</div>
-	<div class="item2">
 		<p class="board_info">
-		<img src="../images/placeImg/read_count.png" class="readImg" >
-		조회수 : ${placeDto.boardViewCount }
+			<img src="../images/placeImg/read_count.png" class="readImg" >
+			조회수 : ${placeDto.boardViewCount }
 		</p>
 	</div>
-	<div class="item3">
+	<div class="item2">
 		<p class="board_info">
 		게시날짜 : ${placeDto.boardRegDate }  (ID:${placeDto.boardRegId })
 		</p>
@@ -82,18 +80,19 @@
 		</div>	
 	</div>
 </div>	
-
-<div class="footer">
-	<button type="button" id="updButton" class="changeButton">수정</button>
-	<button type="button" id="delButton" class="changeButton">삭제</button>
-</div>
-
+<c:if test="${login != null &&  (placeDto.boardRegId == login.id || login.auth == 3) }">
+	<div class="footer">
+		<button type="button" id="updButton" class="changeButton">수정</button>
+		<button type="button" id="delButton" class="changeButton">삭제</button>
+	</div>
+</c:if>
 
 
 
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dcdc7367b980d0b1446f352a1693e015&libraries=services"></script>
 <script>
+
 
 let boardSeq = ${placeDto.boardSeq};
 
@@ -115,6 +114,8 @@ function getBbsListData(pNumber){
 			$('.comm_listItem').html("");
 			if(list != null || list !=''){
 				$.each(list, function(index, commDto){
+
+				
 					
 					let updDate ="";
 					if(commDto.commUpdDate != null){
@@ -123,6 +124,21 @@ function getBbsListData(pNumber){
 								+ commDto.commUpdDate
 								+ "</span>";
 					}
+
+                    let buttons = "";
+                    if("${login}"!= null && ("${login.id}" == commDto.id || "${login.auth}" == 3)  ){
+
+                    	buttons = "<a id='commUpdButton"
+								+ commDto.commSeq
+								+ "' onclick=\"commUpdate('"
+								+ commDto.commSeq + "','" + commDto.commContent
+								+ "')\" class='commButton'>수정</a>"
+								+ "<a id='commDelButton"
+								+ commDto.commSeq
+								+ "' onclick=\"commDelete('"
+								+ commDto.commSeq
+								+ "')\" class='commButton'>삭제</a>";
+                    }
 
 					
 					let tagData = "<div class='commHeader'>"
@@ -135,16 +151,7 @@ function getBbsListData(pNumber){
 								+ "'>"
 								+ commDto.commRegDate
 								+ "</span>"
-								+ "<a id='commUpdButton"
-								+ commDto.commSeq
-								+ "' onclick=\"commUpdate('"
-								+ commDto.commSeq + "','" + commDto.commContent
-								+ "')\" class='commButton'>수정</a>"
-								+ "<a id='commDelButton"
-								+ commDto.commSeq
-								+ "' onclick=\"commDelete('"
-								+ commDto.commSeq
-								+ "')\" class='commButton'>삭제</a>"
+								+ buttons
 								+ "</div>"
 								+ "<div class='commBody' id='commBody"
 								+ commDto.commSeq + "'>"
@@ -160,6 +167,35 @@ function getBbsListData(pNumber){
 		}	
 	});	
 }
+
+/*
+let tagData = "<div class='commHeader'>"
+	+ "<span class='infoId'>aaa  |</span>"
+	+ updDate							
+	+ "<span class='infoData'>등록날짜</span>"
+	+ "<span"
+	+ " class='infoData' id='commRegDate"
+	+ commDto.commSeq
+	+ "'>"
+	+ commDto.commRegDate
+	+ "</span>"
+	+ "<a id='commUpdButton"
+	+ commDto.commSeq
+	+ "' onclick=\"commUpdate('"
+	+ commDto.commSeq + "','" + commDto.commContent
+	+ "')\" class='commButton'>수정</a>"
+	+ "<a id='commDelButton"
+	+ commDto.commSeq
+	+ "' onclick=\"commDelete('"
+	+ commDto.commSeq
+	+ "')\" class='commButton'>삭제</a>"
+	+ "</div>"
+	+ "<div class='commBody' id='commBody"
+	+ commDto.commSeq + "'>"
+	+ commDto.commContent
+	+ "</div>";
+
+	*/
 
 // 댓글의 총 갯수 카운팅
 function getBbsListCount(boardCategory){

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import io.pet.mint.member.vo.MemberVO;
 import io.pet.mint.placeBoard.dto.ImagesDto;
 import io.pet.mint.placeBoard.dto.PlaceBoardDto;
 import io.pet.mint.placeBoard.dto.PlaceBoardParam;
@@ -59,7 +60,8 @@ public class PlaceBoardController {
 	// 게시물페이지에서 게시물리스트 출력
 	@ResponseBody
 	@PostMapping(value = "getPlaceBoardList")
-	public List<PlaceBoardDto> getPlaceBoardList(PlaceBoardParam param) {
+	public List<PlaceBoardDto> getPlaceBoardList(PlaceBoardParam param
+				,HttpServletRequest req, Model model) {
 		
 		// paging 처리
 		int sn = param.getPageNumber();
@@ -80,7 +82,11 @@ public class PlaceBoardController {
 			}	
 		}
 			
-		System.out.println("리스트 갯수:" +placeList.size());
+		//System.out.println("리스트 갯수:" +placeList.size());
+		
+		MemberVO login = (MemberVO)req.getSession().getAttribute("login");
+		model.addAttribute("login");
+		
 		return placeList;
 	}
 	
@@ -130,14 +136,20 @@ public class PlaceBoardController {
 	// 상세페이지 이동
 	@GetMapping(value = "placeBoardDetail")
 	public String placeBoardDetail(@RequestParam(value = "seq")int boardSeq, 
-									Model model) {
-		
-		
-		//!! 세션에서 로그인한 id와 작성자 id를 비교 후 조회수 카운트
-		boardService.viewCounting(boardSeq);
+									Model model, HttpServletRequest req) {
 		
 		PlaceBoardDto placeDto = boardService.getPlaceBoardContent(boardSeq);
-				
+		MemberVO login = (MemberVO)req.getSession().getAttribute("login");
+		
+		if(login != null&&(!placeDto.getBoardRegId().equals(login.getId())) ) {
+			
+			boardService.viewCounting(boardSeq);
+		}else if(login == null) {
+			
+			boardService.viewCounting(boardSeq);
+		}
+		
+		
 		ImagesDto imageDto = imageService.getImages(boardSeq); 
 		
 		if(imageDto!= null) {
