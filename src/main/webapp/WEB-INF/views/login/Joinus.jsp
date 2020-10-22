@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/>      
@@ -16,31 +15,28 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/login/login.css"/>
 
 <!-- cookie -->
 <script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript" ></script>
-
-<style>
-</style>
 
 <body>
 ​
 <form action="" method="post" id="_frmForm" name="frmForm">
 
-<div id="join_main_wrap">
+<div class="join_container">
 	<div id="join_middle_wrap">
 		<div id="join_content_wrap">
 		
-			<div style="width: 550px; margin-left: 300px;
-						position: relative; top: 10px;">
+			<div style="width: 550px; align: center;">
 
 				<div class="join_title_warp" style="top: 30px;">
 					<img src="./images/회원가입1.png" width="550px">
 				</div>
 		
-				<div id="join_memberinfo_wrap" style="top:10px;">​​
-					<input type="text" class="form-control" name="id" id="id" placeholder="이메일" width="25">
-					<button type="button" class="form-control" id="btnGetId" size="10"> 이메일 확인 </button>
+				<div id="join_memberinfo_wrap" style="top:10px; text-align:center">​​
+					<input type="text" class="form-control" name="id" id="id" placeholder="이메일" width="25" style="align-content: center;">
+					<button type="button" class="btn btn-primary btn-lg btn-block" id="btnGetId" size="30"> 이메일 확인 </button>
 					<div id="rgetid"></div>
 					<input type="text" class="form-control" name="pwd" id="pwd" placeholder="비밀번호" width="25">
 					<input type="text" class="form-control" id="pwdcfm" placeholder="비밀번호 확인" width="25"><br>
@@ -66,9 +62,9 @@
 ​
 </form>
 
-<div style="width: 550px; margin-left: 300px; position: relative; top: 30px;">
+<div class="join_btn_container">
 
-	<a href="#none" id="_btnjoin" title="회원가입">
+	<a href="#none" id="_btnjoin" title="회원가입" class="join_btn">
 		<img alt="" src="./images/joinbtn2.png">
 	</a>
 	 
