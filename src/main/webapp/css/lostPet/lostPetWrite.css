@@ -1,4 +1,4 @@
-/* ±Û¾²±â */
+/* ï¿½Û¾ï¿½ï¿½ï¿½ */
 
 .inputArea{
     background: white;
@@ -11,8 +11,9 @@
     background: white;
     width:350px;
 	height:1200px;
-	margin: auto;
+	margin: right;
 	padding: 20px;
+	margin-left: 350px;
 }
 
 .inputArea2 button{
@@ -25,8 +26,8 @@
     line-height: normal;
     vertical-align: middle;
     border-radius: .25em;
-  -webkit-appearance: none; /* ³×ÀÌÆ¼ºê ¿ÜÇü °¨Ãß±â */
-  -moz-appearance: none;
+
+  -webkit-appearance: none; 
   appearance: none;
 }
 
@@ -46,9 +47,11 @@
   border: 1px solid #ebebeb;
   border-bottom-color: #e2e2e2;
   border-radius: .25em;
-  -webkit-appearance: none; /* ³×ÀÌÆ¼ºê ¿ÜÇü °¨Ãß±â */
+  -webkit-appearance: none; /* ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½ */
   -moz-appearance: none;
   appearance: none;
+  resize:none;
+  width:300px;
 }
 
 body {margin: 10px;}
@@ -99,7 +102,7 @@ body {margin: 10px;}
   border: 1px solid #ebebeb;
   border-bottom-color: #e2e2e2;
   border-radius: .25em;
-  -webkit-appearance: none; /* ³×ÀÌÆ¼ºê ¿ÜÇü °¨Ãß±â */
+  -webkit-appearance: none; /* ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß±ï¿½ */
   -moz-appearance: none;
   appearance: none;
 }
@@ -128,8 +131,8 @@ body {margin: 10px;}
 
 .filebox .upload-display img {
     display: block;
-    max-width: 300%;
-    width: 300% \9;
+    max-width: 400%;
+    width: 400% \9;
     height: auto;
 }
 

@@ -30,7 +30,5 @@ public class PlaceCommParam implements Serializable {
 		this.end = end;
 		this.commRef = commRef;
 	}
-
-	
 	
 }
