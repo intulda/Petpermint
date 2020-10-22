@@ -15,6 +15,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/login/login.css" />
 
 <!-- cookie -->
@@ -22,19 +23,12 @@
 
 <body>
 
-<style>
-.login_container{
-	 text-align: center;
-}
-
-</style>
-
 <div class="login_container">
 		<div id="content_wrap">
 			
 			<div class="login_title_warp" style="text-align: center;">
 				<div style="margin-top: 15px">
-					<img src="./images/로그인1.png" width="900px">
+					<img src="./images/login_btn2.png" width="700px">
 				</div>
 			</div>
 			
@@ -57,19 +51,33 @@
 								<img alt="" src="./images/kakaobtn.png" width="500px">
 							</a>
 							
-							<hr>
-							<input type="text" id="_userid" name="id" class="form-control"
-									size="10" title="이메일" style="border: 1px solid #dddddd" placeholder="이메일"> <br>
-							<input type="text" id="_pwd" name="pwd" class="form-control"
-									size="10" title="비밀번호" style="border: 1px solid #dddddd" placeholder="비밀번호">	<br>
-							<input type="checkbox" id="chk_save_id"> ID 저장
-							<br>
+							<hr width="500px">
+							
+							<div class="login_input">
+								
+								<div class="input-group mb-3 input-group-lg">
+								  <div class="input-group-prepend">
+								    <span class="input-group-text" id="basic-addon1">@</span>
+								  </div>
+								  <input type="text" class="form-control " id="_userid" name="id" placeholder="이메일" aria-label="id" aria-describedby="basic-addon1">
+								</div>
+								
+								<!-- 
+								<input type="text" id="_userid" name="id" class="input-group-text"
+										size="10" title="이메일" style="border: 1px solid #dddddd" placeholder="이메일"> <br>
+								-->
+										
+								<input type="text" id="_pwd" name="pwd" class="form-control"
+										size="30" title="비밀번호" style="border: 1px solid #dddddd" placeholder="비밀번호"><br>
+							</div>
+							<input type="checkbox" id="chk_save_id" style="align=left;"> ID 저장
+							<br><br>
 							<a href="#none" id="_btnlogin" title="로그인">
 								<img alt="" src="./images/loginbtn1.png">
 							</a>
 							
 							<br>
-							<hr>
+							<hr width="500px">
 							<a href="#none" id="_btnjoin" title="회원가입">
 								<img alt="" src="./images/joinbtn1.png">
 							</a>							
