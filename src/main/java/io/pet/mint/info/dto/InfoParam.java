@@ -110,7 +110,9 @@ public class InfoParam implements Serializable {
 	public void setChoice(String choice) {
 		this.choice = choice;
 	}
-
+	
+	
+	
 	@Override
 	public String toString() {
 		return "InfoParam [keyword=" + keyword + ", category=" + category + ", choice=" + choice + ", pageNumber="

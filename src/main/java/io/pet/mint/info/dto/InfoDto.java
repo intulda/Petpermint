@@ -39,6 +39,7 @@ public class InfoDto implements Serializable {
    private int boardDel;
    
    /*이미지*/
+   private byte[] imagesPath;
    private String filePath;
    
    
@@ -207,6 +208,13 @@ public void setBoardDel(int boardDel) {
 }
 
 
+public byte[] getImagesPath() {
+	return imagesPath;
+}
+
+public void setImagesPath(byte[] imagesPath) {
+	this.imagesPath = imagesPath;
+}
 
 @Override
 public String toString() {

@@ -36,7 +36,6 @@ public interface InfoDao {
 	void infoDelete(int seq); //삭제
 	
 	public int getParamCount(InfoParam par);
-	
-	public int getInfoListCount(InfoParam param);
+
 
 }
