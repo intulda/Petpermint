@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.pet.mint.placeBoard.dao.PlaceCommDao">
+
+<insert id="placeCommWrite" parameterType="io.pet.mint.placeBoard.dto.PlaceCommDto">
+
+	INSERT INTO PLACE_COMM(COMM_SEQ, COMM_REF, COMM_DEL, COMM_CONTENT, COMM_REG_ID, COMM_REG_DATE)
+	VALUES(SEQ_PLACE_COMM.NEXTVAL, #{commRef}, 0, #{commContent}, #{commRegId}, SYSDATE)
+</insert>
+
+<select id="getCommList" parameterType="io.pet.mint.placeBoard.dto.PlaceCommParam"
+	resultType="io.pet.mint.placeBoard.dto.PlaceCommDto">
+
+	SELECT COMM_SEQ, COMM_REF, COMM_DEL, COMM_CONTENT, COMM_REG_ID, COMM_REG_DATE, COMM_UPD_DATE
+	FROM ( SELECT ROW_NUMBER()OVER(ORDER BY COMM_SEQ DESC)AS RNUM,
+					COMM_SEQ, COMM_REF, COMM_DEL, COMM_CONTENT, 
+					COMM_REG_ID, TO_CHAR(COMM_REG_DATE,'YYYY/MM/DD HH24:MI') AS COMM_REG_DATE,
+					TO_CHAR(COMM_UPD_DATE,'YYYY/MM/DD HH24:MI') AS COMM_UPD_DATE
+		   FROM PLACE_COMM
+		   WHERE COMM_DEL=0 AND COMM_REF=#{commRef}
+		   )
+	WHERE RNUM BETWEEN ${start} AND ${end} 	
+</select>
+
+
+<select id="getCommCount" parameterType="java.lang.Integer"
+	 resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0) AS CNT
+	FROM PLACE_COMM
+	WHERE COMM_DEL=0 AND COMM_REF=#{commRef}
+</select>
+
+
+<update id="placeCommUpdate" parameterType="io.pet.mint.placeBoard.dto.PlaceCommDto">
+
+	UPDATE PLACE_COMM
+	SET  COMM_CONTENT=#{commContent}, COMM_UPD_DATE=SYSDATE
+	WHERE COMM_SEQ=#{commSeq} 
+</update>
+
+
+<update id="placeCommDelete" parameterType="java.lang.Integer">
+
+	UPDATE PLACE_COMM
+	SET COMM_DEL=1
+	WHERE COMM_SEQ=#{commSeq}
+</update>
+</mapper>
+
+
+

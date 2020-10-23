@@ -7,7 +7,6 @@
     position: relative;
     z-index: 3;
     box-shadow: 0 2px 0 0 #60a1e1;
-    margin-bottom: 50px;
 }
 .menu__sub-menu-container {
     display: flex;
@@ -109,6 +108,82 @@
     animation: fade-out 0.3s;
     animation-fill-mode: forwards;
 }
+.header__hamburger-menu {
+    display: none;
+}
+
+input[id="hamburger"] {
+    display: none;
+}
+input[id="hamburger"] + label {
+    display: block;
+    width: 30px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+input[id="hamburger"] + label span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    border-radius: 30px;
+    background: #60a1e1;
+    transition: all 0.35s;
+}
+input[id="hamburger"] + label span:nth-child(1) {
+    top: 0;
+}
+input[id="hamburger"] + label span:nth-child(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+input[id="hamburger"] + label span:nth-child(3) {
+    bottom: 0;
+}
+input[id="hamburger"]:checked + label {
+    z-index: 25;
+}
+input[id="hamburger"]:checked + label span {
+    background: #fff;
+}
+input[id="hamburger"]:checked + label span:nth-child(1) {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+}
+input[id="hamburger"]:checked + label span:nth-child(2) {
+    opacity: 0;
+}
+input[id="hamburger"]:checked + label span:nth-child(3) {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg);
+}
+div[class="sidebar"] {
+    width: 300px;
+    height: 100%;
+    background: #222;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    z-index: 20;
+    transition: all 0.35s;
+    display: flex;
+    opacity: 0.9;
+}
+input[id="hamburger"]:checked + label + div {
+    left: 0;
+}
+.header__hamburger-menu-list {
+    padding-top: 120px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.header__hamburger-menu {
+    position: relative;
+    left: 0;
+    top: 0;
+}
 
 @keyframes fade-in {
     from {
@@ -133,4 +208,48 @@
     .menu__container {
         display: none;
     }
+    .menu {
+        color: white !important;
+        width: 100% !important;
+        font-size: 1.5rem;
+        text-align: left;
+        padding: 40px;
+        justify-content: flex-start;
+        height: 0;
+    }
+    .menu a {
+        color: white;
+    }
+    .header__hamburger-menu {
+        display: flex;
+    }
+
+    .menu a:hover {
+        color: #60a1e1;
+    }
 }
+
+@media(max-width: 560px) {
+    .main__contents ul {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .menu {
+        color: white;
+        font-size: 1.2rem;
+        text-align: left;
+        padding: 30px;
+        justify-content: flex-start;
+        height: 0;
+    }
+}
+
+@media(max-height: 414px) {
+    .footer-container {
+        display: none;
+    }
+}
+
+
+
