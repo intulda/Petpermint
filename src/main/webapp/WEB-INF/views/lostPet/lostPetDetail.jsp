@@ -26,7 +26,13 @@
 			<img src="${lostPetDto.imagePath}" width="420px" height="auto">
 </div>
 		<div class="box2">
-
+			<div class="buttonList">
+				<span class="item">
+				<button type="button" onclick="update(${lostPetDto.lostSeq})">수정</button></span> 
+				<span class="item">
+					<button type="button" onclick="del(${lostPetDto.lostSeq})">삭제</button>
+				</span>
+			</div>
 			<div><span>No.</span> <span>${lostPetDto.lostSeq}</span>
 			<span>품종</span></div> <span><c:if
 						test="${lostPetDto.lostType == 1}">
@@ -48,17 +54,14 @@
 </c:if>
 
 			</span></div>
+			<div><span>연락처</span> <span>${lostPetDto.lostPhone}</span></div>
 			<div><span>장소</span> <span>${lostPetDto.lostLocation}</span></div>
 			<div><span>공고 일자</span> <span>${lostPetDto.lostWdate}</span></div>
 			<div><span>기타 사항</span> <span>${lostPetDto.lostDetail}</span></div>
 
-			<div class="buttonList">
-				<span class="item">
-				<button type="button" onclick="update(${lostPetDto.lostSeq})">수정</button></span> 
-				<span class="item">
-					<button type="button" onclick="del(${lostPetDto.lostSeq})">삭제</button>
-				</span>
-			</div>
+
+		
+
 		</div>
 	</div>
 	</div>
@@ -67,9 +70,17 @@
 		<h3 class="comm">댓글()</h3>
 		<div class=lcommArea2>
 			<div class="lcommArea3">
-				<h4 class="lcommId">아이디</h4>
+				<h4 class="lcommId">
+				<c:if test="${login.id != null}"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>&nbsp;&nbsp;${login.id}</c:if>
+				</h4>
+				<c:if test="${login.id != null}">
 				<span><textarea id="_lcommContent" placeholder="동물들이 따뜻한 가정의 품으로 돌아 갈 수 있도록 도와주세요"></textarea></span> 
 				<span><button type="button" id="_lostPetLCommWrite">글쓰기</button></span>
+				</c:if>
+				<c:if test="${login.id eq null}">
+				<span><textarea id="_lcommContent" placeholder="로그인 후 이용해주세요" readonly></textarea></span> 
+				<span><button type="button">글쓰기</button></span>
+				</c:if>
 			</div>
 
 
@@ -85,8 +96,10 @@
 						<span>${c.lcommContent}</span>
 					</div>
 					<div class=button2>
+					<c:if test="${(login.id eq c.lcommId || login.auth == 3)}">
 					<span><button type="button" onclick="upBtn(${c.lcommSeq}, ${c.lostpetSeq})">수정</button></span>
 					<span><button type="button" type="button" value="삭제" onclick="delBtn(${c.lcommSeq},${c.lostpetSeq})">삭제</button></span>
+</c:if>
 </div>
 				</div>
 
@@ -114,7 +127,7 @@ function update(seq) {
 
 $("#_lostPetLCommWrite").click(function(){
 	let lostpetSeq= "${lostPetDto.lostSeq}";
-	let sendCommData = {lostpetSeq:lostpetSeq, lcommContent:$('#_lcommContent').val()
+	let sendCommData = {lostpetSeq:lostpetSeq,lcommId:"${login.id}", lcommContent:$('#_lcommContent').val()
 			};
 	console.log(sendCommData);
 

@@ -6,17 +6,17 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/lostPet/lostPetWrite.css" />
 <fmt:requestEncoding value="utf-8"/>
 
-
+ 
 
 <div class="inputArea">
 <br><br>
 <h3 class="title">유기 동물 구조 글쓰기</h3>
 <div class="inputArea2">
-	<form method="post" class="sendData" id="sendForm" action="/lostPet/lostPetWrite"
+	<form method="post" id="sendForm" action="/lostPet/lostPetWrite"
 		enctype="multipart/form-data">
 <br>
 아이디<br>
-<input type="text" name="lostId" id="_id" value='aaa' readonly placeholder="아이디"/><br>
+<input type="text" name="lostId" id="_id" value="${login.id}" readonly placeholder="아이디"/><br>
 <div class="filebox bs3-primary preview-image">
    <input type="file" id="input_file" name="thumbnail" class="upload-hidden" accept=".gif, .jpg, .png"> <br>
 		사진<br><input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
