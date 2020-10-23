@@ -54,7 +54,7 @@
 <div class="place_container">	
 </div>
 
-<c:if test="${login != null }">
+<c:if test="${login != null && login.auth == 3 }">
 	<div class="header">	
 		<ul class="bottom_list">
 			<li><button type="button" id="writeButton">글쓰기</button></li>
