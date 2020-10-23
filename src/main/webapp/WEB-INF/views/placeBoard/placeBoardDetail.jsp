@@ -264,33 +264,38 @@ $('#delButton').click(function(){
 
 // 댓글 등록
 $('#commButton').click(function(){
-		
+	
 	let sendData = {commRef:boardSeq, commRegId:"${login.id}", 
 			commContent:$('#comm_content').val()};
 	
-	if($('#comm_content').val().trim() == ""){			
-		alert("댓글의 내용을 입력하세요");
-		$('#comm_content').focus();
+	if("${login.id}" != ""){
+		if($('#comm_content').val().trim() == ""){			
+			alert("댓글의 내용을 입력하세요");
+			$('#comm_content').focus();
+		}
+		else{	
+			$.ajax({
+				url:"/placeBoard/placeCommWrite",
+				type:"post",
+				data: sendData,
+				success:function(data){
+					
+					if(data === 'ok'){
+						alert("댓글을 작성했습니다");
+						location.href = "/placeBoard/placeBoardDetail?seq=" + boardSeq;
+					}
+					else{
+						alert("댓글을 작성하지 못했습니다");
+					}
+				},
+				error:function(){
+					alert("error");
+				}
+			});
+		}
 	}
-	else{	
-		$.ajax({
-			url:"/placeBoard/placeCommWrite",
-			type:"post",
-			data: sendData,
-			success:function(data){
-				
-				if(data === 'ok'){
-					alert("댓글을 작성했습니다");
-					location.href = "/placeBoard/placeBoardDetail?seq=" + boardSeq;
-				}
-				else{
-					alert("댓글을 작성하지 못했습니다");
-				}
-			},
-			error:function(){
-				alert("error");
-			}
-		});
+	else{
+		alert("로그인후 댓글등록을 할 수 있습니다.");
 	}
 	
 });
