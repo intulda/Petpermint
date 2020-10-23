@@ -62,7 +62,7 @@
 	</div>
 </c:if>
 
-<div class="container">
+<div class="page_container">
 	<nav aria-label="Page navigation">
 		<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
 	</nav>
@@ -207,7 +207,6 @@ function loadPage( totalCount ){
 		initiateStartPageClick:false,		// onPageClick 자동 실행하지 않는다
 		onPageClick: function(event, page){
 			nowPage = page;
-		//	alert('nowPage:' + nowPage);
 			getBbsListData( nowPage - 1 );	
 		}	
 	});
