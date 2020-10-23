@@ -11,10 +11,18 @@ public class MemberVO {
 	private String signup_type;
 	private int info_agree;
 	private String phone;
+	private String subNickname;
 	
 	public MemberVO() {
 	}
-	
+
+	public String getSubNickname() {
+		return subNickname;
+	}
+
+	public void setSubNickname(String subNickname) {
+		this.subNickname = subNickname;
+	}
 
 	public MemberVO(String id, String pwd, int auth) {
 		super();
