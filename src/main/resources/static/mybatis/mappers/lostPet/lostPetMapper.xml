@@ -89,6 +89,7 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 <select id="getLCommList" resultType="io.pet.mint.lostPet.dto.LCommDto">	
 	SELECT * FROM LOSTPET_COMM
 	WHERE LOSTPET_SEQ=#{lostSeq} AND LCOMM_DEL!=1
+	ORDER BY LCOMM_SEQ DESC
 </select>
 
 <insert id="getLostPetLCommWrite" parameterType="io.pet.mint.lostPet.dto.LCommDto">
