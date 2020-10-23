@@ -62,7 +62,7 @@
 	</div>
 </c:if>
 
-<div class="container">
+<div class="page_container">
 	<nav aria-label="Page navigation">
 		<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
 	</nav>
