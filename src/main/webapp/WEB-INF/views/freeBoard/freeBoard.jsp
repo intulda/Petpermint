@@ -13,13 +13,11 @@
 </head>
 <body>
 
-
 <h1 class="freeH1">커뮤니티</h1>
 <hr class="freeHr">
 <br><br>
 
 <div class="freeDiv">
-<button type="button" class="admin">관리자</button>
 <button type="button" class="write">글쓰기</button>
 <br><br>
 	
@@ -69,7 +67,7 @@
 
 <script>
 
-getListData(1);
+getListData(0);
 getListCount();
 
     $('.write').click(function (){
@@ -89,7 +87,7 @@ getListCount();
 
   
 $('.searchButton').click(function(){
-	getListData(1);
+	getListData(0);
 	getListCount();
 });
 
@@ -100,6 +98,7 @@ function getListData(pNumber){
 		data:{"nowPage":pNumber, "countPerPage":10, "choice":$(".choice").val(),
 				"searchWord":$(".searchWord").val()},
 		success : function(data){
+			
 			 //alert("호옹이");
 
 			 $("tbody").html("");
@@ -134,8 +133,8 @@ function getListData(pNumber){
 		
 		$.ajax({
 			url:"/freeBoard/freeBoardPaging",
-			type:"get",
-			data:{"nowPage":0, "recordCountPerPage":10,"choice":$("#choice").val(),"searchWord":$("#searchWord").val()},
+			type:"post",
+			data:{"choice":$("#choice").val(),"searchWord":$("#searchWord").val()},
 			success:function(count){
 				//alert(count);
 				loadPage(count);
@@ -147,11 +146,19 @@ function getListData(pNumber){
 		//글의 총 수
 		let PageSize = 10;		// 보여주고싶은 글의 갯수
 		let nowPage = 1;
+
+		let totalPages = 0;
 		
-		let totalPages = totalCount / PageSize;
-		//		2			23			10
-		if(totalCount % PageSize > 0){
-			totalPages++;
+		if(totalCount == 0){
+			totalPages = 1;
+		}
+		else{	
+			
+			totalPages =  parseInt(totalCount / PageSize);
+			if(totalCount % PageSize > 0){
+			
+				totalPages++;
+			}
 		}
 		
 		$(".pagination").twbsPagination('destroy');			// 페이지 갱신
@@ -168,6 +175,8 @@ function getListData(pNumber){
 			onPageClick: function(event, page){				// 페이지 번호 클릭시
 				nowPage = page;
 			//	alert('nowPage:' + nowPage);
+				getListData( nowPage - 1);
+				
 			}	
 		});
 		

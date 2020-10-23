@@ -13,16 +13,14 @@
 </head>
 <body>
 <div class="freewrite">
-	<form method="post" id="sendForm" action="/freeBoard/freeWrite"
-		enctype="multipart/form-data">
+	<form method="post" id="sendForm" action="/freeBoard/freeWrite">
 		<h1 class="freeWriteH1">글쓰기</h1>
 		<br>
 		작성자<input type="text" name="id" class="sendData" readonly="readonly" value="aaa"><br>
-		제목<input type="text" name="title" class="sendData" placeholder="제목을 입력해주세요.">
+		제목<input type="text" name="boardTitle" class="boardTitle" placeholder="제목을 입력해주세요.">
 		<br>이미지추가
-		<input type="file" name="thumbnail" class="sendData" accept=".gif, .jpg, .png"><br>
-		<textarea id="summernote" name="boardContents"></textarea>	
-		
+		<input type="file" name="IMG" class="sendDataIMG" accept=".gif, .jpg, .png"><br>
+		<textarea id="summernote" name="boardContents" class="boardContents"></textarea>
 		<br>
 		<button type="button" class="freeWriteRegi" name="freeWriteRegi">등록하기</button>
 		<button type="button" class="backButton" name="backButton">목록으로</button>
@@ -78,6 +76,9 @@ $('.freeWriteRegi').click(function(){
 				}
 		});		
 });
+
+});
+
 
 </script>
 </body>

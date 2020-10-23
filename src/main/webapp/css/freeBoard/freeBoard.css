@@ -1,7 +1,15 @@
 @charset "UTF-8";
 
+button{
+	border : 1px;
+	border-radius : 5px;
+	font-size : 15px;
+	margin-left : 5px;
+}
+
 .freeH1{
-	padding-top:60px;
+	margin-top: 110px;
+	padding-colortop:60px;
 	font-size: 60px;
 	text-align: center;
 	font-weight : normal;
@@ -13,8 +21,7 @@
 
 .freeTable{
 	border-top: 2px solid #dcdcdc;
-	margin-left : 300px;
-	width : 1300px;
+	width : 1100px;
 }
 
 .freeHr{
@@ -24,7 +31,7 @@
 }
 
 .freeDetailHr{
-	width : 1800px;
+	width : 100%;
 	border-color : #d8d3d3;
 }
 
@@ -32,19 +39,8 @@
 	background-color : #c0c0c0;
 }
 
-.admin{
-	float:right;
-	margin-right: 340px;
-	background-color : black;
-	color : white;
-	border-radius : 5px;
-	font-size : 20px;
-	border : 1px;
-}
-
 .write{
 	float : right;
-	margin-right : 10px;
 	border : 1px;
 	border-radius : 5px;
 	font-size : 20px;
@@ -108,8 +104,17 @@
 	border-bottom: 1px solid black;
 }
 
+.freewrite input.sendDataIMG,
+.freewrite input.boardTitle{
+	margin: 5px;
+	height: 30px;
+	width: 940px;
+	border: none;
+	border-bottom: 1px solid black;	
+}
+
 .num{
-	width : 50px;
+	width : 65px;
 }
 
 .title{
@@ -125,10 +130,10 @@
 }
 
 .view{
-	width : 70px;
+	width : 80px;
 }
 .like{
-	width : 70px;
+	width : 80px;
 }
 
 .searchButton{
@@ -141,7 +146,6 @@
 
 .freeContainer{
 	text-align: right;
-    margin-right: 300px;
 }
 
 .detailP{
@@ -160,4 +164,36 @@
 .detailDiv{
 	text-align: center;
     margin-bottom: 200px;
+}
+
+.comm_container{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    padding: 20px 0;
+}
+
+.commContents{
+	width : 85%;
+}
+
+.commHeader{
+	margin-top : 15px;
+}
+
+.commBody{
+	margin-bottom : 10px;
+}
+
+.likeButton{
+	margin-top : 100px;
+	font-size : 30px;
+}
+
+.commButton{
+	font-size : 20px;
 }

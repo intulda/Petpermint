@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.pet.mint.freeBoard.dao.FreeLikeDAO">
+
+<insert id="freeLikeButton" parameterType="io.pet.mint.freeBoard.dto.FreeLikeDTO">
+INSERT INTO BOARD_LIKES (BOARD_LIKE_SEQ, BOARD_SEQ, ID)
+VALUES ('1', #{boardSeq}, 'aaa')
+</insert>
+
+<select id="getLikeCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+SELECT COUNT(*)
+FROM BOARD_LIKES
+WHERE BOARD_LIKE_SEQ = 1 AND BOARD_SEQ = #{boardSeq}
+</select>
+
+<delete id="likeDelete" parameterType="java.lang.Integer">
+DELETE *
+FROM BOARD_LIKES
+WHERE BOARD_SEQ = #{boardSeq}
+</delete>
+
+</mapper>

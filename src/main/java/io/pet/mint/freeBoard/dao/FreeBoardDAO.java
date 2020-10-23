@@ -32,4 +32,9 @@ public interface FreeBoardDAO {
 	
 	//게시판 수정
 	public int freeBoardUpdate(FreeBoardDTO dto);
+	
+	//게시판 조회수
+	public int viewCount(int boardSeq);
+
+	public int freeLikeCount(int boardSeq);
 }

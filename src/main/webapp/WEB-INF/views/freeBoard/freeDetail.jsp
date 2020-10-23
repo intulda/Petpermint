@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href ="/css/freeBoard/freeBoard.css" />
 </head>
 <body>
@@ -20,9 +22,34 @@
 
 <div class="detailDiv">
 	<p>${dto.boardContents}</p>
+	<button type="button" class="likeButton" name="likeButton"><span id="LikeCount"></span>좋아요</button>
+</div>
+<br>
+<span id="replyCount"></span>개의 댓글
+<hr>
+<br>
+<div class="comm_container">
+	<input type="hidden" value="aaa" id="commRedId">
+	<label for="comm_content">댓글</label>
+	<input type="hidden" value="aaa" id="commRegId">
+	<textarea rows="5" cols="40" name="commContents" class="commContents"
+	placeholder="댓글을 입력해주세요"></textarea>
+	<button type="button" class="commButton">등록하기</button>
+</div>
+<div class="free_commList">
+	<div class="comm_listItem">	
+	</div>
+	<div class="container">
+		<nav aria-label="Page navigation">
+			<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
+		</nav>
+	</div>	
 </div>
 
+
+
 <script type="text/javascript">
+
 $(".freeDelete").click(function(){
 
 	let boardSeq = ${dto.boardSeq};
@@ -33,7 +60,7 @@ $(".freeDelete").click(function(){
 		data:{boardSeq},
 		success : function(data){
 			if(data === 'ok'){
-			alert("구뜨");
+			alert("삭제되었습니다.");
 			location.href="/freeBoard/freeBoardViews";
 		}else{
 			alert("글삭제 노노");
@@ -52,6 +79,264 @@ $(".freeUpdate").click(function(){
 	location.href ="/freeBoard/freeBoardUpdateView?boardSeq=" + boardSeq;
 	
 });
+
+$(".commButton").click(function(){
+
+	let sendData = {
+			commContents :$('.commContents').val(), commRef:${dto.boardSeq},
+				commRegId:'aaa' };
+	
+	if($('.commContents').val().trim() == ""){			
+		alert("댓글의 내용을 입력하세요");
+		$('.commContents').focus();
+	}
+	else{
+	$.ajax({
+		url:"/freeBoard/addFreeComm",
+		type:"post",
+		data:sendData,
+		success:function(data){
+			if(data == 'ok'){
+			//	alert("예아");
+				location.href = "/freeBoard/freeDetail?boardSeq=" + ${dto.boardSeq};
+			}
+			else{
+				alert("저런..");
+			}
+			},
+			error : function(){
+				alert("error");
+				}
+		});
+	}
+});
+
+getListData(0);
+getBbsListCount();
+
+function getListData(pNumber){
+	$.ajax({
+		url : "/freeBoard/getFreeCommList",
+		type : "post",
+		data : {"pageNumber":pNumber, "countPerPage":10, "commRef" : ${dto.boardSeq} },
+		success : function(list){
+		//	console.log(list);
+
+			$.each(list, function(idx, commDTO){
+
+				$('.comm_listItem').empty();
+				if(list != null || list !=''){
+					$.each(list, function(index, commDTO){
+
+				let updDate ="";
+				if(commDTO.commUpdate != null){
+					updDate = "<span class='infoData'>수정날짜</span>"
+							+ "<span class='infoData'>"
+							+ commDTO.commUpdate
+							+ "</span>";
+				}	
+				
+			//	console.log(commDTO);
+				let app = "<div class='commHeader'>"
+					+ "<span class='infoId'>aaa  |</span>"
+					+ updDate							
+					+ "<span class='infoData'>등록날짜</span>"
+					+ "<span"
+					+ " class='infoData' id='commRegDate"
+					+ commDTO.commSeq
+					+ "'>"
+					+ commDTO.commRegDate
+					+ "</span>"
+					+ "<button type='button' id='commUpdButton"
+					+ commDTO.commSeq
+					+ "' onclick=\"commUpdate('"
+					+ commDTO.commSeq + "','" + commDTO.commContents
+					+ "')\">수정</button>"
+					+ "<button type='button' id='commDelButton"
+					+ commDTO.commSeq
+					+ "' onclick=\"commDelete('"
+					+ commDTO.commSeq
+					+ "')\">삭제</button>"
+					+ "</div>"
+					+ "<div class='commBody' id='commBody"
+					+ commDTO.commSeq + "'>"
+					+ commDTO.commContents
+					+ "</div><hr>";
+
+				$('.comm_listItem').append(app);
+				});
+				}
+				});
+			getLikeCount(${dto.boardSeq});
+			},
+			error:function(){
+				alert('아 이거다');
+				}
+		});
+	}
+
+function getBbsListCount(){
+	$.ajax({
+		url : "/freeBoard/getCommCount",
+		type:"post",
+		data:{"commRef" : ${dto.boardSeq} },
+		success : function(count){
+			$("#replyCount").text(count);
+			loadPage(count);
+		},
+		error:function(){
+			alert("이거냐?");
+		}
+	});
+}
+
+function loadPage(totalCount){
+	
+	let pageSize = 10;
+	let nowPage = 1;
+
+	let totalPages = 0;
+
+	if(totalCount == 0 ){
+		totalPages = 1;
+	}
+	else{
+		totalPages = parseInt(totalCount / pageSize);
+		if(totalCount % pageSize > 0){
+			totalPages++;
+		}
+	}
+	$("#pagination").twbsPagination('destroy');
+
+	$("#pagination").twbsPagination({
+		
+		totalPages : totalPages,
+		visiblePages: 5,
+		first:'<span aria-hidden="true">«</span>',		
+		prev:"이전",
+		next:"다음",
+		last:'<span aria-hidden="true">»</span>',		
+		initiateStartPageClick:false,					
+		onPageClick: function(event, page){				
+			nowPage = page;
+			//alert("nowPage = " + nowPage);
+			getListData(nowPage - 1);
+		}
+	});
+}
+
+function commDelete(commSeq){
+
+	$.ajax({
+		url:"/freeBoard/freeCommDelete",
+		type:"post",
+		data:{commSeq:commSeq},
+		success:function(data){
+			if(data === 'ok'){
+				alert("댓글삭제");
+				location.href = "/freeBoard/freeDetail?boardSeq=" + ${dto.boardSeq};
+				}
+			else{
+				alert("인생");
+				}
+			},
+			error : function(){
+				alert('error');
+				}
+		});
+}
+
+function commUpdate(commSeq, commContents){
+
+	let htmlData = "<textarea rows='5' cols='40' class='input_comm' placeholder='댓글을 입력해주세요'"
+				 + "id='comm_content"+commSeq +"'>"
+				 + commContents
+				 + "</textarea>";
+				 
+	$("#commBody" + commSeq).html(htmlData);
+	
+	let cancelButton = "<button type='button' onclick=\"commUpdSwitch('"+commSeq +"','"+commContents+"' )\""
+ 	  				 + "id='cancelButton"
+	  				 + commSeq
+	  				 + "'>수정취소</button>";
+	$("#commRegDate"+ commSeq).after(cancelButton);
+	
+	let commUpdAfButton = "<button type='button' onclick=\"commUpdateAf('"+commSeq+"')\""
+		 + "id='commUpdAfButton"
+		 + commSeq
+		 + "'>수정완료</button>";
+	$("#comm_content" + commSeq).after(commUpdAfButton);
+	$("#commUpdButton"+ commSeq).remove();
+	
+	
+}	
+
+
+function commUpdateAf(commSeq){
+
+	let commContents = $("#comm_content" + commSeq).val();
+//	alert(commContents);
+
+	$.ajax({
+		url:"/freeBoard/freeCommUpdate",
+		type:"post",
+		data:{commSeq:commSeq , commContents:commContents},
+		success:function(data){
+			if(data === 'ok'){
+				alert("댓글수정");
+				location.href = "/freeBoard/freeDetail?boardSeq=" + ${dto.boardSeq};
+			}
+			else{
+				alert("인생");
+				}
+			},
+			error:function(){
+				alert('error');
+			}
+		});	
+}
+
+$(".likeButton").click(function (){
+
+	$.ajax({
+		url : "/freeBoard/freeLikeButton",
+		type:"post",
+		data : {boardSeq : ${dto.boardSeq},
+				Id : 'aaa'},
+		success:function(data){
+			if(data === 'ok'){
+			//	alert("좋아용");
+				location.href = "/freeBoard/freeDetail?boardSeq=" + ${dto.boardSeq};
+		}
+		else{
+			alert("노노");
+			}
+		},
+		error:function(){
+			alert("error");
+			}
+		});	
+});
+
+function getLikeCount(num){
+
+//	alert(num)
+	
+	 $.ajax({
+		url : "/freeBoard/getLikeCount",
+		type:"post",
+		data: { boardSeq : num },
+		success : function(count){
+			$("#LikeCount").html(count);
+		},
+		error:function(){
+			alert("error?");
+		}
+	}); 
+}  
+
+
+
 </script>
 </body>	
 </html>
