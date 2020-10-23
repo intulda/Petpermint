@@ -5,12 +5,10 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import io.pet.mint.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import io.pet.mint.member.service.MemberService;
@@ -73,6 +71,7 @@ public class MemberController {
 		
 		if(login != null && !login.getId().equals("")) {
 			// session
+			login.setSubNickname(CommonUtil.getSubStr(login.getNickname(), 2));
 			req.getSession().setAttribute("login", login);
 			req.getSession().setMaxInactiveInterval(60 * 60 * 8);
 			System.out.println(login.getId() + "로그인 성공");
@@ -89,9 +88,11 @@ public class MemberController {
 		return "view:login/sessionOut";
 	}
 	
-	
-	
-		
+	@GetMapping(value="/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 }
 
 

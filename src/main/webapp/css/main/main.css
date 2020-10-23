@@ -15,7 +15,7 @@
     text-align: center;
 }
 .main__title span {
-    font-size: 1.3rem;
+    font-size: 2rem !important;
     font-weight: 400;
     position: relative;
 }
@@ -95,7 +95,7 @@
     word-break:break-all;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:3;
-    font-size: 0.8rem;
+    font-size: 1.2rem !important;
     margin: 10px;
     line-height: 15px;
 }

@@ -73,6 +73,7 @@
 }
 .header__right ul {
     padding: 0;
+    margin: 0;
 }
 .header__right ul li {
     list-style: none;
@@ -95,6 +96,18 @@
     height: 40px;
     border-radius: 50%;
     color: white;
+}
+.header__login-profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 0;
+    background-color: orange;
+    color: white;
+    font-size: 1.5rem;
+}
+.header__profile-li {
+    padding: 9px 0 !important;
 }
 /*스마터폰*/
 @media(max-width: 768px) {
