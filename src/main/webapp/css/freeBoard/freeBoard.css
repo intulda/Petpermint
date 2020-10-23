@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+.freeH1{
+	padding-top:60px;
+	font-size: 60px;
+	text-align: center;
+	font-weight : normal;
+}
+
+.freeDiv{
+	padding-top : 20px;	
+}
+
+.freeTable{
+	border-top: 2px solid #dcdcdc;
+	margin-left : 300px;
+	width : 1300px;
+}
+
+.freeHr{
+	width:150px;
+	border-color:#ffa500;
+	margin-top : 20px;
+}
+
+.freeDetailHr{
+	width : 1800px;
+	border-color : #d8d3d3;
+}
+
+.freeTable tbody > tr:hover{
+	background-color : #c0c0c0;
+}
+
+.admin{
+	float:right;
+	margin-right: 340px;
+	background-color : black;
+	color : white;
+	border-radius : 5px;
+	font-size : 20px;
+	border : 1px;
+}
+
+.write{
+	float : right;
+	margin-right : 10px;
+	border : 1px;
+	border-radius : 5px;
+	font-size : 20px;
+}
+
+.freeTable th{
+	text-align: center;
+	padding : 10px;
+	border-bottom : 1px solid #dcdcdc;
+}
+
+.freeTable td{
+	padding : 10px;
+	border-bottom : 1px solid #dcdcdc;
+	text-align : center;
+}
+
+.freeWriteH1{
+	font-size : 60px;
+	font-weight : normal;
+	text-align : center;
+}
+
+.writeTable{
+	margin : auto;
+}
+
+.writeTable th{
+	text-align : left;
+}
+
+.writeTable tr{
+	margin-top : 10px;
+}
+
+.boardTitle{
+	width : 500px;
+	height : 30px;
+}
+
+.boardContents{
+	margin-top : 10px;
+}
+
+.freeWriteRegi{
+	margin : inherit;
+}
+
+.freewrite{
+	width:60%;
+	margin: 0 auto;
+	margin-top: 80px;
+
+}
+
+.freewrite input.sendData{
+	margin: 5px;
+	height: 30px;
+	width: 940px;
+	border: none;
+	border-bottom: 1px solid black;
+}
+
+.num{
+	width : 50px;
+}
+
+.title{
+	width : 900px;
+}
+
+.name{
+	width : 70px;
+}
+
+.date{
+	width : 90px;
+}
+
+.view{
+	width : 70px;
+}
+.like{
+	width : 70px;
+}
+
+.searchButton{
+	background-color : black;
+	color : white;
+	border-radius : 5px;
+	font-size : 20px;
+	border : 1px;
+}
+
+.freeContainer{
+	text-align: right;
+    margin-right: 300px;
+}
+
+.detailP{
+	margin-left : 100px;
+	color : #a9a9a9;
+}
+
+.detailH1{
+	
+	padding-top:90px;
+	font-size: 60px;
+	text-align: center;
+	font-weight : normal;
+}
+
+.detailDiv{
+	text-align: center;
+    margin-bottom: 200px;
+}

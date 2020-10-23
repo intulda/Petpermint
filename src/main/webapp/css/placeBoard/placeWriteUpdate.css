@@ -1,0 +1,119 @@
+div.writeArea{
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+}
+
+div.place_title{
+
+	font-family: 'Nanum Pen Script', cursive;
+	font-size: 60px;
+	color: #60a1e1;
+	margin-bottom: 40px;
+	
+}
+
+
+.inputArea{
+	display: flex;
+	flex-direction: column;
+	width:1048px;	
+	margin-top: 30px;
+	margin-bottom:10px;
+	padding: 0 0;
+	border: 1px solid #cccccc;
+	border-top: 2px solid black;
+	border-radius: 5px;
+
+	
+}
+.subArea{
+	
+	display: flex;
+	flex-direction: row;
+	padding: 5px 0;
+	
+	
+}
+
+.item1{
+
+	flex: 1;
+	text-align: center;	
+	margin-top: 10px;
+	
+}
+
+.item2{
+	flex:9;
+}
+
+.item3{
+
+	flex:8;
+}
+
+
+.sendData{
+	margin: 5px;
+	height: 30px;
+	width: 90%;
+	
+}
+
+.idData{
+	margin: 5px;
+	height: 30px;
+	width: 80%;
+	border: none;
+
+}
+
+.idData:focus{
+	
+	outline:none;
+}
+
+
+
+.boardContents{
+
+	margin-top: 30px;
+}
+
+
+
+.category_sel{
+
+	height:30px;
+	margin-left: 5px;
+}
+
+.submitWrap{
+
+	width: 100%;
+	text-align: center;
+}
+
+.submitButton{
+
+	background-color: #60a1e1;
+    width: 110px;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    margin: 2px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 2px;
+    outline: 0;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.submitButton:hover{
+
+	background-color: #3e8cda;
+}

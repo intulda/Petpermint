@@ -1,11 +1,9 @@
 package io.pet.mint.controller;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +12,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import io.pet.mint.member.vo.MemberVO;
 import io.pet.mint.placeBoard.dto.ImagesDto;
 import io.pet.mint.placeBoard.dto.PlaceBoardDto;
 import io.pet.mint.placeBoard.dto.PlaceBoardParam;
@@ -59,7 +56,8 @@ public class PlaceBoardController {
 	// 게시물페이지에서 게시물리스트 출력
 	@ResponseBody
 	@PostMapping(value = "getPlaceBoardList")
-	public List<PlaceBoardDto> getPlaceBoardList(PlaceBoardParam param) {
+	public List<PlaceBoardDto> getPlaceBoardList(PlaceBoardParam param
+				,HttpServletRequest req, Model model) {
 		
 		// paging 처리
 		int sn = param.getPageNumber();
@@ -79,8 +77,7 @@ public class PlaceBoardController {
 				placeDto.setImagePath(CommonUtil.imageToBase64(byteImage));
 			}	
 		}
-			
-		System.out.println("리스트 갯수:" +placeList.size());
+		
 		return placeList;
 	}
 	
@@ -109,6 +106,7 @@ public class PlaceBoardController {
 		
 			try {
 				
+				System.out.println("글쓰기 : " + placeDto.toString());
 				// 게시판 내용 저장
 				boardService.placeBoardWrite(placeDto);
 													
@@ -129,10 +127,20 @@ public class PlaceBoardController {
 	// 상세페이지 이동
 	@GetMapping(value = "placeBoardDetail")
 	public String placeBoardDetail(@RequestParam(value = "seq")int boardSeq, 
-									Model model) {
+									Model model, HttpServletRequest req) {
 		
 		PlaceBoardDto placeDto = boardService.getPlaceBoardContent(boardSeq);
-				
+		MemberVO login = (MemberVO)req.getSession().getAttribute("login");
+		
+		if(login != null&&(!placeDto.getBoardRegId().equals(login.getId())) ) {
+			
+			boardService.viewCounting(boardSeq);
+		}else if(login == null) {
+			
+			boardService.viewCounting(boardSeq);
+		}
+		
+		
 		ImagesDto imageDto = imageService.getImages(boardSeq); 
 		
 		if(imageDto!= null) {
@@ -269,13 +277,4 @@ public class PlaceBoardController {
 	}
 	
 	
-	
-	/*---------------- 맵 컨트롤러 ----------------*/
-	
-	
-	@GetMapping( value = "placeBoardMap")
-	public String placeBoardMap() {
-		
-		return "view:placeBoard/placeBoardMap";
-	}
 }

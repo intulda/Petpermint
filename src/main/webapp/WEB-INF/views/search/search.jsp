@@ -53,7 +53,7 @@
                                             ${dog.boardTitle}
                                         </div>
                                         <div class="search__card-date">${dog.boardRegDate}</div>
-                                        <span>${dog.boardContents}</span>
+                                        <span><c:out value='${dog.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
                                     </div>
                                 </li>
                             </c:forEach>
@@ -91,7 +91,7 @@
                                             ${cat.boardTitle}
                                     </div>
                                     <div class="search__card-date">${cat.boardRegDate}</div>
-                                    <span>${cat.boardContents}</span>
+                                    <span><c:out value='${cat.boardContents.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
                                 </div>
                             </li>
                         </c:forEach>
@@ -129,7 +129,7 @@
                                                 ${free.boardTitle}
                                         </div>
                                         <div class="search__card-date">${free.boardRegDate}</div>
-                                        <span>${free.boardContents}</span>
+                                        <span><c:out value='${free.boardContents.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
                                     </div>
                                 </li>
                             </c:forEach>
@@ -141,6 +141,12 @@
                         </div>
                     </c:when>
                 </c:choose>
+            </div>
+        </c:when>
+        <c:when test="${totalCount <= 0}">
+            <div class="search__empty-cat-image">
+                <div></div>
+                <p>다른 검색어로 해달라옹...</p>
             </div>
         </c:when>
     </c:choose>

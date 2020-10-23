@@ -10,5 +10,6 @@
         <typeAlias type="io.pet.mint.search.dto.SearchParamDTO" alias="SearchParamDTO"/>
         <typeAlias type="io.pet.mint.search.dto.SearchDTO" alias="SearchDTO"/>
         <typeAlias type="io.pet.mint.search.dto.SearchLostPetDTO" alias="SearchLostPetDTO"/>
+        <typeAlias type="io.pet.mint.member.vo.MemberVO" alias="MemberVO"/>
     </typeAliases>
 </configuration>
