@@ -53,7 +53,7 @@
 <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
 	<tr>
 		<td style="padding-left: 5px">
-			<select id="_category" name="category">
+			<select id="_category" name="category" class="sel" >
 				<option value="" selected="selected">선택</option>
 				<option value="lostId">작성자</option>
 				<option value="lostLocation">지역</option>		
@@ -61,10 +61,10 @@
 		</td>
 		<td style="padding-left: 5px" class="lostPet__search-wrap">
 			<input type="text" id="_keyword" name="keyword">
-			<label for="_keyword" id="findButton"></label>		
+			<label for="_keyword" id="findButton"></label>
 		</td>
 		<td style="padding-left: 5px">
-			<button type="button" id="writeButton">글쓰기</button>
+			<button type="button" id="writeButton" class='writeButton'>글쓰기</button>
 		</td>
 	</tr>
 </table>
@@ -151,47 +151,80 @@ function getBbsListData( pNumber){
 						type = "기타 동물"
 					}
 
-					let status = "";
-					
+					let img = "</div><div class='lostPet__card'>"
+							+ "<img src='" 
+							+ lostDto.imagePath
+							+ "' width='250px' height='300px' onclick='moveDetail("
+							+ lostDto.lostSeq
+							+ ")'>";
+						
 					if(lostDto.lostStatus == '1'){
 
-						status = "실종";
+						img += "<span class='red'>실종</span></div>";
+
 					}
 					else if(lostDto.lostStatus == '2'){
-						status = "목격";
+
+						img += "<span class='blue'>목격</span></div>";
 					}
 					else{
-						status = "기타";
+
+						img += "<span class='yellow'>기타</span></div>";
 					}
+					
 					
 					let tagData = "<div class='lost_container2'>"
 								+ "<div class='lost_content'>"									
 								+ "<div><p>"
 								+ "NO .&nbsp;"+ lostDto.lostSeq
-								+ "</p></div>"
-								+ "<img src='" 
-								+ lostDto.imagePath
-								+ "' width='250px' height='300px' onclick='moveDetail("
-								+ lostDto.lostSeq
-								+ ")'>"
+								+ "</p>"
+								+ img
 								+ "<br><br><div><h5>"
 								+ type+"&nbsp;"+gender+"&nbsp;["+lostDto.lostKind+"]"
 								+ "</h5></div>"
-								+ "<div><div><p>"
-								+ "상태&nbsp;&nbsp;"+status
-								+ "</p></div>"
-								+ "</p></div>"
 								+ "<div><p>"
 								+ "<img src=/css/lostPet/lostPetIcon/location.png class='icon'>&nbsp;&nbsp;"+lostDto.lostLocation
 								+ "</p></div>"
 								+ "<div><p>"
 								+ "<img src=/css/lostPet/lostPetIcon/calendar.png class='icon'>&nbsp;&nbsp;"+lostDto.lostWdate
-								+ "</p></div>"
+								+ "</p></div><br>"
 								+ "<div><a href='/lostPet/lostPetDetail?seq="
 								+ lostDto.lostSeq
 								+ "' class='detailButton'>상세보기</a></div>"
 								+ "</div>";
-	
+
+								/*
+								let tagData = "<div class='lost_container2'>"
+									+ "<div class='lost_content'>"									
+									+ "<div><p>"
+									+ "NO .&nbsp;"+ lostDto.lostSeq
+									+ "</p></div><div class='lostPet__card'>"
+									+ "<img src='" 
+									+ lostDto.imagePath
+									+ "' width='250px' height='300px' onclick='moveDetail("
+									+ lostDto.lostSeq
+									+ ")'>"
+									+ "<span class='yellow'>"+status
+									+ "</span>"
+									+ "</div>"
+									+ "<br><br><div><h5>"
+									+ type+"&nbsp;"+gender+"&nbsp;["+lostDto.lostKind+"]"
+									+ "</h5></div>"
+									+ "<div><div><p>"
+									+ "상태&nbsp;&nbsp;"+status
+									+ "</p></div>"
+									+ "</p></div>"
+									+ "<div><p>"
+									+ "<img src=/css/lostPet/lostPetIcon/location.png class='icon'>&nbsp;&nbsp;"+lostDto.lostLocation
+									+ "</p></div>"
+									+ "<div><p>"
+									+ "<img src=/css/lostPet/lostPetIcon/calendar.png class='icon'>&nbsp;&nbsp;"+lostDto.lostWdate
+									+ "</p></div>"
+									+ "<div><a href='/lostPet/lostPetDetail?seq="
+									+ lostDto.lostSeq
+									+ "' class='detailButton'>상세보기</a></div>"
+									+ "</div>";
+								*/
 					$('.lost_container1').append(tagData);
 					
 				});
