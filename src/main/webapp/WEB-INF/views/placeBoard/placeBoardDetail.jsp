@@ -59,8 +59,7 @@
 			</div>
 		</div>
 	</div>
-	
-	
+		
 </div>
 <div class="place_comm">
 	<div class="place_commInput">
