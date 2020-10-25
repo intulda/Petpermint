@@ -105,25 +105,26 @@
 }
 
 .box1{
-	width: 450px;
-	height: 600px;
-	padding: 20px;
-	text-align:left;
-	float: left;
-	margin-top:70px;
+    width: 450px;
+    height: 600px;
+    padding: 20px;
+    text-align: left;
+    float: left;
+    margin-top: 60px;
 }
-.box2{
-	width: 450px;
-	height: 600px;
-	float: right;
-	margin-top :170px;
-	text-align:left;
-
+.box2 {
+    width: 400px;
+    height: 600px;
+    float: right;
+    margin-top: 120px;
+    text-align: left;
+    font-size: 170%;
 }
 
 .title{
 	padding:10px;
 	text-align:left;
+	margin-top:100px;
 	
 }
 
@@ -145,13 +146,11 @@
 }
 
 .buttonList{
-	display:flex;
-	flex-direction: row;
-	margin-left: 250px;
-	margin-right: 95px;
-	margin-top: 250px;
-	
+flex-direction: row;
+    margin-right: 0px;
+    margin-top: -15px;
 }
+	
 
 .item{
 	margin: 0 10px;
@@ -176,10 +175,12 @@
     float: right;
 }
 .titlebox{
-	padding:50px;
-	width:950px;
-	padding-left:20px;
-	border-bottom:1px solid black;
+padding: 50px;
+    padding-top: 30px;
+    /* height: 1; */
+    width: 950px;
+    padding-left: 20px;
+    border-bottom: 1px solid black;
 	
 }
 
@@ -196,4 +197,20 @@ margin-left:30px;
 .button2{
 	margin-top:2%;
 	padding-left:590px;
+}
+
+.inputArea Button {
+    color: #fff;
+    background-color: #60a1e1;
+    border-color: #2e6da4;
+    padding: 2px;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    border-radius: .25em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 30;
+    width: 70;
 }

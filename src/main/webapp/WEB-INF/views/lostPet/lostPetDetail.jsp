@@ -14,7 +14,7 @@
 
 
 <div class="inputArea">
-	<h3 class="title">구조 동물 상세 보기</h3>
+	<h2 class="title">구조 동물 상세 보기</h2>
 	<div class="titlebox">
 		<div class="idbox"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>&nbsp;&nbsp;${lostPetDto.lostId}
 		&nbsp;&nbsp; ${lostPetDto.lostWdate}
@@ -23,9 +23,8 @@
 	</div>
 <div class="inputArea2">	
 	<div class="box1">
-			<img src="${lostPetDto.imagePath}" width="420px" height="auto">
+			<img src="${lostPetDto.imagePath}" width="420px" height="520px">
 </div>
-		<div class="box2">
 			<div class="buttonList">
 				<span class="item">
 				<button type="button" onclick="update(${lostPetDto.lostSeq})">수정</button></span> 
@@ -33,6 +32,7 @@
 					<button type="button" onclick="del(${lostPetDto.lostSeq})">삭제</button>
 				</span>
 			</div>
+		<div class="box2">
 			<div><span>No.</span> <span>${lostPetDto.lostSeq}</span>
 			<span>품종</span></div> <span><c:if
 						test="${lostPetDto.lostType == 1}">
@@ -57,7 +57,7 @@
 			<div><span>연락처</span> <span>${lostPetDto.lostPhone}</span></div>
 			<div><span>장소</span> <span>${lostPetDto.lostLocation}</span></div>
 			<div><span>공고 일자</span> <span>${lostPetDto.lostWdate}</span></div>
-			<div><span>기타 사항</span> <span>${lostPetDto.lostDetail}</span></div>
+			<div><span>기타 사항</span> <br><span>${lostPetDto.lostDetail}</span></div>
 
 
 		
