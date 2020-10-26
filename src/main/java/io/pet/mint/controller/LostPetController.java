@@ -30,13 +30,16 @@ import io.pet.mint.util.CommonUtil;
 @RequestMapping(value="/lostPet/*")
 public class LostPetController {
 
-	@Autowired
-	LostPetService service;
-	
-	@Autowired
+	LostPetService service;	
 	LostImagesService imageService;
 	
-	@GetMapping(value = "lostPet")
+	public LostPetController(LostPetService service, LostImagesService imageService) {
+		this.service = service;
+		this.imageService = imageService;
+	}
+	
+	
+	@GetMapping("lostPet")
 	public String lostPet() {
 		
 		return "view:lostPet/lostPet";
@@ -112,6 +115,7 @@ public class LostPetController {
 	
 	@GetMapping(value="lostPetWriteView")
 	public String lostPetWriteView() {
+
 		
 		System.out.println("lostPetWriteViewController");
 		return "view:lostPet/lostPetWrite";

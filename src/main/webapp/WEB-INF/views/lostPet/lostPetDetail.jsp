@@ -2,16 +2,12 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<script
-	src="<%=request.getContextPath()%>/js/jquery.twbsPagination.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/lostPet/lostPetDetail.css" />
+<script src="<%=request.getContextPath()%>/js/jquery.twbsPagination.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/lostPet/lostPetDetail.css" />
 <fmt:requestEncoding value="utf-8" />
 
 <title>멍냥 구조대</title>
-
 
 <div class="inputArea">
 	<h2 class="title">구조 동물 상세 보기</h2>
@@ -33,44 +29,46 @@
 				</span>
 			</div>
 		<div class="box2">
-			<div><span>No.</span> <span>${lostPetDto.lostSeq}</span>
-			<span>품종</span></div> <span><c:if
-						test="${lostPetDto.lostType == 1}">
-강아지
-</c:if> <c:if test="${lostPetDto.lostType == 2}">
-고양이
-</c:if> <c:if test="${lostPetDto.lostType == 3}">
-기타
-</c:if> [${lostPetDto.lostKind}]</span></li>
-
-			<div><span>성별</span> 
-<span> <c:if
-						test="${lostPetDto.lostGender == 1}">
-암컷
-</c:if> <c:if test="${lostPetDto.lostGender == 2}">
-수컷
-</c:if> <c:if test="${lostPetDto.lostGender == 3}">
-기타
-</c:if>
-
-			</span></div>
-			<div><span>연락처</span> <span>${lostPetDto.lostPhone}</span></div>
-			<div><span>장소</span> <span>${lostPetDto.lostLocation}</span></div>
-			<div><span>공고 일자</span> <span>${lostPetDto.lostWdate}</span></div>
-			<div><span>기타 사항</span> <br><span>${lostPetDto.lostDetail}</span></div>
-
-
-		
-
+			<table><th class='head'>No.</th>
+						<td class='content'>${lostPetDto.lostSeq}</td>
+					<tr><th class='head'>품종</th>
+						<td class='content'>
+							<c:if test="${lostPetDto.lostType == 1}">강아지</c:if>
+							<c:if test="${lostPetDto.lostType == 2}">고양이</c:if> 
+							<c:if test="${lostPetDto.lostType == 3}">기타</c:if>
+							[${lostPetDto.lostKind}]</td></tr>
+					<tr><th class='head'>성별</th>
+						<td class='content'>
+							<c:if test="${lostPetDto.lostGender == 1}">암컷</c:if>
+							<c:if test="${lostPetDto.lostGender == 2}">수컷</c:if>
+							<c:if test="${lostPetDto.lostGender == 3}">모름</c:if>
+						</td>
+					</tr>
+					<tr><th class='head'>연락처</th>
+						<td class='content'>${lostPetDto.lostPhone}</td>
+					</tr>		
+					<tr><th class='head'>장소</th>
+						<td class='content'>${lostPetDto.lostLocation}</td>
+					</tr>
+					<tr><th class='head'>일자</th>
+						<td class='content'>${lostPetDto.lostWdate}</td>
+					</tr>
+					</table>
+					<br>
 		</div>
+		
 	</div>
+	
 	</div>
+	<div class='head2'>상세 내용</div>
+	<div class='content2'>${lostPetDto.lostDetail}</div>
 	<br> <br>
 	<div class=lcommArea>
 		<h3 class="comm">댓글()</h3>
 		<div class=lcommArea2>
 			<div class="lcommArea3">
 				<h4 class="lcommId">
+				<c:if test="${login.id == null}"><br></c:if>
 				<c:if test="${login.id != null}"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>&nbsp;&nbsp;${login.id}</c:if>
 				</h4>
 				<c:if test="${login.id != null}">

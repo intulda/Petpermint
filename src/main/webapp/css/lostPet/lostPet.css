@@ -1,4 +1,4 @@
-/* ���� */
+@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@500&display=swap');
 .lost_container1{
     display: grid; 
     grid-auto-flow: row;
@@ -31,16 +31,20 @@
     
 }.lostPet__card span.red{
 	
-	 background-color: red;
+	 background-color: #BE2457;
+	 color: black;
+font-family: 'Sunflower', sans-serif;
 }.lostPet__card span.blue{
 
-	background-color: blue;
+	background-color: #00cc66;
+	color: black;
+font-family: 'Sunflower', sans-serif;
 }.lostPet__card span.yellow{
-	
-	background-color: yellow;
-	color:black;
-}
 
+	background-color: #FFD732;
+	color: black;
+font-family: 'Sunflower', sans-serif;
+}
 
 .lost_container2{
     background: white;
@@ -128,4 +132,10 @@
     -webkit-appearance: button;
     appearance: button;
     outline: none;
+}
+
+.lost_seq {
+		font-family:'Sunflower', sans-serif !important;
+		color: #60a1e1;
+		font-size: 35px ;
 }

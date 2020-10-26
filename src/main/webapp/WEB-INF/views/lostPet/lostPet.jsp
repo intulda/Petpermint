@@ -50,9 +50,10 @@
 
 <br>
 <br>
+<div>
 <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
 	<tr>
-		<td style="padding-left: 5px">
+		<td width='100'>
 			<select id="_category" name="category" class="sel" >
 				<option value="" selected="selected">선택</option>
 				<option value="lostId">작성자</option>
@@ -63,11 +64,17 @@
 			<input type="text" id="_keyword" name="keyword">
 			<label for="_keyword" id="findButton"></label>
 		</td>
+		<c:if test="${login.id != null}">
 		<td style="padding-left: 5px">
 			<button type="button" id="writeButton" class='writeButton'>글쓰기</button>
 		</td>
+		</c:if>
+		<c:if test="${login.id == null}">
+		<td style="padding-left: 5px"></td>
+		</c:if>
 	</tr>
 </table>
+</div>
 <br>
 
 <div class="lost_container1">	
@@ -175,7 +182,7 @@ function getBbsListData( pNumber){
 					
 					let tagData = "<div class='lost_container2'>"
 								+ "<div class='lost_content'>"									
-								+ "<div><p>"
+								+ "<div><p class='lost_seq'>"
 								+ "NO .&nbsp;"+ lostDto.lostSeq
 								+ "</p>"
 								+ img

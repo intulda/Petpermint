@@ -114,7 +114,7 @@
 }
 .box2 {
     width: 400px;
-    height: 600px;
+    height: 460px;
     float: right;
     margin-top: 120px;
     text-align: left;
@@ -213,4 +213,33 @@ margin-left:30px;
     appearance: none;
     height: 30;
     width: 70;
+}
+
+.head{
+	color: #ffcd00;
+	height:30;
+	width:120;	
+}
+
+.head2{
+	color: #ffcd00;
+	height:30;
+	font-size: 170%;
+	width: 900px;
+	margin:0 auto;
+}
+
+
+.content{
+	color: #60a1e1;
+	width:300;
+}
+.content2{
+	color: #60a1e1;
+	width:550;
+	font-size: 170%;
+	width: 900px;
+	margin: 0 auto;
+
+	
 }
