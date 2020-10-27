@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="io.pet.mint.freeBoard.dao.FreeCommDAO">
+
+<insert id="addFreeComm" parameterType="io.pet.mint.freeBoard.dto.FreeCommDTO">
+	INSERT INTO FREE_COMM (COMM_SEQ, COMM_REF, COMM_CONTENTS, COMM_REG_ID, COMM_REG_DATE)
+	VALUES (SEQ_FREE_COMM.NEXTVAL, #{commRef}, #{commContents},'aaa', SYSDATE)
+</insert>
+
+<select id="getFreeCommList" parameterType="io.pet.mint.freeBoard.dto.FreeCommParam" resultType="io.pet.mint.freeBoard.dto.FreeCommDTO">
+	SELECT COMM_SEQ, COMM_REF, COMM_CONTENTS, COMM_REG_ID, COMM_REG_DATE, COMM_UPDATE
+	FROM ( SELECT ROW_NUMBER()OVER(ORDER BY COMM_SEQ DESC)AS RNUM,
+					COMM_SEQ, COMM_REF, COMM_CONTENTS, 
+					COMM_REG_ID, TO_CHAR(COMM_REG_DATE,'YYYY/MM/DD HH24:MI') AS COMM_REG_DATE,
+					TO_CHAR(COMM_UPDATE,'YYYY/MM/DD HH24:MI') AS COMM_UPDATE
+		   FROM FREE_COMM
+		   WHERE COMM_REF = #{commRef} )
+	WHERE RNUM BETWEEN ${start} AND ${end} 	
+</select>
+
+<select id="getCommCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	SELECT NVL(COUNT(*), 0) AS CNT
+	FROM FREE_COMM
+	WHERE COMM_REF = #{commRef}
+</select>
+
+<delete id="freeCommDelete" parameterType="java.lang.Integer">
+	DELETE
+	FROM FREE_COMM
+	WHERE COMM_SEQ = #{commSeq}
+</delete>
+
+<update id="freeCommUpdate" parameterType="io.pet.mint.freeBoard.dto.FreeCommDTO">
+UPDATE FREE_COMM
+SET COMM_CONTENTS = #{commContents},
+	COMM_UPDATE = SYSDATE
+WHERE COMM_SEQ = #{commSeq}
+</update>
+
+</mapper>
+

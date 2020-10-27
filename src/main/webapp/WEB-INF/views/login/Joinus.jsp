@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:requestEncoding value="utf-8"/>      
@@ -16,48 +15,42 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/login/login.css"/>
 
 <!-- cookie -->
 <script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript" ></script>
-
-<style>
-</style>
 
 <body>
 ​
 <form action="" method="post" id="_frmForm" name="frmForm">
 
-<div id="join_main_wrap">
+<div class="join_container">
 	<div id="join_middle_wrap">
 		<div id="join_content_wrap">
 		
-			<div style="width: 550px; margin-left: 300px;
-						position: relative; top: 10px;">
+			<div style="width: 550px; align: center;">
 
 				<div class="join_title_warp" style="top: 30px;">
-					<img src="./images/회원가입1.png" width="550px">
+					<img src="./images/member/회원가입1.png" width="550px">
 				</div>
 		
-				<div id="join_memberinfo_wrap" style="top:10px;">​​
-					<input type="text" class="form-control" name="id" id="_id" placeholder="이메일" width="25">
-					<button type="button" class="form-control" id="_btnGetId" size="10"> 이메일 확인 </button>
-					<div id="_rgetid"></div>
-					<input type="text" class="form-control" name="pwd" id="_pwd" placeholder="비밀번호" width="25">
-					<input type="text" class="form-control" id="_pwdcfm" placeholder="비밀번호 확인" width="25"><br>
+				<div id="join_memberinfo_wrap" style="top:10px; text-align:center">​​
+					<input type="text" class="form-control" name="id" id="id" placeholder="이메일" width="25" style="align-content: center;">
+					<button type="button" class="btn btn-primary btn-lg btn-block" id="btnGetId" size="30"> 이메일 확인 </button>
+					<div id="rgetid"></div>
+					<input type="password" class="form-control" name="pwd" id="pwd" placeholder="비밀번호" width="25">
+					<input type="password" class="form-control" id="pwdcfm" placeholder="비밀번호 확인" width="25"><br>
 				</div>
 	
-				<span> 닉네임 </span><img src="./images/red-dot.png">
-				<input type="text" class="form-control" name="nicname" id="_nicname" size="25" placeholder="닉네임"><br>
-				<span> 연락처 </span><img src="./images/red-dot.png">
-				<input type="text" class="form-control" name="phone" id="_phone" size="25" placeholder="연락처"><br>				
+				<span> 닉네임 </span><img src="./images/member/red-dot.png">
+				<input type="text" class="form-control" name="nickname" id="nickname" size="25" placeholder="닉네임"><br>
+				<span> 연락처 </span><img src="./images/member/red-dot.png">
+				<input type="text" class="form-control" name="phone" id="phone" size="25" placeholder="연락처"><br>				
 				
 				
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-				    	개인정보 제공에 동의합니다.
-				  </label>
-				</div>
+				
+				<label><input type="checkbox" value="infocheck" id="defaultCheck1" style="width: 20px;">개인정보 제공에 동의합니다</label>
+				
 							
 			</div>
 	​	</div>
@@ -66,66 +59,54 @@
 ​
 </form>
 
-<div style="width: 550px; margin-left: 300px; position: relative; top: 30px;">
+<div class="join_btn_container">
 
-	<a href="#none" id="_btnjoin" title="회원가입">
-		<img alt="" src="./images/joinbtn2.png">
+	<a href="#none" id="_btnjoin" title="회원가입" class="join_btn">
+		<img alt="" src="./images/member/joinbtn2.png">
 	</a>
 	 
 </div>
 
 <script type="text/javascript">
 $("#_btnjoin").click(function(){
-	if( $("#_id").val().trim() == "" ){
+	if( $("#id").val().trim() == "" ){
 		alert("id를 입력해 주십시오");
-		$("#_id").focus();		
+		$("#id").focus();		
 	}
 	else{
-		$("#_frmForm").attr("action", "joinus.do").submit();
-		alert("회원가입이 완료되었습니다");
+		$("#_frmForm").attr("action", "regiAf.do").submit();
+		alert("회원가입이 완료되었습니다. 다시 로그인 해주세요!");
 	}
 });
 
-/* 
-$("#_btnjoin").click(function(){
-	if( $("#_id").val().trim() == "" ){
-		alert("id를 입력해 주십시오");
-		$("#_id").focus();		
-	}
-	else{
-		$("#_frmForm").attr("action", "joinus.do").submit();
-		alert("회원가입이 완료되었습니다");
-	}
-});
- */
 
-$("#_btnGetId").click(function(){
+$("#btnGetId").click(function(){
 
-	if($("#_id").val().trim() == ""){
+	if($("#id").val().trim() == ""){
 		 alert("id를 입력해 주십시오");
-		$("#_id").val("");
-		$("#_id").focus();
-		$("#_userid").val("");
-		$("#_rgetid").html("아이디를 입력해 주십시오");		
+		$("#id").val("");
+		$("#id").focus();
+		$("#id").val("");
+		$("#rgetid").html("아이디를 입력해 주십시오");		
 	}
 	else{
 
 		$.ajax({
 			url:"getId.do",
 			type:"post",
-			data:{ id:$("#_id").val() },
+			data:{ id:$("#id").val() },
 			success:function( msg ){
 				if(msg == 'YES'){
 					// alert("이 ID를 사용할 수 없습니다");
-					$("#_rgetid").html("사용할 수 없는 ID입니다");
-					$("#_rgetid").css("color", "#ff0000");
-					$("#_id").val();
-					$("#_userid").val();
+					$("#rgetid").html("사용할 수 없는 ID입니다");
+					$("#rgetid").css("color", "#ff0000");
+					$("#id").val();
+					$("#id").val();
 				}
 				else{
-					$("#_rgetid").html("사용 가능한 ID입니다");
-					$("#_rgetid").css("color", "#0000ff");
-					$("#_userid").val(  $("#_id").val().trim()  );
+					$("#rgetid").html("사용 가능한 ID입니다");
+					$("#rgetid").css("color", "#0000ff");
+					$("#id").val(  $("#id").val().trim()  );
 				}
 			},
 			error:function(){
@@ -142,9 +123,9 @@ $("#_btnGetId").click(function(){
  $(document).ready(function(){
      $("#defaultCheck1").change(function(){
          if($("#defaultCheck1").is(":checked")){
-             alert("체크박스 체크했음!");
+             // alert("체크박스 체크했음!");
          }else{
-             alert("체크박스 체크 해제!");
+             // alert("체크박스 체크 해제!");
          }
      });
  });

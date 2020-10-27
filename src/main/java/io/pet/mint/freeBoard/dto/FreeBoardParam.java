@@ -9,8 +9,8 @@ public class FreeBoardParam implements Serializable {
 	private String choice;
 	
 	//페이지
-	private int nowPage;		//현제 페이지
-	private int CountPerPage;	//표현할 페이지 수
+	private int nowPage = 0;		//현제 페이지
+	private int CountPerPage = 10;	//표현할 페이지 수
 	
 	private int start = 1;
 	private int end = 10;
@@ -18,7 +18,7 @@ public class FreeBoardParam implements Serializable {
 	public FreeBoardParam() {
 		
 	}
-	
+
 	public String getSearchWord() {
 		return searchWord;
 	}
@@ -55,12 +55,16 @@ public class FreeBoardParam implements Serializable {
 	public void setEnd(int end) {
 		this.end = end;
 	}
+
 	@Override
 	public String toString() {
-		return "freeBoardParam [searchWord=" + searchWord + ", choice=" + choice + ", nowPage=" + nowPage
-				+ ", CountPerPage=" + CountPerPage + ", start=" + start + ", end=" + end + "]";
+		return "FreeBoardParam [searchWord=" + searchWord + ", choice=" + choice + ", nowPage=" + nowPage
+				+ ", CountPerPage=" + CountPerPage + ", start=" + start + ", end=" + end
+				+ "]";
 	}
-	public FreeBoardParam(String searchWord, String choice, int nowPage, int countPerPage, int start, int end) {
+
+	public FreeBoardParam(String searchWord, String choice, int nowPage, int countPerPage, int start,
+			int end) {
 		super();
 		this.searchWord = searchWord;
 		this.choice = choice;
@@ -69,4 +73,6 @@ public class FreeBoardParam implements Serializable {
 		this.start = start;
 		this.end = end;
 	}
+	
+	
 }

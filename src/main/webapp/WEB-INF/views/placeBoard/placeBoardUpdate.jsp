@@ -6,7 +6,7 @@
 <script src="/js/summernote/summernote-ko-KR.js"></script>  
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeWriteUpdate.css" />
+<link rel="stylesheet" type="text/css" href="../css/placeBoard/placeWriteUpdate.css" />
 
 <div class="place_title">펫플레이스</div>
 
@@ -72,6 +72,10 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
+
+// 선택된 카테고리 자동선택
+categorySelect();
+
 //주소입력시 도로명과 주소명을 찾음
 function sample4_execDaumPostcode() {
     new daum.Postcode({
@@ -100,8 +104,6 @@ function sample4_execDaumPostcode() {
     }).open();
 }
 
-
-
 $(document).ready(function() {
 	
 	// 섬머노트api 출력
@@ -123,17 +125,16 @@ $(document).ready(function() {
 
 	// 등록한 내용을 섬머노트 api 입력란에 대입
 	$('#summernote').summernote('pasteHTML','${placeDto.boardContents}');
-	categorySelect();
-
+	
 	// 게시물 수정
 	$('#updateButton').click(function(){
 		
 		if($('#boardTitle').val().trim() == ""){			
-			alert("장소명을 입력해주세요");
+			
 			$('#boardTitle').focus();
 		}
 		else if($('#boardLocation').val().trim() == ""){			
-			alert("장소주소를 입력해주세요");
+			
 			$('#boardLocation').focus();
 		}		
 		else{		
@@ -142,15 +143,19 @@ $(document).ready(function() {
 	});
 
 	// 입력된 카테고리 자동선택
-	function categorySelect(){
-	
-		let sel = document.querySelector('#boardCategory');
-		
-		for(i=0; i < sel.length; i++){
-			if(sel.options[i].value == '${placeDto.boardCategory}'){
-				sel.options[i].selected =true;
-			}	
-		}	
-	}
+
 });
+
+//선택된 카테고리 자동선택
+function categorySelect(){
+
+	let sel = document.querySelector('#boardCategory');
+	
+	for(i=0; i < sel.length; i++){
+		if(sel.options[i].value == '${placeDto.boardCategory}'){
+			sel.options[i].selected =true;
+		}	
+	}	
+}
+
 </script>
