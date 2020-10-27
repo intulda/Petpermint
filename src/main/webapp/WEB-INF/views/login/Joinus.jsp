@@ -48,12 +48,9 @@
 				<input type="text" class="form-control" name="phone" id="phone" size="25" placeholder="연락처"><br>				
 				
 				
-				<div class="form-check">
-					<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-					<label class="form-check-label" for="defaultCheck1">
-				    	개인정보 제공에 동의합니다.
-				  </label>
-				</div>
+				
+				<label><input type="checkbox" value="infocheck" id="defaultCheck1" style="width: 20px;">개인정보 제공에 동의합니다</label>
+				
 							
 			</div>
 	​	</div>
@@ -78,21 +75,10 @@ $("#_btnjoin").click(function(){
 	}
 	else{
 		$("#_frmForm").attr("action", "regiAf.do").submit();
+		alert("회원가입이 완료되었습니다. 다시 로그인 해주세요!");
 	}
 });
 
-/* 
-$("#_btnjoin").click(function(){
-	if( $("#id").val().trim() == "" ){
-		alert("id를 입력해 주십시오");
-		$("#id").focus();		
-	}
-	else{
-		$("#_frmForm").attr("action", "joinus.do").submit();
-		alert("회원가입이 완료되었습니다");
-	}
-});
- */
 
 $("#btnGetId").click(function(){
 
@@ -137,9 +123,9 @@ $("#btnGetId").click(function(){
  $(document).ready(function(){
      $("#defaultCheck1").change(function(){
          if($("#defaultCheck1").is(":checked")){
-             alert("체크박스 체크했음!");
+             // alert("체크박스 체크했음!");
          }else{
-             alert("체크박스 체크 해제!");
+             // alert("체크박스 체크 해제!");
          }
      });
  });
