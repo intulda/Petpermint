@@ -14,73 +14,75 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css" />  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
 <script src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/login/login.css" />
 
 <!-- cookie -->
 <script src="http://lab.alexcican.com/set_cookies/cookie.js" type="text/javascript" ></script>
 
 <body>
 
-<div id="main_wrap">
-	<div id="middle_wrap">
+<div class="login_container">
 		<div id="content_wrap">
 			
-			<div style="width: 900px; margin-left: 200px;
-						position: relative; top: 50px;">
-								
-			<div class="login_title_warp">
+			<div class="login_title_warp" style="text-align: center;">
 				<div style="margin-top: 15px">
-					<img src="./images/로그인1.png" width="950px">
+					<img src="./images/member/login_btn2.png" width="700px">
 				</div>
 			</div>
 			
 			<br><br>
 			
-			<div id="login_wrap">
+			<div id="login_wrap" class="login_wrap">
 				
 				<form action="/loginAf.do" name="frmFrom" id="_frmForm" method="post">
 					
-					<table class="content_table" >
-					<tr>
-<!-- 					
-						<td>
-							<img src="./images/login_pic1.jpg" width="450px" height="450px">						
-						</td>	
+							<img src="./images/member/댕냥이1.png" width="400px" height="400px">
+							
+							<br>				
+
 						
-						 -->
-						<td style="margin: 10px">
 							<a href="#none" id="_loginNaver" title="Naver로그인">
-								<img alt="" src="./images/naverbtn.png" width="500px">
-							</a>
-							&nbsp;
+								<img alt="" src="./images/member/naverbtn.png" width="500px">
+							</a> <br>
+						
 							<a href="#none" id="_loginNaver" title="Kakao로그인">
-								<img alt="" src="./images/kakaobtn.png" width="500px">
+								<img alt="" src="./images/member/kakaobtn.png" width="500px">
 							</a>
 							
-							<hr>
-							<input type="text" id="_userid" name="id" class="form-control"
-									size="400px" title="이메일" style="border: 1px solid #dddddd" placeholder="이메일"> <br>
-							<input type="text" id="_pwd" name="pwd" class="form-control"
-									size="100px" title="비밀번호" style="border: 1px solid #dddddd" placeholder="비밀번호">	<br>
-							<input type="checkbox" id="chk_save_id"> ID 저장
-							<br>
+							<hr width="500px">
+							
+							<div class="login_input">
+								
+								<div class="input-group mb-3 input-group-lg">
+								  <input type="text" class="form-control" id="_userid" name="id" placeholder="이메일" size="30" aria-label="id" aria-describedby="basic-addon1">
+								</div>
+								
+								<!-- 
+								<input type="text" id="_userid" name="id" class="input-group-text"
+										size="10" title="이메일" style="border: 1px solid #dddddd" placeholder="이메일"> <br>
+								-->
+										
+								<input type="password" id="_pwd" name="pwd" class="form-control"
+										size="30" title="비밀번호" style="border: 1px solid #dddddd" placeholder="비밀번호"><br>
+							</div>
+							<input type="checkbox" id="chk_save_id" style="align=left;"> ID 저장
+							<br><br>
 							<a href="#none" id="_btnlogin" title="로그인">
-								<img alt="" src="./images/loginbtn1.png">
+								<img alt="" src="./images/member/loginbtn1.png">
 							</a>
 							
 							<br>
-							<hr>
+							<hr width="500px">
 							<a href="#none" id="_btnjoin" title="회원가입">
-								<img alt="" src="./images/joinbtn1.png">
+								<img alt="" src="./images/member/joinbtn1.png">
 							</a>							
-						</td>					
-					</tr>											
-					</table>
 				</form>			
 			</div>
 			</div>		
 		</div>	
 	</div>
-</div>
 
 <br><br><br>
 
@@ -93,7 +95,7 @@
 
 $(document).ready(function(){
 	$('#_btnjoin').click(function() {
-		location.href="joinus.do";
+		location.href="regi.do";
 	});
 /* 	$('#_btnlogin').click(function() {
 		location.href="login.do";

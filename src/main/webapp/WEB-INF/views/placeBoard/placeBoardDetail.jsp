@@ -181,7 +181,7 @@ function getBbsListCount(boardCategory){
 		data:{"commRef":${placeDto.boardSeq}
 			 },
 		success:function( count ){
-	
+			
 			loadPage(count);		
 		},
 		error:function(){

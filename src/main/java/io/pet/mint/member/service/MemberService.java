@@ -1,14 +1,45 @@
 package io.pet.mint.member.service;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import io.pet.mint.member.dao.MemberDao;
 import io.pet.mint.member.vo.MemberVO;
 
-public interface MemberService {
+@Service
+@Transactional
+public class MemberService{
 
-	//List<MemberDto> allMember();
+	@Autowired	
+	MemberDao memberDao;
 	
-	int getId(MemberVO vo);
-	boolean addmember(MemberVO vo);
+	/*
+	public List<MemberDto> allMember() {		
+		return memberDao.allMember();
+	}
+	*/
+
+	public int getId(MemberVO vo) {		
+		return memberDao.getId(vo);		
+	}
 	
-	MemberVO login(MemberVO vo);
+	public boolean addmember(MemberVO vo) {		
+		return memberDao.addmember(vo);
+	}
+	
+	public MemberVO login(MemberVO vo) {
+		return memberDao.login(vo);
+	}
+	
+	
+	
 	
 }
+
+
+
+
+
