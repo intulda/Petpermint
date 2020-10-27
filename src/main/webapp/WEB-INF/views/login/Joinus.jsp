@@ -38,8 +38,8 @@
 					<input type="text" class="form-control" name="id" id="id" placeholder="이메일" width="25" style="align-content: center;">
 					<button type="button" class="btn btn-primary btn-lg btn-block" id="btnGetId" size="30"> 이메일 확인 </button>
 					<div id="rgetid"></div>
-					<input type="text" class="form-control" name="pwd" id="pwd" placeholder="비밀번호" width="25">
-					<input type="text" class="form-control" id="pwdcfm" placeholder="비밀번호 확인" width="25"><br>
+					<input type="password" class="form-control" name="pwd" id="pwd" placeholder="비밀번호" width="25">
+					<input type="password" class="form-control" id="pwdcfm" placeholder="비밀번호 확인" width="25"><br>
 				</div>
 	
 				<span> 닉네임 </span><img src="./images/member/red-dot.png">

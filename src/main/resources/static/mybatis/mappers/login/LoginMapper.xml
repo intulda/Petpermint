@@ -41,8 +41,9 @@
 	UPDATE MEMBER 
 	SET PWD, NICKNAME
 	WHERE PWD=#{pwd} OR NICKNAME=#{nickname}
+</update>
 
-<update id="changePasswd" parameterType="User">
+<update id="changePasswd" parameterType="io.pet.mint.member.vo.MemberVO">
     UPDATE MEMBER
     SET PWD=#{pwd}
     WHERE email = #{email}

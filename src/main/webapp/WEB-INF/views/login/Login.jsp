@@ -28,7 +28,7 @@
 			
 			<div class="login_title_warp" style="text-align: center;">
 				<div style="margin-top: 15px">
-					<img src="./images/login_btn2.png" width="700px">
+					<img src="./images/member/login_btn2.png" width="700px">
 				</div>
 			</div>
 			
@@ -67,7 +67,7 @@
 										size="10" title="이메일" style="border: 1px solid #dddddd" placeholder="이메일"> <br>
 								-->
 										
-								<input type="text" id="_pwd" name="pwd" class="form-control"
+								<input type="password" id="_pwd" name="pwd" class="form-control"
 										size="30" title="비밀번호" style="border: 1px solid #dddddd" placeholder="비밀번호"><br>
 							</div>
 							<input type="checkbox" id="chk_save_id" style="align=left;"> ID 저장
@@ -98,7 +98,7 @@
 
 $(document).ready(function(){
 	$('#_btnjoin').click(function() {
-		location.href="joinus.do";
+		location.href="regi.do";
 	});
 /* 	$('#_btnlogin').click(function() {
 		location.href="login.do";

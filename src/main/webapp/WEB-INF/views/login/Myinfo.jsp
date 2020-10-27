@@ -50,8 +50,8 @@
 						<td>
 							<span> Password </span>
 						</td>
-						<td  colspan="2">
-							<input type="text" class="form-control"><br>
+						<td colspan="2">
+							<input type='password' class="form-control"><br>
 						</td>
 					</tr>
 					
