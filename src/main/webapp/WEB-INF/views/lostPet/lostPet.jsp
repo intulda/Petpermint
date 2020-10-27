@@ -129,9 +129,7 @@ function getBbsListData( pNumber){
 			}
 			else{	
 				$.each(list, function(index, lostDto){
-					//alert(lostDto.lostSeq);
-					//alert(lostDto.imagePath);
-				
+
 					let gender = "";
 					
 					if(lostDto.lostGender == '1'){
@@ -240,7 +238,6 @@ function getBbsListData( pNumber){
 						
 		},
 		error:function(){
-			alert("error1");
 		}	
 	});	
 }
@@ -259,13 +256,11 @@ function getBbsListCount(){
 		data:{ "pageNumber":0, "recordCountPerPage":6, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val()
 			 },
-		success:function( count ){
-		//	alert("success");
-		//	alert(count);	
+		success:function( count ){	
 			loadPage(count);		
 		},
 		error:function(){
-			alert("error2");
+
 		}		
 	});	
 }
@@ -294,7 +289,7 @@ function loadPage( totalCount ){
 		initiateStartPageClick:false,		// onPageClick 자동 실행하지 않는다
 		onPageClick: function(event, page){
 			nowPage = page;
-		//	alert('nowPage:' + nowPage);
+			
 			getBbsListData( nowPage - 1 );	
 		}	
 	});

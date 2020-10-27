@@ -19,7 +19,7 @@
 	</div>
 <div class="inputArea2">	
 	<div class="box1">
-			<img src="${lostPetDto.imagePath}" width="420px" height="520px">
+			<img src="${lostPetDto.imagePath}" width="420px" height="480px">
 </div>
 			<div class="buttonList">
 				<span class="item">
@@ -29,8 +29,8 @@
 				</span>
 			</div>
 		<div class="box2">
-			<table><th class='head'>No.</th>
-						<td class='content'>${lostPetDto.lostSeq}</td>
+			<table><tr><th class="head">No.</th>
+						<td class='content'>${lostPetDto.lostSeq}</td></tr>
 					<tr><th class='head'>품종</th>
 						<td class='content'>
 							<c:if test="${lostPetDto.lostType == 1}">강아지</c:if>
@@ -56,11 +56,9 @@
 					</table>
 					<br>
 		</div>
-		
 	</div>
-	
 	</div>
-	<div class='head2'>상세 내용</div>
+	<div  class='head2'><h2>상세 내용</h2></div><br>
 	<div class='content2'>${lostPetDto.lostDetail}</div>
 	<br> <br>
 	<div class=lcommArea>
@@ -80,8 +78,6 @@
 				<span><button type="button">글쓰기</button></span>
 				</c:if>
 			</div>
-
-
 			<c:forEach var="c" items="${LCommList}">
 				<div class="lcommArea4">
 					<div>
@@ -100,14 +96,10 @@
 </c:if>
 </div>
 				</div>
-
 			</c:forEach>
-
-
 		</div>
 </div>
 	
-
 <script type="text/javascript">
 function del(seq) {
 	var chk = confirm("정말 삭제하시겠습니까?");
@@ -134,26 +126,30 @@ $("#_lostPetLCommWrite").click(function(){
 		type:"post",
 		data:sendCommData,
 		success:function(data){
-		//alert("success");
 
 			if(data==='ok'){
-				alert("댓글을 작성했습니다.");
+
 				location.href='/lostPet/lostPetDetail?seq=' + lostpetSeq;
 			}
 			else{
-				alert("댓글을 작성하지못했습니다.");
+
 			}
 		},
 		error:function(){
-			alert("댓글 내용을 입력해주세요.");
+
 			}
 	});	
 });
 
 function upBtn(seq, bseq){
-	 
+
+	  var windowW = 700;  // 창의 가로 길이
+      var windowH = 250;  // 창의 세로 길이
+      var left = Math.ceil((window.screen.width - windowW)/2);
+      var top = Math.ceil((window.screen.height - windowH)/2);
+      
     window.open('/lostPet/lcommUpdate?seq='+seq,'popName',
-                'width=850,height=200,top=500,left=300,toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+    		"l top="+top+", left="+left+", height="+windowH+", width="+windowW);
 }
 
 
@@ -165,18 +161,18 @@ function delBtn(seq, bseq){
 		type:"post",
 		data:sendCommDelData,
 		success:function(data){
-		//alert("success");
+
 			
 			if(data==='ok'){
-				confirm('댓글을 삭제하시겠습니까?');
+
 				location.href='/lostPet/lostPetDetail?seq=' + bseq;
 			}
 			else{
-				alert("댓글 수정 실패.");
+
 			}
 		},
 		error:function(){
-			alert("error");
+
 			}
 	});	
 }
