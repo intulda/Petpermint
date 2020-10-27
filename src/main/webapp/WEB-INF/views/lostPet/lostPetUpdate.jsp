@@ -17,27 +17,27 @@
 <br>
 <h5>등록 번호 : '${lostPetDto.lostSeq}' </h5>
 <br>	
-<input type="hidden" class="label" name="lostSeq" value="${lostPetDto.lostSeq}">
+<input type="hidden" name="lostSeq" value="${lostPetDto.lostSeq}">
 아이디<br>
-<input type="text" class="label" name="lostId"  id="_id" value='${lostPetDto.lostId}' placeholder="아이디" />
+<input type="text" name="lostId"  id="_id" value='${lostPetDto.lostId}' placeholder="아이디" />
 <div class="filebox bs3-primary preview-image">
    <input type="file" id="input_file" name="thumbnail" class="upload-hidden" accept=".gif, .jpg, .png"> <br>
 		사진<br><input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 			<label for="input_file">사진 첨부</label>
 </div> <br>
-연락처<br><input type="text" class="label" name="lostPhone" id="_phone" value='${lostPetDto.lostPhone}' placeholder="-을 포함한 연락처 기재"/><br>
-장소<br><input type="text" class="label" name="lostLocation" id="_location" value='${lostPetDto.lostLocation}' placeholder="목격/실종 장소"/></br>
+연락처<br><input type="text" name="lostPhone" id="_phone" value='${lostPetDto.lostPhone}' placeholder="-을 포함한 연락처 기재"/><br>
+장소<br><input type="text" name="lostLocation" id="_location" value='${lostPetDto.lostLocation}' placeholder="목격/실종 장소"/></br>
 동물<br>
-<select name="lostType" id="_type" class="label">
+<select name="lostType" id="_type">
 		<option value="0">동물 선택</option>
 		<option value="1">강아지</option>
 		<option value="2">고양이</option>
 		<option value="3">기타</option>
 </select>
 <br>
-품종<br> <input type="text" class="label" name="lostKind" id="_kind" value='${lostPetDto.lostKind}'placeholder="품종"/><br>
+품종<br> <input type="text" name="lostKind" id="_kind" value='${lostPetDto.lostKind}'placeholder="품종"/><br>
 상태<br>
-<select name="lostStatus" id="_status" class="label">
+<select name="lostStatus" id="_status">
 		<option value="0">상태 선택</option>
 		<option value="1">실종</option>
 		<option value="2">목격</option>
@@ -46,7 +46,7 @@
 </select>
 <br>
 성별<br>
-<select name="lostGender" id="_gender" class="label">
+<select name="lostGender" id="_gender">
 		<option value="0">성별 선택</option>
 		<option value="1">암컷</option>
 		<option value="2">수컷</option>
@@ -54,7 +54,7 @@
 </select>
 <br>
 상세<br>
-<textarea id="_detail" class="label" name="lostDetail" rows="4" cols="50">
+<textarea id="_detail" name="lostDetail" rows="4" cols="50">
 ${lostPetDto.lostDetail}</textarea>
 <br>
 	</form>	
