@@ -32,26 +32,26 @@
 					<img src="./images/member/infoupdate_title.png" width="650px">
 				</div>
 				
-				
+				<form id="editInfoForm" action="editInfo" method="post" onsubmit="return check()">
 				<br><br><br>
-				<table>
+				<table style="margin-left: 35px;">
 					<colgroup>
-						<col width="200px" height="100px"><col width="300px" height="100px">
+						<col width="200px" height="100px"><col width="300px" height="100px"><col width="100px" height="100px">
 					</colgroup>
 					<tr>
 						<td>
 							<span> ID </span>
 						</td>
-						<td>	
-							<input type="text" class="form-control" readonly="readonly" value="${login.id }"> 
+						<td colspan="2">
+							<input type="text" class="form-control" readonly="readonly" value="${login.id }">  <br>
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<span> Password </span>
 						</td>
-						<td>
-							<input type="text" class="form-control">
+						<td  colspan="2">
+							<input type="text" class="form-control"><br>
 						</td>
 					</tr>
 					
@@ -60,23 +60,27 @@
 							<span> Password 확인 </span>
 						</td>
 						<td>
-							<input type="text" class="form-control">
+							<input type="text" class="form-control" width="50px">
 						</td>
-						
+						<td>						
+							<button type="button" class="form-control"> 확인 </button> <br>
+						</td>
 					</tr>
 					<tr>
 						<td>
 							<span> 닉네임 </span>
 						</td>
-						<td>
-							<input type="text" class="form-control">
+						<td colspan="2">
+							<input type="text" class="form-control" value="${login.nickname }"> <br>
 						</td>
 					</tr>	
 				</table>
+				</form>
 				
 				<br><br><br>
 				
 			</div>
+			
 
 			<a href="#none" id="_btnjoin" title="회원가입" class="join_btn"  style="top: 30px;">
 				<img alt="" src="./images/member/myinfobtn.png" width="500px">
@@ -86,6 +90,15 @@
 	</div>
 </div>
 
+
+<script type="text/javascript">
+function check() {
+    var form = document.getElementById("editInfoForm");
+    //유효성 검사
+    return true;
+}
+
+</script>
 
 
 </body>

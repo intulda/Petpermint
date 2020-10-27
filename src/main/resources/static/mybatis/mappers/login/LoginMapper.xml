@@ -37,5 +37,15 @@
 	WHERE ID=#{id} AND PWD=#{pwd}
 </select>
 
+<update id="myinfo_update" parameterType="io.pet.mint.member.vo.MemberVO">
+	UPDATE MEMBER 
+	SET PWD, NICKNAME
+	WHERE PWD=#{pwd} OR NICKNAME=#{nickname}
+
+<update id="changePasswd" parameterType="User">
+    UPDATE MEMBER
+    SET PWD=#{pwd}
+    WHERE email = #{email}
+</update>
 
 </mapper>
