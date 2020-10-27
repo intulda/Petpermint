@@ -7,14 +7,16 @@
 
 <insert id="addFreeBoardPage" parameterType="io.pet.mint.freeBoard.dto.FreeBoardDTO">
 
-	INSERT INTO BOARD (BOARD_SEQ,BOARD_TYPE, BOARD_REG_ID, BOARD_TITLE, BOARD_CONTENTS,
-				BOARD_VIEW_COUNT, BOARD_REG_DATE,BOARD_CATEGORY,ID, BOARD_REF)
+	INSERT INTO BOARD (BOARD_SEQ, BOARD_TYPE, BOARD_REG_ID, BOARD_TITLE, BOARD_CONTENTS,
+				BOARD_VIEW_COUNT, BOARD_REG_DATE, BOARD_CATEGORY, ID, BOARD_REF, BOARD_LIKE_SEQ)
 	VALUES (SEQ_BOARD.NEXTVAL,'자유게시판' ,'aaa', #{boardTitle}, #{boardContents},0,
-				SYSDATE,'자유게시판','aaa', (SELECT NVL(MAX(BOARD_REF), 0 ) + 1 FROM BOARD) )
+				SYSDATE,'자유게시판','aaa', (SELECT NVL(MAX(BOARD_REF), 0 ) + 1 FROM BOARD), 0 )
 </insert>
 
 <select id="getFreeBoardList" resultType="io.pet.mint.freeBoard.dto.FreeBoardDTO">
-		SELECT BOARD_SEQ, BOARD_TITLE, BOARD_REG_ID, TO_CHAR(BOARD_REG_DATE, 'YYYY/MM/DD')AS "BOARD_REG_DATE", BOARD_VIEW_COUNT
+		SELECT BOARD_SEQ, BOARD_TITLE, BOARD_REG_ID,
+				TO_CHAR(BOARD_REG_DATE, 'YYYY/MM/DD')AS "BOARD_REG_DATE",
+				BOARD_VIEW_COUNT, BOARD_LIKE_SEQ
 		FROM BOARD
 		WHERE BOARD_TYPE IN '자유게시판'
 		ORDER BY BOARD_REG_DATE DESC
@@ -23,9 +25,9 @@
 <select id="freeBoardSearch" parameterType="io.pet.mint.freeBoard.dto.FreeBoardParam" resultType="io.pet.mint.freeBoard.dto.FreeBoardDTO">
 
 	SELECT BOARD_SEQ, BOARD_TITLE, BOARD_REG_ID, TO_CHAR(BOARD_REG_DATE, 'YYYY/MM/DD')AS
-			"BOARD_REG_DATE", BOARD_VIEW_COUNT
+			"BOARD_REG_DATE", BOARD_VIEW_COUNT, BOARD_LIKE_SEQ
 	FROM (SELECT ROW_NUMBER()OVER(ORDER BY BOARD_SEQ, BOARD_REG_DATE)AS RNUM,
-			BOARD_SEQ, BOARD_TITLE, BOARD_REG_ID, BOARD_REG_DATE, BOARD_VIEW_COUNT
+			BOARD_SEQ, BOARD_TITLE, BOARD_REG_ID, BOARD_REG_DATE, BOARD_VIEW_COUNT, BOARD_LIKE_SEQ
 			FROM BOARD
 			WHERE BOARD_TYPE = '자유게시판'
 			<if test="searchWord != null and searchWord !=''">
@@ -64,7 +66,7 @@
 
 <select id="freeDetail" parameterType="java.lang.Integer" resultType="io.pet.mint.freeBoard.dto.FreeBoardDTO">
 	SELECT BOARD_SEQ, BOARD_TITLE, BOARD_REG_ID, BOARD_CONTENTS, ID,
-			BOARD_REG_DATE, BOARD_VIEW_COUNT
+			BOARD_REG_DATE, BOARD_UPD_DATE, BOARD_VIEW_COUNT
 	FROM BOARD
 	WHERE BOARD_TYPE = '자유게시판' AND BOARD_SEQ = #{boardSeq}
 </select>
@@ -79,10 +81,27 @@
 UPDATE BOARD
 SET BOARD_TITLE = #{boardTitle},
 	BOARD_CONTENTS = #{boardContents},
-	BOARD_VIEW_COUNT = #{boardViewCount},
 	BOARD_UPD_ID = #{id},
 	BOARD_UPD_DATE = SYSDATE
 WHERE BOARD_SEQ = #{boardSeq}
 </update>
+
+<update id="viewCount" parameterType="io.pet.mint.freeBoard.dto.FreeBoardDTO">
+UPDATE BOARD
+SET BOARD_VIEW_COUNT = BOARD_VIEW_COUNT + 1
+WHERE BOARD_SEQ = #{boardSeq}
+</update>
+
+<update id="freeLikeCount" parameterType="java.lang.Integer">
+UPDATE BOARD
+SET BOARD_LIKE_SEQ = BOARD_LIKE_SEQ + 1
+WHERE BOARD_SEQ = #{boardSeq}
+</update>
+
+<delete id="checkDel" parameterType="java.lang.Integer">
+DELETE
+FROM BOARD
+WHERE BOARD_SEQ = #{boardSeq}
+</delete>
 
 </mapper>
