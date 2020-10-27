@@ -15,9 +15,9 @@ import io.pet.mint.info.dto.InfoParam;
 @Repository
 public interface InfoDao {
 	
-	//public List<InfoDto> getInfoList(); //리스트 불러오기
-	
 	public List<InfoDto> dogListPage(InfoParam par);
+
+	public List<InfoDto> catListPage(InfoParam par);
 	
 	int infoWrite(InfoDto dto); //글 쓰기
 	
@@ -36,6 +36,8 @@ public interface InfoDao {
 	void infoDelete(int seq); //삭제
 	
 	public int getParamCount(InfoParam par);
+	
+	public int viewCounting(int seq);
 
 
 }

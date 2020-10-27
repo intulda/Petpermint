@@ -22,6 +22,7 @@ import io.pet.mint.info.dto.InfoDto;
 import io.pet.mint.info.dto.InfoImagesDto;
 import io.pet.mint.info.dto.InfoParam;
 import io.pet.mint.info.service.InfoService;
+import io.pet.mint.member.vo.MemberVO;
 import io.pet.mint.util.CommonUtil;
 
 @Controller
@@ -37,16 +38,22 @@ public class InfoController {
 	// 강아지 페이지로 이동
 	@GetMapping(value="dogPage")
 	public String dogPage() {
-		System.out.println("InfoController 접근중 : dogpage(강아지 메인페이지 입니다.)");
 		return "view:info/dogPage";
 	}
 	
-	  	//	dog List page 이동
+	// 고앵이 페이지로 이동
+	@GetMapping(value="catPage")
+	public String catPage() {
+		return "view:info/catPage";
+	}
+	
+	  //	dog List page 이동
 	  @GetMapping(value = "dogListPageView") 
-	  public String dogListPageView(String Type,Model model) {
-	  model.addAttribute("boardType", Type);
+	  public String dogListPageView(String Type,Model model ) {
+
+		  model.addAttribute("boardType", Type);
 	 
-	  return "view:info/dogListPage"; 
+		  return "view:info/dogListPage";
 	  }
 		
 	//글쓰기 페이지 이동(강아지/고양이 통합)
@@ -57,11 +64,20 @@ public class InfoController {
 		
 	//dogList에서 Detail페이지 이동
 	@GetMapping(value = "dogDetail")
-		public String dogDetail(int seq, Model model) {	
+		public String dogDetail(int seq, Model model, HttpServletRequest req) {	
 			
 			InfoDto infoDto = service.infoDetail(seq);
-					
+			
 			InfoImagesDto imageDto = service.imgDetail(seq); // 이미지를 가져오는것
+			MemberVO login = (MemberVO)req.getSession().getAttribute("login");
+			
+			if(login != null&&(!infoDto.getBoardRegId().equals(login.getId())) ) {
+				
+				service.viewCounting(seq);
+			}else if(login == null) {
+				
+				service.viewCounting(seq);
+			}
 			
 			if(imageDto!= null) {
 				byte[] byteImage = imageDto.getImagesPath();
@@ -101,7 +117,7 @@ public class InfoController {
 		
 	// Post Mapping
 	
-	// 강아지/고양이 게시글 불러오기 !
+	// 강아지 게시글 불러오기 !
 	@ResponseBody
 	@PostMapping(value="dogListPage")
 		public List<InfoDto> getInfoList(Model model, InfoParam par) {
@@ -136,20 +152,21 @@ public class InfoController {
 	
 	//글쓰기 및 이미지 
 	@PostMapping (value = "dogWriteAf") 
-		public String dogWriteAf (InfoDto dto , 
+		public String dogWriteAf (InfoDto dto , String regId,
 			@ RequestParam (value = "thumbnail", required = false) 
 			 MultipartFile thumbnail , HttpServletRequest req) { 
-
+			
+		System.out.println();
 				try { 
 					// byte [ ] 이미지 = dto.getImagesPath (); 			
-			
+				
 					//글쓰기 완료   
 					int dbCheck = service.infoWrite(dto); 
 					System.out.println ( "글 추가 완료 :"+ dbCheck); 
 
 					//이미지
 					InfoImagesDto imageDto = new InfoImagesDto(); 
-					
+					imageDto.setRegId(regId);
 					//이미지 바이트를 dto에 저장
 					imageDto.setImagesPath (thumbnail.getBytes ()); 
 			    

@@ -25,6 +25,12 @@ public class InfoService {
 		return list;
 	}
 	
+	public List<InfoDto> catListPage(InfoParam par){
+		List<InfoDto> list = dao.dogListPage(par);
+		System.out.println("getinfolist = "+list.size() + ", PARAM = "+ par.toString());
+		return list;
+	}
+	
 	public int getInfoListCount(InfoParam par) {
 		return dao.getParamCount(par);
 	}
@@ -65,4 +71,7 @@ public class InfoService {
 		 dao.infoDelete(seq);
 	}
 	
+	public int viewCounting(int seq) {
+		return dao.viewCounting(seq);
+	}
 }

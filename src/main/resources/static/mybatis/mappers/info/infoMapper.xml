@@ -5,7 +5,7 @@
 
  <mapper namespace="io.pet.mint.info.dao.InfoDao">
 
-<!-- 리스트/페이지/검색 -->
+<!-- 강아지 리스트/페이지/검색 -->
 <select id="dogListPage" parameterType="io.pet.mint.info.dto.InfoParam" resultType="io.pet.mint.info.dto.InfoDto">
 
    SELECT BOARD_TYPE,A.BOARD_SEQ,BOARD_REG_ID, BOARD_TITLE, BOARD_CONTENTS,BOARD_REG_DATE, BOARD_VIEW_COUNT,BOARD_DEL, B_IMG.IMAGES_PATH
@@ -22,18 +22,29 @@
           </if>
           <if test="category == 'content'">
              AND BOARD_CONTENTS LIKE '%'||#{keyword}||'%'
-          </if>             
-       </if>
-       <if test="board_category = '백과'">
-       		AND BOARD_CATEGORY=#{boardType}
-       </if>
-        <if test="board_category = '훈련'">
-       		AND BOARD_CATEGORY=#{boardType}
-       </if>
-        <if test="board_category = '음식'">
-       		AND BOARD_CATEGORY=#{boardType}
-       </if>
-       	AND BOARD_TYPE='강아지'	
+          </if>  
+          
+	    <if test="board_category = '강아지백과'">
+	            AND BOARD_CATEGORY=#{boardType}
+	    </if>
+	    <if test="board_category = '강아지음식'">
+	            AND BOARD_CATEGORY=#{boardType}
+	    </if>
+	    <if test="board_category = '강아지행동'">
+	            AND BOARD_CATEGORY=#{boardType}
+	    </if>
+	    
+	     <if test="board_category = '고양이백과'">
+	            AND BOARD_CATEGORY=#{boardType}
+	    </if>
+	    <if test="board_category = '고양이음식'">
+	            AND BOARD_CATEGORY=#{boardType}
+	    </if>
+	    <if test="board_category = '고양이행동'">
+	            AND BOARD_CATEGORY=#{boardType}
+	    </if>           
+	   </if>
+       	AND BOARD_TYPE IN ('강아지', '고양이')	
 		AND BOARD_DEL=0 
        ) A,
        BOARD_IMAGES B_IMG   
@@ -46,25 +57,16 @@
                         resultType="java.lang.Integer">
    SELECT NVL(COUNT(*), 0) AS CNT
    FROM BOARD
-   WHERE 1=1 
+   WHERE BOARD_CATEGORY=#{boardType}
    <if test="category != null and category != ''">
       <if test="category == 'title'">
          AND BOARD_TITLE LIKE '%'||#{keyword}||'%'
-      </if>
-      <if test="category == 'content'">
+    </if>
+    <if test="category == 'content'">
          AND BOARD_CONTENTS LIKE '%'||#{keyword}||'%'
       </if>
-   </if>
-   <if test="board_category = '백과'">
-      		AND BOARD_CATEGORY=#{boardType}
-      </if>
-       <if test="board_category = '훈련'">
-      		AND BOARD_CATEGORY=#{boardType}
-      </if>
-       <if test="board_category = '음식'">
-      		AND BOARD_CATEGORY=#{boardType}
-   </if>
-   AND BOARD_TYPE='강아지'
+    </if>
+   	AND BOARD_TYPE IN ('강아지', '고양이')	
    AND BOARD_DEL=0
 </select>
 
@@ -72,14 +74,14 @@
 <insert id="infoWrite" parameterType="io.pet.mint.info.dto.InfoDto">
 	INSERT INTO BOARD(BOARD_SEQ,BOARD_TYPE,BOARD_CATEGORY, ID,BOARD_REG_ID,BOARD_REF,BOARD_STEP, 
 				BOARD_DEPTH, BOARD_TITLE, BOARD_CONTENTS, BOARD_REG_DATE, BOARD_VIEW_COUNT,BOARD_DEL)
-		VALUES(SEQ_BOARD.NEXTVAL,#{boardType},#{boardCategory}, 'aaa','aaa', 0, 0, 0, 
+		VALUES(SEQ_BOARD.NEXTVAL,#{boardType},#{boardCategory}, #{id}, #{id}, 0, 0, 0, 
 				#{boardTitle}, #{boardContents}, SYSDATE, 0, 0)	
 </insert> 
 <!-- 글 쓰기 : 이미지 저장 -->
 <insert id = "imgSave" parameterType = "io.pet.mint.info.dto.InfoImagesDto"> 
 	INSERT INTO BOARD_IMAGES (IMAGES_SEQ, BOARD_SEQ, IMAGES_PATH, REG_ID, REG_DATE) 
 	VALUES (SEQ_IMAGES.NEXTVAL, (SELECT MAX(BOARD_SEQ) FROM BOARD), 
-			 #{imagesPath}, 'aaa', SYSDATE) 
+			 #{imagesPath}, '운영자', SYSDATE) 
 </insert>
 
 <!-- 글 디테일 -->
@@ -114,6 +116,13 @@
 	UPDATE BOARD 
 	SET BOARD_DEL=1
 	WHERE BOARD_SEQ=#{boardSeq}
+</update>
+
+<!-- 뷰 카운트 -->
+<update id="viewCounting" parameterType="java.lang.Integer">
+UPDATE BOARD
+SET BOARD_VIEW_COUNT=BOARD_VIEW_COUNT+1
+WHERE BOARD_SEQ=#{boardSeq}
 </update>
 
 

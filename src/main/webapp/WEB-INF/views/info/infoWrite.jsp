@@ -25,13 +25,18 @@
 		<option value="고양이">고양이</option>
 	</select>
 	<select id="boardCategory" name="boardCategory">
-		<option value="음식">[음식]</option>
-		<option value="훈련">[행동]</option>
-		<option value="백과">[백과]</option>		
+		<option value="강아지음식">[강아지/음식]</option>
+		<option value="강아지행동">[강아지/행동]</option>
+		<option value="강아지백과">[강아지/백과]</option>	
+		<option value="고양이음식">[고양이/음식]</option>
+		<option value="고양이행동">[고양이/행동]</option>
+		<option value="고양이백과">[고양이/백과]</option>		
 	</select>
+	
 </div>	
 
 <div class="writeTitle">
+		<input type="hidden" name="id" value="${login.id }">
 	[ 제목 ] <input type="text" placeholder="제목을 입력해주세요." size="60" id="boardTitle" name="boardTitle"/><br>
 	[ 첨부 이미지 ]<input type="file" name="thumbnail" size="20" required="required">
 </div>

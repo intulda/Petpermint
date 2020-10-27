@@ -16,7 +16,8 @@ public class InfoParam implements Serializable {
 	   private int end = 10;
 
 	   private String boardType;	// 백과, 푸드, 훈련
-	
+	   private String boardPet; //고양ㅇ이. 강아지.
+	   
 	   public InfoParam() {
 		
 	   }

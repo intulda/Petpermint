@@ -9,15 +9,15 @@
 
         const data = {
             list : [
-                {name: '강아지 이야기', link:'/info/dogPage', subMenu: [
-  						{ name: '강아지 백과', link: '/info/dogPage', order: 1},
-                        { name: '강아지 음식', link: '/info/dogListPageView?Type=음식', order: 2},
-                        { name: '강아지 훈련', link: '/info/dogListPageView?Type=훈련', order: 3},
+                {name: '강아지 이야기', link:'/info/dogPage?Pet=강아지', subMenu: [
+  						{ name: '강아지 백과', link: '/info/dogListPageView?Type=강아지백과', order: 1},
+                        { name: '강아지 음식', link: '/info/dogListPageView?Type=강아지음식', order: 2},
+                        { name: '강아지 행동', link: '/info/dogListPageView?Type=강아지행동', order: 3},
                     ], order:1},
-                {name: '고양이 이야기', link:'', subMenu: [
-                        { name: '고양이 백과', link: '', order: 1},
-                        { name: '고양이 음식', link: '', order: 2},
-                        { name: '고양이 훈련', link: '', order: 3},
+                {name: '고양이 이야기', link:'/info/catPage?Pet=고양이', subMenu: [
+                        { name: '고양이 백과', link: '/info/dogListPageView?Type=고양이백과', order: 1},
+                        { name: '고양이 음식', link: '/info/dogListPageView?Type=고양이음식', order: 2},
+                        { name: '고양이 행동', link: '/info/dogListPageView?Type=고양이행동', order: 3},
                     ], order:2},
                 {name: '펫플레이스',link:'/placeBoard/placeBoardList', subMenu: [
                         { name: '펫플레이스', link: '/placeBoard/placeBoardList', order: 1},
