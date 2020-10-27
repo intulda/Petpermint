@@ -6,8 +6,6 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeList.css" />
 
 
-
-
 <div class="main_title">펫플레이스</div>
 
 <div class="header">	
@@ -37,11 +35,6 @@
 	</tr>
 </table>
 </div>
-
-
-
-
-
 
 
 <div class="header_title">
