@@ -33,3 +33,16 @@
 .footer-flex {
     display: flex;
 }
+@media(max-width: 768px) {
+    .footer__left {
+        display: none;
+    }
+
+    .footer__center {
+        font-size: 0.8rem;
+    }
+
+    .footer__right {
+        display: none;
+    }
+}

@@ -24,4 +24,6 @@ public interface PlaceBoardDao {
 	public int placeBoardUpdate(PlaceBoardDto placeDto);
 	// 게시물 삭제
 	public int placeBoardDelete(int boardSeq);
+	// 조회수 카운트
+	public int viewCounting(int boardSeq);
 }

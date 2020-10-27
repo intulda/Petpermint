@@ -134,6 +134,18 @@ public class FreeController {
 		return "view:freeBoard/freeBoard";
 	}
 	
+	@ResponseBody
+	@PostMapping(value="checkDel")
+	public String checkDel(
+			@RequestParam(value="boardSeq")int boardSeq) {
+		
+	//	System.out.println("=============================================제발요=======================================================");
+		
+		int check = service.checkDel(boardSeq);
+		
+		return check>0?"ok":"no";
+	}
+	
 	
 	
 	
@@ -210,7 +222,7 @@ public class FreeController {
 		int n = likeService.freeLikeButton(dto);
 	//	System.out.println("------------------------------------------------");
 		service.freeLikeCount(dto.getBoardSeq());
-		return n>0?"ok":"no";
+		return n > 0?"ok":"no";
 	}
 
 	@ResponseBody

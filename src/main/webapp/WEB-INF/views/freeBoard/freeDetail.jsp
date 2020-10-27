@@ -14,15 +14,19 @@
 <body>
 <h1 class="detailH1">${dto.boardTitle}</h1>
 <p class="detailP">${dto.boardRegDate}</p>
+<p class="detailP">${dto.boardUpdDate}</p>
 <button class="freeUpdate">수정</button>
 <button class="freeDelete">삭제</button>
 <br><br>
 <hr class="freeDetailHr">
 <br><br>
 
-<div class="detailDiv">
+<div class="detailDiv" id="detailDiv">
 	<p>${dto.boardContents}</p>
-	<button type="button" class="likeButton" name="likeButton"><span id="LikeCount"></span>좋아요</button>
+	<button type="button" class="likeButton" name="likeButton">
+		<span class="img_emoti">좋아요</span>
+	 	<span class="ani_heart_m"></span>
+	</button>
 </div>
 <br>
 <span id="replyCount"></span>개의 댓글
@@ -41,7 +45,7 @@
 	</div>
 	<div class="container">
 		<nav aria-label="Page navigation">
-			<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
+			<ul class="pagination" id="pagination"></ul>
 		</nav>
 	</div>	
 </div>
@@ -138,9 +142,8 @@ function getListData(pNumber){
 				
 			//	console.log(commDTO);
 				let app = "<div class='commHeader'>"
-					+ "<span class='infoId'>aaa  |</span>"
+					+ "<span class='infoId'>aaa</span><br>"
 					+ updDate							
-					+ "<span class='infoData'>등록날짜</span>"
 					+ "<span"
 					+ " class='infoData' id='commRegDate"
 					+ commDTO.commSeq
@@ -167,7 +170,7 @@ function getListData(pNumber){
 				});
 				}
 				});
-			getLikeCount(${dto.boardSeq});
+			/* getLikeCount(${dto.boardSeq}); */
 			},
 			error:function(){
 				alert('아 이거다');
@@ -298,19 +301,20 @@ function commUpdateAf(commSeq){
 
 $(".likeButton").click(function (){
 
+	/* 	var click = true; */
+
 	$.ajax({
 		url : "/freeBoard/freeLikeButton",
 		type:"post",
 		data : {boardSeq : ${dto.boardSeq},
-				Id : 'aaa'},
+				id : 'aaa'},
 		success:function(data){
 			if(data === 'ok'){
-			//	alert("좋아용");
-				location.href = "/freeBoard/freeDetail?boardSeq=" + ${dto.boardSeq};
+			/* alert("좋아용"); */
 		}
 		else{
-			alert("노노");
-			}
+			/* alert('싫어용'); */
+		}
 		},
 		error:function(){
 			alert("error");
@@ -318,7 +322,7 @@ $(".likeButton").click(function (){
 		});	
 });
 
-function getLikeCount(num){
+/*  function getLikeCount(num){
 
 //	alert(num)
 	
@@ -330,11 +334,23 @@ function getLikeCount(num){
 			$("#LikeCount").html(count);
 		},
 		error:function(){
-			alert("error?");
+			alert("error");
 		}
-	}); 
-}  
-
+	});
+}
+ */
+ $('button').click(function(){
+	  if($(this).hasClass('btn_unlike')){
+	    $(this).removeClass('btn_unlike');
+	    $('.ani_heart_m').removeClass('hi');
+	    $('.ani_heart_m').addClass('bye');
+	  }
+	  else{
+	    $(this).addClass('btn_unlike');
+	    $('.ani_heart_m').addClass('hi');
+	    $('.ani_heart_m').removeClass('bye');
+	  }
+});
 
 
 </script>

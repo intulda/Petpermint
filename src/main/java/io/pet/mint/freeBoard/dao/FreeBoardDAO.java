@@ -37,4 +37,7 @@ public interface FreeBoardDAO {
 	public int viewCount(int boardSeq);
 
 	public int freeLikeCount(int boardSeq);
+	
+	//게시판  체크된것 삭제
+	public int checkDel(int boardSeq);
 }

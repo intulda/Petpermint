@@ -18,13 +18,16 @@
 <br><br>
 
 <div class="freeDiv">
-<button type="button" class="write">글쓰기</button>
+<%-- <c:if test="${login != null }"> --%>
+	<button type="button" class="write">글쓰기</button>
+	<button type="button" class="checkDel">삭제</button>
+<%-- </c:if> --%>
 <br><br>
 	
 	<table class="freeTable" id="bbs">
 		<thead>
 			<tr>
-				<th><input name="checkAll" type="checkbox" onclick="toggle(this)"></th>
+				<th><input name="checkAll" class="checkAll" type="checkbox" onclick="toggle(this)"></th>
 				<th class="num">번호</th>
 				<th class="title">제목</th>
 				<th class="name">작성자</th>
@@ -35,8 +38,8 @@
 		</thead>
 		<tbody>
 		<c:forEach var="l" items="${getFreeBoardList}" varStatus="vs">
-				<tr onclick = "location.href='/freeDetail/${l.boardSeq}'">
-					<th><input type="checkbox" name="freeCheck"></th>
+				<tr>
+					<th><input type="checkbox" name="freeCheck_${dto.boardSeq}" class="freeCheck_${dto.boardSeq}" value="${dto.boardSeq}" seq="${dto.boardSeq}"></th>
 					<td>${vs.count}</td>
 					<td>${l.boardTitle}</td>
 					<td>${l.boardRegId}</td>
@@ -54,13 +57,15 @@
 			<ul class="pagination" ></ul>
 		</nav>
 		<input type="text" name="searchWord" class="searchWord">
-		<button type="button" class="searchButton">검색</button>
-		<select class="choice">
-			<option value="select">전체</option>
-			<option value="title">제목</option>
-			<option value="contents">내용</option>
-			<option value="name">작성자</option>
-		</select>
+		<label for="searchButton" class="searchButton" name="searchButton"></label>
+		<div>
+			<select class="choice">
+				<option value="select">선택</option>
+				<option value="title">제목</option>
+				<option value="contents">내용</option>
+				<option value="name">작성자</option>
+			</select>
+		</div>
 	</div>
 </div>
 <br><br>
@@ -70,13 +75,15 @@
 getListData(0);
 getListCount();
 
+$(document).ready(function(){
+	$(".freeTable").on('click', 'td', function(){
+		location.href = "/freeBoard/freeDetail?boardSeq=" + $(this).parent().data('value');
+	});
+});
+
     $('.write').click(function (){
         location.href = "http://localhost:8090/freeBoard/freeWrite";
     });
-
-   /*  $('.freeTable td').click(function(){
-		location.href = "http://localhost:8090/freeBoard/freeDetail";
-        }); */
     
     function toggle(source) {
     	  checkboxes = document.getElementsByName('freeCheck');
@@ -105,8 +112,8 @@ function getListData(pNumber){
 			
 			$.each(data,function(idx,data){ 
 				console.log(data);
-				let app = "<tr onclick='location.href=\"freeDetail?boardSeq=" + data.boardSeq + "\"'>"
-						+"	<th><input type='checkbox' name='freeCheck'></th>"
+				let app = "<tr data-value='"+data.boardSeq+"'>"
+						+"	<th><input type='checkbox' name='freeCheck' value="+data.boardSeq+"></th>"
 						+"	<td>" + (idx + 1) + "</td>"
 						+"	<td>" + data.boardTitle + "</td>"
 						+"	<td>" + data.boardRegId + "</td>"
@@ -116,18 +123,17 @@ function getListData(pNumber){
 						+"	</tr>";
 						
 				$("tbody").append(app);
-
-			/* 	 $('.freeTable td').click(function(){
-						location.href = "http://localhost:8090/freeBoard/freeDetail?boardSeq=" + data.boardSeq;
-				  });	 */
+				
 			});
-
+			
 			},
 			error : function(e){
 				alert("error");
 			}
 		});
 	}
+
+
 
 	function getListCount(){
 		
@@ -179,10 +185,30 @@ function getListData(pNumber){
 				
 			}	
 		});
-		
-		
 	}
 
+ 	$(".checkDel").click(function(){
+
+		var checkArr = new Array();
+		var delArr = $('input[name=freeCheck]:checked');
+		for(let i=0; i<delArr.length; i++) {
+			$.ajax({
+				url:"/freeBoard/checkDel",
+				type:"post",
+				data: { boardSeq : delArr[i].value },
+				success : function(data){
+					//현재 페이지넘버 가져와 알겠어?
+					getListData(0);
+					getListCount();
+				},
+					error:function(){
+						alert("error");
+					}
+				});
+		}
+		
+	});
+	
 </script>
 </body>
 </html>

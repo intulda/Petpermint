@@ -6,7 +6,7 @@ public class FreeLikeDTO implements Serializable {
 	
 	private int boardLikeSeq;
 	private int boardSeq;
-	private String Id;
+	private String id;
 	private int boardLikeCount;
 	
 	public FreeLikeDTO() {
@@ -39,17 +39,17 @@ public class FreeLikeDTO implements Serializable {
 		this.boardSeq = boardSeq;
 	}
 
-	public String getId() {
-		return Id;
+	public String getid() {
+		return id;
 	}
 
 	public void setId(String id) {
-		Id = id;
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "FreeLikeDTO [boardLikeSeq=" + boardLikeSeq + ", boardSeq=" + boardSeq + ", Id=" + Id
+		return "FreeLikeDTO [boardLikeSeq=" + boardLikeSeq + ", boardSeq=" + boardSeq + ", id=" + id
 				+ ", boardLikeCount=" + boardLikeCount + "]";
 	}
 
@@ -57,7 +57,7 @@ public class FreeLikeDTO implements Serializable {
 		super();
 		this.boardLikeSeq = boardLikeSeq;
 		this.boardSeq = boardSeq;
-		Id = id;
+		this.id = id;
 		this.boardLikeCount = boardLikeCount;
 	}
 

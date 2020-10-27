@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-button{
+/* button{
 	border : 1px;
 	border-radius : 5px;
 	font-size : 15px;
 	margin-left : 5px;
-}
+} */
 
 .freeH1{
 	margin-top: 110px;
@@ -37,13 +37,6 @@ button{
 
 .freeTable tbody > tr:hover{
 	background-color : #c0c0c0;
-}
-
-.write{
-	float : right;
-	border : 1px;
-	border-radius : 5px;
-	font-size : 20px;
 }
 
 .freeTable th{
@@ -137,19 +130,33 @@ button{
 }
 
 .searchButton{
-	background-color : black;
-	color : white;
-	border-radius : 5px;
-	font-size : 20px;
-	border : 1px;
+    position: absolute;
+    right: 0;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    color: white;
+    line-height: 40px;
+    background-color: #60a1e1;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    background-image: url(/images/search.png);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin-bottom: 0 !important;
 }
 
-.freeContainer{
-	text-align: right;
+.searchWord{
+	width: 300px;
+	float:right;
+    height: 40px;
+    border: 2px solid #60a1e1;
+    border-radius: 5px;
+    padding: 10px;
 }
 
 .detailP{
-	margin-left : 100px;
 	color : #a9a9a9;
 }
 
@@ -189,11 +196,133 @@ button{
 	margin-bottom : 10px;
 }
 
-.likeButton{
-	margin-top : 100px;
-	font-size : 30px;
+.commButton{
+	font-size : 20px;
+}
+
+.freeContainer{
+	width : 100%;
+	position: relative;
+}
+
+.write,
+.checkDel{
+	float : right;
+	margin-right : 10px;
+	border: 1px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.freeUpdate,
+.freeDelete{
+	margin-right : 10px;
+	border: 1px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.pagination {
+	justify-content: center;
+}
+
+.choice{
+	float:right;
+	margin-right : 10px;
+	height : 40px;
+	width : 100px;
 }
 
 .commButton{
-	font-size : 20px;
+	background-color: #5499de;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    margin: 2px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 10px;
+    outline: 0;
+}
+
+.likeButton {
+  position: relative;
+  margin: 100px auto;
+  display: block;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #e8e8e8;
+  border-radius: 44px;
+  font-family: notokr-bold,sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  background-color: #fff;
+  color: #DD5D54;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.03);
+  transition: border .2s ease-out,box-shadow .1s ease-out,background-color .4s ease-out;
+  cursor: pointer;
+}
+
+.likeButton:hover {
+  border: 1px solid rgba(228,89,89,0.3);
+  background-color: rgba(228,89,89,0.02);
+  box-shadow: 0 2px 4px 0 rgba(228,89,89,0.2);
+}
+
+.btn_unlike .img_emoti {
+    background-position: -30px -120px;
+}
+
+.img_emoti {
+    display: inline-block;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    background: url(https://mk.kakaocdn.net/dn/emoticon/static/images/webstore/img_emoti.png?v=20180410) no-repeat;
+    text-indent: -9999px;
+    vertical-align: top;
+    width: 20px;
+    height: 17px;
+    margin-top: 1px;
+    background-position: 0px -120px;
+    text-indent: 0;
+}
+
+.likeButton .ani_heart_m {
+    margin: -63px 0 0 -63px;
+}
+
+.ani_heart_m {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 125px;
+    height: 125px;
+    margin: -63px 0 0 -63px;
+    pointer-events: none;
+}
+
+.ani_heart_m.hi {
+    background-image: url(https://mk.kakaocdn.net/dn/emoticon/static/images/webstore/retina/zzim_on_m.png);
+    -webkit-background-size: 9000px 125px;
+    background-size: 9000px 125px;
+    animation: on_m 1.06s steps(72);
+}
+
+.ani_heart_m.bye {
+    background-image: url(https://mk.kakaocdn.net/dn/emoticon/static/images/webstore/retina/zzim_off_m.png);
+    -webkit-background-size: 8250px 125px;
+    background-size: 8250px 125px;
+    animation: off_m 1.06s steps(66);
+}
+
+@keyframes on_m {
+  from { background-position: 0 }
+  to { background-position: -9000px }
+}
+
+@keyframes off_m {
+  from { background-position: 0 }
+  to { background-position: -8250px }
 }

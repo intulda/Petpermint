@@ -25,4 +25,8 @@ public class FreeLikeService {
 	public int likeDelete(int boardSeq) {
 		return dao.likeDelete(boardSeq);
 	}
+	
+	public int updateLike(int boardSeq) {
+		return dao.updateLike(boardSeq);
+	}
 }

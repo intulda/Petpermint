@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 
 <script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeList.css" />
 
 
 
 
+<div class="main_title">펫플레이스</div>
 
 <div class="header">	
 	<ul class="board_list">
@@ -18,21 +18,21 @@
 		<li><button type="button" onclick="selCategory(this.value)" value="음식점">음식점</button></li>
 	</ul>
 	
-	<table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
+	<table class="sel_tb">
 	<tr>
-		<td style="padding-left: 5px">
-			<select id="_category" name="category">
-				<option value="" selected="selected">선택</option>
-				<option value="title">장소명</option>
-				<option value="content">내용</option>
-				<option value="address">주소</option>		
-			</select>
+		<td style="padding-left: 5px" >
+			<div  class="box">
+				<select id="_category" name="category">
+					<option value="" selected="selected">선택</option>
+					<option value="title">장소명</option>
+					<option value="content">내용</option>
+					<option value="address">주소</option>			
+				</select>
+			</div>
 		</td>
-		<td style="padding-left: 5px">
-			<input type="text" id="_keyword" name="keyword">		
-		</td>
-		<td style="padding-left: 5px">
-			<button type="button" id="findButton">검색</button>		
+		<td class="placeBoard__search" style="padding-left: 5px">
+			<input type="text" id="_keyword" name="keyword" class='search-txt'>
+			<label for="_keyword"  id="findButton"></label>
 		</td>
 	</tr>
 </table>
@@ -40,7 +40,11 @@
 
 
 
-<div class="place_title">
+
+
+
+
+<div class="header_title">
 	<p>&nbsp;&nbsp;<a href="/" style="color:grey">홈/</a></p>
 	<h2>펫플레이스</h2>
 	<p class="intro">반려동물의 동반장소를 소개해드립니다</p>
@@ -50,15 +54,15 @@
 <div class="place_container">	
 </div>
 
+<c:if test="${login != null }">
+	<div class="header">	
+		<ul class="bottom_list">
+			<li><button type="button" id="writeButton">글쓰기</button></li>
+		</ul>
+	</div>
+</c:if>
 
-<div class="header">	
-	<ul class="board_list">
-		<li><button type="button" id="writeButton">글쓰기</button></li>
-	</ul>
-</div>
-
-
-<div class="container">
+<div class="page_container">
 	<nav aria-label="Page navigation">
 		<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
 	</nav>
@@ -99,7 +103,7 @@ function getBbsListData( pNumber, boardCategory ){
 			"boardCategory":boardCategory
 			 },
 		success:function( list ){
-		
+			console.log(list);
 			$(".place_content").remove();
 			if(list == null || list ==''){
 				let tagData = "<div class='place_content'>"
@@ -117,19 +121,23 @@ function getBbsListData( pNumber, boardCategory ){
 								+ placeDto.imagePath
 								+ "'></div>"
 								+ "<div class='place_item2'>"
-								+ "<div><p>"
+								+ "<p>"
+								+ "<img src='../images/placeImg/reg_date.png' class='reg_date'>"
 								+ placeDto.boardRegDate
-								+ "</p></div>"
-								+ "<div><h1>"
+								+ "</p>"
+								+ "<h1>"
 								+ placeDto.boardTitle
-								+ "</h1></div>"
-								+ "<div><p>"
+								+ "</h1>"
+								+ "<p>종류 : "
 								+ placeDto.boardCategory
-								+ "</p></div>"
-								+ "<div><p>"
+								+ "</p>"
+								+ "<p>주소 : "
 								+ placeDto.boardLocation
-								+ "</p></div>"
-								// 연락처 추가
+								+ "</p>"
+								+ "<p>연락처 : "
+								+ placeDto.boardTel
+								+ "</p>"
+								
 								+ "<div><a href='/placeBoard/placeBoardDetail?seq="
 								+ placeDto.boardSeq
 								+ "' class='detailButton'>더알아보기</a></div>"
@@ -199,7 +207,6 @@ function loadPage( totalCount ){
 		initiateStartPageClick:false,		// onPageClick 자동 실행하지 않는다
 		onPageClick: function(event, page){
 			nowPage = page;
-		//	alert('nowPage:' + nowPage);
 			getBbsListData( nowPage - 1 );	
 		}	
 	});

@@ -53,4 +53,8 @@ public class FreeBoardService {
 		return dao.freeLikeCount(boardSeq);
 	}
 	
+	public int checkDel(int boardSeq) {
+		return dao.checkDel(boardSeq);
+	}
+	
 }
