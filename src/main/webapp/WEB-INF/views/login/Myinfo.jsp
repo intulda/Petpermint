@@ -22,8 +22,6 @@
 
 </head>
 <body>
-
-
 <div class="myinfo_container">
 	<div class="myinfo_middle_container">
 		<div id="myinfo_content_wrap">
