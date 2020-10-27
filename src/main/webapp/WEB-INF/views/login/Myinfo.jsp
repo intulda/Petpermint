@@ -97,7 +97,6 @@
 
 <script type="text/javascript">
 
-
 $("#memberUpdateBtn").click(function(){
 		$("#memberUpdateForm").attr("action", "myinfoAf.do").submit();
 		alert("정보 수정이 완료되었습니다. 다시 로그인 해주세요!");
