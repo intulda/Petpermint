@@ -17,10 +17,12 @@
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <link rel="stylesheet" type="text/css" href="css/default.css"/>
 <link rel="stylesheet" type="text/css" href="css/login/login.css"/>
+<link rel="stylesheet" type="text/css" href="css/login/memberUpdate.css"/>
 
 
 </head>
 <body>
+
 
 <div class="myinfo_container">
 	<div class="myinfo_middle_container">
@@ -32,7 +34,7 @@
 					<img src="./images/member/infoupdate_title.png" width="650px">
 				</div>
 				
-				<form id="editInfoForm" action="editInfo" method="post" onsubmit="return check()">
+				<form action="myinfoAf.do" id="memberUpdateForm" method="post">
 				<br><br><br>
 				<table style="margin-left: 35px;">
 					<colgroup>
@@ -43,7 +45,7 @@
 							<span> ID </span>
 						</td>
 						<td colspan="2">
-							<input type="text" class="form-control" readonly="readonly" value="${login.id }">  <br>
+							<input type="text" class="form-control" readonly="readonly" id="id" name="id" value="${login.id }">  <br>
 						</td>
 					</tr>
 					<tr>
@@ -51,10 +53,10 @@
 							<span> Password </span>
 						</td>
 						<td colspan="2">
-							<input type='password' class="form-control"><br>
+							<input type='password' class="form-control" id="pwd" name="pwd"><br>
 						</td>
 					</tr>
-					
+					<!-- 
 					<tr>
 						<td>
 							<span> Password 확인 </span>
@@ -65,38 +67,41 @@
 						<td>						
 							<button type="button" class="form-control"> 확인 </button> <br>
 						</td>
-					</tr>
+					</tr> -->
+					
 					<tr>
 						<td>
 							<span> 닉네임 </span>
 						</td>
 						<td colspan="2">
-							<input type="text" class="form-control" value="${login.nickname }"> <br>
+							<input type="text" class="form-control" value="${login.nickname }" id="nickname" name="nickname"> <br>
 						</td>
 					</tr>	
 				</table>
 				</form>
 				
-				<br><br><br>
+				<br><br>
 				
 			</div>
 			
-
-			<a href="#none" id="_btnjoin" title="회원가입" class="join_btn"  style="top: 30px;">
+			<input type="submit" title="회원정보수정" id="memberUpdateBtn" class="memberUpdateBtn_submit form-control" style="top: 30px; margin-left: 170px; width: 650px;"> 
+			
+			<!-- 
+			<a href="#none" type="submit" id="_btnjoin" title="회원정보수정" id="memberUpdateBtn"  style="top: 30px; margin-left: 230px;">
 				<img alt="" src="./images/member/myinfobtn.png" width="500px">
 			</a>
-				
+				 -->
 		</div>
 	</div>
 </div>
 
-
 <script type="text/javascript">
-function check() {
-    var form = document.getElementById("editInfoForm");
-    //유효성 검사
-    return true;
-}
+
+
+$("#memberUpdateBtn").click(function(){
+		$("#memberUpdateForm").attr("action", "myinfoAf.do").submit();
+		alert("정보 수정이 완료되었습니다. 다시 로그인 해주세요!");
+});
 
 </script>
 

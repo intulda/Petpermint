@@ -37,16 +37,20 @@
 	WHERE ID=#{id} AND PWD=#{pwd}
 </select>
 
-<update id="myinfo_update" parameterType="io.pet.mint.member.vo.MemberVO">
-	UPDATE MEMBER 
-	SET PWD, NICKNAME
-	WHERE PWD=#{pwd} OR NICKNAME=#{nickname}
+<!-- 회원정보 수정 -->
+<update id="memberUpdate" parameterType="io.pet.mint.member.vo.MemberVO">
+		UPDATE MEMBER
+		SET 
+		PWD = #{pwd},
+		NICKNAME = #{nickname}
+		WHERE ID = #{id}
 </update>
+
 
 <update id="changePasswd" parameterType="io.pet.mint.member.vo.MemberVO">
     UPDATE MEMBER
     SET PWD=#{pwd}
-    WHERE email = #{email}
+    WHERE id = ${login.id }
 </update>
 
 </mapper>

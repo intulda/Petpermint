@@ -33,7 +33,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/myinfo.do", method=RequestMethod.GET)
-	public String infoUpdate() {
+	public String infoUpdateView() {
 		return "view:login/Myinfo";
 	}
 	
@@ -120,8 +120,11 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "myinfoAf.do", method = RequestMethod.POST)
-	public String myinfoUpdate() {
-		return "redirect:/";
+	public String myinfoUpdate(MemberVO vo, HttpSession session) {
+		System.out.println("MemberController myinfoAf()");
+		memberservice.memberUpdate(vo);
+		session.invalidate();
+		return "redirect:/login.do";
 	}
 	
 	

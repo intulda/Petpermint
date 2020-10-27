@@ -34,6 +34,10 @@ public class MemberService{
 		return memberDao.login(vo);
 	}
 	
+	public void memberUpdate(MemberVO vo) {
+		memberDao.memberUpdate(vo);
+	}
+	
 	
 	
 	

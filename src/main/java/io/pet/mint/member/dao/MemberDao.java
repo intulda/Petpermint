@@ -14,5 +14,6 @@ public interface MemberDao {
 	public int getId(MemberVO vo);
 	public boolean addmember(MemberVO vo);
 	public MemberVO login(MemberVO vo);
+	public void memberUpdate(MemberVO vo);
 	
 }
