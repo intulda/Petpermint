@@ -34,8 +34,8 @@
                         { name: '고양이 용품', link: '', order: 2},
                         { name: '무료나눔', link: '', order: 3},
                     ], order:5},
-                {name: '커뮤니티', link:'', subMenu: [
-                        { name: '자유게시판', link: '', order: 1},
+                 {name: '커뮤니티', link:'/freeBoard/freeBoardViews', subMenu: [
+                        { name: '자유게시판', link: '/freeBoard/freeBoardViews', order: 1},
                     ], order:6},
             ]
         }
@@ -139,4 +139,3 @@
     menu.init();
 
 })(jQuery, window);
-
