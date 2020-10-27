@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
+<script src="../js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeDetail.css" />
+<link rel="stylesheet" type="text/css" href="../css/placeBoard/placeDetail.css" />
 <Style>
 
 
@@ -95,7 +95,6 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dcdc7367b980d0b1446f352a1693e015&libraries=services"></script>
 <script>
-
 
 let boardSeq = ${placeDto.boardSeq};
 
@@ -437,9 +436,5 @@ geocoder.addressSearch(locationAddr, function(result, status) {
     map.setCenter(coords);
 } 
 });
-
-
-
-
 
 </script>
