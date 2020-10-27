@@ -119,6 +119,12 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping(value = "myinfoAf.do", method = RequestMethod.POST)
+	public String myinfoUpdate() {
+		return "redirect:/";
+	}
+	
+	
 }
 
 

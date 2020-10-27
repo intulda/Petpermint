@@ -56,10 +56,7 @@
 							<div class="login_input">
 								
 								<div class="input-group mb-3 input-group-lg">
-								  <div class="input-group-prepend">
-								    <span class="input-group-text" id="basic-addon1">@</span>
-								  </div>
-								  <input type="text" class="form-control " id="_userid" name="id" placeholder="이메일" aria-label="id" aria-describedby="basic-addon1">
+								  <input type="text" class="form-control" id="_userid" name="id" placeholder="이메일" size="30" aria-label="id" aria-describedby="basic-addon1">
 								</div>
 								
 								<!-- 
