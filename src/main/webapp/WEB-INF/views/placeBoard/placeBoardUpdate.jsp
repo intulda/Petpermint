@@ -6,7 +6,7 @@
 <script src="/js/summernote/summernote-ko-KR.js"></script>  
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeWriteUpdate.css" />
+<link rel="stylesheet" type="text/css" href="../css/placeBoard/placeWriteUpdate.css" />
 
 <div class="place_title">펫플레이스</div>
 
