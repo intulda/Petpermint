@@ -102,17 +102,11 @@
 	
 <script type="text/javascript">
 function del(seq) {
-	var chk = confirm("정말 삭제하시겠습니까?");
-	if (chk) {
-		location.href='/lostPet/lostPetDelete?lostSeq='+ seq;
-	}
+		location.href='/lostPet/lostPetDelete?lostSeq='+ seq;	
 }
 
 function update(seq) {
-	var chk = confirm("수정 페이지로 이동합니다.");
-	if (chk) {
 		location.href='/lostPet/lostPetUpdate?lostSeq='+ seq;
-	}
 }
 
 $("#_lostPetLCommWrite").click(function(){

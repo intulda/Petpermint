@@ -59,14 +59,6 @@
 	</div>
 
 
-
-
-<!-- <div class="filebox">
-<label for="tumbnail">업로드</label>
-<input type="file" class="label" id="tumbnail" name="thumbnail" ><br>
-</div> -->
-
-
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -157,42 +149,6 @@ $(document).ready(function() {
 });
 
 
-	
-
-/* $("#_lostPetWrite").click(function() {
-	
-	let sendData = {lostId:$('#_id').val(), lostPhone:$('#_phone').val(),
-						lostKind:$('#_kind').val(), lostType:$('#_type').val(),
-						lostStatus:$('#_status').val(), lostGender:$('#_gender').val(),
-						lostDetail:$('#_detail').val(),
-						lostLocation:$('#_location').val()
-						};
-	
-	//console.log(sendData);	
-	
-	$.ajax({
-		url:"/lostPet/lostPetWriteAf",
-		type:"post",
-		data:sendData,
-		success:function(data){
-			//alert("success");
-
-			if(data==='ok'){
-				alert("글을 작성했습니다.");
-				location.href='/lostPet/lostPet';
-			}
-			else{
-				alert("글을 작성하지못했습니다.");
-			}
-	
-		},
-		error:function(){
-			alert("error");
-		}
-
-	});
-	//$("#_lostPetInfo").attr("action":"lostPetWriteAf").submit();	
-}); */
 </script>
 
 

@@ -14,8 +14,6 @@
 	<form method="post" id="sendForm" action="/lostPet/lostPetUpdateAf"
 			enctype="multipart/form-data">
 
-<br>
-<h5>등록 번호 : '${lostPetDto.lostSeq}' </h5>
 <br>	
 <input type="hidden" name="lostSeq" value="${lostPetDto.lostSeq}">
 아이디<br>
@@ -182,45 +180,4 @@ $(document).ready(function() {
 });
 
 
-	
-
-/* 
-
-$("#_lostPetUpdate").click(function() {
-	
-	let sendData = {lostId:$('#_id').val(), lostPhone:$('#_phone').val(),
-						lostKind:$('#_kind').val(), lostType:$('#_type').val(),
-						lostStatus:$('#_status').val(), lostGender:$('#_gender').val(),
-						lostDetail:$('#_detail').val(),
-						lostLocation:$('#_location').val(), lostSeq:'${lostPetDto.lostSeq}'
-						};
-	
-	//console.log(sendData);	
-	
-	$.ajax({
-		url:"/lostPet/lostPetUpdateAf",
-		type:"post",
-		data:sendData,
-		success:function(data){
-			//alert("success");
-
-			if(data==='ok'){
-				alert("수정이 완료됐습니다.");
-				location.href='/lostPet/lostPet';
-			}
-			else{
-				alert("글을 작성하지못했습니다.");
-			}
-	
-		},
-		error:function(){
-			alert("error");
-		}
-
-	});
-	//$("#_lostPetInfo").attr("action":"lostPetWriteAf").submit();	
-});
-
-
- */
 </script>
