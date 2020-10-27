@@ -41,7 +41,7 @@
                                 ${login.subNickname}
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <li role="presentation" class="header__profile-li"><a href="#">내 정보 수정</a></li>
+                                <li role="presentation" class="header__profile-li"><a href="/myinfo.do">내 정보 수정</a></li>
                                 <li role="presentation" class="divider"></li>
                                 <li role="presentation" class="header__profile-li"><a href="/logout">로그아웃</a></li>
                             </ul>
@@ -54,7 +54,7 @@
                         <a href="login.do"> 로그인 </a>
                     </li>
                     <li class="header-flex register">
-                        <a href="joinus.do"> 회원가입 </a>
+                        <a href="regi.do"> 회원가입 </a>
                     </li>
                 </c:if>
             </ul>

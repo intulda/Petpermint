@@ -31,7 +31,7 @@
 			<div style="width: 550px; align: center;">
 
 				<div class="join_title_warp" style="top: 30px;">
-					<img src="./images/회원가입1.png" width="550px">
+					<img src="./images/member/회원가입1.png" width="550px">
 				</div>
 		
 				<div id="join_memberinfo_wrap" style="top:10px; text-align:center">​​
@@ -42,9 +42,9 @@
 					<input type="text" class="form-control" id="pwdcfm" placeholder="비밀번호 확인" width="25"><br>
 				</div>
 	
-				<span> 닉네임 </span><img src="./images/red-dot.png">
+				<span> 닉네임 </span><img src="./images/member/red-dot.png">
 				<input type="text" class="form-control" name="nickname" id="nickname" size="25" placeholder="닉네임"><br>
-				<span> 연락처 </span><img src="./images/red-dot.png">
+				<span> 연락처 </span><img src="./images/member/red-dot.png">
 				<input type="text" class="form-control" name="phone" id="phone" size="25" placeholder="연락처"><br>				
 				
 				
@@ -65,7 +65,7 @@
 <div class="join_btn_container">
 
 	<a href="#none" id="_btnjoin" title="회원가입" class="join_btn">
-		<img alt="" src="./images/joinbtn2.png">
+		<img alt="" src="./images/member/joinbtn2.png">
 	</a>
 	 
 </div>

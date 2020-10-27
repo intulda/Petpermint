@@ -38,17 +38,17 @@
 				
 				<form action="/loginAf.do" name="frmFrom" id="_frmForm" method="post">
 					
-							<img src="./images/댕냥이1.png" width="400px" height="400px">
+							<img src="./images/member/댕냥이1.png" width="400px" height="400px">
 							
 							<br>				
 
 						
 							<a href="#none" id="_loginNaver" title="Naver로그인">
-								<img alt="" src="./images/naverbtn.png" width="500px">
+								<img alt="" src="./images/member/naverbtn.png" width="500px">
 							</a> <br>
 						
 							<a href="#none" id="_loginNaver" title="Kakao로그인">
-								<img alt="" src="./images/kakaobtn.png" width="500px">
+								<img alt="" src="./images/member/kakaobtn.png" width="500px">
 							</a>
 							
 							<hr width="500px">
@@ -73,13 +73,13 @@
 							<input type="checkbox" id="chk_save_id" style="align=left;"> ID 저장
 							<br><br>
 							<a href="#none" id="_btnlogin" title="로그인">
-								<img alt="" src="./images/loginbtn1.png">
+								<img alt="" src="./images/member/loginbtn1.png">
 							</a>
 							
 							<br>
 							<hr width="500px">
 							<a href="#none" id="_btnjoin" title="회원가입">
-								<img alt="" src="./images/joinbtn1.png">
+								<img alt="" src="./images/member/joinbtn1.png">
 							</a>							
 				</form>			
 			</div>

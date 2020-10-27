@@ -32,6 +32,11 @@ public class MemberController {
 		return "view:login/Joinus";
 	}
 	
+	@RequestMapping(value = "/myinfo.do", method=RequestMethod.GET)
+	public String infoUpdate() {
+		return "view:login/Myinfo";
+	}
+	
 	
 	/*
 	 * 
@@ -112,6 +117,8 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	
+	
 }
 
 
