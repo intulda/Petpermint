@@ -10,9 +10,9 @@
         const data = {
             list : [
                 {name: '강아지 이야기', link:'/info/dogPage', subMenu: [
-  						{ name: '강아지 백과', link: '/info/dogInfo', order: 1},
-                        { name: '강아지 음식', link: '/info/dogFood', order: 2},
-                        { name: '강아지 훈련', link: '/info/dogTraining', order: 3},
+  						{ name: '강아지 백과', link: '/info/dogPage', order: 1},
+                        { name: '강아지 음식', link: '/info/dogListPageView?Type=음식', order: 2},
+                        { name: '강아지 훈련', link: '/info/dogListPageView?Type=훈련', order: 3},
                     ], order:1},
                 {name: '고양이 이야기', link:'', subMenu: [
                         { name: '고양이 백과', link: '', order: 1},
@@ -21,7 +21,6 @@
                     ], order:2},
                 {name: '펫플레이스',link:'/placeBoard/placeBoardList', subMenu: [
                         { name: '펫플레이스', link: '/placeBoard/placeBoardList', order: 1},
-                        { name: '펫맵', link: '/placeBoard/placeBoardMap', order: 2},
                     ], order:3},
 
                 {name: '구조했어요', link:'', subMenu: [
@@ -44,6 +43,7 @@
         const container = document.querySelector('.menu__container');
         const subContainer = document.querySelector('.menu__sub-menu-container');
         const menuList = document.querySelector('.menu__list');
+        const hamburgerMenuList = document.querySelector('.header__hamburger-menu-list');
         const subMenuList = document.querySelector('.menu__list-sub');
         const size = data.list.length;
 
@@ -86,9 +86,21 @@
         const render = () => {
             for(let obj of data.list) {
                 const liElem = document.createElement('li');
+                const liElem2 = document.createElement('li');
+                const aElem = document.createElement('a');
+                const aElem2 = document.createElement('a');
+                aElem.setAttribute('href', obj.link);
+                aElem2.setAttribute('href', obj.link);
+                aElem.innerHTML = obj.name;
+                aElem2.innerHTML = obj.name;
                 liElem.classList.add('menu');
-                liElem.innerHTML = obj.name;
                 liElem.style.width = 100/Number(size) + '%';
+                liElem.appendChild(aElem);
+                liElem2.classList.add('menu');
+                liElem2.style.width = 100/Number(size) + '%';
+                liElem2.appendChild(aElem2);
+
+                hamburgerMenuList.appendChild(liElem2);
                 menuList.appendChild(liElem);
                 if(obj.subMenu != null) {
                     subMenu(obj.subMenu);

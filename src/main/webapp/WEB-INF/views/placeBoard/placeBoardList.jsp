@@ -54,7 +54,7 @@
 <div class="place_container">	
 </div>
 
-<c:if test="${login != null }">
+<c:if test="${login != null && login.auth == 3 }">
 	<div class="header">	
 		<ul class="bottom_list">
 			<li><button type="button" id="writeButton">글쓰기</button></li>
@@ -92,6 +92,7 @@ function selCategory(BoardCategory){
 	getBbsListCount(boardCategory);
 }
 
+
 // 누른 페이지를 적용해서 게시물 출력
 function getBbsListData( pNumber, boardCategory ){
 	
@@ -103,7 +104,7 @@ function getBbsListData( pNumber, boardCategory ){
 			"boardCategory":boardCategory
 			 },
 		success:function( list ){
-			console.log(list);
+
 			$(".place_content").remove();
 			if(list == null || list ==''){
 				let tagData = "<div class='place_content'>"

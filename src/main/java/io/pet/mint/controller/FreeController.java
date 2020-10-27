@@ -165,7 +165,7 @@ public class FreeController {
 	
 	@ResponseBody
 	@PostMapping(value="getFreeCommList")
-	public List<FreeCommDTO> getFreeCommList(FreeCommParam param){
+	public List<FreeCommDTO> getFreeCommList(Model model, FreeCommParam param){
 	
 		int sn = param.getPageNumber();	// 0 1 2
 		int start = sn * param.getCountPerPage() + 1;	// 1  11 21 
@@ -175,6 +175,8 @@ public class FreeController {
 		param.setEnd(end);
 		
 		List<FreeCommDTO> list = commService.getFreeCommList(param);
+		model.addAttribute(list);
+		
 		System.out.println(list);
 		
 		return list;

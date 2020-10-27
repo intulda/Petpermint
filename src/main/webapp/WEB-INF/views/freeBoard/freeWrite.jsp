@@ -64,15 +64,15 @@ $('.freeWriteRegi').click(function(){
 			success : function(data){
 
 					if(data=='ok'){
-						alert("글을 작성했습니다.");
+					//	alert("글을 작성했습니다.");
 					}
 					else{
-						alert("글을 작성하지못했습니다.");
+					//	alert("글을 작성하지못했습니다.");
 					}
 					location.href ="/freeBoard/freeBoardViews";
 				},
 			error : function(){
-				alert("error");
+			//	alert("error");
 				}
 		});		
 });

@@ -55,6 +55,7 @@
 	font-size : 60px;
 	font-weight : normal;
 	text-align : center;
+	margin-left : 210px;
 }
 
 .writeTable{
@@ -78,13 +79,18 @@
 	margin-top : 10px;
 }
 
-.freeWriteRegi{
-	margin : inherit;
+.freeWriteRegi,
+.backButton{
+	margin-right : 10px;
+	border: 1px;
+    border-radius: 5px;
+    font-size: 20px;
+    height: 30px;
 }
 
 .freewrite{
 	width:60%;
-	margin: 0 auto;
+	margin-left: 80px;
 	margin-top: 80px;
 
 }
@@ -196,10 +202,6 @@
 	margin-bottom : 10px;
 }
 
-.commButton{
-	font-size : 20px;
-}
-
 .freeContainer{
 	width : 100%;
 	position: relative;
@@ -231,6 +233,8 @@
 	margin-right : 10px;
 	height : 40px;
 	width : 100px;
+	border: 2px solid #60a1e1;
+    border-radius: 5px;
 }
 
 .commButton{
@@ -243,6 +247,7 @@
     text-align: center;
     border-radius: 10px;
     outline: 0;
+    font-size : 20px;
 }
 
 .likeButton {
@@ -325,4 +330,18 @@
 @keyframes off_m {
   from { background-position: 0 }
   to { background-position: -8250px }
+}
+
+.notLogin{
+	background-color: #5499de;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    margin: 2px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 10px;
+    outline: 0;
+	width: 100px;
+    height: 60px;
 }

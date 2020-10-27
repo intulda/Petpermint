@@ -15,8 +15,10 @@
 <h1 class="detailH1">${dto.boardTitle}</h1>
 <p class="detailP">${dto.boardRegDate}</p>
 <p class="detailP">${dto.boardUpdDate}</p>
+<%-- <c:if test="${dto.boardRegId}"> --%>
 <button class="freeUpdate">수정</button>
 <button class="freeDelete">삭제</button>
+<%-- </c:if> --%>
 <br><br>
 <hr class="freeDetailHr">
 <br><br>
@@ -38,7 +40,12 @@
 	<input type="hidden" value="aaa" id="commRegId">
 	<textarea rows="5" cols="40" name="commContents" class="commContents"
 	placeholder="댓글을 입력해주세요"></textarea>
-	<button type="button" class="commButton">등록하기</button>
+<%-- 	<c:if test="${login == null }">
+		<button type="button" class="notLogin">로그인 후 사용 가능</button>
+	</c:if> --%>
+	<%-- <c:if test="${login != null }"> --%>
+		<button type="button" class="commButton">등록하기</button>
+	<%-- </c:if> --%>
 </div>
 <div class="free_commList">
 	<div class="comm_listItem">	
@@ -64,14 +71,14 @@ $(".freeDelete").click(function(){
 		data:{boardSeq},
 		success : function(data){
 			if(data === 'ok'){
-			alert("삭제되었습니다.");
+		//	alert("삭제되었습니다.");
 			location.href="/freeBoard/freeBoardViews";
 		}else{
-			alert("글삭제 노노");
+		//	alert("글삭제 노노");
 			}
 		},
 		error : function(){
-		alert("쉽벌");
+	//	alert("쉽벌");
 			}
 	});
 
@@ -105,11 +112,11 @@ $(".commButton").click(function(){
 				location.href = "/freeBoard/freeDetail?boardSeq=" + ${dto.boardSeq};
 			}
 			else{
-				alert("저런..");
+			//	alert("저런..");
 			}
 			},
 			error : function(){
-				alert("error");
+			//	alert("error");
 				}
 		});
 	}
@@ -173,7 +180,7 @@ function getListData(pNumber){
 			/* getLikeCount(${dto.boardSeq}); */
 			},
 			error:function(){
-				alert('아 이거다');
+			//	alert('아 이거다');
 				}
 		});
 	}
@@ -188,7 +195,7 @@ function getBbsListCount(){
 			loadPage(count);
 		},
 		error:function(){
-			alert("이거냐?");
+		//	alert("이거냐?");
 		}
 	});
 }
@@ -236,15 +243,15 @@ function commDelete(commSeq){
 		data:{commSeq:commSeq},
 		success:function(data){
 			if(data === 'ok'){
-				alert("댓글삭제");
+			//	alert("댓글삭제");
 				location.href = "/freeBoard/freeDetail?boardSeq=" + ${dto.boardSeq};
 				}
 			else{
-				alert("인생");
+			//	alert("인생");
 				}
 			},
 			error : function(){
-				alert('error');
+			//	alert('error');
 				}
 		});
 }
@@ -286,15 +293,15 @@ function commUpdateAf(commSeq){
 		data:{commSeq:commSeq , commContents:commContents},
 		success:function(data){
 			if(data === 'ok'){
-				alert("댓글수정");
+			//	alert("댓글수정");
 				location.href = "/freeBoard/freeDetail?boardSeq=" + ${dto.boardSeq};
 			}
 			else{
-				alert("인생");
+			//	alert("인생");
 				}
 			},
 			error:function(){
-				alert('error');
+			//	alert('error');
 			}
 		});	
 }
@@ -339,7 +346,8 @@ $(".likeButton").click(function (){
 	});
 }
  */
- $('button').click(function(){
+ 
+ $('.likeButton').click(function(){
 	  if($(this).hasClass('btn_unlike')){
 	    $(this).removeClass('btn_unlike');
 	    $('.ani_heart_m').removeClass('hi');

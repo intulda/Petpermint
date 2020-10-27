@@ -39,7 +39,7 @@
 		<tbody>
 		<c:forEach var="l" items="${getFreeBoardList}" varStatus="vs">
 				<tr>
-					<th><input type="checkbox" name="freeCheck_${dto.boardSeq}" class="freeCheck_${dto.boardSeq}" value="${dto.boardSeq}" seq="${dto.boardSeq}"></th>
+					<th><input type="checkbox" name="freeCheck_${dto.boardSeq}" class="freeCheck_${dto.boardSeq}" value="${dto.boardSeq}"></th>
 					<td>${vs.count}</td>
 					<td>${l.boardTitle}</td>
 					<td>${l.boardRegId}</td>
@@ -128,7 +128,7 @@ function getListData(pNumber){
 			
 			},
 			error : function(e){
-				alert("error");
+			//	alert("error");
 			}
 		});
 	}
@@ -202,7 +202,7 @@ function getListData(pNumber){
 					getListCount();
 				},
 					error:function(){
-						alert("error");
+				//		alert("error");
 					}
 				});
 		}

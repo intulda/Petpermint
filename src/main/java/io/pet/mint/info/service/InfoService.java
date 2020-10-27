@@ -25,8 +25,8 @@ public class InfoService {
 		return list;
 	}
 	
-	public int getInfoListCount(InfoParam param) {
-		return dao.getInfoListCount(param);
+	public int getInfoListCount(InfoParam par) {
+		return dao.getParamCount(par);
 	}
 	
 	public int getParamCount(InfoParam par) {
