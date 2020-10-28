@@ -69,7 +69,7 @@ font-family: 'Sunflower', sans-serif;
 }
 
 .detailButton{
-	color: #fff;
+	color: #fff !important;
     background-color: #60a1e1;
     border-color: #60a1e1;
     padding: .5em .75em;
@@ -123,7 +123,7 @@ font-family: 'Sunflower', sans-serif;
 
 .page-item.active .page-link {
     z-index: 3;
-    color: #fff;
+    color: #fff !important;
     background-color: #60a1e1;
     border-color: #60a1e1;
 }
