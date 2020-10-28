@@ -18,10 +18,12 @@
 <br><br>
 
 <div class="freeDiv">
-<%-- <c:if test="${login != null }"> --%>
+ <c:if test="${login != null }"> 
 	<button type="button" class="write">글쓰기</button>
-	<button type="button" class="checkDel">삭제</button>
-<%-- </c:if> --%>
+	<c:if test="${ login.id == admin1 }">
+		<button type="button" class="checkDel">삭제</button>
+	</c:if>
+ </c:if> 
 <br><br>
 	
 	<table class="freeTable" id="bbs">
@@ -33,7 +35,6 @@
 				<th class="name">작성자</th>
 				<th class="date">날짜</th>
 				<th class="view">조회수</th>
-				<th class="like">좋아요</th>
 			</tr> 
 		</thead>
 		<tbody>
@@ -45,7 +46,6 @@
 					<td>${l.boardRegId}</td>
 					<td>${l.boardRegDate}</td>
 					<td>${l.boardViewCount}</td>
-					<td>${l.boardLikeSeq}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -119,7 +119,6 @@ function getListData(pNumber){
 						+"	<td>" + data.boardRegId + "</td>"
 						+"	<td>" + data.boardRegDate + "</td>"
 						+"	<td>" + data.boardViewCount + "</td>"
-						+"	<td>" + data.boardLikeSeq + "</td>"
 						+"	</tr>";
 						
 				$("tbody").append(app);
@@ -197,7 +196,7 @@ function getListData(pNumber){
 				type:"post",
 				data: { boardSeq : delArr[i].value },
 				success : function(data){
-					//현재 페이지넘버 가져와 알겠어?
+					
 					getListData(0);
 					getListCount();
 				},

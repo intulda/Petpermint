@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.pet.mint.freeBoard.dao.FreeLikeDAO;
 import io.pet.mint.freeBoard.dto.FreeBoardDTO;
 import io.pet.mint.freeBoard.dto.FreeBoardParam;
 import io.pet.mint.freeBoard.dto.FreeCommDTO;
@@ -210,30 +211,31 @@ public class FreeController {
 		return check>0?"ok":"no";
 	}
 	
-	
-	
-	
-	
-	
-	//-------------------- 추천 버튼 ------------------------//
-	
-	@ResponseBody
-	@PostMapping(value="freeLikeButton")
-	public String freeLikeButton(FreeLikeDTO dto) {
-		
-		int n = likeService.freeLikeButton(dto);
-	//	System.out.println("------------------------------------------------");
-		service.freeLikeCount(dto.getBoardSeq());
-		return n > 0?"ok":"no";
-	}
-
-	@ResponseBody
-	@PostMapping(value="getLikeCount")
-	public int getLikeCount(int boardSeq) {
-		System.out.println("----------------------------------------------");
-		int count = likeService.getLikeCount(boardSeq);
-		
-		return count;
-	}
-
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * //-------------------- 추천 버튼 ------------------------//
+	 * 
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @PostMapping(value="freeLikeButton") public int freeLikeButton(FreeLikeDTO
+	 * dto) {
+	 * 
+	 * int n = likeService.freeLikeButton(dto); //
+	 * System.out.println("------------------------------------------------");
+	 * service.freeLikeCount(dto.getBoardSeq());
+	 * 
+	 * return n; }
+	 * 
+	 * @ResponseBody
+	 * 
+	 * @PostMapping(value="getLikeCount") public int getLikeCount(int boardSeq) {
+	 * System.out.println("----------------------------------------------"); int
+	 * count = likeService.getLikeCount(boardSeq);
+	 * 
+	 * return count; }
+	 */
 }
