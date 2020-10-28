@@ -22,7 +22,7 @@
 </div>
 <c:if test="${login.id == null }"><br>
 </c:if>
-<c:if test="${login.id eq lostPetDto.lostId}">
+<c:if test="${(login.id eq lostPetDto.lostId || login.auth == 3)}">
 			<div class="buttonList">
 				<span class="item">
 				<button type="button" onclick="update(${lostPetDto.lostSeq})">수정</button></span> 
