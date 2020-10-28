@@ -16,9 +16,5 @@ public interface FreeLikeDAO {
 	//좋아요 카운트
 	public int getLikeCount(int boardSeq);
 	
-	//좋아요 뷰카운트
-	public int likeDelete(int boardSeq);
-	
-	public int updateLike(int boardSeq);
 	
 }

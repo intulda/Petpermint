@@ -5,21 +5,27 @@
 
 <mapper namespace="io.pet.mint.freeBoard.dao.FreeLikeDAO">
 
-<insert id="freeLikeButton" parameterType="io.pet.mint.freeBoard.dto.FreeLikeDTO">
+<!-- <insert id="freeLikeButton" parameterType="io.pet.mint.freeBoard.dto.FreeLikeDTO">
 	INSERT INTO BOARD_LIKES (BOARD_LIKE_SEQ, BOARD_SEQ, ID)
 	VALUES ('1', #{boardSeq}, 'aaa')
 </insert>
-
+-->
 <select id="getLikeCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 	SELECT COUNT(*)
 	FROM BOARD_LIKES
-	WHERE BOARD_LIKE_SEQ = 1 AND BOARD_SEQ = #{boardSeq}
+	WHERE ID = 'aaa' AND BOARD_SEQ = #{boardSeq}
 </select>
 
-<update id="updateLike" parameterType="java.lang.Integer">
+<update id="freeLikeButton" parameterType="java.lang.Integer">
 	UPDATE BOARD_LIKES
-	SET BOARD_LIKE_SEQ = BOARD_LIKE_SEQ - 1
-	WHERE BOARD_SEQ = #{boardSeq}
+	SET BOARD_LIKE_SEQ = BOARD_LIKE_SEQ + 1
+	WHERE ID = 'aaa' AND BOARD_SEQ = #{boardSeq}
 </update>
 
-</mapper>
+<update id="freeUnlikeButton" parameterType="java.lang.Integer">
+	UPDATE BOARD_LIKES
+	SET BOARD_LIKE_SEQ = 0
+	WHERE ID = 'aaa' AND BOARD_SEQ = #{boardSeq}
+</update>
+
+</mapper>	
