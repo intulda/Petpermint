@@ -102,14 +102,18 @@ public class LostPetController {
 		}	
 		
 		model.addAttribute("lostPetDto", lostPetDto);
-
+		
 		//댓글 불러오기
 		List<LCommDto> LCommList = service.getLCommList(seq);
 		System.out.println(LCommList);
+		
+		int commCount = service.getLCommCount(seq);
+		
 		model.addAttribute("LCommList", LCommList);
+		model.addAttribute("commCount", commCount);
 		//댓글 적기 Ajax
 		//댓글
-		
+				
 		return "view:lostPet/lostPetDetail";
 	}
 	

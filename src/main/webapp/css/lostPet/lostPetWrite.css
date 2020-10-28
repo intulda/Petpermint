@@ -1,41 +1,45 @@
-/* �۾��� */
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
 
 .inputArea{
     background: white;
     width:960px;	
 	margin: 0 auto;
-	margin-bottom: 30px;
+	padding: 20px;
 }
 
 .inputArea2{
     background: white;
     width:350px;
 	height:1200px;
-	margin: right;
 	padding: 20px;
-	margin-left: 350px;
+	margin: 0 auto;
 }
 
 .inputArea2 button{
-	color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
+    color: #fff;
+    background-color: #60a1e1;
+    border-color: #60a1e1;
     padding: .5em .75em;
     font-size: inherit;
     font-family: inherit;
     line-height: normal;
     vertical-align: middle;
     border-radius: .25em;
-
-  -webkit-appearance: none; 
-  appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 300;
 }
 
-.title{
-	    margin-left: 60;
+.title {
+    font-family: 'Nanum Pen Script', cursive;
+    font-size: 50px;
+    color: #60a1e1;
     text-align: center;
-	
+    width: 350;
+    margin: auto;
 }
+
 
 .inputArea2 input {
     display: inline-block;
@@ -177,9 +181,18 @@ body {margin: 10px;}
 }
 
 .filebox.bs3-primary label {
-  color: #fff;
-  background-color: #337ab7;
-    border-color: #2e6da4;
+    color: #fff;
+    background-color: #60a1e1;
+    border-color: #60a1e1;
+    padding: .5em .75em;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: normal;
+    vertical-align: -webkit-baseline-middle;
+    border-radius: .25em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 

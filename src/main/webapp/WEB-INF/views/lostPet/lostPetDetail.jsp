@@ -8,12 +8,11 @@
 <fmt:requestEncoding value="utf-8" />
 
 <title>멍냥 구조대</title>
-
+<div class="title">구조 동물 상세 보기</div>
 <div class="inputArea">
-	<h2 class="title">구조 동물 상세 보기</h2>
 	<div class="titlebox">
 		<div class="idbox"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>&nbsp;&nbsp;${lostPetDto.lostId}
-		&nbsp;&nbsp; ${lostPetDto.lostWdate}
+		&nbsp;&nbsp; | &nbsp;&nbsp;${lostPetDto.lostWdate}
 		</div>
 		<div class="eye"><img src=/css/lostPet/lostPetIcon/eye2.png class='icon'>&nbsp;&nbsp;${lostPetDto.lostViewcount}</div>
 	</div>
@@ -21,6 +20,9 @@
 	<div class="box1">
 			<img src="${lostPetDto.imagePath}" width="420px" height="480px">
 </div>
+<c:if test="${login.id == null }"><br>
+</c:if>
+<c:if test="${login.id eq lostPetDto.lostId}">
 			<div class="buttonList">
 				<span class="item">
 				<button type="button" onclick="update(${lostPetDto.lostSeq})">수정</button></span> 
@@ -28,6 +30,8 @@
 					<button type="button" onclick="del(${lostPetDto.lostSeq})">삭제</button>
 				</span>
 			</div>
+</c:if>			
+			
 		<div class="box2">
 			<table><tr><th class="head">No.</th>
 						<td class='content'>${lostPetDto.lostSeq}</td></tr>
@@ -62,7 +66,7 @@
 	<div class='content2'>${lostPetDto.lostDetail}</div>
 	<br> <br>
 	<div class=lcommArea>
-		<h3 class="comm">댓글()</h3>
+		<h3 class="comm">댓글(${commCount})</h3>
 		<div class=lcommArea2>
 			<div class="lcommArea3">
 				<h4 class="lcommId">
@@ -81,13 +85,11 @@
 			<c:forEach var="c" items="${LCommList}">
 				<div class="lcommArea4">
 					<div>
-						<span>${c.lcommId}</span>
-					</div>
+						<span class="font">${c.lcommId}</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+						<span class="font2">${c.lcommDate}</span>
+					</div><br>
 					<div>
-						<span>${c.lcommDate}</span>
-					</div>
-					<div>
-						<span>${c.lcommContent}</span>
+						<span class="font">${c.lcommContent}</span>
 					</div>
 					<div class=button2>
 					<c:if test="${(login.id eq c.lcommId || login.auth == 3)}">
