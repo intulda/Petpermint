@@ -25,18 +25,10 @@
 
                 {name: '구조했어요', link:'', subMenu: [
                         { name: '구조했어요', link: '/lostPet/lostPet', order: 1},
-                        { name: '찾아주세요', link: '', order: 2},
-                        { name: '입양공고', link: '', order: 3},
                     ], order:4},
-
-                {name: '중고장터', link:'', subMenu: [
-                        { name: '강아지 용품', link: '', order: 1},
-                        { name: '고양이 용품', link: '', order: 2},
-                        { name: '무료나눔', link: '', order: 3},
-                    ], order:5},
                 {name: '커뮤니티', link:'', subMenu: [
                         { name: '자유게시판', link: '', order: 1},
-                    ], order:6},
+                    ], order:5},
             ]
         }
 
