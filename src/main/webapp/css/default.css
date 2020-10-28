@@ -73,8 +73,8 @@ footer, header, hgroup, menu, nav, section {
     display: block;
 }
 a {
-    text-decoration: none;
-    color: black;
+    text-decoration: none !important;
+    color: black !important;
 }
 body {
     width: 100%;
