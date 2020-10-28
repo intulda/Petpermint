@@ -15,20 +15,18 @@
 <h1 class="detailH1">${dto.boardTitle}</h1>
 <p class="detailP">${dto.boardRegDate}</p>
 <p class="detailP">${dto.boardUpdDate}</p>
-<%-- <c:if test="${dto.boardRegId}"> --%>
-<button class="freeUpdate">수정</button>
-<button class="freeDelete">삭제</button>
-<%-- </c:if> --%>
+
+<c:if test="${login != null || login.auth == 3 }">
+	<button class="freeUpdate">수정</button>
+	<button class="freeDelete">삭제</button>
+</c:if>
+
 <br><br>
 <hr class="freeDetailHr">
 <br><br>
 
 <div class="detailDiv" id="detailDiv">
 	<p>${dto.boardContents}</p>
-	<button type="button" class="likeButton" name="likeButton">
-		<span class="img_emoti">좋아요</span>
-	 	<span class="ani_heart_m"></span>
-	</button>
 </div>
 <br>
 <span id="replyCount"></span>개의 댓글
@@ -40,12 +38,12 @@
 	<input type="hidden" value="aaa" id="commRegId">
 	<textarea rows="5" cols="40" name="commContents" class="commContents"
 	placeholder="댓글을 입력해주세요"></textarea>
-<%-- 	<c:if test="${login == null }">
+ 	<c:if test="${login == null }">
 		<button type="button" class="notLogin">로그인 후 사용 가능</button>
-	</c:if> --%>
-	<%-- <c:if test="${login != null }"> --%>
+	</c:if> 
+	 <c:if test="${login != null }"> 
 		<button type="button" class="commButton">등록하기</button>
-	<%-- </c:if> --%>
+	 </c:if> 
 </div>
 <div class="free_commList">
 	<div class="comm_listItem">	
@@ -141,10 +139,10 @@ function getListData(pNumber){
 
 				let updDate ="";
 				if(commDTO.commUpdate != null){
-					updDate = "<span class='infoData'>수정날짜</span>"
+					updDate = "<span class='infoData'>수정날짜 </span>"
 							+ "<span class='infoData'>"
 							+ commDTO.commUpdate
-							+ "</span>";
+							+ "</span><br>";
 				}	
 				
 			//	console.log(commDTO);
@@ -157,16 +155,18 @@ function getListData(pNumber){
 					+ "'>"
 					+ commDTO.commRegDate
 					+ "</span>"
-					+ "<button type='button' id='commUpdButton"
+					+"	<c:if test='${login != null }'>"
+					+ "<a id='commUpdButton"
 					+ commDTO.commSeq
 					+ "' onclick=\"commUpdate('"
 					+ commDTO.commSeq + "','" + commDTO.commContents
-					+ "')\">수정</button>"
-					+ "<button type='button' id='commDelButton"
+					+ "')\" class='commUpdButton'>수정</a>"
+					+ "<a id='commDelButton"
 					+ commDTO.commSeq
 					+ "' onclick=\"commDelete('"
 					+ commDTO.commSeq
-					+ "')\">삭제</button>"
+					+ "')\" class='commDelButton'>삭제</a>"
+					+"	</c:if>"
 					+ "</div>"
 					+ "<div class='commBody' id='commBody"
 					+ commDTO.commSeq + "'>"
@@ -265,21 +265,34 @@ function commUpdate(commSeq, commContents){
 				 
 	$("#commBody" + commSeq).html(htmlData);
 	
-	let cancelButton = "<button type='button' onclick=\"commUpdSwitch('"+commSeq +"','"+commContents+"' )\""
+	let cancelButton = "<a onclick=\"commUpdSwitch('"+commSeq +"','"+commContents+"' )\""
  	  				 + "id='cancelButton"
 	  				 + commSeq
-	  				 + "'>수정취소</button>";
+	  				 + "'> 수정취소</a>";
 	$("#commRegDate"+ commSeq).after(cancelButton);
 	
-	let commUpdAfButton = "<button type='button' onclick=\"commUpdateAf('"+commSeq+"')\""
+	let commUpdAfButton = "<a onclick=\"commUpdateAf('"+commSeq+"')\""
 		 + "id='commUpdAfButton"
 		 + commSeq
-		 + "'>수정완료</button>";
+		 + "' class='commUpdateAf'>수정완료</a>";
 	$("#comm_content" + commSeq).after(commUpdAfButton);
 	$("#commUpdButton"+ commSeq).remove();
 	
 	
-}	
+}
+
+function commUpdSwitch(commSeq, commContent){
+
+	let	 updButton = "<a id='commUpdButton"
+				  + commSeq
+				  + "' onclick=\"commUpdate('"
+				  + commSeq + "','" + commContent
+				  + "')\"  class='commUpdButton'>수정</a>";
+	$("#commBody" + commSeq).html(commContent);
+	$("#commRegDate"+ commSeq).after(updButton);
+	$("#cancelButton"+ commSeq).remove();
+	
+}
 
 
 function commUpdateAf(commSeq){
@@ -316,11 +329,13 @@ $(".likeButton").click(function (){
 		data : {boardSeq : ${dto.boardSeq},
 				id : 'aaa'},
 		success:function(data){
-			if(data === 'ok'){
-			/* alert("좋아용"); */
+			if(data === 1){
+			// alert("좋아용");
 		}
-		else{
-			/* alert('싫어용'); */
+		else if(data === 0){
+			//alert('싫어용');
+			boardLikeSeq--;
+			
 		}
 		},
 		error:function(){

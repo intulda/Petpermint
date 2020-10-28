@@ -10,7 +10,7 @@
 .freeH1{
 	margin-top: 110px;
 	padding-colortop:60px;
-	font-size: 60px;
+	font-size: 45px;
 	text-align: center;
 	font-weight : normal;
 }
@@ -169,7 +169,7 @@
 .detailH1{
 	
 	padding-top:90px;
-	font-size: 60px;
+	font-size: 45px;
 	text-align: center;
 	font-weight : normal;
 }
@@ -207,13 +207,42 @@
 	position: relative;
 }
 
-.write,
+.write{
+	float : right;
+	margin-right : 10px;
+	border: 1px;
+    border-radius: 5px;
+    font-size: 20px;
+    border: 2px solid #dcdcdc;
+}
+
 .checkDel{
 	float : right;
 	margin-right : 10px;
 	border: 1px;
     border-radius: 5px;
     font-size: 20px;
+    background-color : black;
+    color : white;
+    border: 2px solid black;
+ 
+}
+
+div.commHeader{
+	flex-direction: row;
+	margin-bottom: 10px;
+	font-size: 15px;
+	color: #999999;
+}
+
+.commUpdButton,
+.commDelButton{
+	margin-right : 5px;
+	color: #999999;
+}
+
+.commUpdateAf{
+	margin-left : 5px;
 }
 
 .freeUpdate,
@@ -235,6 +264,7 @@
 	width : 100px;
 	border: 2px solid #60a1e1;
     border-radius: 5px;
+    color: #8c8c8c;
 }
 
 .commButton{
@@ -250,7 +280,7 @@
     font-size : 20px;
 }
 
-.likeButton {
+/* .likeButton {
   position: relative;
   margin: 100px auto;
   display: block;
@@ -330,7 +360,7 @@
 @keyframes off_m {
   from { background-position: 0 }
   to { background-position: -8250px }
-}
+} */
 
 .notLogin{
 	background-color: #5499de;
