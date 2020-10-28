@@ -11,7 +11,7 @@
         <div class="main__title">
             <span>강아지 이야기</span>
         </div>
-        <div class="story__more" data-link="">
+        <div class="story__more" data-link="/info/dogPage?Pet=강아지">
             <p>더보기</p>
         </div>
         <div class="main__contents">
@@ -19,7 +19,7 @@
                 <c:when test="${dogList.size() ne 0}">
                     <ul>
                         <c:forEach items="${dogList}" var="dog">
-                            <li class="story__card-wrap" data-link="">
+                            <li class="story__card-wrap" data-link="/info/dogDetail?seq=${dog.boardSeq}">
                                 <div class="story__card-image">
                                     <c:if test="${dog.thumbnail ne null}">
                                         <div style="background-image: url('${dog.thumbnail}')"></div>
@@ -44,7 +44,7 @@
         <div class="main__title">
             <span>고양이 이야기</span>
         </div>
-        <div class="story__more" data-link="">
+        <div class="story__more" data-link="/info/catPage?Pet=고양이">
             <p>더보기</p>
         </div>
         <div class="main__contents">
@@ -52,14 +52,14 @@
                 <c:when test="${catList.size() ne 0}">
                     <ul>
                         <c:forEach items="${catList}" var="cat">
-                            <li class="story__card-wrap" data-link="">
+                            <li class="story__card-wrap" data-link="/info/dogDetail?seq=${cat.boardSeq}">
                                 <div class="story__card-image">
                                     <c:if test="${cat.thumbnail ne null}">
-                                        <div style="background-image: url("${cat.thumbnail}")"></div>
-                                    /</c:if>
+                                        <div style="background-image: url('${cat.thumbnail}')"></div>
+                                    </c:if>
                                 </div>
                                 <div class="story__card-content">
-                                    <span><c:out value='${cat.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
+                                    <span><c:out value="${cat.boardContents.replaceAll('\\\<.*?\\\>','')}"></c:out></span>
                                 </div>
                             </li>
                         </c:forEach>

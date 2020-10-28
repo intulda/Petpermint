@@ -29,6 +29,7 @@
 }
 .footer__right ul li {
     padding: 5px;
+    white-space: nowrap;
 }
 .footer-flex {
     display: flex;
