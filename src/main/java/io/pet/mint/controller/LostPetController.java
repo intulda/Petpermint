@@ -3,6 +3,8 @@ package io.pet.mint.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,19 +22,24 @@ import io.pet.mint.lostPet.dto.LostPetDto;
 import io.pet.mint.lostPet.dto.LostPetParam;
 import io.pet.mint.lostPet.service.LostImagesService;
 import io.pet.mint.lostPet.service.LostPetService;
+import io.pet.mint.member.vo.MemberVO;
+import io.pet.mint.placeBoard.dto.PlaceBoardDto;
 import io.pet.mint.util.CommonUtil;
 
 @Controller
 @RequestMapping(value="/lostPet/*")
 public class LostPetController {
 
-	@Autowired
-	LostPetService service;
-	
-	@Autowired
+	LostPetService service;	
 	LostImagesService imageService;
 	
-	@GetMapping(value = "lostPet")
+	public LostPetController(LostPetService service, LostImagesService imageService) {
+		this.service = service;
+		this.imageService = imageService;
+	}
+	
+	
+	@GetMapping("lostPet")
 	public String lostPet() {
 		
 		return "view:lostPet/lostPet";
@@ -72,11 +79,21 @@ public class LostPetController {
 	}
 	
 	@GetMapping(value="lostPetDetail")
-	public String getLostPetDetail(int seq, Model model) {
+	public String getLostPetDetail(@RequestParam(value = "seq") int seq, Model model, HttpServletRequest req) {
 		//글 상세
-		LostPetDto lostPetDto = service.getLostPetDetail(seq);
-		System.out.println(lostPetDto);
 		
+		LostPetDto lostPetDto = service.getLostPetDetail(seq);
+		MemberVO login = (MemberVO)req.getSession().getAttribute("login");
+		
+		//조회수 관련
+		if(login != null&&(!lostPetDto.getLostId().equals(login.getId())) ) {
+			
+			service.getLostViewcount(seq);
+		}else if(login == null) {
+			
+			service.getLostViewcount(seq);
+		}
+				
 		LostImagesDto imagesDto = imageService.getImages(lostPetDto.getLostSeq());
 		
 		if(imagesDto != null) {
@@ -85,9 +102,7 @@ public class LostPetController {
 		}	
 		
 		model.addAttribute("lostPetDto", lostPetDto);
-		//뷰카운트
-		int getLostViewcount = service.getLostViewcount(seq);
-		model.addAttribute("getLostViewcount", getLostViewcount);
+
 		//댓글 불러오기
 		List<LCommDto> LCommList = service.getLCommList(seq);
 		System.out.println(LCommList);
@@ -100,6 +115,7 @@ public class LostPetController {
 	
 	@GetMapping(value="lostPetWriteView")
 	public String lostPetWriteView() {
+
 		
 		System.out.println("lostPetWriteViewController");
 		return "view:lostPet/lostPetWrite";
@@ -140,7 +156,7 @@ public class LostPetController {
 	@ResponseBody
 	@PostMapping(value = "lostPetLCommWriteAf")
 	public String lostPetLCommWriteAf(LCommDto lcommDto, Model model) throws Exception {
-		System.out.println("lostPetLCommWriteAf 도착" + lcommDto.getLcommSeq());
+		System.out.println("lostPetLCommWriteAf 도착" + lcommDto.toString());
 		int n = service.getLostPetLCommWrite(lcommDto);
 		
 		return n>0?"ok":"no";

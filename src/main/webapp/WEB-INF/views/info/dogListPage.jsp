@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/info/infoList.css">
 <fmt:requestEncoding value="utf-8"/>
 
+
+
 <div class="infomain">
 
 <table class="infotable">
@@ -25,10 +27,8 @@
 	</tr>
 </table>	
 
-
-
 <c:choose>
-	<c:when test="${param.Type eq '백과'}">
+	<c:when test="${param.Type eq '강아지백과'}">
 		<div class="infotitle">
 			<img src="/images/infoImg/아이콘.png" style="height: 50px; width: 50px;">
 			강아지백과 페이지 입니다!
@@ -37,7 +37,7 @@
 		</div>
 	</c:when>
 
-	<c:when test="${param.Type eq '음식'}">
+	<c:when test="${param.Type eq '강아지음식'}">
 		<div class="infotitle">
 			<img src="/images/infoImg/음식.png" style="height: 50px; width: 50px;">
 			강아지음식 페이지 입니다!
@@ -46,10 +46,37 @@
 		</div>
 	</c:when>
 	
-	<c:when test="${param.Type eq '훈련'}">
+	<c:when test="${param.Type eq '강아지행동'}">
 		<div class="infotitle">
 		<img src="/images/infoImg/훈련.png" style="height: 50px; width: 50px;">
-		강아지훈련 페이지 입니다!
+		강아지행동 페이지 입니다!
+		</div>
+		<div class="infoDiv">
+		</div>
+	</c:when>
+	
+		<c:when test="${param.Type eq '고양이백과'}">
+		<div class="infotitle">
+			<img src="/images/infoImg/고양.png" style="height: 50px; width: 50px;">
+			고양이백과 페이지 입니다!
+		</div>
+		<div class="infoDiv">
+		</div>
+	</c:when>
+
+	<c:when test="${param.Type eq '고양이음식'}">
+		<div class="infotitle">
+			<img src="/images/infoImg/양이.png" style="height: 50px; width: 50px;">
+			고양이음식 페이지 입니다!
+		</div>
+		<div class="infoDiv">
+		</div>
+	</c:when>
+	
+	<c:when test="${param.Type eq '고양이행동'}">
+		<div class="infotitle">
+		<img src="/images/infoImg/이이.png" style="height: 50px; width: 50px;">
+			고양이행동 페이지 입니다!
 		</div>
 		<div class="infoDiv">
 		</div>
@@ -110,7 +137,7 @@ function getBbsListData(pNumber){
          boardType:boardType
           },
       success:function( list ){
-
+		 console.log(list);
          $(".infoDiv").empty();
          
          if(list.length < 1 ){
@@ -124,9 +151,9 @@ function getBbsListData(pNumber){
             $.each(list, function(index, infoDto){
                 let tagData = "<div class='infoDiv2' onclick='detailgo("+infoDto.boardSeq+")'>";
 				tagData += "<div class='infocontent'>";
-                tagData += "<img src='"+infoDto.filePath+"' width='300px' height='300px'><br>";
+                tagData += "<img class='infoimg' src='"+infoDto.filePath+"'  style='height: 280px; width: 280px; border-radius: 10px;' ><br><br>";
                 tagData += "<h3>"+infoDto.boardTitle+"</h3>";
-                tagData += "작성자:["+infoDto.boardRegId+"]<br>";
+                tagData += "작성자 ["+infoDto.boardRegId+"]<br>";
                 tagData += "</div>";
                 tagData += "</div>";
     
@@ -168,17 +195,27 @@ function loadPage( totalCount ){
    let pageSize = 10;
    let nowPage = 1;
 
-   let totalPages = totalCount / pageSize;
-   if(totalCount % pageSize > 0){
-      totalPages++;
-   }
+   let totalPages = 0;
+
+   // 게시물 갯수가 0일경우 페이지수를 1로 지정
+   if(totalCount == 0){
+      totalPages = 1;
+   }else{
+	// 자바스크립트는 정수결과를 얻기 위해서 정수변환
+	// 자바스크립트는 정수결과를 얻기 위해서 정수변환
+		totalPages =  parseInt(totalCount / pageSize);
+		if(totalCount % pageSize > 0){
+		
+			totalPages++;
+		}
+	   }
    
    $("#pagination").twbsPagination('destroy');	// 페이지 갱신
 	
 	$("#pagination").twbsPagination({
-	//	startPage: 1,
+		//startPage: 1,
 		totalPages: totalPages,		// 전체 페이지 수
-		visiblePages: 10,
+		visiblePages: 9,
 		first:'<span aria-hidden="true">«</span>',
 		prev:"이전",
 		next:"다음",

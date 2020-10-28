@@ -45,6 +45,7 @@ div.place_title{
 }
 
 .item2{
+	
 	flex:9;
 }
 
@@ -53,20 +54,26 @@ div.place_title{
 	flex:8;
 }
 
+.item4{
+	
+	flex:1;
+	padding-bottom: 20px;
+	padding-left: 20px;
+}
 
 .sendData{
+	
 	margin: 5px;
 	height: 30px;
-	width: 90%;
-	
+	width: 90%;	
 }
 
 .idData{
+	
 	margin: 5px;
 	height: 30px;
 	width: 80%;
 	border: none;
-
 }
 
 .idData:focus{
@@ -106,7 +113,7 @@ div.place_title{
     text-decoration: none;
     text-align: center;
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 400;
     border-radius: 2px;
     outline: 0;
     margin-top: 20px;

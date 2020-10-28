@@ -6,17 +6,15 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/lostPet/lostPetWrite.css" />
 <fmt:requestEncoding value="utf-8"/>
 
-
-
 <div class="inputArea">
 <br><br>
 <h3 class="title">유기 동물 구조 글쓰기</h3>
 <div class="inputArea2">
-	<form method="post" class="sendData" id="sendForm" action="/lostPet/lostPetWrite"
-		enctype="multipart/form-data">
+	<form method="post" id="sendForm" action="/lostPet/lostPetWrite" enctype="multipart/form-data">
+아이디
 <br>
-아이디<br>
-<input type="text" name="lostId" id="_id" value='aaa' readonly placeholder="아이디"/><br>
+<input type="text" name="lostId" id="_id" value="${login.id}" readonly/>
+<br>
 <div class="filebox bs3-primary preview-image">
    <input type="file" id="input_file" name="thumbnail" class="upload-hidden" accept=".gif, .jpg, .png"> <br>
 		사진<br><input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
@@ -59,14 +57,6 @@
 <button type="button" id="writeButton" >작성 완료</button>
 </div>
 	</div>
-
-
-
-
-<!-- <div class="filebox">
-<label for="tumbnail">업로드</label>
-<input type="file" class="label" id="tumbnail" name="thumbnail" ><br>
-</div> -->
 
 
 <script type="text/javascript">
@@ -159,42 +149,6 @@ $(document).ready(function() {
 });
 
 
-	
-
-/* $("#_lostPetWrite").click(function() {
-	
-	let sendData = {lostId:$('#_id').val(), lostPhone:$('#_phone').val(),
-						lostKind:$('#_kind').val(), lostType:$('#_type').val(),
-						lostStatus:$('#_status').val(), lostGender:$('#_gender').val(),
-						lostDetail:$('#_detail').val(),
-						lostLocation:$('#_location').val()
-						};
-	
-	//console.log(sendData);	
-	
-	$.ajax({
-		url:"/lostPet/lostPetWriteAf",
-		type:"post",
-		data:sendData,
-		success:function(data){
-			//alert("success");
-
-			if(data==='ok'){
-				alert("글을 작성했습니다.");
-				location.href='/lostPet/lostPet';
-			}
-			else{
-				alert("글을 작성하지못했습니다.");
-			}
-	
-		},
-		error:function(){
-			alert("error");
-		}
-
-	});
-	//$("#_lostPetInfo").attr("action":"lostPetWriteAf").submit();	
-}); */
 </script>
 
 

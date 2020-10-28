@@ -7,11 +7,12 @@ public class InfoDto implements Serializable {
    
    /* 강아지 , 고양이*/
    
+	
+	/* 카테고리  */
+	private String boardCategory;   // 4 dog, cat
+	   
    /* 게시판 타입 */
-   private String boardType;  // 3 info,food,training
-   
-   /* 카테고리  */
-   private String boardCategory;   // 4 dog, cat
+   private String boardType;  // 백과,음식,행동
    
    /* 시퀀스, FK*/
    private int boardSeq;    // 2  글 순서
@@ -94,7 +95,6 @@ public int getBoardSeq() {
 public void setBoardSeq(int boardSeq) {
 	this.boardSeq = boardSeq;
 }
-
 public String getId() {
 	return id;
 }
@@ -102,6 +102,7 @@ public String getId() {
 public void setId(String id) {
 	this.id = id;
 }
+
 
 public int getBoardRef() {
 	return boardRef;

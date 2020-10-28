@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
+<script src="../js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeDetail.css" />
+<link rel="stylesheet" type="text/css" href="../css/placeBoard/placeDetail.css" />
 <Style>
 
 
@@ -96,12 +96,11 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dcdc7367b980d0b1446f352a1693e015&libraries=services"></script>
 <script>
 
-
 let boardSeq = ${placeDto.boardSeq};
 
 getBbsListData(0);
 getBbsListCount();
-			
+
 
 // 지정 번호에 해당하는 댓글 게시물 출력
 function getBbsListData(pNumber){
@@ -181,7 +180,7 @@ function getBbsListCount(boardCategory){
 		data:{"commRef":${placeDto.boardSeq}
 			 },
 		success:function( count ){
-	
+			
 			loadPage(count);		
 		},
 		error:function(){
@@ -247,7 +246,6 @@ $('#delButton').click(function(){
 		success:function(data){
 			if(data === 'ok'){
 	
-				alert("글을 삭제했습니다.");
 				location.href = "/placeBoard/placeBoardList" ;
 			}
 			else{
@@ -255,7 +253,7 @@ $('#delButton').click(function(){
 			}
 		},
 		error:function(){
-				alert("실패");
+				alert("error");
 		}
 	});
 	
@@ -269,7 +267,7 @@ $('#commButton').click(function(){
 	
 	if("${login.id}" != ""){
 		if($('#comm_content').val().trim() == ""){			
-			alert("댓글의 내용을 입력하세요");
+		
 			$('#comm_content').focus();
 		}
 		else{	
@@ -280,7 +278,7 @@ $('#commButton').click(function(){
 				success:function(data){
 					
 					if(data === 'ok'){
-						alert("댓글을 작성했습니다");
+					
 						location.href = "/placeBoard/placeBoardDetail?seq=" + boardSeq;
 					}
 					else{
@@ -299,6 +297,7 @@ $('#commButton').click(function(){
 	
 });
 
+// 게시판으로 이동
 $('#listButton').click(function(){
 
 	location.href = "/placeBoard/placeBoardList";
@@ -349,7 +348,6 @@ function commUpdSwitch(commSeq, commContent){
 function commUpdateAf(commSeq){
 	
 	let commContent = $("#comm_content" + commSeq).val();
-	alert(commContent);
 	
 	$.ajax({
 		url:"/placeBoard/PlaceCommUpdate",
@@ -357,7 +355,7 @@ function commUpdateAf(commSeq){
 		data: {commSeq:commSeq, commContent:commContent},
 		success:function(data){
 			if(data === 'ok'){
-				alert("댓글을 수정했습니다");
+				
 				location.href = "/placeBoard/placeBoardDetail?seq=" + boardSeq;				
 			}
 			else{
@@ -380,7 +378,7 @@ function commDelete(commSeq){
 		data:{commSeq:commSeq},
 		success:function(data){
 			if(data === 'ok'){
-				alert("댓글을 삭제했습니다");
+			
 				location.href = "/placeBoard/placeBoardDetail?seq=" + boardSeq;				
 			}
 			else{
@@ -438,4 +436,5 @@ geocoder.addressSearch(locationAddr, function(result, status) {
     map.setCenter(coords);
 } 
 });
+
 </script>

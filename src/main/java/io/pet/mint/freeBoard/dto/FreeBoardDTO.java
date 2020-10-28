@@ -8,6 +8,7 @@ public class FreeBoardDTO implements Serializable {
 	private String boardRegId;
 	private String boardTitle;
 	private String boardContents;
+	private String id;
 	
 	private String boardRegDate;
 	private String boardUpdDate;
@@ -28,6 +29,14 @@ public class FreeBoardDTO implements Serializable {
 		this.boardContents = boardContents;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public int getBoardSeq() {
 		return boardSeq;
 	}
@@ -92,22 +101,22 @@ public class FreeBoardDTO implements Serializable {
 		this.boardNoticeYn = boardNoticeYn;
 	}
 
-	
-
 	@Override
 	public String toString() {
 		return "FreeBoardDTO [boardSeq=" + boardSeq + ", boardRegId=" + boardRegId + ", boardTitle=" + boardTitle
-				+ ", boardContents=" + boardContents + ", boardRegDate=" + boardRegDate + ", boardUpdDate="
-				+ boardUpdDate + ", boardLikeSeq=" + boardLikeSeq + ", boardViewCount=" + boardViewCount
-				+ ", boardNoticeYn=" + boardNoticeYn + "]";
+				+ ", boardContents=" + boardContents + ", id=" + id + ", boardRegDate=" + boardRegDate
+				+ ", boardUpdDate=" + boardUpdDate + ", boardLikeSeq=" + boardLikeSeq + ", boardViewCount="
+				+ boardViewCount + ", boardNoticeYn=" + boardNoticeYn + "]";
 	}
 
-	public FreeBoardDTO(int boardSeq, String boardRegId, String boardTitle, String boardRegDate, String boardUpdDate,
-			int boardLikeSeq, int boardViewCount, String boardNoticeYn) {
+	public FreeBoardDTO(int boardSeq, String boardRegId, String boardTitle, String boardContents, String id,
+			String boardRegDate, String boardUpdDate, int boardLikeSeq, int boardViewCount, String boardNoticeYn) {
 		super();
 		this.boardSeq = boardSeq;
 		this.boardRegId = boardRegId;
 		this.boardTitle = boardTitle;
+		this.boardContents = boardContents;
+		this.id = id;
 		this.boardRegDate = boardRegDate;
 		this.boardUpdDate = boardUpdDate;
 		this.boardLikeSeq = boardLikeSeq;

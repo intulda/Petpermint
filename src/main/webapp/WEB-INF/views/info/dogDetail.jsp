@@ -67,13 +67,12 @@ ${infoDto.boardTitle}
 
 </div>
 
-		<!--<c:if test="${infoDto.boardRegId eq login.id}">
-			</c:if>-->
+<%-- <c:if test="${infoDto.boardRegId eq login.id}">	 --%>
 <div class="btnDiv">
 	<button class="btn" type="button" id="btnUpdate">글 수정하기</button>
 	<button class="btn" type="button" id="btnDelete">글 삭제하기</button>
 </div>
-
+<%-- </c:if> --%>
 
 </form>
 

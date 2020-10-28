@@ -2,10 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 
-<script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeList.css" />
-
-
+<script src="../js/jquery.twbsPagination.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/placeBoard/placeList.css" />
 
 
 <div class="main_title">펫플레이스</div>
@@ -39,11 +37,6 @@
 </div>
 
 
-
-
-
-
-
 <div class="header_title">
 	<p>&nbsp;&nbsp;<a href="/" style="color:grey">홈/</a></p>
 	<h2>펫플레이스</h2>
@@ -67,7 +60,6 @@
 		<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
 	</nav>
 </div>
-
 
 <script>
 
@@ -214,5 +206,4 @@ function loadPage( totalCount ){
 }
 
 </script>
-
 

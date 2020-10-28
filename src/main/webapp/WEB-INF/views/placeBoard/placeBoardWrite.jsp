@@ -6,7 +6,7 @@
 <script src="/js/summernote/summernote-ko-KR.js"></script>  
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeWriteUpdate.css" />
+<link rel="stylesheet" type="text/css" href="../css/placeBoard/placeWriteUpdate.css" />
 	
 <div class="place_title">펫플레이스</div>
 
@@ -45,7 +45,7 @@
 		</div>
 			<div class="subArea">
 			<div class="item1">썸네일이미지</div>
-			<div class="item2"><input type="file" name="thumbnail" class="sendData" accept=".gif, .jpg, .png">	</div>
+			<div class="item2"><input type="file" name="thumbnail" id="thumbnail" class="sendData" accept=".gif, .jpg, .png"></div>
 		</div>	  
 	</div>
 		<textarea id="summernote" name="boardContents" class="boardContents"></textarea>
@@ -57,35 +57,6 @@
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 
-
-
-// 주소입력시 도로명과 주소명을 찾음
-function sample4_execDaumPostcode() {
-    new daum.Postcode({
-        oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-            // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-            var roadAddr = data.roadAddress; // 도로명 주소 변수
-            var extraRoadAddr = ''; // 참고 항목 변수
-
-            // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-            // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                extraRoadAddr += data.bname;
-            }
-            // 건물명이 있고, 공동주택일 경우 추가한다.
-            if(data.buildingName !== '' && data.apartment === 'Y'){
-               extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-            }
-     
-            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.querySelector('#boardLocation').value = roadAddr;
-         
-        }
-    }).open();
-}
 
 $(document).ready(function() {
 
@@ -110,15 +81,15 @@ $(document).ready(function() {
 	$('#writeButton').click(function(){
 		
 		if($('#boardTitle').val().trim() == ""){			
-			alert("장소명을 입력해주세요");
+			
 			$('#boardTitle').focus();
 		}
 		else if($('#boardLocation').val().trim() == ""){			
-			alert("장소주소를 입력해주세요");
+			
 			$('#boardLocation').focus();
 		}
 		else if($('#boardTel').val().trim() == ""){			
-			alert("연락처를 입력해주세요");
+			
 			$('#boardTel').focus();
 		}		
 		else{		
@@ -127,6 +98,50 @@ $(document).ready(function() {
 	});
 });
 
+//파일 용량 10MB로 제한
+$('#thumbnail').on('change',function(){
+
+	let maxSize = 10 * 1024 * 1024;	// 10MB
+	let fileSize = document.querySelector('#thumbnail').files[0].size;
+	
+	if(maxSize < fileSize){
+		if(document.querySelectorAll('.subArea')[6] != null){
+			document.querySelectorAll('.subArea')[6].remove();
+		}
+		
+		let warnMessage = "<div class='subArea'><div class='item4'>10MB이하 이미지파일만 업로드 가능합니다.</div>"; 
+		$('.subArea:eq(5)').after(warnMessage);
+		$('#thumbnail').val('');
+	}
+
+});
+
+//주소입력시 도로명과 주소명을 찾음
+function sample4_execDaumPostcode() {
+ new daum.Postcode({
+     oncomplete: function(data) {
+         // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+         // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+         var roadAddr = data.roadAddress; // 도로명 주소 변수
+         var extraRoadAddr = ''; // 참고 항목 변수
+
+         // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+         // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+         if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+             extraRoadAddr += data.bname;
+         }
+         // 건물명이 있고, 공동주택일 경우 추가한다.
+         if(data.buildingName !== '' && data.apartment === 'Y'){
+            extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+         }
+  
+         // 우편번호와 주소 정보를 해당 필드에 넣는다.
+         document.querySelector('#boardLocation').value = roadAddr;
+      
+     }
+ }).open();
+}
 
 
 

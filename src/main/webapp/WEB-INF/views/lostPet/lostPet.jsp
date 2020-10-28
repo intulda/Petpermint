@@ -50,9 +50,10 @@
 
 <br>
 <br>
+<div>
 <table style="margin-left: auto; margin-right: auto; margin-top: 3px; margin-bottom: 3px">
 	<tr>
-		<td style="padding-left: 5px">
+		<td width='100'>
 			<select id="_category" name="category" class="sel" >
 				<option value="" selected="selected">선택</option>
 				<option value="lostId">작성자</option>
@@ -63,11 +64,17 @@
 			<input type="text" id="_keyword" name="keyword">
 			<label for="_keyword" id="findButton"></label>
 		</td>
+		<c:if test="${login.id != null}">
 		<td style="padding-left: 5px">
 			<button type="button" id="writeButton" class='writeButton'>글쓰기</button>
 		</td>
+		</c:if>
+		<c:if test="${login.id == null}">
+		<td style="padding-left: 5px"></td>
+		</c:if>
 	</tr>
 </table>
+</div>
 <br>
 
 <div class="lost_container1">	
@@ -122,9 +129,7 @@ function getBbsListData( pNumber){
 			}
 			else{	
 				$.each(list, function(index, lostDto){
-					//alert(lostDto.lostSeq);
-					//alert(lostDto.imagePath);
-				
+
 					let gender = "";
 					
 					if(lostDto.lostGender == '1'){
@@ -175,7 +180,7 @@ function getBbsListData( pNumber){
 					
 					let tagData = "<div class='lost_container2'>"
 								+ "<div class='lost_content'>"									
-								+ "<div><p>"
+								+ "<div><p class='lost_seq'>"
 								+ "NO .&nbsp;"+ lostDto.lostSeq
 								+ "</p>"
 								+ img
@@ -233,7 +238,6 @@ function getBbsListData( pNumber){
 						
 		},
 		error:function(){
-			alert("error1");
 		}	
 	});	
 }
@@ -252,13 +256,11 @@ function getBbsListCount(){
 		data:{ "pageNumber":0, "recordCountPerPage":6, 
 			"category":$("#_category").val(), "keyword":$("#_keyword").val()
 			 },
-		success:function( count ){
-		//	alert("success");
-		//	alert(count);	
+		success:function( count ){	
 			loadPage(count);		
 		},
 		error:function(){
-			alert("error2");
+
 		}		
 	});	
 }
@@ -287,7 +289,7 @@ function loadPage( totalCount ){
 		initiateStartPageClick:false,		// onPageClick 자동 실행하지 않는다
 		onPageClick: function(event, page){
 			nowPage = page;
-		//	alert('nowPage:' + nowPage);
+			
 			getBbsListData( nowPage - 1 );	
 		}	
 	});
