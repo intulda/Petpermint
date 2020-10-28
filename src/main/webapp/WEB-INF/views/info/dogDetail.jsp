@@ -67,23 +67,21 @@ ${infoDto.boardTitle}
 
 </div>
 
-<%-- <c:if test="${infoDto.boardRegId eq login.id}">	 --%>
+<c:if test="${login.auth eq 3}">
 <div class="btnDiv">
 	<button class="btn" type="button" id="btnUpdate">글 수정하기</button>
 	<button class="btn" type="button" id="btnDelete">글 삭제하기</button>
 </div>
-<%-- </c:if> --%>
+</c:if>
 
 </form>
 
 <script type="text/javascript">
-$("#btnUpdate").click(function() {	
-	alert('글수정하기');		
+$("#btnUpdate").click(function() {			
 	$("#_formInfo").attr({"action":"infoUpDate"}).submit();
 });
 
 $("#btnDelete").click(function() {	
-	alert("삭제하기");
 	$("#_formInfo").attr({ "action":"infoDelete" }).submit();
 });
 </script>
