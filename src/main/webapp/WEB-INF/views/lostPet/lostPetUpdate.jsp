@@ -8,58 +8,54 @@
 
 
 <div class="inputArea">
-<br><br>
+
 <h3 class="title">글 수정하기</h3>
 <div class="inputArea2">
 	<form method="post" id="sendForm" action="/lostPet/lostPetUpdateAf"
 			enctype="multipart/form-data">
-
-<br>
-<h5>등록 번호 : '${lostPetDto.lostSeq}' </h5>
-<br>	
-<input type="hidden" class="label" name="lostSeq" value="${lostPetDto.lostSeq}">
+	
+<input type="hidden" name="lostSeq" value="${lostPetDto.lostSeq}">
 아이디<br>
-<input type="text" class="label" name="lostId"  id="_id" value='${lostPetDto.lostId}' placeholder="아이디" />
+<input type="text" name="lostId"  id="_id" value='${lostPetDto.lostId}' placeholder="아이디" />
 <div class="filebox bs3-primary preview-image">
-   <input type="file" id="input_file" name="thumbnail" class="upload-hidden" accept=".gif, .jpg, .png"> <br>
-		사진<br><input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+   <input type="file" id="input_file" name="thumbnail" class="upload-hidden" accept=".gif, .jpg, .png">
+		<br>사진<br><input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 			<label for="input_file">사진 첨부</label>
 </div> <br>
-연락처<br><input type="text" class="label" name="lostPhone" id="_phone" value='${lostPetDto.lostPhone}' placeholder="-을 포함한 연락처 기재"/><br>
-장소<br><input type="text" class="label" name="lostLocation" id="_location" value='${lostPetDto.lostLocation}' placeholder="목격/실종 장소"/></br>
-동물<br>
-<select name="lostType" id="_type" class="label">
+연락처<br><input type="text" name="lostPhone" id="_phone" value='${lostPetDto.lostPhone}' placeholder="-을 포함한 연락처 기재"/><br>
+<br>장소<br><input type="text" name="lostLocation" id="_location" value='${lostPetDto.lostLocation}' placeholder="목격/실종 장소"/></br>
+<br>동물<br>
+<select name="lostType" id="_type">
 		<option value="0">동물 선택</option>
 		<option value="1">강아지</option>
 		<option value="2">고양이</option>
 		<option value="3">기타</option>
 </select>
 <br>
-품종<br> <input type="text" class="label" name="lostKind" id="_kind" value='${lostPetDto.lostKind}'placeholder="품종"/><br>
-상태<br>
-<select name="lostStatus" id="_status" class="label">
+<br>품종<br> <input type="text" name="lostKind" id="_kind" value='${lostPetDto.lostKind}'placeholder="품종"/><br>
+<br>상태<br>
+<select name="lostStatus" id="_status">
 		<option value="0">상태 선택</option>
 		<option value="1">실종</option>
 		<option value="2">목격</option>
 		<option value="3">기타</option>
-		<option value="4">구조 완료</option>
 </select>
 <br>
-성별<br>
-<select name="lostGender" id="_gender" class="label">
+<br>성별<br>
+<select name="lostGender" id="_gender">
 		<option value="0">성별 선택</option>
 		<option value="1">암컷</option>
 		<option value="2">수컷</option>
 		<option value="3">모름</option>
 </select>
 <br>
-상세<br>
-<textarea id="_detail" class="label" name="lostDetail" rows="4" cols="50">
+<br>상세<br>
+<textarea id="_detail" name="lostDetail" rows="4" cols="50">
 ${lostPetDto.lostDetail}</textarea>
 <br>
 	</form>	
-
-<button type="button"id="updateButton" >글수정하기</button>
+<br>
+<button type="button"id="updateButton" >글 수정하기</button>
 </div>
 </div>
 
@@ -182,45 +178,4 @@ $(document).ready(function() {
 });
 
 
-	
-
-/* 
-
-$("#_lostPetUpdate").click(function() {
-	
-	let sendData = {lostId:$('#_id').val(), lostPhone:$('#_phone').val(),
-						lostKind:$('#_kind').val(), lostType:$('#_type').val(),
-						lostStatus:$('#_status').val(), lostGender:$('#_gender').val(),
-						lostDetail:$('#_detail').val(),
-						lostLocation:$('#_location').val(), lostSeq:'${lostPetDto.lostSeq}'
-						};
-	
-	//console.log(sendData);	
-	
-	$.ajax({
-		url:"/lostPet/lostPetUpdateAf",
-		type:"post",
-		data:sendData,
-		success:function(data){
-			//alert("success");
-
-			if(data==='ok'){
-				alert("수정이 완료됐습니다.");
-				location.href='/lostPet/lostPet';
-			}
-			else{
-				alert("글을 작성하지못했습니다.");
-			}
-	
-		},
-		error:function(){
-			alert("error");
-		}
-
-	});
-	//$("#_lostPetInfo").attr("action":"lostPetWriteAf").submit();	
-});
-
-
- */
 </script>

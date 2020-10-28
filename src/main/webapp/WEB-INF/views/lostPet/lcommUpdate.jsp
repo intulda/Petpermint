@@ -9,24 +9,22 @@
 	name="sendForm">
 		<input type='hidden' name='lostpetSeq' value="${dto.lostpetSeq}">
 		<input type='hidden' name='lcommSeq' value="${dto.lcommSeq}">
-	<div class=lcommArea>
+	<div class=lcommAreaPop>
+<!-- 	<div class="homeBtn"><button type="button" class="homeBtn" onclick="backBtn()"><img src=/css/lostPet/lostPetIcon/arrow2.png class='icon'></button></div> -->
 	<div>
-		<h3 class="comm"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>${dto.lcommId}&nbsp;&nbsp;${dto.lcommDate}</h3>
+		<h3 class="comm"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>${dto.lcommId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.lcommDate}</h3>
 		</div>
-			<div class="lcommArea3">
-				<span><textarea id="_lcommContent" class="lcommId" name="lcommContent">${dto.lcommContent}</textarea></span>
-				<span><button type="button" onclick="upBtn('${dto.lostpetSeq}', '${dto.lcommSeq}', '${dto.lcommContent}')">수정</button></span>
-				<span><button type="button" onclick="backBtn()">취소</button></span>
+			<div class="lcommArea5">
+				<span class="item"><textarea id="_lcommContent" name="lcommContent">${dto.lcommContent}</textarea></span>
+				<span class="item"><button type="button" onclick="upBtn('${dto.lostpetSeq}', '${dto.lcommSeq}', '${dto.lcommContent}')">수정</button></span>
 			</div>
 		</div>
-	
 </form>
 
 <script type="text/javascript">
 
 function upBtn(bseq, seq, con) {
 
-	alert("확인");
 	window.opener.name = "parentPage"; // 부모창의 이름 설정
     document.sendForm.target = "parentPage"; // 타켓을 부모창으로 설정
     document.sendForm.action = "/lostPet/lcommUpdateAf";
@@ -34,7 +32,6 @@ function upBtn(bseq, seq, con) {
 	
 }
 function backBtn() {
-	alert('댓글이 수정되지 않았습니다.');
 window.opener.location.reload();
 window.close();  
 }

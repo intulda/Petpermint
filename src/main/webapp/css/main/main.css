@@ -95,7 +95,7 @@
     word-break:break-all;
     -webkit-box-orient:vertical;
     -webkit-line-clamp:3;
-    font-size: 1.2rem !important;
+    font-size: 0.9rem !important;
     margin: 10px;
     line-height: 15px;
 }

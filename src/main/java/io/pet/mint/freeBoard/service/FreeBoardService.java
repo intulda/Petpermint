@@ -45,4 +45,16 @@ public class FreeBoardService {
 		return dao.freeBoardUpdate(dto);
 	}
 	
+	public int viewCount(int boardSeq) {
+		return dao.viewCount(boardSeq);
+	}
+	
+	public int freeLikeCount(int boardSeq) {
+		return dao.freeLikeCount(boardSeq);
+	}
+	
+	public int checkDel(int boardSeq) {
+		return dao.checkDel(boardSeq);
+	}
+	
 }

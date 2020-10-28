@@ -302,7 +302,7 @@ input.comRegDate{
 
 .page-item.active .page-link {
     z-index: 3;
-    color: #fff;
+    color: #fff !important;
     background-color: #60a1e1;
     border-color: #60a1e1;
 }

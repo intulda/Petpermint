@@ -1,5 +1,6 @@
 package io.pet.mint.controller;
 
+
 import java.io.IOException;
 import java.util.List;
 
@@ -274,5 +275,6 @@ public class PlaceBoardController {
 		
 		return check>0?"ok":"no";
 	}
+	
 	
 }

@@ -6,35 +6,32 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/lostPet/lostPetWrite.css" />
 <fmt:requestEncoding value="utf-8"/>
 
-
-
+<div class="title">유기 동물 구조 글쓰기</div>
 <div class="inputArea">
-<br><br>
-<h3 class="title">유기 동물 구조 글쓰기</h3>
 <div class="inputArea2">
-	<form method="post" class="sendData" id="sendForm" action="/lostPet/lostPetWrite"
-		enctype="multipart/form-data">
+	<form method="post" id="sendForm" action="/lostPet/lostPetWrite" enctype="multipart/form-data">
+아이디
 <br>
-아이디<br>
-<input type="text" class="label" name="lostId" id="_id" value='aaa' readonly placeholder="아이디"/><br>
+<input type="text" name="lostId" id="_id" value="${login.id}" readonly/>
+<br>
 <div class="filebox bs3-primary preview-image">
    <input type="file" id="input_file" name="thumbnail" class="upload-hidden" accept=".gif, .jpg, .png"> <br>
 		사진<br><input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 			<label for="input_file">사진 첨부</label>
 </div> <br>
-연락처<br><input type="text" class="label" name="lostPhone" id="_phone" placeholder="-을 포함한 연락처 기재"><br><br>
-장소<br><input type="text" class="label" name="lostLocation" id="_location" placeholder="목격/실종 장소"></br><br>
+연락처<br><input type="text" name="lostPhone" id="_phone" placeholder="-을 포함한 연락처 기재"><br><br>
+장소<br><input type="text" name="lostLocation" id="_location" placeholder="목격/실종 장소"></br><br>
 동물<br>
-<select name="lostType" id="_type" class="label" >
+<select name="lostType" id="_type">
 		<option value="0">동물 선택</option>
 		<option value="1">강아지</option>
 		<option value="2">고양이</option>
 		<option value="3">기타</option>
 </select>
 <br><br>
-품종<br><input type="text" class="label" name="lostKind" id="_kind" placeholder="품종"/><br><br>
+품종<br><input type="text" name="lostKind" id="_kind" placeholder="품종"/><br><br>
 상태<br>
-<select name="lostStatus" class="label" id="_status">
+<select name="lostStatus" id="_status">
 		<option value="0">상태 선택</option>
 		<option value="1">실종</option>
 		<option value="2">목격</option>
@@ -42,7 +39,7 @@
 </select>
 <br><br>
 성별<br>
-<select name="lostGender" class="label" id="_gender">
+<select name="lostGender" id="_gender">
 		<option value="0">성별 선택</option>
 		<option value="1">암컷</option>
 		<option value="2">수컷</option>
@@ -50,7 +47,7 @@
 </select>
 <br><br>
 상세<br>
-<textarea id="_detail" class="label" name="lostDetail" placeholder="동물의 안전한 귀가를 위한 보다 상세한 정보를 기재해주세요." >
+<textarea id="_detail" name="lostDetail" placeholder="동물의 안전한 귀가를 위한 보다 상세한 정보를 기재해주세요." >
 </textarea>
 <br>
 
@@ -59,14 +56,6 @@
 <button type="button" id="writeButton" >작성 완료</button>
 </div>
 	</div>
-
-
-
-
-<!-- <div class="filebox">
-<label for="tumbnail">업로드</label>
-<input type="file" class="label" id="tumbnail" name="thumbnail" ><br>
-</div> -->
 
 
 <script type="text/javascript">
@@ -159,42 +148,6 @@ $(document).ready(function() {
 });
 
 
-	
-
-/* $("#_lostPetWrite").click(function() {
-	
-	let sendData = {lostId:$('#_id').val(), lostPhone:$('#_phone').val(),
-						lostKind:$('#_kind').val(), lostType:$('#_type').val(),
-						lostStatus:$('#_status').val(), lostGender:$('#_gender').val(),
-						lostDetail:$('#_detail').val(),
-						lostLocation:$('#_location').val()
-						};
-	
-	//console.log(sendData);	
-	
-	$.ajax({
-		url:"/lostPet/lostPetWriteAf",
-		type:"post",
-		data:sendData,
-		success:function(data){
-			//alert("success");
-
-			if(data==='ok'){
-				alert("글을 작성했습니다.");
-				location.href='/lostPet/lostPet';
-			}
-			else{
-				alert("글을 작성하지못했습니다.");
-			}
-	
-		},
-		error:function(){
-			alert("error");
-		}
-
-	});
-	//$("#_lostPetInfo").attr("action":"lostPetWriteAf").submit();	
-}); */
 </script>
 
 

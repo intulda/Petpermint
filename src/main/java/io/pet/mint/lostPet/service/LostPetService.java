@@ -64,8 +64,12 @@ public class LostPetService {
 		return dao.getLCommDel(lcommSeq);
 	}
 	
-	
 	public LCommDto getLCommDto(int seq) {
 		return dao.getLCommDto(seq);
 	}	
+	
+	public int getLCommCount(int seq) {
+		return dao.getLCommCount(seq);
+	}
+	
 }

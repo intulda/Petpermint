@@ -4,140 +4,161 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/info/infoList.css">
 <fmt:requestEncoding value="utf-8"/>
 
-<style>
 
 
-</style>
+<div class="infomain">
 
-<%
-String choice = (String)request.getAttribute("choice");
-if(choice == null) choice = "";
-
-String searchWord = (String)request.getAttribute("searchWord");
-if(searchWord == null) searchWord = "";
-
-if(searchWord.equals("")){
-	choice = "";
-}
-%>
-
-<script>
-let choice = "<%=choice %>";
-let searchWord = "<%=searchWord %>";
-$(document).ready(function(){
-	$("#_choice").val(choice);
-
-	// $("#_searchWord").val(searchWord);
-	document.frmForm1.searchWord.value = searchWord;
-});
-</script>
-
-<form action="" name="frmForm1" id="_frmFormSearch" method="post">
-
-<table>
+<table class="infotable">
 	<tr>
-		<td >
-			<select id="choice">
-				<option>선택</option>
+		<td class="info__search">
+			<select id="_category" name="category">
+				<option value="choice">선택</option>
 				<option value="title">제목</option>
-				<option value="content">내용</option>		
-<!-- 			</select> -->
-			<input id="searchWord" placeholder="검색어입력" size="10">
-			<button type="button" id="dogsearch">검색</button>
+				<option value="content">내용</option>	
+			</select>	
+			<span class="info__search-wrap">
+				<input type="text" id="_keyword" name="keyword" placeholder="검색어입력" size="10">
+				<label for="_keyword" id="findButton"></label>	
+			</span>
 		</td>
 	</tr>
 </table>	
-<!-- 추가 기입 -->
-<input type="hidden" name="pageNumber" id="_pageNumber" value="${(empty pageNumber)?0:pageNumber }">
-<input type="hidden" name="recordCountPerPage" id="_recordCountPerPage" value="${(empty recordCountPerPage)?0:recordCountPerPage }">
-
-</form>
-
-
 
 <c:choose>
-	<c:when test="${param.Type eq '백과'}">
-<div class="infoList" onclick='location.href = dogDetail?=${infoDto.boardSeq}'">
-</div>
+	<c:when test="${param.Type eq '강아지백과'}">
+		<div class="infotitle">
+			<img src="/images/infoImg/아이콘.png" style="height: 50px; width: 50px;">
+			강아지백과 페이지 입니다!
+		</div>
+		<div class="infoDiv">
+		</div>
+	</c:when>
+
+	<c:when test="${param.Type eq '강아지음식'}">
+		<div class="infotitle">
+			<img src="/images/infoImg/음식.png" style="height: 50px; width: 50px;">
+			강아지음식 페이지 입니다!
+		</div>
+		<div class="infoDiv">
+		</div>
 	</c:when>
 	
-	<c:when test="${param.Type eq '음식'}">
-	제가...제가보이시나요?....저는 음식입니다..냠냠
-<div class="infoList" onclick='location.href = dogDetail?=${infoDto.boardSeq}'">
+	<c:when test="${param.Type eq '강아지행동'}">
+		<div class="infotitle">
+		<img src="/images/infoImg/훈련.png" style="height: 50px; width: 50px;">
+		강아지행동 페이지 입니다!
+		</div>
+		<div class="infoDiv">
+		</div>
 	</c:when>
 	
-	<c:when test="${param.Type eq '훈련'}">
-	나는 훈련^^
+		<c:when test="${param.Type eq '고양이백과'}">
+		<div class="infotitle">
+			<img src="/images/infoImg/고양.png" style="height: 50px; width: 50px;">
+			고양이백과 페이지 입니다!
+		</div>
+		<div class="infoDiv">
+		</div>
+	</c:when>
+
+	<c:when test="${param.Type eq '고양이음식'}">
+		<div class="infotitle">
+			<img src="/images/infoImg/양이.png" style="height: 50px; width: 50px;">
+			고양이음식 페이지 입니다!
+		</div>
+		<div class="infoDiv">
+		</div>
 	</c:when>
 	
+	<c:when test="${param.Type eq '고양이행동'}">
+		<div class="infotitle">
+		<img src="/images/infoImg/이이.png" style="height: 50px; width: 50px;">
+			고양이행동 페이지 입니다!
+		</div>
+		<div class="infoDiv">
+		</div>
+	</c:when>
  </c:choose>
 
-<div class="infofoList">
-</div>
+
 <!-- paging -->
-<div class="container">
+<div>
 	<nav aria-label="Page navigation">
 		<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
 	</nav>
 </div>
 
+</div>
 
-<a href="infoWrite"><button>글쓰기^^</button></a>
 
-<div onclick="location.href='dogListPageView?Type=${'음식'}'"></div>
 
 <script>
+
 getBbsListData(0);
 getBbsListCount();
 
+let boardCategory = "";
+
 $('#findButton').click(function(){
+    
    getBbsListData(0);
    getBbsListCount();
+
+   //검색검사
+   
+   let category = $("#_category").val();
+   let keyword =$("#_keyword").val();
+
+   if(category == 'choice'){
+       alert('카테고리를 선택해주세요!');
+       return false;
+      }
+   if(keyword == "" ){
+          alert('검색어를 입력해주세요!');
+       return false;
+      }
+   
 });
 
 
-
-
 //페이징 함수
-
 function getBbsListData(pNumber){
-   //alert(${boardType});
    
    let boardType = '${boardType}';
+   
    $.ajax({
       url:"/info/dogListPage",
       type:"post",
-      data:{ "pageNumber":pNumber, "recordCountPerPage":10, 
+      data:{ "pageNumber":pNumber, "recordCountPerPage":9, 
          "category":$("#_category").val(), "keyword":$("#_keyword").val(),
          boardType:boardType
           },
       success:function( list ){
-
-         $(".infoList").remove();
+		 console.log(list);
+         $(".infoDiv").empty();
          
          if(list.length < 1 ){
-            let tagData = "<div class='infoList'>"
+            let tagData = "<div class='infocontent'>"
                      + "<p>해당결과가 없습니다.</p>"
                      + "</div>";
-            $('.place_container').append(tagData);
+            $('.infoDiv').append(tagData);
          }
          else{ 
-               
+             
             $.each(list, function(index, infoDto){
-				let tagData = "<div class='infoList' onclick>";
-				tagData	+= "<a href='/info/dogDetail?="+infoDto.boardSeq+"'>이동</a><br>";
-                tagData += "<img src='"+infoDto.filePath+"'><br>";
-                tagData += "<h1>"+infoDto.boardTitle+"</h1><br>";
-                tagData += "작성자:["+infoDto.boardRegId+"]<br>";
-                tagData += "seq:["+infoDto.boardSeq+"]<br>";
-                tagData += "</div>"
-                    
-                if(index%3 == 0){
-                    tagData +="<br style='clear:both;'>";
-                }
-                $('.infofoList').append(tagData);
+                let tagData = "<div class='infoDiv2' onclick='detailgo("+infoDto.boardSeq+")'>";
+				tagData += "<div class='infocontent'>";
+                tagData += "<img class='infoimg' src='"+infoDto.filePath+"'  style='height: 280px; width: 280px; border-radius: 10px;' ><br><br>";
+                tagData += "<h3>"+infoDto.boardTitle+"</h3>";
+                tagData += "작성자 ["+infoDto.boardRegId+"]<br>";
+                tagData += "</div>";
+                tagData += "</div>";
+    
+               
+                $('.infoDiv').append(tagData);
             });   
          }           
       },
@@ -149,11 +170,14 @@ function getBbsListData(pNumber){
 
 //글의 총수를 취득
 function getBbsListCount(){
+
+   let boardType = '${boardType}';
    $.ajax({
       url:"/info/getCount",
       type:"post",
-      data:{ "pageNumber":0, "recordCountPerPage":10, 
-         "category":$("#_category").val(), "keyword":$("#_keyword").val()
+      data:{ "pageNumber":0, "recordCountPerPage":9, 
+         "category":$("#_category").val(), "keyword":$("#_keyword").val(),
+         boardType:boardType
           },
       success:function( count ){
          loadPage(count);      
@@ -171,17 +195,27 @@ function loadPage( totalCount ){
    let pageSize = 10;
    let nowPage = 1;
 
-   let totalPages = totalCount / pageSize;
-   if(totalCount % pageSize > 0){
-      totalPages++;
-   }
+   let totalPages = 0;
+
+   // 게시물 갯수가 0일경우 페이지수를 1로 지정
+   if(totalCount == 0){
+      totalPages = 1;
+   }else{
+	// 자바스크립트는 정수결과를 얻기 위해서 정수변환
+	// 자바스크립트는 정수결과를 얻기 위해서 정수변환
+		totalPages =  parseInt(totalCount / pageSize);
+		if(totalCount % pageSize > 0){
+		
+			totalPages++;
+		}
+	   }
    
    $("#pagination").twbsPagination('destroy');	// 페이지 갱신
 	
 	$("#pagination").twbsPagination({
-	//	startPage: 1,
+		//startPage: 1,
 		totalPages: totalPages,		// 전체 페이지 수
-		visiblePages: 10,
+		visiblePages: 9,
 		first:'<span aria-hidden="true">«</span>',
 		prev:"이전",
 		next:"다음",
@@ -191,17 +225,13 @@ function loadPage( totalCount ){
 			nowPage = page;
 			getBbsListData( nowPage - 1 );	
 		}	
-	});
-   
+	}); 
 }
 
-
-
-
-
-
-
-
+//디테일 이동
+function detailgo(infoDtoSeq){
+	location.href ="/info/dogDetail?seq="+infoDtoSeq;
+}
 
 </script>
 

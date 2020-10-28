@@ -2,10 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 
-<script src="<%=request.getContextPath() %>/js/jquery.twbsPagination.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/css/placeBoard/placeList.css" />
-
-
+<script src="../js/jquery.twbsPagination.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../css/placeBoard/placeList.css" />
 
 
 <div class="main_title">펫플레이스</div>
@@ -39,11 +37,6 @@
 </div>
 
 
-
-
-
-
-
 <div class="header_title">
 	<p>&nbsp;&nbsp;<a href="/" style="color:grey">홈/</a></p>
 	<h2>펫플레이스</h2>
@@ -54,7 +47,7 @@
 <div class="place_container">	
 </div>
 
-<c:if test="${login != null }">
+<c:if test="${login != null && login.auth == 3 }">
 	<div class="header">	
 		<ul class="bottom_list">
 			<li><button type="button" id="writeButton">글쓰기</button></li>
@@ -62,12 +55,11 @@
 	</div>
 </c:if>
 
-<div class="container">
+<div class="page_container">
 	<nav aria-label="Page navigation">
 		<ul class="pagination" id="pagination" style="justify-content: center;"></ul>
 	</nav>
 </div>
-
 
 <script>
 
@@ -92,6 +84,7 @@ function selCategory(BoardCategory){
 	getBbsListCount(boardCategory);
 }
 
+
 // 누른 페이지를 적용해서 게시물 출력
 function getBbsListData( pNumber, boardCategory ){
 	
@@ -103,7 +96,7 @@ function getBbsListData( pNumber, boardCategory ){
 			"boardCategory":boardCategory
 			 },
 		success:function( list ){
-			console.log(list);
+
 			$(".place_content").remove();
 			if(list == null || list ==''){
 				let tagData = "<div class='place_content'>"
@@ -207,12 +200,10 @@ function loadPage( totalCount ){
 		initiateStartPageClick:false,		// onPageClick 자동 실행하지 않는다
 		onPageClick: function(event, page){
 			nowPage = page;
-		//	alert('nowPage:' + nowPage);
 			getBbsListData( nowPage - 1 );	
 		}	
 	});
 }
 
 </script>
-
 

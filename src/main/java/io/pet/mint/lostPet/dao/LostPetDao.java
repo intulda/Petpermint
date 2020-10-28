@@ -31,4 +31,6 @@ public interface LostPetDao {
 	int getLCommDel(int lcommSeq);
 	LCommDto getLCommDto(int seq);
 	
+	int getLCommCount(int seq);
+	
 }

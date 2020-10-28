@@ -13,38 +13,39 @@
 </head>
 <body>
 
-
 <h1 class="freeH1">커뮤니티</h1>
 <hr class="freeHr">
 <br><br>
 
 <div class="freeDiv">
-<button type="button" class="admin">관리자</button>
-<button type="button" class="write">글쓰기</button>
+ <c:if test="${login != null }"> 
+	<button type="button" class="write">글쓰기</button>
+	<c:if test="${ login.id == admin1 }">
+		<button type="button" class="checkDel">삭제</button>
+	</c:if>
+ </c:if> 
 <br><br>
 	
 	<table class="freeTable" id="bbs">
 		<thead>
 			<tr>
-				<th><input name="checkAll" type="checkbox" onclick="toggle(this)"></th>
+				<th><input name="checkAll" class="checkAll" type="checkbox" onclick="toggle(this)"></th>
 				<th class="num">번호</th>
 				<th class="title">제목</th>
 				<th class="name">작성자</th>
 				<th class="date">날짜</th>
 				<th class="view">조회수</th>
-				<th class="like">좋아요</th>
 			</tr> 
 		</thead>
 		<tbody>
 		<c:forEach var="l" items="${getFreeBoardList}" varStatus="vs">
-				<tr onclick = "location.href='/freeDetail/${l.boardSeq}'">
-					<th><input type="checkbox" name="freeCheck"></th>
+				<tr>
+					<th><input type="checkbox" name="freeCheck_${dto.boardSeq}" class="freeCheck_${dto.boardSeq}" value="${dto.boardSeq}"></th>
 					<td>${vs.count}</td>
 					<td>${l.boardTitle}</td>
 					<td>${l.boardRegId}</td>
 					<td>${l.boardRegDate}</td>
 					<td>${l.boardViewCount}</td>
-					<td>${l.boardLikeSeq}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -56,29 +57,33 @@
 			<ul class="pagination" ></ul>
 		</nav>
 		<input type="text" name="searchWord" class="searchWord">
-		<button type="button" class="searchButton">검색</button>
-		<select class="choice">
-			<option value="select">전체</option>
-			<option value="title">제목</option>
-			<option value="contents">내용</option>
-			<option value="name">작성자</option>
-		</select>
+		<label for="searchButton" class="searchButton" name="searchButton"></label>
+		<div>
+			<select class="choice">
+				<option value="select">선택</option>
+				<option value="title">제목</option>
+				<option value="contents">내용</option>
+				<option value="name">작성자</option>
+			</select>
+		</div>
 	</div>
 </div>
 <br><br>
 
 <script>
 
-getListData(1);
+getListData(0);
 getListCount();
+
+$(document).ready(function(){
+	$(".freeTable").on('click', 'td', function(){
+		location.href = "/freeBoard/freeDetail?boardSeq=" + $(this).parent().data('value');
+	});
+});
 
     $('.write').click(function (){
         location.href = "http://localhost:8090/freeBoard/freeWrite";
     });
-
-   /*  $('.freeTable td').click(function(){
-		location.href = "http://localhost:8090/freeBoard/freeDetail";
-        }); */
     
     function toggle(source) {
     	  checkboxes = document.getElementsByName('freeCheck');
@@ -89,7 +94,7 @@ getListCount();
 
   
 $('.searchButton').click(function(){
-	getListData(1);
+	getListData(0);
 	getListCount();
 });
 
@@ -100,42 +105,41 @@ function getListData(pNumber){
 		data:{"nowPage":pNumber, "countPerPage":10, "choice":$(".choice").val(),
 				"searchWord":$(".searchWord").val()},
 		success : function(data){
+			
 			 //alert("호옹이");
 
 			 $("tbody").html("");
 			
 			$.each(data,function(idx,data){ 
 				console.log(data);
-				let app = "<tr onclick='location.href=\"freeDetail?boardSeq=" + data.boardSeq + "\"'>"
-						+"	<th><input type='checkbox' name='freeCheck'></th>"
+				let app = "<tr data-value='"+data.boardSeq+"'>"
+						+"	<th><input type='checkbox' name='freeCheck' value="+data.boardSeq+"></th>"
 						+"	<td>" + (idx + 1) + "</td>"
 						+"	<td>" + data.boardTitle + "</td>"
 						+"	<td>" + data.boardRegId + "</td>"
 						+"	<td>" + data.boardRegDate + "</td>"
 						+"	<td>" + data.boardViewCount + "</td>"
-						+"	<td>" + data.boardLikeSeq + "</td>"
 						+"	</tr>";
 						
 				$("tbody").append(app);
-
-			/* 	 $('.freeTable td').click(function(){
-						location.href = "http://localhost:8090/freeBoard/freeDetail?boardSeq=" + data.boardSeq;
-				  });	 */
+				
 			});
-
+			
 			},
 			error : function(e){
-				alert("error");
+			//	alert("error");
 			}
 		});
 	}
+
+
 
 	function getListCount(){
 		
 		$.ajax({
 			url:"/freeBoard/freeBoardPaging",
-			type:"get",
-			data:{"nowPage":0, "recordCountPerPage":10,"choice":$("#choice").val(),"searchWord":$("#searchWord").val()},
+			type:"post",
+			data:{"choice":$("#choice").val(),"searchWord":$("#searchWord").val()},
 			success:function(count){
 				//alert(count);
 				loadPage(count);
@@ -147,11 +151,19 @@ function getListData(pNumber){
 		//글의 총 수
 		let PageSize = 10;		// 보여주고싶은 글의 갯수
 		let nowPage = 1;
+
+		let totalPages = 0;
 		
-		let totalPages = totalCount / PageSize;
-		//		2			23			10
-		if(totalCount % PageSize > 0){
-			totalPages++;
+		if(totalCount == 0){
+			totalPages = 1;
+		}
+		else{	
+			
+			totalPages =  parseInt(totalCount / PageSize);
+			if(totalCount % PageSize > 0){
+			
+				totalPages++;
+			}
 		}
 		
 		$(".pagination").twbsPagination('destroy');			// 페이지 갱신
@@ -168,12 +180,34 @@ function getListData(pNumber){
 			onPageClick: function(event, page){				// 페이지 번호 클릭시
 				nowPage = page;
 			//	alert('nowPage:' + nowPage);
+				getListData( nowPage - 1);
+				
 			}	
 		});
-		
-		
 	}
 
+ 	$(".checkDel").click(function(){
+
+		var checkArr = new Array();
+		var delArr = $('input[name=freeCheck]:checked');
+		for(let i=0; i<delArr.length; i++) {
+			$.ajax({
+				url:"/freeBoard/checkDel",
+				type:"post",
+				data: { boardSeq : delArr[i].value },
+				success : function(data){
+					
+					getListData(0);
+					getListCount();
+				},
+					error:function(){
+				//		alert("error");
+					}
+				});
+		}
+		
+	});
+	
 </script>
 </body>
 </html>

@@ -34,7 +34,7 @@
                         강아지 이야기
                         <span>(${dogList.size() > 0 ? dogList[0].count : 0})</span>
                     </div>
-                    <div class="search__more" data-link="">
+                    <div class="search__more" data-link="/info/dogPage?Pet=강아지">
                         <p>더보기</p>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <c:when test="${dogList.size() > 0}">
                         <ul class="search__contents-list">
                             <c:forEach items="${dogList}" var="dog">
-                                <li>
+                                <li data-link="/info/dogDetail?seq=${dog.boardSeq}">
                                     <c:if test="${dog.thumbnail ne null}">
                                         <div class="search__card-image">
                                             <div style="background-image: url('${dog.thumbnail}')"></div>
@@ -72,7 +72,7 @@
                         고양이 이야기
                         <span>(${catList.size() > 0 ? catList[0].count : 0})</span>
                     </div>
-                    <div class="search__more" data-link="">
+                    <div class="search__more" data-link="/info/catPage?Pet=고양이">
                         <p>더보기</p>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                     <c:when test="${catList.size() > 0}">
                     <ul class="search__contents-list">
                         <c:forEach items="${catList}" var="cat">
-                            <li>
+                            <li data-link="/info/dogDetail?seq=${cat.boardSeq}">
                                 <c:if test="${cat.thumbnail ne null}">
                                     <div class="search__card-image">
                                         <div style="background-image: url('${cat.thumbnail}')"></div>
@@ -91,7 +91,7 @@
                                             ${cat.boardTitle}
                                     </div>
                                     <div class="search__card-date">${cat.boardRegDate}</div>
-                                    <span><c:out value='${cat.boardContents.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
+                                    <span><c:out value='${cat.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
                                 </div>
                             </li>
                         </c:forEach>
@@ -110,7 +110,7 @@
                         커뮤니티
                         <span>(${freeBoard.size() > 0 ? freeBoard[0].count : 0})</span>
                     </div>
-                    <div class="search__more" data-link="">
+                    <div class="search__more" data-link="/freeBoard/freeBoardViews">
                         <p>더보기</p>
                     </div>
                 </div>
@@ -118,7 +118,7 @@
                     <c:when test="${freeBoard.size() > 0}">
                         <ul class="search__contents-list">
                             <c:forEach items="${freeBoard}" var="free">
-                                <li>
+                                <li data-link="/freeBoard/freeDetail?boardSeq=${free.boardSeq}">
                                     <c:if test="${free.thumbnail ne null}">
                                         <div class="search__card-image">
                                             <div style="background-image: url('${free.thumbnail}')"></div>
@@ -129,7 +129,7 @@
                                                 ${free.boardTitle}
                                         </div>
                                         <div class="search__card-date">${free.boardRegDate}</div>
-                                        <span><c:out value='${free.boardContents.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
+                                        <span><c:out value='${free.boardContents.replaceAll("\\\<.*?\\\>","")}' /></span>
                                     </div>
                                 </li>
                             </c:forEach>
@@ -151,3 +151,5 @@
         </c:when>
     </c:choose>
 </div>
+
+<script type="text/javascript" src="/js/search/search.js"></script>
