@@ -12,8 +12,8 @@
 	<div class=lcommAreaPop>
 <!-- 	<div class="homeBtn"><button type="button" class="homeBtn" onclick="backBtn()"><img src=/css/lostPet/lostPetIcon/arrow2.png class='icon'></button></div> -->
 	<div>
-		<h3 class="comm"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>${dto.lcommId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dto.lcommDate}</h3>
-		</div>
+		<h3 class="comm"><img src=/css/lostPet/lostPetIcon/pencil.png class='icon'>&nbsp;&nbsp;${dto.lcommId}</h3>
+	</div>
 			<div class="lcommArea5">
 				<span class="item"><textarea id="_lcommContent" name="lcommContent">${dto.lcommContent}</textarea></span>
 				<span class="item"><button type="button" onclick="upBtn('${dto.lostpetSeq}', '${dto.lcommSeq}', '${dto.lcommContent}')">수정</button></span>

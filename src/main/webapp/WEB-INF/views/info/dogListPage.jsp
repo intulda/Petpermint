@@ -151,7 +151,7 @@ function getBbsListData(pNumber){
             $.each(list, function(index, infoDto){
                 let tagData = "<div class='infoDiv2' onclick='detailgo("+infoDto.boardSeq+")'>";
 				tagData += "<div class='infocontent'>";
-                tagData += "<img class='infoimg' src='"+infoDto.filePath+"'  style='height: 280px; width: 280px; border-radius: 10px;' ><br><br>";
+                tagData += "<img class='infoimgz' src='"+infoDto.filePath+"'  style='height: 280px; width: 280px; border-radius: 10px;' ><br><br>";
                 tagData += "<h3>"+infoDto.boardTitle+"</h3>";
                 tagData += "작성자 ["+infoDto.boardRegId+"]<br>";
                 tagData += "</div>";
