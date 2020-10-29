@@ -11,12 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import io.pet.mint.freeBoard.dao.FreeLikeDAO;
 import io.pet.mint.freeBoard.dto.FreeBoardDTO;
 import io.pet.mint.freeBoard.dto.FreeBoardParam;
 import io.pet.mint.freeBoard.dto.FreeCommDTO;
 import io.pet.mint.freeBoard.dto.FreeCommParam;
-import io.pet.mint.freeBoard.dto.FreeLikeDTO;
 import io.pet.mint.freeBoard.service.FreeBoardService;
 import io.pet.mint.freeBoard.service.FreeCommService;
 import io.pet.mint.freeBoard.service.FreeLikeService;
@@ -65,7 +63,7 @@ public class FreeController {
 	public String addFreeBoardPage(FreeBoardDTO dto) {
 		//System.out.println(dto.toString());
 		int n = service.addFreeBoardPage(dto);
-	//	System.out.println("등록게시물갯수"+n);
+		//System.out.println("등록게시물갯수"+n);
 		
 		return n>0?"ok":"no";
 	}
