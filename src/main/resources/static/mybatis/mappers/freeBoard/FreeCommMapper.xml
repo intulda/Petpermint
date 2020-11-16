@@ -7,7 +7,7 @@
 
 <insert id="addFreeComm" parameterType="io.pet.mint.freeBoard.dto.FreeCommDTO">
 	INSERT INTO FREE_COMM (COMM_SEQ, COMM_REF, COMM_CONTENTS, COMM_REG_ID, COMM_REG_DATE)
-	VALUES (SEQ_FREE_COMM.NEXTVAL, #{commRef}, #{commContents},'aaa', SYSDATE)
+	VALUES (SEQ_FREE_COMM.NEXTVAL, #{commRef}, #{commContents}, #{commRegId}, SYSDATE)
 </insert>
 
 <select id="getFreeCommList" parameterType="io.pet.mint.freeBoard.dto.FreeCommParam" resultType="io.pet.mint.freeBoard.dto.FreeCommDTO">

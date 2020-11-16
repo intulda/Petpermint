@@ -68,7 +68,7 @@
 </div>
 </div>
 <br>
-<c:if test="${login.id eq '운영자' }">
+<c:if test="${login.auth eq 3 }">
 <div class="btnDiv">
 <a href="infoWrite"><button class="btn">글쓰기^^</button></a>
 </div>

@@ -17,7 +17,7 @@
 	<form method="post" id="sendForm" action="/freeBoard/freeWrite">
 		<h1 class="freeWriteH1">글쓰기</h1>
 		<br>
-		작성자<input type="text" name="id" class="sendData" readonly="readonly" value="aaa"><br>
+		작성자<input type="text" name="id" class="id" readonly="readonly" value="${login.id}"><br>
 		제목<input type="text" name="boardTitle" class="boardTitle" placeholder="제목을 입력해주세요.">
 		<br>이미지추가
 		<input type="file" name="IMG" class="sendDataIMG" accept=".gif, .jpg, .png"><br>
@@ -53,9 +53,11 @@ $('.backButton').click(function(){
 });
 
 $('.freeWriteRegi').click(function(){
+	
 		let sendData = {
 				boardTitle : $(".boardTitle").val(),
-				boardContents : $(".boardContents").val()
+				boardContents : $(".boardContents").val(),
+				id : $(".id").val()
 				};
 
 		$.ajax({

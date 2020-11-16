@@ -95,7 +95,7 @@
 
 }
 
-.freewrite input.sendData{
+.freewrite input.id{
 	margin: 5px;
 	height: 30px;
 	width: 940px;

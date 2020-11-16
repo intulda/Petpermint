@@ -51,10 +51,10 @@
                 <c:if test="${empty login}">
                     <%-- 로그인 전 --%>
                     <li class="header-flex login">
-                        <a href="/login.do"> 로그인 </a>
+                        <a href="${pageContext.request.contextPath}/login.do"> 로그인 </a>
                     </li>
                     <li class="header-flex register">
-                        <a href="/regi.do"> 회원가입 </a>
+                        <a href="${pageContext.request.contextPath}/regi.do"> 회원가입 </a>
                     </li>
                 </c:if>
             </ul>

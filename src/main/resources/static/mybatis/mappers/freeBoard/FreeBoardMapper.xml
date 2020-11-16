@@ -9,8 +9,8 @@
 
 	INSERT INTO BOARD (BOARD_SEQ, BOARD_TYPE, BOARD_REG_ID, BOARD_TITLE, BOARD_CONTENTS,
 				BOARD_VIEW_COUNT, BOARD_REG_DATE, BOARD_CATEGORY, ID, BOARD_REF, BOARD_LIKE_SEQ)
-	VALUES (SEQ_BOARD.NEXTVAL,'자유게시판' ,'aaa', #{boardTitle}, #{boardContents},0,
-				SYSDATE,'자유게시판','aaa', (SELECT NVL(MAX(BOARD_REF), 0 ) + 1 FROM BOARD), 0 )
+	VALUES (SEQ_BOARD.NEXTVAL,'자유게시판' , #{id}, #{boardTitle}, #{boardContents},0,
+				SYSDATE,'자유게시판', #{id}, (SELECT NVL(MAX(BOARD_REF), 0 ) + 1 FROM BOARD), 0 )
 </insert>
 
 <select id="getFreeBoardList" resultType="io.pet.mint.freeBoard.dto.FreeBoardDTO">

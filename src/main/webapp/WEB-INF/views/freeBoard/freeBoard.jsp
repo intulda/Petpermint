@@ -9,7 +9,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.twbsPagination.min.js"></script>
 <link rel="stylesheet" href ="/css/freeBoard/freeBoard.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 <div class="freeDiv">
  <c:if test="${login != null }"> 
 	<button type="button" class="write">글쓰기</button>
-	<c:if test="${ login.id == admin1 }">
+	<c:if test="${login.auth == 3 && login.id != null }">
 		<button type="button" class="checkDel">삭제</button>
 	</c:if>
  </c:if> 
@@ -29,7 +29,9 @@
 	<table class="freeTable" id="bbs">
 		<thead>
 			<tr>
-				<th><input name="checkAll" class="checkAll" type="checkbox" onclick="toggle(this)"></th>
+				<c:if test="${login.id != null && login.auth == 3 }">
+					<th><input name="checkAll" class="checkAll" type="checkbox" onclick="toggle(this)"></th>
+				</c:if>
 				<th class="num">번호</th>
 				<th class="title">제목</th>
 				<th class="name">작성자</th>
@@ -40,7 +42,9 @@
 		<tbody>
 		<c:forEach var="l" items="${getFreeBoardList}" varStatus="vs">
 				<tr>
+				<c:if test="${login.id != null && login.auth == 3 }">
 					<th><input type="checkbox" name="freeCheck_${dto.boardSeq}" class="freeCheck_${dto.boardSeq}" value="${dto.boardSeq}"></th>
+				</c:if>	
 					<td>${vs.count}</td>
 					<td>${l.boardTitle}</td>
 					<td>${l.boardRegId}</td>
@@ -113,7 +117,9 @@ function getListData(pNumber){
 			$.each(data,function(idx,data){ 
 				console.log(data);
 				let app = "<tr data-value='"+data.boardSeq+"'>"
+						+"	<c:if test='${login.id != null && login.auth == 3 }'>"
 						+"	<th><input type='checkbox' name='freeCheck' value="+data.boardSeq+"></th>"
+						+"	</c:if>"
 						+"	<td>" + (idx + 1) + "</td>"
 						+"	<td>" + data.boardTitle + "</td>"
 						+"	<td>" + data.boardRegId + "</td>"

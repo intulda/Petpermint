@@ -16,7 +16,7 @@
 <p class="detailP">${dto.boardRegDate}</p>
 <p class="detailP">${dto.boardUpdDate}</p>
 
-<c:if test="${login != null || login.auth == 3 }">
+<c:if test="${login.auth == 3 || login.id == dto.boardRegId && login != null}">
 	<button class="freeUpdate">수정</button>
 	<button class="freeDelete">삭제</button>
 </c:if>
@@ -33,9 +33,8 @@
 <hr>
 <br>
 <div class="comm_container">
-	<input type="hidden" value="aaa" id="commRedId">
 	<label for="comm_content">댓글</label>
-	<input type="hidden" value="aaa" id="commRegId">
+	<input type="hidden" value="${login.id}" id="commRegId">
 	<textarea rows="5" cols="40" name="commContents" class="commContents"
 	placeholder="댓글을 입력해주세요"></textarea>
  	<c:if test="${login == null }">
@@ -93,7 +92,7 @@ $(".commButton").click(function(){
 
 	let sendData = {
 			commContents :$('.commContents').val(), commRef:${dto.boardSeq},
-				commRegId:'aaa' };
+				commRegId:$('#commRegId').val() };
 	
 	if($('.commContents').val().trim() == ""){			
 		alert("댓글의 내용을 입력하세요");
@@ -147,7 +146,9 @@ function getListData(pNumber){
 				
 			//	console.log(commDTO);
 				let app = "<div class='commHeader'>"
-					+ "<span class='infoId'>aaa</span><br>"
+					+ "<span class='infoId'>"
+					+ commDTO.commRegId
+					+ "</span><br>"
 					+ updDate							
 					+ "<span"
 					+ " class='infoData' id='commRegDate"
@@ -155,7 +156,7 @@ function getListData(pNumber){
 					+ "'>"
 					+ commDTO.commRegDate
 					+ "</span>"
-					+"	<c:if test='${login != null }'>"
+					+"	<c:if test='${login.auth == 3 || login.id == dto.boardRegId && login != null}'>"
 					+ "<a id='commUpdButton"
 					+ commDTO.commSeq
 					+ "' onclick=\"commUpdate('"

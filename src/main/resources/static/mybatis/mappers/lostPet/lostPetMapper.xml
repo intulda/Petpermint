@@ -94,7 +94,7 @@ resultType="io.pet.mint.lostPet.dto.LostPetDto">
 <insert id="getLostPetLCommWrite" parameterType="io.pet.mint.lostPet.dto.LCommDto">
 	INSERT INTO LOSTPET_COMM
 	(LOSTPET_SEQ, LCOMM_SEQ, LCOMM_DATE, LCOMM_ID, LCOMM_CONTENT, LCOMM_DEL)
-	VALUES(#{lostpetSeq}, SEQ_LOSTPET_COMM.NEXTVAL, SYSDATE, #{lcommId}, #{lcommContent}, 0, 0, 0, 0)
+	VALUES(#{lostpetSeq}, SEQ_LOSTPET_COMM.NEXTVAL, SYSDATE, #{lcommId}, #{lcommContent}, 0)
 </insert>
 
 <update id="getLCommUpdate" parameterType="io.pet.mint.lostPet.dto.LCommDto">
